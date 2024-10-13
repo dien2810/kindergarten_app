@@ -38,6 +38,13 @@ dependencies:
   google_fonts: ^6.2.1
   flutter_native_splash: ^2.4.1
   get: ^4.6.6
+  liquid_swipe: ^3.1.0
+  smooth_page_indicator: ^1.2.0+3
+  flutter_otp_text_field: ^1.1.0+2
+  firebase_core: ^3.4.1
+  firebase_auth: ^5.2.1
+  line_awesome_flutter: ^3.0.1
+  cloud_firestore: ^5.4.2
 
 
 dev_dependencies:
@@ -56,14 +63,14 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter_native_splash:
-  color: '#f7f6f1'
+  color: '#0961f5'
   color_dark: '#272727'
   image: assets/images/splash_images/splash_image_1.png
   image_dark: assets/images/splash_images/splash_image_1.png
 
   android_12:
     image: assets/images/splash_images/splash_image_1.png
-    icon_background_color: '#f7f6f1'
+    icon_background_color: '#0961f5'
     image_dark: assets/images/splash_images/splash_image_1.png
     icon_background_color_dark: '#272727'
 flutter:
@@ -74,6 +81,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/splash_images/
+    - assets/images/login_images/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

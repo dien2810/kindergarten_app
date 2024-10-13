@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:kindergarten_app/src/constants/image_strings.dart';
 
 import '../../../../common_widgets/fade_in_animation/animation_design.dart';
