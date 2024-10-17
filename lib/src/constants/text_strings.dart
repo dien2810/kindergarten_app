@@ -13,9 +13,16 @@ const String tSignupUsername = 'Username/Email';
 const String tPhoneNumber = 'Phone Number';
 const String tAlreadyHaveAcc = 'Already have an account?';
 //ForgetPasswordScreen
-const String tEnterEmailOrPhone = 'Enter your phone number';
+const String tEnterPhone = 'Enter your phone number';
+const String tEnterEmail = 'Enter your Email';
 const String tBackToSignIn = 'Back to sign in';
 const String tSendVerification = 'Send Verification';
+// Forget Password Modal Bottom Sheet Text
+const String tForgetPasswordTitle = "Make Selection!";
+const String tForgetPasswordSubTitle = "Select one of the options given below to reset your password.";
+const String tResetViaEMail = "Reset via Mail Verification";
+const String tResetViaPhone = "Reset via Phone Verification";
+const String tEmail = "E-Mail";
 //OTPScreen
 const String tEnterVerificationCode = 'Enter Verification Code';
 const String tDidntReceiveCode = 'Didn''t receive the code? ';

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "375240832414",
+    "project_id": "kindergarten-app-8ad95",
+    "storage_bucket": "kindergarten-app-8ad95.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:375240832414:android:254851fef9f99b1e80928f",
+        "android_client_info": {
+          "package_name": "com.example.kindergarten_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADelHUo8LC0DKXBdLMUpuByEj4IbrZ0kA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

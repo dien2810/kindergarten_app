@@ -90,7 +90,6 @@ class SignupScreen extends StatelessWidget {
                                       border: OutlineInputBorder(
                                           borderRadius: BorderRadius.circular(t40Size)
                                       )
-
                                   ),
                                 ),
                                 const SizedBox(height: t20Size),
@@ -176,6 +175,13 @@ class SignupScreen extends StatelessWidget {
                                         ),
                                         onPressed: () {
                                           //Get.to(()=>const Dashboard());
+                                          if (formKey.currentState!.validate()){
+                                            SignupController.instance.registerUser(
+                                                controller.email.text.trim(),
+                                                controller.password.text.trim(),
+                                                controller.role.value
+                                            );
+                                          }
                                         },
                                         child: const Text(
                                           tSignup,

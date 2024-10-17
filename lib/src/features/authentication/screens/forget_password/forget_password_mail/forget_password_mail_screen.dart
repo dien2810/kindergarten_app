@@ -11,8 +11,8 @@ import '../../../controllers/forgot_password_email_controller.dart';
 import '../../login_screen/login_screen.dart';
 import '../../signup_screen/signup_screen.dart';
 
-class ForgetPasswordPhoneScreen extends StatelessWidget {
-  const ForgetPasswordPhoneScreen({super.key});
+class ForgetPasswordMailScreen extends StatelessWidget {
+  const ForgetPasswordMailScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +70,7 @@ class ForgetPasswordPhoneScreen extends StatelessWidget {
                                     controller: controller.emailOrPhone,
                                     decoration: InputDecoration(
                                         hintStyle: const TextStyle(fontSize: 16, fontFamily: "Outfit"),
-                                        hintText: tEnterPhone,
+                                        hintText: tEnterEmail,
                                         border: OutlineInputBorder(
                                             borderRadius: BorderRadius.circular(t40Size)
                                         )
@@ -88,10 +88,10 @@ class ForgetPasswordPhoneScreen extends StatelessWidget {
                                           child: const Text(
                                             tBackToSignIn,
                                             style: TextStyle(
-                                              fontFamily: 'Mulish',
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.bold,
-                                              color: Color(0xFF39647F)
+                                                fontFamily: 'Mulish',
+                                                fontSize: 13,
+                                                fontWeight: FontWeight.bold,
+                                                color: Color(0xFF39647F)
                                             ),
                                           ),
                                         )
@@ -99,34 +99,34 @@ class ForgetPasswordPhoneScreen extends StatelessWidget {
                                   ),
                                   const SizedBox(height: t20Size),
                                   SizedBox(
-                                      width: double.infinity,
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          gradient: const LinearGradient(
-                                            colors: [Color(0xFF03045E), Color(0xFF0608C4)],
-                                            begin: Alignment.centerLeft,
-                                            end: Alignment.centerRight,
-                                          ),
-                                          borderRadius: BorderRadius.circular(t50Size),
+                                    width: double.infinity,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        gradient: const LinearGradient(
+                                          colors: [Color(0xFF03045E), Color(0xFF0608C4)],
+                                          begin: Alignment.centerLeft,
+                                          end: Alignment.centerRight,
                                         ),
-                                        child: ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                              backgroundColor: Colors.transparent
-                                          ),
-                                          onPressed: () {
-                                            Get.to(()=>const OTPScreen());
-                                          },
-                                          child: const Text(
-                                            tSendVerification,
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 20,
-                                                fontFamily: "Outfit",
-                                                color: tWhiteColor
-                                            ),
+                                        borderRadius: BorderRadius.circular(t50Size),
+                                      ),
+                                      child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            backgroundColor: Colors.transparent
+                                        ),
+                                        onPressed: () {
+                                          Get.to(()=>const OTPScreen());
+                                        },
+                                        child: const Text(
+                                          tSendVerification,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 20,
+                                              fontFamily: "Outfit",
+                                              color: tWhiteColor
                                           ),
                                         ),
                                       ),
+                                    ),
                                   ),
                                   const SizedBox(height: t20Size),
                                   const Align(

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kindergarten_app/src/features/authentication/screens/forget_password/forget_password_options/forget_password_modal_bottom_sheet.dart';
 import 'package:kindergarten_app/src/features/authentication/screens/signup_screen/signup_screen.dart';
+import 'package:kindergarten_app/src/features/student/screens/homepage_news.dart';
 
 import '../../../../constants/colors.dart';
 import '../../../../constants/sizes.dart';
 import '../../../../constants/text_strings.dart';
 import '../../controllers/login_controller.dart';
-import '../forget_password/forget_password_phone/forget_password_phone_screen.dart';
 import 'login_screen.dart';
 
 class LoginFormWidget extends StatelessWidget {
@@ -90,8 +91,8 @@ class LoginFormWidget extends StatelessWidget {
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     onPressed: () {
-                      //ForgetPasswordScreen.buildShowModalBottomSheet(context);
-                      Get.to(()=>const ForgetPasswordPhoneScreen());
+                      ForgetPasswordModalBottomSheet.buildShowModalBottomSheet(context);
+                      //Get.to(()=>const ForgetPasswordPhoneScreen());
                     },
                     child: const Text(
                         tForgotPassword,
@@ -155,7 +156,7 @@ class LoginFormWidget extends StatelessWidget {
                             backgroundColor: Colors.transparent
                         ),
                         onPressed: () {
-                          //Get.to(()=>const Dashboard());
+                          Get.to(()=>const HomepageNews());
                         },
                         child: const Text(
                           tLogin,
@@ -196,7 +197,7 @@ class LoginFormWidget extends StatelessWidget {
                           )
                       ),
                       onPressed: () {
-                        Get.off(()=>const SignupScreen());
+                        Get.to(()=>const SignupScreen());
                       },
                       child: const Text(
                         tSignup,
