@@ -1,6 +1,6 @@
 //LoginScreen
 const String tLogin = 'Login';
-const String tLoginUsername = 'Username , email & phone number';
+const String tLoginUsername = 'Email';
 const String tPassword = 'Password';
 const String tForgotPassword = "Forgot Password?";
 const String tGuardian = "Guardian";
@@ -9,7 +9,7 @@ const String tDontHaveAccount = "Don't have an account";
 const String tSignup = "Sign up";
 //SignupScreen
 const String tFullname = 'Fullname';
-const String tSignupUsername = 'Username/Email';
+const String tSignupUsername = 'Email';
 const String tPhoneNumber = 'Phone Number';
 const String tAlreadyHaveAcc = 'Already have an account?';
 //ForgetPasswordScreen

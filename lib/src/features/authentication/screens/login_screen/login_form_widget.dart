@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/features/authentication/screens/forget_password/forget_password_options/forget_password_modal_bottom_sheet.dart';
 import 'package:kindergarten_app/src/features/authentication/screens/signup_screen/signup_screen.dart';
-import 'package:kindergarten_app/src/features/student/screens/homepage_news.dart';
 
 import '../../../../constants/colors.dart';
 import '../../../../constants/sizes.dart';
@@ -59,7 +58,7 @@ class LoginFormWidget extends StatelessWidget {
                   controller: controller.email,
                   decoration: InputDecoration(
                       hintStyle:
-                      const TextStyle(fontSize: 16, fontFamily: "Outfit"),
+                        const TextStyle(fontSize: 16, fontFamily: "Outfit"),
                       prefixIcon: const Icon(Icons.person_outline_outlined),
                       labelText: tLoginUsername,
                       hintText: tLoginUsername,
@@ -69,22 +68,27 @@ class LoginFormWidget extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: t20Size),
-                TextFormField(
-                  controller: controller.password,
-                  decoration: InputDecoration(
-                      hintStyle: const TextStyle(
-                          fontSize: 16, fontFamily: "Outfit"
-                      ),
-                      prefixIcon: const Icon(Icons.fingerprint_outlined),
-                      labelText: tPassword,
-                      hintText: tPassword,
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(t40Size)
-                      ),
-                      suffixIcon: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.remove_red_eye_sharp),
-                      )),
+                Obx(()=>TextFormField(
+                    controller: controller.password,
+                    obscureText: controller.obscureText.value,
+                    decoration: InputDecoration(
+                        hintStyle: const TextStyle(
+                            fontSize: 16, fontFamily: "Outfit"
+                        ),
+                        prefixIcon: const Icon(Icons.fingerprint_outlined),
+                        labelText: tPassword,
+                        hintText: tPassword,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(t40Size)
+                        ),
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            final obscureStatus = controller.obscureText.value;
+                            controller.obscureText.value=!obscureStatus;
+                          },
+                          icon: const Icon(Icons.remove_red_eye_sharp),
+                        )),
+                  ),
                 ),
                 const SizedBox(height: t5Size),
                 Align(
@@ -156,7 +160,8 @@ class LoginFormWidget extends StatelessWidget {
                             backgroundColor: Colors.transparent
                         ),
                         onPressed: () {
-                          Get.to(()=>const HomepageNews());
+                          //Get.to(()=>const HomepageNews());
+                          controller.login();
                         },
                         child: const Text(
                           tLogin,

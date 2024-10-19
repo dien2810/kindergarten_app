@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/features/authentication/screens/login_screen/login_screen.dart';
 import 'package:kindergarten_app/src/features/student/screens/homepage_news.dart';
+import 'package:kindergarten_app/src/features/teacher/screens/trang_chu/trang_chu_giao_vien.dart';
 
 import 'exceptions/signup_email_password_failure.dart';
 
@@ -17,7 +18,7 @@ class AuthenticationRepository extends GetxController {
   void onReady() {
     firebaseUser = Rx<User?>(_auth.currentUser);
     firebaseUser.bindStream(_auth.userChanges());
-    ever(firebaseUser, _setInitialScreen);
+    ever(firebaseUser, setInitialScreen);
   }
   //xac thuc bang phone
   Future<void> phoneAuthentication(String phoneNo) async {
@@ -47,10 +48,9 @@ class AuthenticationRepository extends GetxController {
     return credentials.user != null ? true : false;
   }
 
-  _setInitialScreen(User? user) {
-    user == null
-        ? Get.offAll(() => const LoginScreen())
-        : Get.offAll(() => const HomepageNews());
+  setInitialScreen(User? user) {
+    if (user == null) Get.offAll(() => const LoginScreen());
+        //: Get.offAll(() => const HomepageNews());
   }
 
   Future<void> createGuardianWithEmailAndPassword(
@@ -78,7 +78,7 @@ class AuthenticationRepository extends GetxController {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       firebaseUser.value != null
-          ? Get.offAll(() => const HomepageNews())
+          ? Get.offAll(() => const TrangChuGiaoVien())
           : Get.to(() => const LoginScreen());
     } on FirebaseAuthException catch (e) {
       final ex = SignupEmailPasswordFailure.code(e.code);

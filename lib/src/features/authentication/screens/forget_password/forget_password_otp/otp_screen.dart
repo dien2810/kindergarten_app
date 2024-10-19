@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/constants/text_strings.dart';
-import 'package:kindergarten_app/src/features/authentication/screens/forget_password/change_password/change_password_screen.dart';
 
 import '../../../../../common_widgets/authentication_background_widget/authentication_background_widget.dart';
 import '../../../../../common_widgets/logo_widgets/logo_login_page.dart';
 import '../../../../../constants/colors.dart';
 import '../../../../../constants/sizes.dart';
+import '../../../controllers/otp_controller.dart';
 import '../../signup_screen/signup_screen.dart';
 
 class OTPScreen extends StatelessWidget {
@@ -15,6 +15,8 @@ class OTPScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var otp;
+    final otpController = Get.put(OTPController());
     return SafeArea(
       child: Scaffold(
           body: Stack(
@@ -69,7 +71,10 @@ class OTPScreen extends StatelessWidget {
                                   filled: true,
                                   fillColor: const Color(0xFFCAF0F8),
                                   borderRadius: BorderRadius.circular(40),
-                                  onSubmit: (code){}
+                                  onSubmit: (code){
+                                    otp = code;
+                                    otpController.verifyOTP(otp);
+                                  }
                               ),
                               const SizedBox(height: t10Size),
                               TextButton(
@@ -108,7 +113,8 @@ class OTPScreen extends StatelessWidget {
                                         backgroundColor: Colors.transparent
                                     ),
                                     onPressed: () {
-                                      Get.to(()=>const ChangePasswordScreen());
+                                      otpController.verifyOTP(otp);
+                                      //Get.to(()=>const ChangePasswordScreen());
                                     },
                                     child: const Text(
                                       tSend,

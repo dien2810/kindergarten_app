@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/constants/text_strings.dart';
 import 'package:kindergarten_app/src/features/authentication/controllers/signup_controller.dart';
+import 'package:kindergarten_app/src/features/authentication/models/account_model.dart';
 
 import '../../../../common_widgets/authentication_background_widget/authentication_background_widget.dart';
 import '../../../../common_widgets/logo_widgets/logo_login_page.dart';
@@ -176,11 +177,19 @@ class SignupScreen extends StatelessWidget {
                                         onPressed: () {
                                           //Get.to(()=>const Dashboard());
                                           if (formKey.currentState!.validate()){
-                                            SignupController.instance.registerUser(
-                                                controller.email.text.trim(),
-                                                controller.password.text.trim(),
-                                                controller.role.value
+                                            // SignupController.instance.registerUser(
+                                            //     controller.email.text.trim(),
+                                            //     controller.password.text.trim(),
+                                            //     controller.role.value
+                                            // );
+                                            final account = AccountModel(
+                                                username: controller.email.text.trim(),
+                                                password: controller.password.text.trim(),
+                                                fullname: controller.fullname.text.trim(),
+                                                phoneNo: controller.phone.text.trim(),
+                                                role: controller.role.value
                                             );
+                                            controller.createAccount(account);
                                           }
                                         },
                                         child: const Text(
