@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/features/authentication/screens/login_screen/login_screen.dart';
+import 'package:kindergarten_app/src/features/student/screens/guardian_navigation_menu/guardian_navigation_menu.dart';
 import 'package:kindergarten_app/src/features/student/screens/homepage_news.dart';
 import 'package:kindergarten_app/src/features/teacher/screens/trang_chu/trang_chu_giao_vien.dart';
 
@@ -59,7 +60,7 @@ class AuthenticationRepository extends GetxController {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       firebaseUser.value != null
-          ? Get.offAll(() => const HomepageNews())
+          ? Get.offAll(() => const GuardianNavigationMenu())
           : Get.to(() => const LoginScreen());
     } on FirebaseAuthException catch (e) {
       final ex = SignupEmailPasswordFailure.code(e.code);

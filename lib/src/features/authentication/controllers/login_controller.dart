@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:kindergarten_app/src/features/student/screens/guardian_navigation_menu/guardian_navigation_menu.dart';
 import 'package:kindergarten_app/src/features/student/screens/homepage_news.dart';
 import 'package:kindergarten_app/src/features/teacher/screens/trang_chu/trang_chu_giao_vien.dart';
 import 'package:kindergarten_app/src/repository/account_repository/account_repository.dart';
@@ -25,7 +26,7 @@ class LoginController extends GetxController{
       final account = await accountRepo.getAccountDetails(emailText);
       print("-------------------Role: "+account.role.toString());
       if (role.value == Role.guardian && account.role == Role.guardian) {
-        Get.offAll(() => const HomepageNews());
+        Get.offAll(() => const GuardianNavigationMenu());
       } else if (role.value == Role.teacher && account.role == Role.teacher) {
         Get.offAll(() => const TrangChuGiaoVien());
       }
