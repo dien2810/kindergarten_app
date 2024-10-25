@@ -6,7 +6,6 @@ import '../../../../../common_widgets/information_input_widget/information_input
 import '../../../../../constants/sizes.dart';
 import '../../../../../constants/text_strings.dart';
 import '../../../controllers/thong_tin_suc_khoe_controller.dart';
-import '../co_ban_tab/ghi_chu_widget.dart';
 
 class KhamTabWidget extends StatelessWidget {
   const KhamTabWidget({super.key, required this.controller});

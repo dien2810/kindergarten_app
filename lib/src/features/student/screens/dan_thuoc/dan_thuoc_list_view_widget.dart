@@ -1,0 +1,66 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../../../constants/colors.dart';
+import '../../../../constants/image_strings.dart';
+import '../../../../constants/text_strings.dart';
+import 'chi_tiet_dan_thuoc/chi_tiet_dan_thuoc_screen.dart';
+import 'dan_thuoc_list_tile_widget.dart';
+
+class DanThuocListViewWidget extends StatelessWidget {
+  const DanThuocListViewWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      itemBuilder: (BuildContext context, int index) {
+        String image = '';
+        String status = tDangThucHien;
+        String title = tThuocViemHongCap;
+        String subtitle = tTuNgayDenNgay;
+        Color color = tWhiteColor;
+        if (status == tDaHuy){
+          color = const Color(0xFFFFEEEB);
+        }
+        else if (status == tDaHoanThanh) {
+          color = const Color(0xFFCFECFF);
+        }
+        else if (status == tDangThucHien) {
+          color = const Color(0xFFE8E7FC);
+        }
+        else {color = const Color(0xFFDAF6F4);}
+        if (index % 4 == 0){
+          image = tDanThuocItemImage1;
+        }
+        else if (index % 4 == 1) {
+          image = tDanThuocItemImage2;
+        }
+        else if (index % 4 == 2) {
+          image = tDanThuocItemImage3;
+        }
+        else {image = tDanThuocItemImage4;}
+        return GestureDetector(
+          onTap: (){
+            Get.to(()=>ChiTietDanThuocScreen(
+              image: image,
+              title: title,
+              subtitle: subtitle,
+              status: status,
+              color: color,
+            ));
+          },
+          child: DanThuocListTileWidget(image: image, title: title, subtitle: subtitle, status: status, color: color),
+        );
+      },
+      separatorBuilder: (BuildContext context, int index) {
+        return const Divider(
+          color: Colors.grey,
+          thickness: 1,
+        );
+      },
+      itemCount: 12,
+    );
+  }
+}

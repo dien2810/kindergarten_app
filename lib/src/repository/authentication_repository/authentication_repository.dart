@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/features/authentication/screens/login_screen/login_screen.dart';
 import 'package:kindergarten_app/src/features/student/screens/guardian_navigation_menu/guardian_navigation_menu.dart';
-import 'package:kindergarten_app/src/features/student/screens/homepage_news.dart';
 import 'package:kindergarten_app/src/features/teacher/screens/trang_chu/trang_chu_giao_vien.dart';
 
 import 'exceptions/signup_email_password_failure.dart';

@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/features/student/screens/guardian_navigation_menu/guardian_navigation_menu.dart';
-import 'package:kindergarten_app/src/features/student/screens/homepage_news.dart';
 import 'package:kindergarten_app/src/features/teacher/screens/trang_chu/trang_chu_giao_vien.dart';
 import 'package:kindergarten_app/src/repository/account_repository/account_repository.dart';
 
