@@ -6,6 +6,7 @@ import 'package:kindergarten_app/src/repository/authentication_repository/authen
 import 'package:kindergarten_app/src/utils/theme.dart';
 import 'package:kindergarten_app/src/features/student/screens/student_information/screen/student_information_screen.dart';
 import 'firebase_options.dart';
+import 'package:kindergarten_app/src/features/student/screens/health/thong_tin_suc_khoe_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +29,8 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       //home: const SplashScreen(),
       //home: const DanThuocScreen(),
-      home : const ThongTinHocSinhScreen(),
+      //home : const ThongTinHocSinhScreen(),
+      home: ThongTinSucKhoeScreen(),
       defaultTransition: Transition.leftToRightWithFade,
       transitionDuration: const Duration(milliseconds: 500),
     );

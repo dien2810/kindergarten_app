@@ -119,3 +119,11 @@ const String tThemThuoc = 'Thêm thuốc';
 const String tThemMoi = 'Thêm mới';
 const String tHuy = 'Hủy';
 
+// HoSoYTe / loi_khuyen_bac_si_widget
+const String tLoiKhuyenBacSiHeader =  "Lời khuyên của bác sĩ ";
+
+// LichSuTiemChung/ danh_sach_lich_su_tiem_chung_widget
+const String tLichSuTiemChungHeader = "Thông tin lịch sử tiêm chủng";
+const String tSTTTableColumn = "STT";
+const String tLoaiVaccineTableColumn = "Loại Vaccine";
+const String tChiTietTableColumn = 'Chi tiết';
