@@ -9,6 +9,11 @@ import 'package:kindergarten_app/src/features/student/screens/health/thong_tin_s
 
 import '../../../../constants/sizes.dart';
 import 'co_ban_tab/co_ban_tab_widget.dart';
+// loi khuyen bac si tab
+import 'package:kindergarten_app/src/features/student/screens/health/ho_so_y_te/loi_khuyen_bac_si_widget.dart';
+// lich su tiem chung tab
+import 'package:kindergarten_app/src/features/student/screens/health/ho_so_y_te/danh_sach_lich_su_tiem_chung_widget.dart';
+
 
 class ThongTinSucKhoeScreen extends StatelessWidget {
   const ThongTinSucKhoeScreen({super.key});
@@ -142,8 +147,8 @@ class ThongTinSucKhoeScreen extends StatelessWidget {
                                   children: [
                                     CoBanTabWidget(controller: controller),
                                     KhamTabWidget(controller: controller),
-                                    const Text(tLoiKhuyen),
-                                    const Text(tTiemChung)
+                                    LoiKhuyenBacSiWidget(controller: controller),
+                                    DanhSachLichSuTiemChungWidget(controller: controller),
                                   ],
                                 ),
                               ),

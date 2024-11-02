@@ -129,3 +129,11 @@ const String tLuaChon = 'Lựa chọn: Cháo thịt bò, cháo cá, cháo rau c�
 const String tThemGhiChu = 'Thêm ghi chú';
 const String tTuan = 'Tuần';
 
+// HoSoYTe / loi_khuyen_bac_si_widget
+const String tLoiKhuyenBacSiHeader =  "Lời khuyên của bác sĩ ";
+
+// LichSuTiemChung/ danh_sach_lich_su_tiem_chung_widget
+const String tLichSuTiemChungHeader = "Thông tin lịch sử tiêm chủng";
+const String tSTTTableColumn = "STT";
+const String tLoaiVaccineTableColumn = "Loại Vaccine";
+const String tChiTietTableColumn = 'Chi tiết';
