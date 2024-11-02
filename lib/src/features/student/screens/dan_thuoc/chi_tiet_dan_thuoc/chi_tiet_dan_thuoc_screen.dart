@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/common_widgets/app_bar_widgets/guardian_app_bar_with_title.dart';
 import 'package:kindergarten_app/src/constants/text_strings.dart';
-import 'package:kindergarten_app/src/features/student/controllers/dan_thuoc_controller.dart';
-import 'package:kindergarten_app/src/features/student/controllers/guardian_navigation_menu_controller.dart';
+import 'package:kindergarten_app/src/features/student/models/medicine/medicine_model.dart';
 
 import '../../../../../common_widgets/information_widget/information_widget.dart';
 import '../../../../../constants/colors.dart';
@@ -15,21 +14,16 @@ class ChiTietDanThuocScreen extends StatelessWidget {
   const ChiTietDanThuocScreen({
     super.key,
     required this.image,
-    required this.title,
-    required this.subtitle,
-    required this.status, required this.color}
+    required this.color,
+    required this.medicine}
   );
 
   final String image;
-  final String title;
-  final String subtitle;
-  final String status;
+  final MedicineModel medicine;
   final Color color;
 
   @override
   Widget build(BuildContext context) {
-    final danThuocController = Get.put(DanThuocController());
-    final guardianNavigationMenuController = Get.put(GuardianNavigationMenuController());
 
     return DefaultTabController(
       length: 1,
@@ -71,7 +65,6 @@ class ChiTietDanThuocScreen extends StatelessWidget {
                 children: [
                   SingleChildScrollView(
                     child: Container(
-                      height: 600,
                       padding: const EdgeInsets.all(t15Size),
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -92,28 +85,28 @@ class ChiTietDanThuocScreen extends StatelessWidget {
                           const SizedBox(height: t15Size),
                           DanThuocListTileWidget(
                             image: image,
-                            title: title,
-                            subtitle: subtitle,
-                            status: status,
+                            title: medicine.prescription,
+                            subtitle: "${medicine.dates[0]} - ${medicine.dates[1]}",
+                            status: medicine.status,
                             color: color,
                           ),
                           const SizedBox(height: t10Size,),
                           InformationWidget(
                               title: tDonThuoc,
                             color: const Color(0xFFDAF6F4),
-                            value: title,
+                            value: medicine.prescription,
                           ),
                           const SizedBox(height: t5Size,),
-                          const InformationWidget(
+                          InformationWidget(
                             title: tGhiChuDanThuoc,
-                            color: Color(0xFFDAF6F4),
-                            value: tCanUongNhieuNuoc,
+                            color: const Color(0xFFDAF6F4),
+                            value: medicine.note,
                           ),
                           const SizedBox(height: t5Size,),
                           InformationWidget(
                             title: tNgayUong,
                             color: const Color(0xFFDAF6F4),
-                            value: subtitle,
+                            value: "${medicine.dates[0]} - ${medicine.dates[1]}",
                           ),
                           const SizedBox(height: t10Size,),
                           const Text(
@@ -122,30 +115,39 @@ class ChiTietDanThuocScreen extends StatelessWidget {
                                 fontSize: 20, fontWeight: FontWeight.bold
                             ),
                           ),
-                          const Text(
-                            tThuocSo,
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold
-                            ),
-                          ),
-                          const InformationWidget(
-                            title: tTenThuoc,
-                            color: Color(0xFFDAF6F4),
-                            value: 'Paracetamol',
-                          ),
-                          const SizedBox(height: t5Size,),
-                          const InformationWidget(
-                            title: tLieuLuong,
-                            color: Color(0xFFDAF6F4),
-                            value: tLanTrenNgay,
-                          ),
-                          const SizedBox(height: t5Size,),
-                          const InformationWidget(
-                            title: tThoiGian,
-                            color: Color(0xFFDAF6F4),
-                            value: tThoiGian,
-                          ),
-                          const SizedBox(height: t10Size,),
+                          ...medicine.medicineDetails.asMap().entries.map((entry) {
+                            int index = entry.key;
+                            var detail = entry.value;
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Thuốc số ${index + 1}',
+                                  style: const TextStyle(
+                                      fontSize: 18, fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(height: 8),
+                                InformationWidget(
+                                  title: tTenThuoc,
+                                  color: const Color(0xFFDAF6F4),
+                                  value: detail.name,
+                                ),
+                                const SizedBox(height: 5),
+                                InformationWidget(
+                                  title: tLieuLuong,
+                                  color: Colors.white,
+                                  value: detail.dosage,
+                                ),
+                                const SizedBox(height: 5),
+                                InformationWidget(
+                                  title: tThoiGian,
+                                  color: const Color(0xFFDAF6F4),
+                                  value: detail.time,
+                                ),
+                                const SizedBox(height: 10),
+                              ],
+                            );
+                          }),
                           Align(
                             alignment: Alignment.center,
                             child: SizedBox(

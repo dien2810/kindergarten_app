@@ -61,7 +61,7 @@ class ThongTinSucKhoeScreen extends StatelessWidget {
               ),
               const SizedBox(height: t15Size),
               SizedBox(
-                height: 600,
+                height: 575,
                 child: TabBarView(
                   children: [
                     ThongTinSucKhoeChungWidget(controller: controller),

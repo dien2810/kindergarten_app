@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/common_widgets/app_bar_widgets/guardian_app_bar_with_title.dart';
 import 'package:kindergarten_app/src/constants/text_strings.dart';
-import 'package:kindergarten_app/src/features/student/controllers/dan_thuoc_controller.dart';
 import 'package:kindergarten_app/src/features/student/controllers/guardian_navigation_menu_controller.dart';
 import 'package:kindergarten_app/src/features/student/screens/dan_thuoc/dan_thuoc_list_view_widget.dart';
 import 'package:kindergarten_app/src/features/student/screens/dan_thuoc/them_moi_dan_thuoc/them_moi_dan_thuoc_bottom_sheet.dart';
@@ -15,7 +14,6 @@ class DanThuocScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final danThuocController = Get.put(DanThuocController());
     final guardianNavigationMenuController = Get.put(GuardianNavigationMenuController());
 
     return DefaultTabController(

@@ -8,13 +8,17 @@ class InformationInputWithIconWidget extends StatelessWidget {
     required this.color,
     required this.title,
     required this.hintText,
-    this.widget,
+    this.widget, this.textEdittingController, this.initialValue,
+    this.onChanged
   });
 
   final Color color;
   final String title;
   final String hintText;
   final Widget? widget;
+  final TextEditingController? textEdittingController;
+  final String? initialValue;
+  final ValueChanged<String>? onChanged;
 
 
   @override
@@ -29,7 +33,7 @@ class InformationInputWithIconWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Flexible(
-            flex: 2,
+            flex: 3,
             fit: FlexFit.loose,
             child: Text(
               title,
@@ -42,7 +46,10 @@ class InformationInputWithIconWidget extends StatelessWidget {
             flex: 4,
             fit: FlexFit.loose,
             child: TextFormField(
+              initialValue: initialValue,
+              controller: textEdittingController,
               maxLines: null,
+              onChanged: onChanged,
               decoration: InputDecoration(
                   hintText: hintText,
                   hintStyle: const TextStyle(
@@ -62,6 +69,7 @@ class InformationInputWithIconWidget extends StatelessWidget {
               ),
             ),
           ),
+          const Spacer(),
           Flexible(
             flex: 1,
             child: Align(

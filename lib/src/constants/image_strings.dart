@@ -11,3 +11,6 @@ const String tDanThuocItemImage1 = 'assets/images/dan_thuoc_images/dan_thuoc_ite
 const String tDanThuocItemImage2 = 'assets/images/dan_thuoc_images/dan_thuoc_item_2.png';
 const String tDanThuocItemImage3 = 'assets/images/dan_thuoc_images/dan_thuoc_item_3.png';
 const String tDanThuocItemImage4 = 'assets/images/dan_thuoc_images/dan_thuoc_item_4.png';
+const String tDanThuocDeleteIcon = 'assets/images/dan_thuoc_images/delete_icon.png';
+//ThucDon Screen
+const String tThucDonBuaSang = 'assets/images/thuc_don_images/thuc_don_bua_sang.png';
