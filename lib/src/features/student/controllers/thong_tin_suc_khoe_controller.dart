@@ -34,5 +34,63 @@ class ThongTinSucKhoeController extends GetxController{
   final benhLyKhac = TextEditingController();
   final chanDoanCuaBacSi = TextEditingController();
 
-
+  // danh sach lich su tiem chung
+  var isDetailView = false.obs;
+  var selectedVaccine = Rxn<String>();
+  var vaccineHistory = <Map<String, dynamic>>[
+    {
+      'STT': '1',
+      'LoaiVaccine': 'vaccine uống',
+      'vaccineHistory_id_1_12': {
+        'vaccineID': 'vaccine_id_12',
+        'doses': [
+          {
+            'dateAdministered': '05/07/2022',
+            'dose': '1.5 ml',
+            'site': 'Uống (vaccine uống)',
+            'provider': 'Trạm y tế Phường Long Trường - 1341 Nguyễn Duy Trinh, KP Phước Lai, Phường Long Trường, Quận Thủ Đức',
+            'sideEffects': 'Không có',
+            'nextDoseDue': '05/01/2023',
+            'vaccinationProgress': '1/2',
+          },
+          {
+            'dateAdministered': '05/01/2023',
+            'dose': '1.5 ml',
+            'site': 'Uống (vaccine uống)',
+            'provider': 'Trạm y tế Phường Long Trường - 1341 Nguyễn Duy Trinh, KP Phước Lai, Phường Long Trường, Quận Thủ Đức',
+            'sideEffects': 'Không có',
+            'nextDoseDue': 'Không có',
+            'vaccinationProgress': '2/2',
+          },
+        ],
+      },
+    },
+    {
+      'STT': '2',
+      'LoaiVaccine': 'vaccine tiêm',
+      'vaccineHistory_id_2_14': {
+        'vaccineID': 'vaccine_id_14',
+        'doses': [
+          {
+            'dateAdministered': '15/05/2020',
+            'dose': '1 ml',
+            'site': 'Cánh tay trái',
+            'provider': 'Trạm y tế Phường Hiệp Bình Chánh - 76 Nguyễn Đức Cảnh, Phường Hiệp Bình Chánh, Quận Thủ Đức',
+            'sideEffects': 'Sưng tại chỗ tiêm',
+            'nextDoseDue': '20/06/2020',
+            'vaccinationProgress': '1/2',
+          },
+          {
+            'dateAdministered': '20/06/2020',
+            'dose': '1 ml',
+            'site': 'Cánh tay phải',
+            'provider': 'Trạm y tế Phường Hiệp Bình Chánh - 76 Nguyễn Đức Cảnh, Phường Hiệp Bình Chánh, Quận Thủ Đức',
+            'sideEffects': 'Không có',
+            'nextDoseDue': 'Không có',
+            'vaccinationProgress': '2/2',
+          },
+        ],
+      },
+    },
+  ].obs;
 }

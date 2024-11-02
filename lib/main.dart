@@ -4,13 +4,14 @@ import 'package:get/get.dart';
 import 'package:kindergarten_app/src/features/student/screens/dan_thuoc/dan_thuoc_screen.dart';
 import 'package:kindergarten_app/src/repository/authentication_repository/authentication_repository.dart';
 import 'package:kindergarten_app/src/utils/theme.dart';
-
+import 'package:kindergarten_app/src/features/student/screens/student_information/screen/student_information_screen.dart';
 import 'firebase_options.dart';
+import 'package:kindergarten_app/src/features/student/screens/health/thong_tin_suc_khoe_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
-      .then((value) => Get.put(AuthenticationRepository()));
+  //Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
+  //    .then((value) => Get.put(AuthenticationRepository()));
   runApp(const MyApp());
 }
 
@@ -27,7 +28,9 @@ class MyApp extends StatelessWidget {
       darkTheme: TAppTheme.darkTheme,
       themeMode: ThemeMode.light,
       //home: const SplashScreen(),
-      home: const DanThuocScreen(),
+      //home: const DanThuocScreen(),
+      //home : const ThongTinHocSinhScreen(),
+      home: ThongTinSucKhoeScreen(),
       defaultTransition: Transition.leftToRightWithFade,
       transitionDuration: const Duration(milliseconds: 500),
     );
