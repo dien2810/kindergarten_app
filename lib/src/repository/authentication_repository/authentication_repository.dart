@@ -14,12 +14,12 @@ class AuthenticationRepository extends GetxController {
   late final Rx<User?> firebaseUser;
   var verificationId = ''.obs;
 
-  @override
-  void onReady() {
-    firebaseUser = Rx<User?>(_auth.currentUser);
-    firebaseUser.bindStream(_auth.userChanges());
-    ever(firebaseUser, setInitialScreen);
-  }
+  // @override
+  // void onReady() {
+  //   firebaseUser = Rx<User?>(_auth.currentUser);
+  //   firebaseUser.bindStream(_auth.userChanges());
+  //   ever(firebaseUser, setInitialScreen);
+  // }
   //xac thuc bang phone
   Future<void> phoneAuthentication(String phoneNo) async {
     await _auth.verifyPhoneNumber(
