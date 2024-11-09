@@ -45,7 +45,7 @@ dependencies:
   firebase_auth: ^5.2.1
   line_awesome_flutter: ^3.0.1
   cloud_firestore: ^5.4.2
-
+  image_picker: ^0.8.4+8
 
 dev_dependencies:
   flutter_test:

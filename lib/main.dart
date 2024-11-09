@@ -29,8 +29,8 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       //home: const SplashScreen(),
       //home: const DanThuocScreen(),
-      //home : const ThongTinHocSinhScreen(),
-      home: ThongTinSucKhoeScreen(),
+      home : const ThongTinHocSinhScreen(),
+      //home: ThongTinSucKhoeScreen(),
       defaultTransition: Transition.leftToRightWithFade,
       transitionDuration: const Duration(milliseconds: 500),
     );
