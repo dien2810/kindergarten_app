@@ -8,17 +8,27 @@ class InformationInputWithIconWidget extends StatelessWidget {
     required this.color,
     required this.title,
     required this.hintText,
-    this.widget,
+    this.widget, this.textEdittingController, this.initialValue,
+    this.onChanged,
+    this.readOnly = false
   });
 
   final Color color;
   final String title;
   final String hintText;
   final Widget? widget;
+  final TextEditingController? textEdittingController;
+  final String? initialValue;
+  final ValueChanged<String>? onChanged;
+  final bool readOnly;
 
 
   @override
   Widget build(BuildContext context) {
+    var flex = 0;
+    if (widget != null){
+      const flex = 1;
+    }
     return Container(
       padding: const EdgeInsets.all(t5Size),
       decoration: BoxDecoration(
@@ -29,12 +39,13 @@ class InformationInputWithIconWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Flexible(
-            flex: 2,
+            flex: 4,
             fit: FlexFit.loose,
             child: Text(
               title,
               style: const TextStyle(
-                  fontSize: 18
+                fontWeight: FontWeight.bold,
+                fontSize: 18
               ),
             ),
           ),
@@ -42,7 +53,10 @@ class InformationInputWithIconWidget extends StatelessWidget {
             flex: 4,
             fit: FlexFit.loose,
             child: TextFormField(
+              initialValue: initialValue,
+              controller: textEdittingController,
               maxLines: null,
+              onChanged: onChanged,
               decoration: InputDecoration(
                   hintText: hintText,
                   hintStyle: const TextStyle(
@@ -60,10 +74,12 @@ class InformationInputWithIconWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(t20Size)
                   )
               ),
+              readOnly: readOnly,
             ),
           ),
+          const Spacer(),
           Flexible(
-            flex: 1,
+            flex: flex,
             child: Align(
                 alignment: Alignment.centerRight,
                 child: widget

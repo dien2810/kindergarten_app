@@ -30,6 +30,7 @@ class InformationWidget extends StatelessWidget {
             ),
           ),
           Text(
+            maxLines: null,
             value,
             style: const TextStyle(
                 fontSize: 16,

@@ -6,14 +6,13 @@ import 'package:kindergarten_app/src/features/student/screens/hoat_dong_su_kien/
 import 'package:kindergarten_app/src/features/student/screens/ngoai_khoa/screen/ngoai_khoa_screen.dart';
 import 'package:kindergarten_app/src/repository/authentication_repository/authentication_repository.dart';
 import 'package:kindergarten_app/src/utils/theme.dart';
-import 'package:kindergarten_app/src/features/student/screens/student_information/screen/student_information_screen.dart';
 import 'firebase_options.dart';
 import 'package:kindergarten_app/src/features/student/screens/health/thong_tin_suc_khoe_screen.dart';
 
-void main() {
+void main()  async {
   WidgetsFlutterBinding.ensureInitialized();
-  //Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
-  //    .then((value) => Get.put(AuthenticationRepository()));
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
+      .then((value) => Get.put(AuthenticationRepository()));
   runApp(const MyApp());
 }
 
