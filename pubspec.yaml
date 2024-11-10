@@ -45,6 +45,8 @@ dependencies:
   firebase_auth: ^5.2.1
   line_awesome_flutter: ^3.0.1
   cloud_firestore: ^5.4.2
+  weekly_date_picker: ^1.4.2
+
   image_picker: ^0.8.4+8
   intl: ^0.17.0
   table_calendar: ^3.0.5
@@ -90,7 +92,6 @@ flutter:
     - assets/images/app_bar_images/
     - assets/images/dan_thuoc_images/
     - assets/images/ho_so_y_te_images/
-    - assets/images/ngoai_khoa_images/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

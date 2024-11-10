@@ -101,23 +101,41 @@ const String tTuNgayDenNgay = '06/07/2024 - 11/07/2024';
 const String tDaGui = 'Đã gửi';
 const String tDaHoanThanh = 'Đã hoàn thành';
 const String tDangThucHien = 'Đang thực hiện';
-const String tDaHuy = 'Đã hủy';
 const String tChiTietDonThuoc = 'Chi tiết đơn thuốc';
 const String tDonThuoc = 'Đơn thuốc: ';
 const String tGhiChuDanThuoc = 'Ghi chú: ';
+const String tNgayNhanThuoc = 'Ngày nhận thuốc: ';
+const String tHoVaTenPhuHuynhDanThuoc = 'Họ và tên phụ huynh dặn thuốc: ';
+const String tNguoiNhanDonThuoc = 'Người nhận đơn thuốc (GVCN lớp): ';
 const String tCanUongNhieuNuoc = 'Cần uống nhiều nước';
 const String tNgayUong = 'Ngày uống: ';
+const String tNgayBatDau = 'Ngày bắt đầu: ';
+const String tNgayKetThuc = 'Ngày kết thúc: ';
 const String tThongTinThuocVaCachSuDung = 'Thông tin thuốc và cách sử dụng';
 const String tThuocSo = 'Thuốc số ';
-const String tTenThuoc = 'Tên thuốc';
-const String tLieuLuong = 'Liều lượng';
+const String tTenThuoc = 'Tên thuốc: ';
+const String tLieuLuong = 'Liều lượng: ';
 const String tLanTrenNgay = 'Lần/Ngày';
-const String tThoiGian = 'Thời gian';
+const String tThoiGian = 'Thời gian: ';
 const String tQuayLaiTrangTruoc = 'Quay lại trang trước';
 const String tThemMoiDanThuoc = 'Thêm mới dặn thuốc';
 const String tThemThuoc = 'Thêm thuốc';
 const String tThemMoi = 'Thêm mới';
 const String tHuy = 'Hủy';
+const String tDaThemThanhCong = 'Đã thêm thành công';
+//ThucDonScreen
+const String tThucDon = 'Thực đơn';
+const String tBuaSang = 'Bữa sáng';
+const String tTenMon = 'Tên món: Bánh mì Sandwich';
+const String tLuaChon = 'Lựa chọn: Cháo thịt bò, cháo cá, cháo rau củ';
+const String tThemGhiChu = 'Thêm ghi chú';
+const String tTuan = 'Tuần';
+//ChiTietMonAnScreen
+const String tChiTietMonAn = 'Chi tiết món ăn';
+const String tThanhPhanCoTrongMonAn = 'Thành phần có trong món ăn:\nthịt bò\nhành tây';
+//ThemGhiChuMoiScreen
+const String tThemGhiChuMoi = 'Thêm ghi chú mới';
+const String tNoiDungGhiChu = 'Nội dung ghi chú';
 
 // HoSoYTe / loi_khuyen_bac_si_widget
 const String tLoiKhuyenBacSiHeader =  "Lời khuyên của bác sĩ ";
