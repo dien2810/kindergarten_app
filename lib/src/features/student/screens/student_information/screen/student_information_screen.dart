@@ -1,82 +1,60 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kindergarten_app/src/features/student/screens/student_information/widget/student_document_widget.dart'; // Import widget
-import 'package:kindergarten_app/src/features/student/controllers/guardian_navigation_menu_controller.dart';
+import 'package:kindergarten_app/src/features/student/screens/student_information/widget/student_document_widget.dart';
+import 'package:kindergarten_app/src/features/student/screens/student_information/widget/student_info_widget.dart';
+
+import '../../../../../common_widgets/app_bar_widgets/guardian_app_bar_with_title.dart';
+import '../../../../../constants/sizes.dart';
+import '../../../../../constants/text_strings.dart';
+import '../../../controllers/guardian_navigation_menu_controller.dart';
+import '../../guardian_navigation_menu/bottom_navigation_bar_widget.dart';
+
 class ThongTinHocSinhScreen extends StatelessWidget {
-  const ThongTinHocSinhScreen({Key? key}) : super(key: key);
+  const ThongTinHocSinhScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final guardianNavigationMenuController = Get.put(GuardianNavigationMenuController());
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Thông tin học sinh"),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        backgroundColor: Colors.blue.shade900,
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Tab Buttons
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: const GuardianAppBarWithTitleWidget(title: tThongTinHocSinh),
+        bottomNavigationBar: BottomNavigationBarWidget(controller: guardianNavigationMenuController),
+        body: const Column(
+          children: <Widget>[
+            TabBar(
+              tabs: [
+                Tab(
+                  child: Text(
+                    "Thông tin học sinh",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Color(0xFF0B2384),
+                    ),
+                  ),
+                ),
+                Tab(
+                  child: Text(
+                    "Hồ sơ giấy tờ",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Color(0xFF0B2384),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Expanded(
+              child: TabBarView(
                 children: [
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.orange,
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              topRight: Radius.circular(20))),
-                    ),
-                    child: const Text('Thông tin học sinh'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            topRight: Radius.circular(20)),
-                      ),
-                    ),
-                    child: const Text(
-                      'Hồ sơ giấy tờ',
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  ),
+                  StudentInfoWidget(),
+                  StudentDocumentWidget(), // Tab Hồ sơ giấy tờ
                 ],
               ),
-
-              const SizedBox(height: 20),
-
-              // Student Document Widget
-              StudentDocumentWidget(
-                hoTen: "Nguyễn Văn A",
-                maHocSinh: "student_id_1",
-                ngaySinh: "1/1/2020",
-                gioiTinh: "Male",
-                truong: "Cơ sở 1",
-                he: "Chuẩn",
-                khoi: "3",
-                lop: "Lớp giao tiếp và ngôn ngữ Pooh 01",
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
-    //guardian bottom navigation bar widget
-
     );
   }
 }

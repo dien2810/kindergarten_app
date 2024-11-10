@@ -138,3 +138,39 @@ const String tPhanUngSauTiem = 'Phản ứng sau tiêm:';
 const String tLieuTiepTheo = 'Liều tiếp theo:';
 const String tTienTrinhTiem = 'Tiến trình tiêm:';
 const String tQuayLaiDanhSach = 'Quay lại danh sách';
+
+// Thông tin học sinh screen : student_information_screen.dart
+const String tThongTinHocSinh = "Thông tin học sinh";
+const String tHoSoGiayTo = "Hồ sơ giấy tờ";
+
+// Thông tin học sinh widget : student_info_widget.dart
+const String tHoTen = "Họ tên : ";
+const String tMaHocSinh = "Mã học sinh : ";
+const String tNgaySinh = "Ngày sinh : ";
+const String tGioiTinh = "Giới tính: ";
+const String tTruong = "Trường : ";
+const String tHe = "Hệ : ";
+const String tKhoi = "Khối : ";
+const String tLop = "Lớp : ";
+
+// Hồ sơ giấy tờ widget: student_document_widget.dart
+const String tHoTenCha = "Họ tên cha : ";
+const String tHoTenMe = "Họ tên mẹ : ";
+const String tNgheNghiepCuaCha = "Nghề nghiệp của cha : ";
+const String tNgheNghiepCuaMe = "Nghề nghiệp của mẹ : ";
+const String tAnhHocSinh = "Ảnh học sinh 4x6 : ";
+const String tAnhGiayKhaiSinh = "Ảnh giấy khai sinh : ";
+const String tAnhSoHoKhau = "Ảnh sổ hộ khẩu : ";
+const String tBamVaoDeNop = "Bấm vào để nộp";
+const String tDaNop = "Đã nộp";
+
+// Ngoại khóa : ngoai_khoa_screen.dart
+const String tNgoaiKhoa = "Ngoại khóa";
+const String tDanhSachCLB = "Danh sách CLB";
+const String tCLBCuaToi = "CLB của tôi ";
+
+// chi tiết câu lạc bộ của tôi : chi_tiet_clb_cua_toi_screen.dart
+const String tChiTietCauLacBoCuaToi = "Chi tiết CLB của tôi";
+
+// chi tiết câu lạc bộ : chi_tiet_clb_card_screen.dart
+const String tChiTietCauLacBo = "Chi tiết câu lạc bộ";
