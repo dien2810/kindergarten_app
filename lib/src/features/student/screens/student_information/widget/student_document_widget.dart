@@ -1,74 +1,64 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:kindergarten_app/src/constants/text_strings.dart';
+import '../../../controllers/student_document_controller.dart';
 
 class StudentDocumentWidget extends StatelessWidget {
-  final String hoTen;
-  final String maHocSinh;
-  final String ngaySinh;
-  final String gioiTinh;
-  final String truong;
-  final String he;
-  final String khoi;
-  final String lop;
-
-  const StudentDocumentWidget({
-    Key? key,
-    required this.hoTen,
-    required this.maHocSinh,
-    required this.ngaySinh,
-    required this.gioiTinh,
-    required this.truong,
-    required this.he,
-    required this.khoi,
-    required this.lop,
-  }) : super(key: key);
+  const StudentDocumentWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _buildInfoTile("Họ tên", hoTen),
-        const SizedBox(height: 10),
-        _buildInfoTile("Mã học sinh", maHocSinh),
-        const SizedBox(height: 10),
-        _buildInfoTile("Ngày sinh", ngaySinh),
-        const SizedBox(height: 10),
-        _buildInfoTile("Giới tính", gioiTinh),
-        const SizedBox(height: 10),
-        _buildInfoTile("Trường", truong),
-        const SizedBox(height: 10),
-        _buildInfoTile("Hệ", he),
-        const SizedBox(height: 10),
-        _buildInfoTile("Khối", khoi),
-        const SizedBox(height: 10),
-        _buildInfoTile("Lớp", lop),
-      ],
+    final StudentDocumentController controller = Get.put(StudentDocumentController());
+
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildDocumentField(tHoTenCha),
+          _buildDocumentField(tHoTenMe),
+          _buildDocumentField(tNgheNghiepCuaCha),
+          _buildDocumentField(tNgheNghiepCuaMe),
+          GestureDetector(
+            onTap: () => controller.pickImage('photo4x6'),
+            child: Obx(() => _buildDocumentField(
+              "$tAnhHocSinh ${controller.hasPhoto4x6.value ? tDaNop : tBamVaoDeNop}",
+              textColor: controller.hasPhoto4x6.value ? Colors.green : Colors.red,  // Đổi màu thành đỏ
+            )),
+          ),
+          GestureDetector(
+            onTap: () => controller.pickImage('birthCertificate'),
+            child: Obx(() => _buildDocumentField(
+              "$tAnhGiayKhaiSinh ${controller.hasBirthCertificate.value ? tDaNop : tBamVaoDeNop}",
+              textColor: controller.hasBirthCertificate.value ? Colors.green : Colors.red,  // Đổi màu thành đỏ
+            )),
+          ),
+          GestureDetector(
+            onTap: () => controller.pickImage('householdRegistration'),
+            child: Obx(() => _buildDocumentField(
+              "$tAnhSoHoKhau ${controller.hasHouseholdRegistration.value ? tDaNop : tBamVaoDeNop}",
+              textColor: controller.hasHouseholdRegistration.value ? Colors.green : Colors.red,  // Đổi màu thành đỏ
+            )),
+          ),
+        ],
+      ),
     );
   }
 
-  Widget _buildInfoTile(String label, String value) {
+  // Hàm để tạo khung cho từng dòng văn bản
+  Widget _buildDocumentField(String text, {Color textColor = const Color(0xFF505050)}) {  // Màu chữ mặc định là #505050
     return Container(
-      padding: const EdgeInsets.all(12.0),
+      width: 500,  // Chiều rộng cố định
+      padding: const EdgeInsets.all(16.0),
+      margin: const EdgeInsets.only(bottom: 8.0),  // Khoảng cách giữa các container
       decoration: BoxDecoration(
-        color: Colors.grey.shade200,
-        borderRadius: BorderRadius.circular(10),
+        color: const Color(0xFFD9D9D9),  // Màu nền khung
+        borderRadius: BorderRadius.circular(8),  // Bo góc cho container
       ),
-      child: Row(
-        children: [
-          Text(
-            "$label: ",
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-            ),
-          ),
-          Expanded(
-            child: Text(
-              value,
-              style: const TextStyle(fontSize: 16),
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-        ],
+      child: Text(
+        text,
+        style: TextStyle(fontSize: 16, color: textColor),
+        softWrap: true,  // Đảm bảo văn bản tự xuống dòng nếu cần
       ),
     );
   }

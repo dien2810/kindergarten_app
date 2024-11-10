@@ -18,3 +18,6 @@ const String tLoiKhuyenBacSiItemImage2 = 'assets/images/ho_so_y_te_images/loi_kh
 const String tDanThuocDeleteIcon = 'assets/images/dan_thuoc_images/delete_icon.png';
 //ThucDon Screen
 const String tThucDonBuaSang = 'assets/images/thuc_don_images/thuc_don_bua_sang.png';
+
+
+// Ngoại khóa : ngoai_khoa_screen.dart

@@ -47,6 +47,7 @@ dependencies:
   cloud_firestore: ^5.4.2
   weekly_date_picker: ^1.4.2
 
+  image_picker: ^0.8.4+8
 
 dev_dependencies:
   flutter_test:
@@ -86,7 +87,6 @@ flutter:
     - assets/images/app_bar_images/
     - assets/images/dan_thuoc_images/
     - assets/images/ho_so_y_te_images/
-    - assets/images/thuc_don_images/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

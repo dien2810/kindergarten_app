@@ -35,62 +35,126 @@ class ThongTinSucKhoeController extends GetxController{
   final chanDoanCuaBacSi = TextEditingController();
 
   // danh sach lich su tiem chung
+  var vaccineData = {}.obs;
+  var vaccinationInformation = {}.obs;
+  var vaccineHistory = {}.obs;
+  var selectedVaccineHistory = [].obs;
+  var selectedVaccine = ''.obs;
   var isDetailView = false.obs;
-  var selectedVaccine = Rxn<String>();
-  var vaccineHistory = <Map<String, dynamic>>[
-    {
-      'STT': '1',
-      'LoaiVaccine': 'vaccine uống',
-      'vaccineHistory_id_1_12': {
-        'vaccineID': 'vaccine_id_12',
-        'doses': [
-          {
-            'dateAdministered': '05/07/2022',
-            'dose': '1.5 ml',
-            'site': 'Uống (vaccine uống)',
-            'provider': 'Trạm y tế Phường Long Trường - 1341 Nguyễn Duy Trinh, KP Phước Lai, Phường Long Trường, Quận Thủ Đức',
-            'sideEffects': 'Không có',
-            'nextDoseDue': '05/01/2023',
-            'vaccinationProgress': '1/2',
-          },
-          {
-            'dateAdministered': '05/01/2023',
-            'dose': '1.5 ml',
-            'site': 'Uống (vaccine uống)',
-            'provider': 'Trạm y tế Phường Long Trường - 1341 Nguyễn Duy Trinh, KP Phước Lai, Phường Long Trường, Quận Thủ Đức',
-            'sideEffects': 'Không có',
-            'nextDoseDue': 'Không có',
-            'vaccinationProgress': '2/2',
-          },
-        ],
+
+  @override
+  void onInit() {
+    super.onInit();
+    loadSampleData();
+    buildVaccineHistory();
+  }
+
+  void loadSampleData() {
+    // Sample vaccine data
+    vaccineData.value = {
+      "vaccine_id_1": {
+        "vaccineName": "rabies",
+        "description": "vaccine phòng bệnh dại "
       },
-    },
-    {
-      'STT': '2',
-      'LoaiVaccine': 'vaccine tiêm',
-      'vaccineHistory_id_2_14': {
-        'vaccineID': 'vaccine_id_14',
-        'doses': [
-          {
-            'dateAdministered': '15/05/2020',
-            'dose': '1 ml',
-            'site': 'Cánh tay trái',
-            'provider': 'Trạm y tế Phường Hiệp Bình Chánh - 76 Nguyễn Đức Cảnh, Phường Hiệp Bình Chánh, Quận Thủ Đức',
-            'sideEffects': 'Sưng tại chỗ tiêm',
-            'nextDoseDue': '20/06/2020',
-            'vaccinationProgress': '1/2',
-          },
-          {
-            'dateAdministered': '20/06/2020',
-            'dose': '1 ml',
-            'site': 'Cánh tay phải',
-            'provider': 'Trạm y tế Phường Hiệp Bình Chánh - 76 Nguyễn Đức Cảnh, Phường Hiệp Bình Chánh, Quận Thủ Đức',
-            'sideEffects': 'Không có',
-            'nextDoseDue': 'Không có',
-            'vaccinationProgress': '2/2',
-          },
-        ],
+      "vaccine_id_2": {
+        "vaccineName": "pertussis",
+        "description": "vaccine phòng bệnh ho gà "
       },
-    },
-  ].obs;
+      "vaccine_id_3": {
+        "vaccineName": "BCG",
+        "description": "vaccine phòng bệnh lao "
+      }
+    };
+
+    // Sample vaccination information data
+    vaccinationInformation.value = {
+      "vaccinationInformation_id_10": {
+        "studentID": "student_id_10",
+        "vaccineHistory": [
+          "vaccineHistory_id_1_1",
+          "vaccineHistory_id_1_2",
+        ]
+      }
+    };
+
+    // Sample vaccine history data
+    vaccineHistory.value = {
+      "vaccineHistory_id_1_1": {
+        "vaccineID": "vaccine_id_1",
+        "doses": [
+          {
+            "dateAdministered": "21/06/2022",
+            "dose": "0.5 ml",
+            "site": "Cơ delta (bắp tay) trái",
+            "provider": "Phòng khám đa khoa Linh Trung 1 thuộc Bệnh viện Quận Thủ Đức",
+            "sideEffects": "Đau nhức tại chỗ tiêm, sốt nhẹ, mệt mỏi.",
+            "nextDoseDue": "Không có",
+            "vaccinationProgress": "1/"
+          }
+        ]
+      },
+      "vaccineHistory_id_1_2": {
+        "vaccineID": "vaccine_id_2",
+        "doses": [
+          {
+            "dateAdministered": "16/03/2020",
+            "dose": "0.5 ml",
+            "site": "đùi trái",
+            "provider": "Phòng khám đa khoa Trung tâm Y tế Quận Thủ Đức",
+            "sideEffects": "Không có",
+            "nextDoseDue": "16/04/2020",
+            "vaccinationProgress": "1/4"
+          },
+          {
+            "dateAdministered": "16/04/2020",
+            "dose": "0.5 ml",
+            "site": "đùi trái",
+            "provider": "Phòng khám đa khoa Trung tâm Y tế Quận Thủ Đức",
+            "sideEffects": "Sốt, sưng đỏ tại chỗ tiêm, khóc nhiều, biếng ăn, buồn nôn.",
+            "nextDoseDue": "16/05/2020",
+            "vaccinationProgress": "2/4"
+          },
+          {
+            "dateAdministered": "16/05/2020",
+            "dose": "0.5 ml",
+            "site": "đùi trái",
+            "provider": "Phòng khám đa khoa Trung tâm Y tế Quận Thủ Đức",
+            "sideEffects": "Sốt, sưng đỏ tại chỗ tiêm, khóc nhiều, biếng ăn, buồn nôn.",
+            "nextDoseDue": "16/07/2021",
+            "vaccinationProgress": "3/4"
+          },
+          {
+            "dateAdministered": "16/07/2021",
+            "dose": "0.5 ml",
+            "site": "đùi trái",
+            "provider": "Phòng khám đa khoa Trung tâm Y tế Quận Thủ Đức",
+            "sideEffects": "Không có",
+            "nextDoseDue": "Không có",
+            "vaccinationProgress": "4/4"
+          }
+        ]
+      }
+    };
+  }
+
+  void buildVaccineHistory() {
+    var result = [];
+    vaccinationInformation.forEach((key, value) {
+      value["vaccineHistory"].forEach((historyId) {
+        if (vaccineHistory.containsKey(historyId)) {
+          var history = vaccineHistory[historyId];
+          var vaccineId = history["vaccineID"];
+          var vaccineName = vaccineData[vaccineId]["vaccineName"];
+          result.add({
+            "STT": (result.length + 1).toString(),
+            "LoaiVaccine": vaccineName,
+            "vaccineHistoryId": historyId,
+            "details": history
+          });
+        }
+      });
+    });
+    selectedVaccineHistory.value = result;
+  }
 }
+
