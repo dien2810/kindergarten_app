@@ -46,6 +46,11 @@ dependencies:
   line_awesome_flutter: ^3.0.1
   cloud_firestore: ^5.4.2
   image_picker: ^0.8.4+8
+  intl: ^0.17.0
+  table_calendar: ^3.0.5
+  video_player: ^2.6.0
+
+
 
 dev_dependencies:
   flutter_test:
