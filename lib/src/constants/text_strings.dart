@@ -163,3 +163,14 @@ const String tAnhGiayKhaiSinh = "Ảnh giấy khai sinh : ";
 const String tAnhSoHoKhau = "Ảnh sổ hộ khẩu : ";
 const String tBamVaoDeNop = "Bấm vào để nộp";
 const String tDaNop = "Đã nộp";
+
+// Ngoại khóa : ngoai_khoa_screen.dart
+const String tNgoaiKhoa = "Ngoại khóa";
+const String tDanhSachCLB = "Danh sách CLB";
+const String tCLBCuaToi = "CLB của tôi ";
+
+// chi tiết câu lạc bộ của tôi : chi_tiet_clb_cua_toi_screen.dart
+const String tChiTietCauLacBoCuaToi = "Chi tiết CLB của tôi";
+
+// chi tiết câu lạc bộ : chi_tiet_clb_card_screen.dart
+const String tChiTietCauLacBo = "Chi tiết câu lạc bộ";

@@ -15,3 +15,6 @@ const String tDanThuocItemImage4 = 'assets/images/dan_thuoc_images/dan_thuoc_ite
 // Ho So Y Te : LoiKhuyenBacSi Screen
 const String tLoiKhuyenBacSiItemImage1 = 'assets/images/ho_so_y_te_images/loi_khuyen_bac_si_item_1.png';
 const String tLoiKhuyenBacSiItemImage2 = 'assets/images/ho_so_y_te_images/loi_khuyen_bac_si_item_2.png';
+
+
+// Ngoại khóa : ngoai_khoa_screen.dart
