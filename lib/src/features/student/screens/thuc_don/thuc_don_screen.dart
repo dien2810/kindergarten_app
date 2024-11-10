@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/constants/text_strings.dart';
 import 'package:kindergarten_app/src/features/student/controllers/thuc_don/thuc_don_controller.dart';
+import 'package:kindergarten_app/src/features/student/screens/thuc_don/thuc_don_card_widget.dart';
 import 'package:weekly_date_picker/weekly_date_picker.dart';
 
 import '../../../../common_widgets/app_bar_widgets/guardian_app_bar_with_title.dart';
-import '../../../../constants/image_strings.dart';
 import '../../../../constants/sizes.dart';
 import '../../controllers/guardian_navigation_menu_controller.dart';
 import '../guardian_navigation_menu/bottom_navigation_bar_widget.dart';
@@ -85,14 +85,15 @@ class ThucDonScreen extends StatelessWidget {
                               enableWeeknumberText: false,
                             ),
                           )),
+                          const SizedBox(height: t10Size,),
                           Expanded(
                             child: ListView.builder(
                               itemCount: 3,
                               itemBuilder: (context,index){
-                                return Column(
+                                return const Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text(
+                                    Text(
                                       tBuaSang,
                                       style: TextStyle(
                                         fontSize: 18,
@@ -100,34 +101,8 @@ class ThucDonScreen extends StatelessWidget {
                                         color: Color(0xFF03045E)
                                       ),
                                     ),
-                                    const SizedBox(height: t10Size,),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Flexible(
-                                          flex: 2,
-                                          child: Container(
-                                            padding: const EdgeInsets.all(t10Size),
-                                            decoration: const BoxDecoration(
-                                              color: Color(0xFFA6A3A3)
-                                            ),
-
-                                          ),
-                                        ),
-                                        const Flexible(
-                                          flex: 1,
-                                          child: SizedBox(
-                                            width: t100Size,
-                                            height: t100Size,
-                                            child: ClipRRect(
-                                              child: Image(
-                                                image: AssetImage(tThucDonBuaSang)
-                                              ),
-                                            ),
-                                          )
-                                        )
-                                      ],
-                                    )
+                                    SizedBox(height: t5Size,),
+                                    ThucDonCardWidget()
                                   ],
                                 );
                               },

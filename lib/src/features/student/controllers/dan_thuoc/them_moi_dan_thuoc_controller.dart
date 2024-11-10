@@ -1,81 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/constants/text_strings.dart';
-import 'package:kindergarten_app/src/features/student/models/medicine/medicine_detail.dart';
 import 'package:kindergarten_app/src/features/student/models/medicine/medicine_model.dart';
 import 'package:kindergarten_app/src/features/student/screens/dan_thuoc/dan_thuoc_screen.dart';
 import 'package:kindergarten_app/src/repository/medicine_repository/medicine_repository.dart';
 import 'package:kindergarten_app/src/utils/helper_controller/helper_controller.dart';
 
-import '../../screens/dan_thuoc/them_moi_dan_thuoc/chi_tiet_don_thuoc_input_widget.dart';
 
 class ThemMoiDanThuocController extends GetxController{
-  final Rx<DateTime> selectedDate = DateTime.now().obs;
-  final startDate = TextEditingController();
-  final endDate = TextEditingController();
+  var createDate = DateTime.now().toString();
   final prescription = TextEditingController();
   final note = TextEditingController();
+  final hoVaTenPhuHuynhDanThuoc = TextEditingController();
+  final lop = TextEditingController();
   final medicineRepo = Get.put(MedicineRepository());
   // Danh sách chứa các widget để nhân bản, sử dụng RxList để có thể lắng nghe thay đổi
-  var listThuocWidget = <Widget>[
-    const ChiTietDonThuocInputWidget(
-      dosage: '',
-      name: '',
-      time: ''
-    )
-  ].obs;
-  var listChiTietDonThuoc = <MedicineDetail>[
-    MedicineDetail(
-      dosage: '',
-      name: '',
-      time: ''
-    )
-  ];
   void reset(){
     prescription.text = '';
     note.text = '';
-    startDate.text = '';
-    endDate.text = '';
-    listChiTietDonThuoc = [
-      MedicineDetail(dosage: '', name: '', time: '')
-    ];
-    listThuocWidget.value = <Widget>[
-      const ChiTietDonThuocInputWidget(
-        dosage: '',
-        name: '',
-        time: ''
-      )
-    ];
+    hoVaTenPhuHuynhDanThuoc.text = 'Nguyễn Văn Bình';
+    lop.text = 'Pool 1';
+    DateTime now = DateTime.now();
+    String formattedDate = "${now.day.toString().padLeft(2, '0')}/${now.month.toString().padLeft(2, '0')}/${now.year}";
+    createDate = formattedDate;
   }
   // Hàm thêm widget mới vào danh sách
-  void addCloneableWidget() {
-    listChiTietDonThuoc.add(MedicineDetail(
-      dosage: '',
-      name: '',
-      time: ''
-    ));
-    listThuocWidget.add(ChiTietDonThuocInputWidget(
-      index: listThuocWidget.length,
-      dosage: '',
-      name: '',
-      time: ''
-    ));
-  }
-  void removeCloneableWidget() {
-    if (listThuocWidget.length >= 2) {
-      listThuocWidget.removeLast();
-      listChiTietDonThuoc.removeLast();
-    }
-  }
+
   Future<void> addMedicine(MedicineModel medicine) async{
-    DateTime now = DateTime.now();
-    String today = "${now.day}/${now.month}/${now.year}";
-    if (compareDates(today, medicine.dates[0]) == 1) { //today sau startDate
-      medicine.status = tDangThucHien;
-    }
-    else {
-      medicine.status = tDaGui;
-    }
     await medicineRepo.addMedicine(medicine);
     Helper.successSnackBar(title: 'Đã thêm thành công', message: tDaThemThanhCong);
     Get.offAll(const DanThuocScreen());

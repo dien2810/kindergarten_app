@@ -11,7 +11,9 @@ class MedicineRepository extends GetxController{
     try{
       final snapshot =
         await _medicineCollection.where("studentID", isEqualTo: studentID).get();
+      print('Snapshot: ${snapshot.docs}');
       final medicineData = snapshot.docs.map((e) => MedicineModel.fromFirestore(e)).toList();
+
       return medicineData;
     } catch(e){
       print("Fail to catch medicines: $e");

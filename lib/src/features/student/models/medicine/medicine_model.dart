@@ -1,22 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'medicine_detail.dart';
-
 class MedicineModel{
   final String? id;
-  final List<String> dates;
-  final List<MedicineDetail> medicineDetails;
+  final String createDate;
   final String note;
   final String prescription;
+  final String receivedPerson;
+  final String sentGuardian;
   String status;
   final String studentID;
 
   MedicineModel({
     this.id,
-    required this.dates,
-    required this.medicineDetails,
+    required this.createDate,
     required this.note,
     required this.prescription,
+    required this.receivedPerson,
+    required this.sentGuardian,
     required this.status,
     required this.studentID,
   });
@@ -26,24 +26,29 @@ class MedicineModel{
     final data = doc.data() as Map<String, dynamic>;
     return MedicineModel(
       id: doc.id,
-      dates: List<String>.from(data['dates']),
-      medicineDetails: (data['medicineDetails'] as List<dynamic>)
-          .map((item) => MedicineDetail.fromMap(item as Map<String, dynamic>))
-          .toList(),
+      createDate: data['createDate'],
+      // medicineDetails: (data['medicineDetails'] as List<dynamic>)
+      //     .map((item) => MedicineDetail.fromMap(item as Map<String, dynamic>))
+      //     .toList(),
       note: data['note'],
       prescription: data['prescription'],
+      receivedPerson: data['receivedPerson'],
+      sentGuardian: data['sentGuardian'],
       status: data['status'],
       studentID: data['studentID'],
+
     );
   }
 
   // Chuyển đổi MedicineModel thành một Map để lưu trữ trong Firestore
   Map<String, dynamic> toJson() {
     return {
-      'dates': dates,
-      'medicineDetails': medicineDetails.map((detail) => detail.toMap()).toList(),
+      'dates': createDate,
+      //'medicineDetails': medicineDetails.map((detail) => detail.toMap()).toList(),
       'note': note,
       'prescription': prescription,
+      'receivedPerson': receivedPerson,
+      'sentGuardian': sentGuardian,
       'status': status,
       'studentID': studentID,
     };

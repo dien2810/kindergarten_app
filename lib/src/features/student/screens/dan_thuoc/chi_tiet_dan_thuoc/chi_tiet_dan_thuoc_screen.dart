@@ -86,70 +86,52 @@ class ChiTietDanThuocScreen extends StatelessWidget {
                           DanThuocListTileWidget(
                             image: image,
                             title: medicine.prescription,
-                            subtitle: "${medicine.dates[0]} - ${medicine.dates[1]}",
+                            subtitle: medicine.createDate,
                             status: medicine.status,
                             color: color,
                           ),
                           const SizedBox(height: t10Size,),
-                          InformationWidget(
-                              title: tDonThuoc,
+                          Container(
                             color: const Color(0xFFDAF6F4),
-                            value: medicine.prescription,
-                          ),
-                          const SizedBox(height: t5Size,),
-                          InformationWidget(
-                            title: tGhiChuDanThuoc,
-                            color: const Color(0xFFDAF6F4),
-                            value: medicine.note,
-                          ),
-                          const SizedBox(height: t5Size,),
-                          InformationWidget(
-                            title: tNgayUong,
-                            color: const Color(0xFFDAF6F4),
-                            value: "${medicine.dates[0]} - ${medicine.dates[1]}",
-                          ),
-                          const SizedBox(height: t10Size,),
-                          const Text(
-                            tThongTinThuocVaCachSuDung,
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold
+                            height: t80Size,
+                            child: Align(
+                              alignment: Alignment.topLeft,
+                              child: InformationWidget(
+                                title: tDonThuoc,
+                                color: const Color(0xFFDAF6F4),
+                                value: medicine.prescription,
+                              ),
                             ),
                           ),
-                          ...medicine.medicineDetails.asMap().entries.map((entry) {
-                            int index = entry.key;
-                            var detail = entry.value;
-                            return Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Thuốc số ${index + 1}',
-                                  style: const TextStyle(
-                                      fontSize: 18, fontWeight: FontWeight.bold),
-                                ),
-                                const SizedBox(height: 8),
-                                InformationWidget(
-                                  title: tTenThuoc,
-                                  color: const Color(0xFFDAF6F4),
-                                  value: detail.name,
-                                ),
-                                const SizedBox(height: 5),
-                                InformationWidget(
-                                  title: tLieuLuong,
-                                  color: Colors.white,
-                                  value: detail.dosage,
-                                ),
-                                const SizedBox(height: 5),
-                                InformationWidget(
-                                  title: tThoiGian,
-                                  color: const Color(0xFFDAF6F4),
-                                  value: detail.time,
-                                ),
-                                const SizedBox(height: 10),
-                              ],
-                            );
-                          }),
+                          const SizedBox(height: t10Size,),
+                          Container(
+                            color: const Color(0xFFDAF6F4),
+                            height: t120Size,
+                            child: Align(
+                              alignment: Alignment.topLeft,
+                              child: InformationWidget(
+                                title: tGhiChuDanThuoc,
+                                color: const Color(0xFFDAF6F4),
+                                value: medicine.note,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: t10Size,),
+                          Container(
+                            color: const Color(0xFFDAF6F4),
+                            height: t100Size,
+                            child: Align(
+                              alignment: Alignment.topLeft,
+                              child: InformationWidget(
+                                title: tNgayUong,
+                                color: const Color(0xFFDAF6F4),
+                                value: medicine.createDate,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: t50Size,),
                           Align(
-                            alignment: Alignment.center,
+                            alignment: Alignment.bottomCenter,
                             child: SizedBox(
                               width: t10Size*25,
                               child: Container(

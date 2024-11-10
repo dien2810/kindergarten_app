@@ -18,7 +18,7 @@ class AuthenticationRepository extends GetxController {
   void onReady() {
     firebaseUser = Rx<User?>(_auth.currentUser);
     firebaseUser.bindStream(_auth.userChanges());
-    ever(firebaseUser, setInitialScreen);
+    //ever(firebaseUser, setInitialScreen);
   }
   //xac thuc bang phone
   Future<void> phoneAuthentication(String phoneNo) async {

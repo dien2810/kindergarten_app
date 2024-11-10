@@ -35,20 +35,19 @@ class DanThuocListViewWidget extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               String image = '';
               final medicine = medicineList[index];
-              String status = medicine.status ?? 'No status';
-              String title = medicine.prescription ?? 'No prescription';
-              String subtitle = "${medicine.dates[0]} - ${medicine.dates[1]}";
+              String status = medicine.status;
+              String title = medicine.prescription;
+              String subtitle = medicine.createDate;
               Color color = tWhiteColor;
-              if (status == tDaHuy){
-                color = const Color(0xFFFFEEEB);
+              if (status == tDaGui){
+                color = const Color(0xFFDAF6F4);
               }
               else if (status == tDaHoanThanh) {
                 color = const Color(0xFFCFECFF);
               }
-              else if (status == tDangThucHien) {
+              else {
                 color = const Color(0xFFE8E7FC);
               }
-              else {color = const Color(0xFFDAF6F4);}
               if (index % 4 == 0){
                 image = tDanThuocItemImage1;
               }
