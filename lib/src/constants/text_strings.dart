@@ -205,3 +205,11 @@ const String tChiTietCauLacBoCuaToi = "Chi tiết CLB của tôi";
 
 // chi tiết câu lạc bộ : chi_tiet_clb_card_screen.dart
 const String tChiTietCauLacBo = "Chi tiết câu lạc bộ";
+
+
+
+// hoạt động - sự kiện : hoat_dong_su_kien_screen.dart
+
+const String tHoatDongSuKien = "Hoạt động - Sự kiện ";
+const String tHoatDong = "Hoạt động";
+const String tSuKien = "Sự kiện ";

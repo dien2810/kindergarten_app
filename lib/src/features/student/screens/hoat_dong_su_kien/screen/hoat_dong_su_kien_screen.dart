@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/common_widgets/app_bar_widgets/guardian_app_bar_with_title.dart';
-import 'package:kindergarten_app/src/constants/colors.dart';
 import 'package:kindergarten_app/src/constants/text_strings.dart';
-import 'package:kindergarten_app/src/features/student/controllers/thong_tin_suc_khoe_controller.dart';
-import 'package:kindergarten_app/src/features/student/screens/ngoai_khoa/widget/danh_sach_clb_cua_toi_widget.dart';
+import 'package:kindergarten_app/src/features/student/screens/hoat_dong_su_kien/widget/su_kien_widget.dart';
 import '../../../../../constants/sizes.dart';
 import '../../../controllers/guardian_navigation_menu_controller.dart';
 import '../../guardian_navigation_menu/bottom_navigation_bar_widget.dart';
-import '../widget/danh_sach_clb_widget.dart';
+import '../widget/hoat_dong_widget.dart';
 
-class NgoaiKhoaScreen extends StatelessWidget {
-  const NgoaiKhoaScreen({super.key});
+
+class HoatDongSuKienScreen extends StatelessWidget {
+  const HoatDongSuKienScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-   // final controller = Get.put(NgoaiKhoaController());
+    // final controller = Get.put(NgoaiKhoaController());
     final guardianNavigationMenuController = Get.put(GuardianNavigationMenuController());
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: const GuardianAppBarWithTitleWidget(title: tNgoaiKhoa),
+        appBar: const GuardianAppBarWithTitleWidget(title: tHoatDongSuKien),
         bottomNavigationBar: BottomNavigationBarWidget(controller: guardianNavigationMenuController),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: t10Size),
@@ -39,13 +38,13 @@ class NgoaiKhoaScreen extends StatelessWidget {
                     tabs: [
                       Tab(
                         child: Text(
-                          tDanhSachCLB,
+                          tHoatDong,
                           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                         ),
                       ),
                       Tab(
                         child: Text(
-                          tCLBCuaToi,
+                          tSuKien,
                           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                         ),
                       ),
@@ -54,12 +53,12 @@ class NgoaiKhoaScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: t15Size),
-              const SizedBox(
+              SizedBox(
                 height: 600,
                 child: TabBarView(
                   children: [
-                    DanhSachClbWidget(), // Hiển thị widget cho "Danh sách CLB"
-                    DanhSachClbCuaToiWidget(), // Hiển thị widget cho "CLB của Tôi"
+                    HoatDongWidget(),
+                    SuKienWidget()
                   ],
                 ),
               ),
