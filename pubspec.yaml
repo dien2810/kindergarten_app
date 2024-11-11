@@ -74,6 +74,9 @@ flutter_native_splash:
   color_dark: '#272727'
   image: assets/images/splash_images/splash_image_1.png
   image_dark: assets/images/splash_images/splash_image_1.png
+  intl: ^0.17.0
+  table_calendar: ^3.0.5
+  video_player: ^2.6.0
 
   android_12:
     image: assets/images/splash_images/splash_image_1.png

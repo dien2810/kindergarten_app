@@ -41,7 +41,7 @@ class HocSinhScreen extends StatelessWidget {
                   flex: 1,
                   child: HocSinhNavigationWidget(
                     imageString: tHoatDongSuKienImage,
-                    title: tHoatDongSuKien,
+                    title: tHoatDongVaSuKien,
                     onTap: (){}
                   ),
                 ),
@@ -92,7 +92,7 @@ class HocSinhScreen extends StatelessWidget {
                     imageString: tNgoaiKhoaImage,
                     title: tNgoaiKhoa,
                     onTap: (){
-                      Get.to(()=>const DanhSachClbScreen());
+                      Get.to(()=>const NgoaiKhoaScreen());
                     },
                   ),
                 ),

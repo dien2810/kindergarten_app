@@ -37,7 +37,7 @@ const String tConfirm = 'Confirm';
 //HocSinhScreen
 const String tHocSinh = 'Học sinh';
 const String tHoatDongHangNgay = 'Hoạt động hàng ngày';
-const String tHoatDongSuKien = 'Hoạt động \n Sự kiện';
+const String tHoatDongVaSuKien = 'Hoạt động \n Sự kiện';
 const String tSucKhoe = 'Sức khỏe';
 const String tChuyenCan = 'Chuyên cần';
 const String tXinNghi = 'Xin nghỉ';
