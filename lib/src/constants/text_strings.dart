@@ -1,5 +1,6 @@
 //LoginScreen
 const String tLogin = 'Login';
+const String tAccountID = 'AccountID';
 const String tLoginUsername = 'Email';
 const String tPassword = 'Password';
 const String tForgotPassword = "Forgot Password?";
@@ -33,6 +34,21 @@ const String tEnterNewPassword = 'Enter New Password';
 const String tAtLeast8Digits = 'At least 8 digits';
 const String tConfirmPassword = 'Confirm Password';
 const String tConfirm = 'Confirm';
+//HocSinhScreen
+const String tHocSinh = 'Học sinh';
+const String tHoatDongHangNgay = 'Hoạt động hàng ngày';
+const String tHoatDongSuKien = 'Hoạt động \n Sự kiện';
+const String tSucKhoe = 'Sức khỏe';
+const String tChuyenCan = 'Chuyên cần';
+const String tXinNghi = 'Xin nghỉ';
+const String tNhanXet = 'Nhận xét';
+const String tNgoaiKhoa = 'Ngoại khóa';
+const String tDanThuoc = 'Dặn thuốc';
+const String tThucDon = 'Thực đơn';
+const String tDichVuHocDuong = 'Dịch vụ học đường';
+const String tThoiHocHoanPhi = 'Thôi học\nHoàn phí';
+const String tHocPhi = 'Học phí';
+const String tKhaoSat = 'Khảo sát';
 //ThongTinSucKhoeScreen
 const String tThongTinSucKhoe = 'Thông tin sức khỏe';
 //ThongTinChungTab
@@ -94,7 +110,6 @@ const String tKhongCoBenhDangLoNgai = 'Không có bệnh lý đáng lo ngại';
 const String tLoiKhuyenCuaBacSi = 'Lời khuyên của bác sĩ';
 const String tThongTinLichSuTiemChung = 'Thông tin lịch sử tiêm chủng';
 //DanThuocScreen
-const String tDanThuoc = 'Dặn thuốc';
 const String tLichSuDanThuoc = 'Lịch sử dặn thuốc';
 const String tThuocViemHongCap = 'Thuốc viêm họng cấp';
 const String tTuNgayDenNgay = '06/07/2024 - 11/07/2024';
@@ -124,7 +139,6 @@ const String tThemMoi = 'Thêm mới';
 const String tHuy = 'Hủy';
 const String tDaThemThanhCong = 'Đã thêm thành công';
 //ThucDonScreen
-const String tThucDon = 'Thực đơn';
 const String tBuaSang = 'Bữa sáng';
 const String tTenMon = 'Tên món: Bánh mì Sandwich';
 const String tLuaChon = 'Lựa chọn: Cháo thịt bò, cháo cá, cháo rau củ';
@@ -183,7 +197,6 @@ const String tBamVaoDeNop = "Bấm vào để nộp";
 const String tDaNop = "Đã nộp";
 
 // Ngoại khóa : ngoai_khoa_screen.dart
-const String tNgoaiKhoa = "Ngoại khóa";
 const String tDanhSachCLB = "Danh sách CLB";
 const String tCLBCuaToi = "CLB của tôi ";
 

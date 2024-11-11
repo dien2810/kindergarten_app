@@ -6,6 +6,7 @@ import 'package:kindergarten_app/src/features/authentication/models/account_mode
 class AccountRepository extends GetxController {
   static AccountRepository get instance => Get.find();
   final _db = FirebaseFirestore.instance;
+  var userId = '';
 
   createAccount(AccountModel account) async {
     final isExist = await isAccountExist(account.username);

@@ -31,7 +31,7 @@ class AccountModel {
   factory AccountModel.fromSnapShot(DocumentSnapshot<Map<String,dynamic>> document){
     final data = document.data()!;
     Role roleType = Role.guardian;
-    if (data['role'] == 'guardian'){
+    if (data['role'] == 'parents'){
       roleType = Role.guardian;
     }
     else {

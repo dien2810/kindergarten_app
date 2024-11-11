@@ -1,15 +1,17 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kindergarten_app/src/features/authentication/screens/login_screen/login_screen.dart';
+import 'package:kindergarten_app/src/features/authentication/screens/splash_screen/splash_screen.dart';
+import 'package:kindergarten_app/src/features/student/screens/ngoai_khoa/screen/ngoai_khoa_screen.dart';
 import 'package:kindergarten_app/src/repository/authentication_repository/authentication_repository.dart';
 import 'package:kindergarten_app/src/utils/theme.dart';
 import 'firebase_options.dart';
-import 'package:kindergarten_app/src/features/student/screens/health/thong_tin_suc_khoe_screen.dart';
 
 void main()  async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
-      .then((value) => Get.put(AuthenticationRepository()));
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+      // .then((value) => Get.put(AuthenticationRepository()));
   runApp(const MyApp());
 }
 
@@ -28,7 +30,7 @@ class MyApp extends StatelessWidget {
       //home: const SplashScreen(),
       //home: const DanThuocScreen(),
       //home : const ThongTinHocSinhScreen(),
-      home: const ThongTinSucKhoeScreen(),
+      home: const LoginScreen(),
       defaultTransition: Transition.leftToRightWithFade,
       transitionDuration: const Duration(milliseconds: 500),
     );

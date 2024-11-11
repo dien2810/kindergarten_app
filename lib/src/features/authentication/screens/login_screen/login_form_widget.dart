@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/features/authentication/screens/forget_password/forget_password_options/forget_password_modal_bottom_sheet.dart';
-import 'package:kindergarten_app/src/features/authentication/screens/signup_screen/signup_screen.dart';
 
 import '../../../../constants/colors.dart';
 import '../../../../constants/sizes.dart';
@@ -60,8 +59,8 @@ class LoginFormWidget extends StatelessWidget {
                       hintStyle:
                         const TextStyle(fontSize: 16, fontFamily: "Outfit"),
                       prefixIcon: const Icon(Icons.person_outline_outlined),
-                      labelText: tLoginUsername,
-                      hintText: tLoginUsername,
+                      labelText: tAccountID,
+                      hintText: tAccountID,
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(t40Size)
                       )
@@ -177,45 +176,45 @@ class LoginFormWidget extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: t20Size),
-                const Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                      tDontHaveAccount,
-                      style: TextStyle(
-                          fontFamily: "Outfit",
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xff39647F)
-                      )
-                  ),
-                ),
-                const SizedBox(height: t20Size),
-                Align(
-                  alignment: Alignment.center,
-                  child: SizedBox(
-                    width: t10Size*20,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: tLightBlue,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(t40Size)
-                          )
-                      ),
-                      onPressed: () {
-                        Get.to(()=>const SignupScreen());
-                      },
-                      child: const Text(
-                        tSignup,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            fontFamily: "Outfit",
-                            color: tWhiteColor
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                // const Align(
+                //   alignment: Alignment.center,
+                //   child: Text(
+                //       tDontHaveAccount,
+                //       style: TextStyle(
+                //           fontFamily: "Outfit",
+                //           fontSize: 14,
+                //           fontWeight: FontWeight.w500,
+                //           color: Color(0xff39647F)
+                //       )
+                //   ),
+                // ),
+                // const SizedBox(height: t20Size),
+                // Align(
+                //   alignment: Alignment.center,
+                //   child: SizedBox(
+                //     width: t10Size*20,
+                //     child: ElevatedButton(
+                //       style: ElevatedButton.styleFrom(
+                //           backgroundColor: tLightBlue,
+                //           shape: RoundedRectangleBorder(
+                //               borderRadius: BorderRadius.circular(t40Size)
+                //           )
+                //       ),
+                //       onPressed: () {
+                //         Get.to(()=>const SignupScreen());
+                //       },
+                //       child: const Text(
+                //         tSignup,
+                //         style: TextStyle(
+                //             fontWeight: FontWeight.bold,
+                //             fontSize: 20,
+                //             fontFamily: "Outfit",
+                //             color: tWhiteColor
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),

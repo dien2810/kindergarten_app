@@ -6,6 +6,18 @@ const String tSplashLogo = 'assets/images/splash_images/splash_image_2.png';
 const String tLoginBackground = 'assets/images/login_images/background.png';
 //Guardian App Bar
 const String tGuardianAppBarImage = 'assets/images/app_bar_images/guardian_app_bar_image.png';
+//HocSinhScreen
+const String tHoatDongSuKienImage = 'assets/images/hoc_sinh_screen_images/Calandar.png';
+const String tSucKhoeImage = 'assets/images/hoc_sinh_screen_images/Medical Shield.png';
+const String tChuyenCanImage = 'assets/images/hoc_sinh_screen_images/file.png';
+const String tXinNghiImage = 'assets/images/hoc_sinh_screen_images/Calander.png';
+const String tNhanXetImage = 'assets/images/hoc_sinh_screen_images/snapedit_1731330027036 1.png';
+const String tNgoaiKhoaImage = 'assets/images/hoc_sinh_screen_images/basketball.png';
+const String tDanThuocImage = 'assets/images/hoc_sinh_screen_images/Group 77.png';
+const String tThucDonImage = 'assets/images/hoc_sinh_screen_images/noodle.png';
+const String tThoiHocHoanPhiImage = 'assets/images/hoc_sinh_screen_images/3D money exchange.png';
+const String tHocPhiImage = 'assets/images/hoc_sinh_screen_images/money.png';
+const String tKhaoSatImage = 'assets/images/hoc_sinh_screen_images/Man Pose - 03.png';
 //DanThuoc Screen
 const String tDanThuocItemImage1 = 'assets/images/dan_thuoc_images/dan_thuoc_item_1.png';
 const String tDanThuocItemImage2 = 'assets/images/dan_thuoc_images/dan_thuoc_item_2.png';
@@ -18,6 +30,4 @@ const String tLoiKhuyenBacSiItemImage2 = 'assets/images/ho_so_y_te_images/loi_kh
 const String tDanThuocDeleteIcon = 'assets/images/dan_thuoc_images/delete_icon.png';
 //ThucDon Screen
 const String tThucDonBuaSang = 'assets/images/thuc_don_images/thuc_don_bua_sang.png';
-
-
 // Ngoại khóa : ngoai_khoa_screen.dart

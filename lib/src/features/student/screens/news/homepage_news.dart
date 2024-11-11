@@ -1,13 +1,14 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:kindergarten_app/src/constants/sizes.dart';
+import 'package:kindergarten_app/src/features/authentication/controllers/login_controller.dart';
 
 class HomepageNews extends StatelessWidget {
   const HomepageNews({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final auth = FirebaseAuth.instance;
+    // final auth = FirebaseAuth.instance;
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -16,7 +17,11 @@ class HomepageNews extends StatelessWidget {
               children: [
                 const Center(child: Text("Trang chủ Guardian")),
                 TextButton(
-                  onPressed: () async {await auth.signOut();},
+                  onPressed: () {
+                    // await auth.signOut();
+                    final loginController = Get.put(LoginController());
+                    loginController.signOut();
+                  },
                   child: const Text("Sign out"),
                 )
               ],
