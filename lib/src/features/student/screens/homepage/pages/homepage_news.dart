@@ -7,7 +7,7 @@ import '../../../../../../flutter_flow/flutter_flow_icon_button.dart';
 import '../../../../../../flutter_flow/flutter_flow_theme.dart';
 import '../components/NavigationBarBottom/navigation_bar_bottom_widget.dart';
 import '../components/TabBar/tab_bar_widget.dart';
-import 'homepage_news_mode.dart';
+import 'homepage_news_model.dart';
 
 
 
@@ -138,7 +138,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           ],
         ),
       ),
-
     );
   }
 }
