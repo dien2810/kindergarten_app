@@ -8,7 +8,7 @@ import '../../../../../../flutter_flow/flutter_flow_icon_button.dart';
 import '../../../../../../flutter_flow/flutter_flow_theme.dart';
 import '../components/NavigationBarBottom/navigation_bar_bottom_widget.dart';
 import '../components/TabBar/tab_bar_widget.dart';
-import 'homepage_news_mode.dart';
+import 'homepage_news_model.dart';
 
 
 
@@ -57,7 +57,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       borderRadius: BorderRadius.circular(0),
                       child: Image.asset(
                         'assets/images/homepage_images/Vector.png',
-                        width: 360,
+                        width: 412,
                         fit: BoxFit.fill,
                       ),
                     ),

@@ -1,3 +1,5 @@
+import 'package:kindergarten_app/src/constants/colors.dart';
+
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/gestures.dart';
@@ -48,8 +50,8 @@ class _TabBarWidgetState extends State<TabBarWidget>
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 360,
-      height: 590,
+      width: 460,
+      height: 620,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
         boxShadow: [
@@ -97,9 +99,10 @@ class _TabBarWidgetState extends State<TabBarWidget>
                           icon: FaIcon(
                             FontAwesomeIcons.solidNewspaper,
                             color: Color(0xFF0B2384),
+                            size: 30,
                           ),
                           iconMargin:
-                          EdgeInsetsDirectional.fromSTEB(0, 25, 0, 0),
+                          EdgeInsetsDirectional.fromSTEB(0, 22, 0, 0),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -107,6 +110,7 @@ class _TabBarWidgetState extends State<TabBarWidget>
                             FaIcon(
                               FontAwesomeIcons.book,
                               color: Color(0xFF0B2384),
+                              size: 30,
                             ),
                             Tab(
                               text: '',
@@ -119,6 +123,7 @@ class _TabBarWidgetState extends State<TabBarWidget>
                             FaIcon(
                               FontAwesomeIcons.graduationCap,
                               color: Color(0xFF0B2384),
+                              size: 30,
                             ),
                             Tab(
                               text: '',
@@ -131,6 +136,7 @@ class _TabBarWidgetState extends State<TabBarWidget>
                             Icon(
                               Icons.account_balance_rounded,
                               color: Color(0xFF0B2384),
+                              size: 30,
                             ),
                             Tab(
                               text: '',
@@ -160,7 +166,7 @@ class _TabBarWidgetState extends State<TabBarWidget>
                               alignment: AlignmentDirectional(-0.8, 0),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    0, 10, 0, 10),
+                                    0, 10, 0, 20),
                                 child: Text(
                                   'Tin tức',
                                   style: FlutterFlowTheme.of(context)
@@ -168,6 +174,7 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                       .override(
                                     fontFamily: 'Inter Tight',
                                     color: Color(0xFF0B2384),
+                                    fontSize: 32,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w800,
                                     shadows: [
@@ -198,22 +205,20 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                   alignment: AlignmentDirectional(-1, 0),
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        25, 0, 0, 0),
+                                        40, 0, 0, 0),
                                     child: RichText(
                                       textScaler:
                                       MediaQuery.of(context).textScaler,
                                       text: TextSpan(
                                         children: [
                                           TextSpan(
-                                            text: 'Title of news',
-                                            style: FlutterFlowTheme.of(context)
-                                                .titleMedium
-                                                .override(
-                                              fontFamily: 'Inter',
-                                              letterSpacing: 0.0,
-                                              fontWeight: FontWeight.w800,
+                                        text: 'Title of news',
+                                            style: TextStyle(
+                                            color: Colors.blueAccent,
+                                            fontFamily: 'Inter',
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.w800,),
                                             ),
-                                          ),
                                           TextSpan(
                                             text: '\nCreate date',
                                             style: TextStyle(),
@@ -254,7 +259,7 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                     alignment: AlignmentDirectional(-1, 0),
                                     child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          25, 0, 0, 0),
+                                          40, 0, 0, 0),
                                       child: RichText(
                                         textScaler:
                                         MediaQuery.of(context).textScaler,
@@ -262,15 +267,11 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                           children: [
                                             TextSpan(
                                               text: 'Title of news',
-                                              style:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleMedium
-                                                  .override(
+                                              style: TextStyle(
+                                                color: Colors.blueAccent,
                                                 fontFamily: 'Inter',
                                                 letterSpacing: 0.0,
-                                                fontWeight:
-                                                FontWeight.w800,
-                                              ),
+                                                fontWeight: FontWeight.w800,),
                                             ),
                                             TextSpan(
                                               text: '\nCreate date',
@@ -299,7 +300,7 @@ class _TabBarWidgetState extends State<TabBarWidget>
                               alignment: AlignmentDirectional(-0.8, 0),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    0, 10, 0, 10),
+                                    0, 10, 0, 20),
                                 child: Text(
                                   'Tuyển sinh',
                                   style: FlutterFlowTheme.of(context)
@@ -307,6 +308,7 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                       .override(
                                     fontFamily: 'Inter Tight',
                                     color: Color(0xFF0B2384),
+                                    fontSize: 32,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w800,
                                     shadows: [
@@ -337,7 +339,7 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                   alignment: AlignmentDirectional(-1, 0),
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        25, 0, 0, 0),
+                                        40, 0, 0, 0),
                                     child: RichText(
                                       textScaler:
                                       MediaQuery.of(context).textScaler,
@@ -345,14 +347,12 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                         children: [
                                           TextSpan(
                                             text: 'Title of news',
-                                            style: FlutterFlowTheme.of(context)
-                                                .titleMedium
-                                                .override(
+                                            style: TextStyle(
+                                              color: Colors.blueAccent,
                                               fontFamily: 'Inter',
                                               letterSpacing: 0.0,
-                                              fontWeight: FontWeight.w800,
+                                              fontWeight: FontWeight.w800,),
                                             ),
-                                          ),
                                           TextSpan(
                                             text: '\nCreate date',
                                             style: TextStyle(),
@@ -393,7 +393,7 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                     alignment: AlignmentDirectional(-1, 0),
                                     child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          25, 0, 0, 0),
+                                          40, 0, 0, 0),
                                       child: RichText(
                                         textScaler:
                                         MediaQuery.of(context).textScaler,
@@ -401,15 +401,11 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                           children: [
                                             TextSpan(
                                               text: 'Title of news',
-                                              style:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleMedium
-                                                  .override(
+                                              style: TextStyle(
+                                                color: Colors.blueAccent,
                                                 fontFamily: 'Inter',
                                                 letterSpacing: 0.0,
-                                                fontWeight:
-                                                FontWeight.w800,
-                                              ),
+                                                fontWeight: FontWeight.w800,),
                                             ),
                                             TextSpan(
                                               text: '\nCreate date',
@@ -438,7 +434,7 @@ class _TabBarWidgetState extends State<TabBarWidget>
                               alignment: AlignmentDirectional(-0.8, 0),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    0, 10, 0, 10),
+                                    20, 10, 0, 20),
                                 child: Text(
                                   'Chương trình giáo dục',
                                   style: FlutterFlowTheme.of(context)
@@ -446,6 +442,7 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                       .override(
                                     fontFamily: 'Inter Tight',
                                     color: Color(0xFF0B2384),
+                                    fontSize: 32,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w800,
                                     shadows: [
@@ -476,7 +473,7 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                   alignment: AlignmentDirectional(-1, 0),
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        25, 0, 0, 0),
+                                        40, 0, 0, 0),
                                     child: RichText(
                                       textScaler:
                                       MediaQuery.of(context).textScaler,
@@ -484,13 +481,11 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                         children: [
                                           TextSpan(
                                             text: 'Title of news',
-                                            style: FlutterFlowTheme.of(context)
-                                                .titleMedium
-                                                .override(
+                                            style: TextStyle(
+                                              color: Colors.blueAccent,
                                               fontFamily: 'Inter',
                                               letterSpacing: 0.0,
-                                              fontWeight: FontWeight.w800,
-                                            ),
+                                              fontWeight: FontWeight.w800,),
                                           ),
                                           TextSpan(
                                             text: '\nCreate date',
@@ -532,24 +527,20 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                     alignment: AlignmentDirectional(-1, 0),
                                     child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          25, 0, 0, 0),
+                                          40, 0, 0, 0),
                                       child: RichText(
                                         textScaler:
                                         MediaQuery.of(context).textScaler,
                                         text: TextSpan(
                                           children: [
-                                            TextSpan(
+                                              TextSpan(
                                               text: 'Title of news',
-                                              style:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleMedium
-                                                  .override(
-                                                fontFamily: 'Inter',
-                                                letterSpacing: 0.0,
-                                                fontWeight:
-                                                FontWeight.w800,
+                                                style: TextStyle(
+                                                  color: Colors.blueAccent,
+                                                  fontFamily: 'Inter',
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.w800,),
                                               ),
-                                            ),
                                             TextSpan(
                                               text: '\nCreate date',
                                               style: TextStyle(),
@@ -577,7 +568,7 @@ class _TabBarWidgetState extends State<TabBarWidget>
                               alignment: AlignmentDirectional(-0.8, 0),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    0, 10, 0, 10),
+                                    10, 10, 0, 20),
                                 child: Text(
                                   'Về Vinschool',
                                   style: FlutterFlowTheme.of(context)
@@ -585,6 +576,7 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                       .override(
                                     fontFamily: 'Inter Tight',
                                     color: Color(0xFF0B2384),
+                                    fontSize: 32,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w800,
                                     shadows: [
@@ -615,7 +607,7 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                   alignment: AlignmentDirectional(-1, 0),
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        25, 0, 0, 0),
+                                        40, 0, 0, 0),
                                     child: RichText(
                                       textScaler:
                                       MediaQuery.of(context).textScaler,
@@ -623,13 +615,11 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                         children: [
                                           TextSpan(
                                             text: 'Title of news',
-                                            style: FlutterFlowTheme.of(context)
-                                                .titleMedium
-                                                .override(
+                                            style: TextStyle(
+                                              color: Colors.blueAccent,
                                               fontFamily: 'Inter',
                                               letterSpacing: 0.0,
-                                              fontWeight: FontWeight.w800,
-                                            ),
+                                              fontWeight: FontWeight.w800,),
                                           ),
                                           TextSpan(
                                             text: '\nCreate date',
@@ -671,7 +661,7 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                     alignment: AlignmentDirectional(-1, 0),
                                     child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          25, 0, 0, 0),
+                                          40, 0, 0, 0),
                                       child: RichText(
                                         textScaler:
                                         MediaQuery.of(context).textScaler,
@@ -679,15 +669,11 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                           children: [
                                             TextSpan(
                                               text: 'Title of news',
-                                              style:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleMedium
-                                                  .override(
+                                              style: TextStyle(
+                                                color: Colors.blueAccent,
                                                 fontFamily: 'Inter',
                                                 letterSpacing: 0.0,
-                                                fontWeight:
-                                                FontWeight.w800,
-                                              ),
+                                                fontWeight: FontWeight.w800,),
                                             ),
                                             TextSpan(
                                               text: '\nCreate date',

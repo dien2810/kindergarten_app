@@ -4,6 +4,12 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kindergarten_app/src/features/student/screens/dan_thuoc/dan_thuoc_screen.dart';
 import 'package:kindergarten_app/src/features/student/screens/homepage/pages/homepage_news.dart';
+import 'package:kindergarten_app/src/features/student/screens/notifications/pages/notification_info.dart';
+import 'package:kindergarten_app/src/features/student/screens/notifications/pages/notifications.dart';
+import 'package:kindergarten_app/src/features/student/screens/remark/pages/remark.dart';
+import 'package:kindergarten_app/src/features/student/screens/remark/pages/remark_info.dart';
+import 'package:kindergarten_app/src/features/student/screens/survey/pages/survey.dart';
+import 'package:kindergarten_app/src/features/student/screens/survey/pages/survey_info.dart';
 import 'package:kindergarten_app/src/repository/authentication_repository/authentication_repository.dart';
 import 'package:kindergarten_app/src/utils/theme.dart';
 
@@ -96,7 +102,7 @@ class _MyAppState extends State<MyApp> {
       darkTheme: TAppTheme.darkTheme,
       themeMode: ThemeMode.light,
       //home: const SplashScreen(),
-      home: const HomePageWidget(),
+      home: const SurveyInfoWidget(),
       defaultTransition: Transition.leftToRightWithFade,
       transitionDuration: const Duration(milliseconds: 500),
     );
