@@ -1,10 +1,9 @@
+import 'package:kindergarten_app/src/constants/sizes.dart';
+
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 import 'tab_bar_model.dart';
 export 'tab_bar_model.dart';
@@ -48,11 +47,11 @@ class _TabBarWidgetState extends State<TabBarWidget>
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 360,
-      height: 590,
+      width: t100Size*4.2,
+      height: double.infinity,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             blurRadius: 1.5,
             color: Color(0xFF838B8F),
@@ -66,7 +65,7 @@ class _TabBarWidgetState extends State<TabBarWidget>
         borderRadius: BorderRadius.circular(24),
       ),
       child: Align(
-        alignment: AlignmentDirectional(0, -1),
+        alignment: const AlignmentDirectional(0, -1),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -75,7 +74,7 @@ class _TabBarWidgetState extends State<TabBarWidget>
               child: Column(
                 children: [
                   Align(
-                    alignment: Alignment(0, 0),
+                    alignment: const Alignment(0, 0),
                     child: TabBar(
                       labelColor: FlutterFlowTheme.of(context).primaryText,
                       unselectedLabelColor:
@@ -92,7 +91,7 @@ class _TabBarWidgetState extends State<TabBarWidget>
                       ),
                       indicatorColor: FlutterFlowTheme.of(context).primary,
                       indicatorWeight: 2.5,
-                      tabs: [
+                      tabs: const [
                         Tab(
                           icon: FaIcon(
                             FontAwesomeIcons.solidNewspaper,
@@ -157,9 +156,9 @@ class _TabBarWidgetState extends State<TabBarWidget>
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Align(
-                              alignment: AlignmentDirectional(-0.8, 0),
+                              alignment: const AlignmentDirectional(-0.8, 0),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0, 10, 0, 10),
                                 child: Text(
                                   'Tin tức',
@@ -167,14 +166,14 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                       .titleLarge
                                       .override(
                                     fontFamily: 'Inter Tight',
-                                    color: Color(0xFF0B2384),
+                                    color: const Color(0xFF0B2384),
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w800,
                                     shadows: [
                                       Shadow(
                                         color: FlutterFlowTheme.of(context)
                                             .secondaryText,
-                                        offset: Offset(2.0, 2.0),
+                                        offset: const Offset(2.0, 2.0),
                                         blurRadius: 4.0,
                                       )
                                     ],
@@ -195,9 +194,9 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                   ),
                                 ),
                                 Align(
-                                  alignment: AlignmentDirectional(-1, 0),
+                                  alignment: const AlignmentDirectional(-1, 0),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         25, 0, 0, 0),
                                     child: RichText(
                                       textScaler:
@@ -212,9 +211,10 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                               fontFamily: 'Inter',
                                               letterSpacing: 0.0,
                                               fontWeight: FontWeight.w800,
+                                              color: Colors.black
                                             ),
                                           ),
-                                          TextSpan(
+                                          const TextSpan(
                                             text: '\nCreate date',
                                             style: TextStyle(),
                                           )
@@ -233,12 +233,12 @@ class _TabBarWidgetState extends State<TabBarWidget>
                             ),
                             Padding(
                               padding:
-                              EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                              const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0, 1, 0, 0),
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(8),
@@ -251,9 +251,9 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                     ),
                                   ),
                                   Align(
-                                    alignment: AlignmentDirectional(-1, 0),
+                                    alignment: const AlignmentDirectional(-1, 0),
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           25, 0, 0, 0),
                                       child: RichText(
                                         textScaler:
@@ -270,9 +270,10 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                                 letterSpacing: 0.0,
                                                 fontWeight:
                                                 FontWeight.w800,
+                                                color: Colors.black
                                               ),
                                             ),
-                                            TextSpan(
+                                            const TextSpan(
                                               text: '\nCreate date',
                                               style: TextStyle(),
                                             )
@@ -296,9 +297,9 @@ class _TabBarWidgetState extends State<TabBarWidget>
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Align(
-                              alignment: AlignmentDirectional(-0.8, 0),
+                              alignment: const AlignmentDirectional(-0.8, 0),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0, 10, 0, 10),
                                 child: Text(
                                   'Tuyển sinh',
@@ -306,14 +307,14 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                       .titleLarge
                                       .override(
                                     fontFamily: 'Inter Tight',
-                                    color: Color(0xFF0B2384),
+                                    color: const Color(0xFF0B2384),
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w800,
                                     shadows: [
                                       Shadow(
                                         color: FlutterFlowTheme.of(context)
                                             .secondaryText,
-                                        offset: Offset(2.0, 2.0),
+                                        offset: const Offset(2.0, 2.0),
                                         blurRadius: 4.0,
                                       )
                                     ],
@@ -334,9 +335,9 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                   ),
                                 ),
                                 Align(
-                                  alignment: AlignmentDirectional(-1, 0),
+                                  alignment: const AlignmentDirectional(-1, 0),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         25, 0, 0, 0),
                                     child: RichText(
                                       textScaler:
@@ -351,9 +352,10 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                               fontFamily: 'Inter',
                                               letterSpacing: 0.0,
                                               fontWeight: FontWeight.w800,
+                                              color: Colors.black
                                             ),
                                           ),
-                                          TextSpan(
+                                          const TextSpan(
                                             text: '\nCreate date',
                                             style: TextStyle(),
                                           )
@@ -372,12 +374,12 @@ class _TabBarWidgetState extends State<TabBarWidget>
                             ),
                             Padding(
                               padding:
-                              EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                              const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0, 1, 0, 0),
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(8),
@@ -390,9 +392,9 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                     ),
                                   ),
                                   Align(
-                                    alignment: AlignmentDirectional(-1, 0),
+                                    alignment: const AlignmentDirectional(-1, 0),
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           25, 0, 0, 0),
                                       child: RichText(
                                         textScaler:
@@ -409,9 +411,10 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                                 letterSpacing: 0.0,
                                                 fontWeight:
                                                 FontWeight.w800,
+                                                color: Colors.black
                                               ),
                                             ),
-                                            TextSpan(
+                                            const TextSpan(
                                               text: '\nCreate date',
                                               style: TextStyle(),
                                             )
@@ -435,9 +438,9 @@ class _TabBarWidgetState extends State<TabBarWidget>
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Align(
-                              alignment: AlignmentDirectional(-0.8, 0),
+                              alignment: const AlignmentDirectional(-0.8, 0),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0, 10, 0, 10),
                                 child: Text(
                                   'Chương trình giáo dục',
@@ -445,14 +448,14 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                       .titleLarge
                                       .override(
                                     fontFamily: 'Inter Tight',
-                                    color: Color(0xFF0B2384),
+                                    color: const Color(0xFF0B2384),
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w800,
                                     shadows: [
                                       Shadow(
                                         color: FlutterFlowTheme.of(context)
                                             .secondaryText,
-                                        offset: Offset(2.0, 2.0),
+                                        offset: const Offset(2.0, 2.0),
                                         blurRadius: 4.0,
                                       )
                                     ],
@@ -473,9 +476,9 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                   ),
                                 ),
                                 Align(
-                                  alignment: AlignmentDirectional(-1, 0),
+                                  alignment: const AlignmentDirectional(-1, 0),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         25, 0, 0, 0),
                                     child: RichText(
                                       textScaler:
@@ -490,9 +493,10 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                               fontFamily: 'Inter',
                                               letterSpacing: 0.0,
                                               fontWeight: FontWeight.w800,
+                                              color: Colors.black
                                             ),
                                           ),
-                                          TextSpan(
+                                          const TextSpan(
                                             text: '\nCreate date',
                                             style: TextStyle(),
                                           )
@@ -511,12 +515,12 @@ class _TabBarWidgetState extends State<TabBarWidget>
                             ),
                             Padding(
                               padding:
-                              EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                              const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0, 1, 0, 0),
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(8),
@@ -529,9 +533,9 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                     ),
                                   ),
                                   Align(
-                                    alignment: AlignmentDirectional(-1, 0),
+                                    alignment: const AlignmentDirectional(-1, 0),
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           25, 0, 0, 0),
                                       child: RichText(
                                         textScaler:
@@ -548,9 +552,10 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                                 letterSpacing: 0.0,
                                                 fontWeight:
                                                 FontWeight.w800,
+                                                color: Colors.black
                                               ),
                                             ),
-                                            TextSpan(
+                                            const TextSpan(
                                               text: '\nCreate date',
                                               style: TextStyle(),
                                             )
@@ -574,24 +579,24 @@ class _TabBarWidgetState extends State<TabBarWidget>
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Align(
-                              alignment: AlignmentDirectional(-0.8, 0),
+                              alignment: const AlignmentDirectional(-0.8, 0),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0, 10, 0, 10),
                                 child: Text(
-                                  'Về Vinschool',
+                                  'Thông tin Trường',
                                   style: FlutterFlowTheme.of(context)
                                       .titleLarge
                                       .override(
                                     fontFamily: 'Inter Tight',
-                                    color: Color(0xFF0B2384),
+                                    color: const Color(0xFF0B2384),
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w800,
                                     shadows: [
                                       Shadow(
                                         color: FlutterFlowTheme.of(context)
                                             .secondaryText,
-                                        offset: Offset(2.0, 2.0),
+                                        offset: const Offset(2.0, 2.0),
                                         blurRadius: 4.0,
                                       )
                                     ],
@@ -612,9 +617,9 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                   ),
                                 ),
                                 Align(
-                                  alignment: AlignmentDirectional(-1, 0),
+                                  alignment: const AlignmentDirectional(-1, 0),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         25, 0, 0, 0),
                                     child: RichText(
                                       textScaler:
@@ -629,9 +634,10 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                               fontFamily: 'Inter',
                                               letterSpacing: 0.0,
                                               fontWeight: FontWeight.w800,
+                                              color: Colors.black
                                             ),
                                           ),
-                                          TextSpan(
+                                          const TextSpan(
                                             text: '\nCreate date',
                                             style: TextStyle(),
                                           )
@@ -650,12 +656,12 @@ class _TabBarWidgetState extends State<TabBarWidget>
                             ),
                             Padding(
                               padding:
-                              EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                              const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0, 1, 0, 0),
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(8),
@@ -668,9 +674,9 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                     ),
                                   ),
                                   Align(
-                                    alignment: AlignmentDirectional(-1, 0),
+                                    alignment: const AlignmentDirectional(-1, 0),
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           25, 0, 0, 0),
                                       child: RichText(
                                         textScaler:
@@ -687,9 +693,10 @@ class _TabBarWidgetState extends State<TabBarWidget>
                                                 letterSpacing: 0.0,
                                                 fontWeight:
                                                 FontWeight.w800,
+                                                color: Colors.black
                                               ),
                                             ),
-                                            TextSpan(
+                                            const TextSpan(
                                               text: '\nCreate date',
                                               style: TextStyle(),
                                             )

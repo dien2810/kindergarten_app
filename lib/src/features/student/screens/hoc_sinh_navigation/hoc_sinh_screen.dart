@@ -91,7 +91,9 @@ class HocSinhScreen extends StatelessWidget {
                   child: HocSinhNavigationWidget(
                       imageString: tNhanXetImage,
                       title: tNhanXet,
-                      onTap: (){}
+                      onTap: (){
+
+                      }
                   ),
                 ),
                 Expanded(

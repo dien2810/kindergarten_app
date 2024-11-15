@@ -1,13 +1,10 @@
+import 'package:kindergarten_app/src/constants/sizes.dart';
+
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-
 import 'navigation_bar_bottom_model.dart';
-import 'navigation_bar_bottom_model.dart';
-export 'navigation_bar_bottom_model.dart';
 
 class NavigationBarBottomWidget extends StatefulWidget {
   const NavigationBarBottomWidget({super.key});
@@ -43,11 +40,11 @@ class _NavigationBarBottomWidgetState extends State<NavigationBarBottomWidget> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        width: 360,
-        height: 65,
+        width: t100Size*4.2,
+        height: t10Size*6.5,
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               blurRadius: 1.5,
               color: Color(0xFF838B8F),
@@ -58,7 +55,7 @@ class _NavigationBarBottomWidgetState extends State<NavigationBarBottomWidget> {
               spreadRadius: 1,
             )
           ],
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
             bottomLeft: Radius.circular(24),
             bottomRight: Radius.circular(24),
             topLeft: Radius.circular(24),
@@ -70,13 +67,13 @@ class _NavigationBarBottomWidgetState extends State<NavigationBarBottomWidget> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 8),
+              padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 8, 8),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -88,8 +85,8 @@ class _NavigationBarBottomWidgetState extends State<NavigationBarBottomWidget> {
                             Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
-                                FaIcon(
-                                  FontAwesomeIcons.home,
+                                const FaIcon(
+                                  FontAwesomeIcons.house,
                                   color: Color(0xFF0B2384),
                                   size: 24,
                                 ),
@@ -99,7 +96,7 @@ class _NavigationBarBottomWidgetState extends State<NavigationBarBottomWidget> {
                                       .bodySmall
                                       .override(
                                     fontFamily: 'Inter',
-                                    color: Color(0xFF0B2384),
+                                    color: const Color(0xFF0B2384),
                                     fontSize: 10,
                                     letterSpacing: 0.0,
                                   ),
@@ -109,7 +106,7 @@ class _NavigationBarBottomWidgetState extends State<NavigationBarBottomWidget> {
                           ],
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
+                          padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
@@ -117,7 +114,7 @@ class _NavigationBarBottomWidgetState extends State<NavigationBarBottomWidget> {
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Align(
+                                  const Align(
                                     alignment: AlignmentDirectional(0, 0),
                                     child: FaIcon(
                                       FontAwesomeIcons.calendar,
@@ -131,7 +128,7 @@ class _NavigationBarBottomWidgetState extends State<NavigationBarBottomWidget> {
                                         .bodySmall
                                         .override(
                                       fontFamily: 'Inter',
-                                      color: Color(0xFF0B2384),
+                                      color: const Color(0xFF0B2384),
                                       fontSize: 10,
                                       letterSpacing: 0.0,
                                     ),
@@ -149,7 +146,7 @@ class _NavigationBarBottomWidgetState extends State<NavigationBarBottomWidget> {
                             Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
-                                FaIcon(
+                                const FaIcon(
                                   FontAwesomeIcons.comment,
                                   color: Color(0xFF0B2384),
                                   size: 24,
@@ -160,7 +157,7 @@ class _NavigationBarBottomWidgetState extends State<NavigationBarBottomWidget> {
                                       .bodySmall
                                       .override(
                                     fontFamily: 'Inter',
-                                    color: Color(0xFF0B2384),
+                                    color: const Color(0xFF0B2384),
                                     fontSize: 10,
                                     letterSpacing: 0.0,
                                   ),
@@ -175,7 +172,7 @@ class _NavigationBarBottomWidgetState extends State<NavigationBarBottomWidget> {
                             Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
-                                FaIcon(
+                                const FaIcon(
                                   FontAwesomeIcons.bell,
                                   color: Color(0xFF0B2384),
                                   size: 24,
@@ -186,7 +183,7 @@ class _NavigationBarBottomWidgetState extends State<NavigationBarBottomWidget> {
                                       .bodySmall
                                       .override(
                                     fontFamily: 'Inter',
-                                    color: Color(0xFF0B2384),
+                                    color: const Color(0xFF0B2384),
                                     fontSize: 10,
                                     letterSpacing: 0.0,
                                   ),
@@ -201,7 +198,7 @@ class _NavigationBarBottomWidgetState extends State<NavigationBarBottomWidget> {
                             Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
-                                FaIcon(
+                                const FaIcon(
                                   FontAwesomeIcons.user,
                                   color: Color(0xFF0B2384),
                                   size: 24,
@@ -212,7 +209,7 @@ class _NavigationBarBottomWidgetState extends State<NavigationBarBottomWidget> {
                                       .bodySmall
                                       .override(
                                     fontFamily: 'Inter',
-                                    color: Color(0xFF0B2384),
+                                    color: const Color(0xFF0B2384),
                                     fontSize: 10,
                                     letterSpacing: 0.0,
                                   ),
