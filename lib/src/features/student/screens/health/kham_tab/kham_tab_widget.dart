@@ -26,7 +26,7 @@ class KhamTabWidget extends StatelessWidget {
                 fontSize: 18
             ),
           ),
-          const SizedBox(height: t10Size),
+          SizedBox(height: t10Size),
           const Text(
             tMat,
             style: TextStyle(
@@ -64,7 +64,7 @@ class KhamTabWidget extends StatelessWidget {
             title: tTinhTrangMat,
             textEditingController: controller.tinhTrangMat,
           ),
-          const SizedBox(height: t10Size),
+          SizedBox(height: t10Size),
           const Text(
             tKhac,
             style: TextStyle(
@@ -73,7 +73,7 @@ class KhamTabWidget extends StatelessWidget {
                 fontSize: 18
             ),
           ),
-          const SizedBox(height: t10Size),
+          SizedBox(height: t10Size),
           InformationInput(
             color: Colors.transparent,
             title: tTinhTrangRang,
@@ -92,7 +92,7 @@ class KhamTabWidget extends StatelessWidget {
             textEditingController: controller.benhLyKhac,
             //defaultInput: tKhongCo,
           ),
-          const SizedBox(height: t10Size),
+          SizedBox(height: t10Size),
           const Text(
             tChuanDoanCuaBacSi,
             style: TextStyle(
@@ -101,9 +101,9 @@ class KhamTabWidget extends StatelessWidget {
                 fontSize: 18
             ),
           ),
-          const SizedBox(height: t10Size),
+          SizedBox(height: t10Size),
           ChuanDoanWidget(controller: controller),
-          const SizedBox(height: t10Size),
+          SizedBox(height: t10Size),
           CustomButtonWidget(
             width: t10Size*20,
             color: const Color(0xFF03045E),

@@ -23,7 +23,7 @@ class ThemThoiHocHoanPhiScreen extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(25.0),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: t10Size),
+                padding: EdgeInsets.symmetric(horizontal: t10Size),
                 child: Container(
                   decoration: const BoxDecoration(
                       color: Colors.white,
@@ -31,7 +31,7 @@ class ThemThoiHocHoanPhiScreen extends StatelessWidget {
                       borderRadius: BorderRadius.all(Radius.circular(25.0))
                   ),
                   child: Container(
-                    padding: const EdgeInsets.all(t15Size),
+                    padding: EdgeInsets.all(t15Size),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: const BorderRadius.all(Radius.circular(25.0)),
@@ -43,7 +43,7 @@ class ThemThoiHocHoanPhiScreen extends StatelessWidget {
                         const Text(
                           tNhungThongTinDuoiDay
                         ),
-                        const SizedBox(height: t10Size,),
+                        SizedBox(height: t10Size,),
                         const Text(
                           tThongTinYeuCau,
                           style: TextStyle(
@@ -52,7 +52,7 @@ class ThemThoiHocHoanPhiScreen extends StatelessWidget {
                             fontSize: 16
                           ),
                         ),
-                        const SizedBox(height: t10Size,),
+                        SizedBox(height: t10Size,),
                         Obx(()=>DropdownButtonFormField(
                             value: themThoiHocHoanPhiController.selectedValDropdown.value,
                             items: themThoiHocHoanPhiController.formTypeList.map(
@@ -84,14 +84,14 @@ class ThemThoiHocHoanPhiScreen extends StatelessWidget {
                           )
                           ),
                         ),
-                        const SizedBox(height: t10Size,),
+                        SizedBox(height: t10Size,),
                         Obx((){
                           themThoiHocHoanPhiController.reset();
                           if (themThoiHocHoanPhiController.selectedValDropdown.value == tYeuCauThoiHoc){
                             return Column(
                               children: [
                                 Container(
-                                    padding: const EdgeInsets.all(t10Size),
+                                    padding: EdgeInsets.all(t10Size),
                                     decoration: BoxDecoration(
                                         color: const Color(0xFFE9EFF7),
                                         borderRadius: BorderRadius.circular(15)
@@ -124,9 +124,9 @@ class ThemThoiHocHoanPhiScreen extends StatelessWidget {
         
                                     )
                                 ),
-                                const SizedBox(height: t10Size,),
+                                SizedBox(height: t10Size,),
                                 Container(
-                                    padding: const EdgeInsets.all(t10Size),
+                                    padding: EdgeInsets.all(t10Size),
                                     decoration: BoxDecoration(
                                         color: const Color(0xFFE9EFF7),
                                         borderRadius: BorderRadius.circular(15)
@@ -162,7 +162,7 @@ class ThemThoiHocHoanPhiScreen extends StatelessWidget {
                             );
                           }
                           return Container(
-                              padding: const EdgeInsets.all(t10Size),
+                              padding: EdgeInsets.all(t10Size),
                               decoration: BoxDecoration(
                                   color: const Color(0xFFE9EFF7),
                                   borderRadius: BorderRadius.circular(15)
@@ -196,7 +196,7 @@ class ThemThoiHocHoanPhiScreen extends StatelessWidget {
                               )
                           );
                         }),
-                        const SizedBox(height: t10Size,),
+                        SizedBox(height: t10Size,),
                         const Text(
                           tThongTinHocSinh,
                           style: TextStyle(
@@ -205,25 +205,25 @@ class ThemThoiHocHoanPhiScreen extends StatelessWidget {
                               fontSize: 16
                           ),
                         ),
-                        const SizedBox(height: t10Size,),
+                        SizedBox(height: t10Size,),
                         const FieldValueWidget(
                           color: Color(0xFFE4E4E4),
                           label: tHoVaTen,
                           value: 'Nguyen Thi Hai Vy'
                         ),
-                        const SizedBox(height: t5Size,),
+                        SizedBox(height: t5Size,),
                         const FieldValueWidget(
                             color: Color(0xFFE4E4E4),
                             label: tMaHocSinh,
                             value: '2111001'
                         ),
-                        const SizedBox(height: t5Size,),
+                        SizedBox(height: t5Size,),
                         const FieldValueWidget(
                             color: Color(0xFFE4E4E4),
                             label: tLop,
                             value: 'Pool 1'
                         ),
-                        const SizedBox(height: t10Size,),
+                        SizedBox(height: t10Size,),
                         const Text(
                           tThongTinPhuHuynh,
                           style: TextStyle(
@@ -232,25 +232,25 @@ class ThemThoiHocHoanPhiScreen extends StatelessWidget {
                               fontSize: 16
                           ),
                         ),
-                        const SizedBox(height: t10Size,),
+                        SizedBox(height: t10Size,),
                         const FieldValueWidget(
                             color: Color(0xFFE4E4E4),
                             label: tHoVaTen,
                             value: 'Hoang Van Thai'
                         ),
-                        const SizedBox(height: t5Size,),
+                        SizedBox(height: t5Size,),
                         const FieldValueWidget(
                             color: Color(0xFFE4E4E4),
                             label: tSoDienThoai,
                             value: '0862215568'
                         ),
-                        const SizedBox(height: t5Size,),
+                        SizedBox(height: t5Size,),
                         const FieldValueWidget(
                             color: Color(0xFFE4E4E4),
                             label: tDiaChi,
                             value: '0862215568'
                         ),
-                        const SizedBox(height: t10Size,),
+                        SizedBox(height: t10Size,),
                         const Text(
                           tThongTinTaiKhoanNganHang,
                           style: TextStyle(
@@ -259,31 +259,31 @@ class ThemThoiHocHoanPhiScreen extends StatelessWidget {
                               fontSize: 16
                           ),
                         ),
-                        const SizedBox(height: t10Size,),
+                        SizedBox(height: t10Size,),
                         const FieldValueWidget(
                             color: Color(0xFFE4E4E4),
                             label: tSoTaiKhoan,
                             value: '0123456789123'
                         ),
-                        const SizedBox(height: t5Size,),
+                        SizedBox(height: t5Size,),
                         const FieldValueWidget(
                             color: Color(0xFFE4E4E4),
                             label: tChuTaiKhoan,
                             value: 'HOANG VAN THAI'
                         ),
-                        const SizedBox(height: t5Size,),
+                        SizedBox(height: t5Size,),
                         const FieldValueWidget(
                             color: Color(0xFFE4E4E4),
                             label: tNganHang,
                             value: 'NH TMCP KY THUONG VN-310-TECHCOMBANK'
                         ),
-                        const SizedBox(height: t5Size,),
+                        SizedBox(height: t5Size,),
                         const FieldValueWidget(
                             color: Color(0xFFE4E4E4),
                             label: tChiNhanh,
                             value: 'HA NOI'
                         ),
-                        const SizedBox(height: t10Size,),
+                        SizedBox(height: t10Size,),
                         RichText(
                           text: const TextSpan(
                             style: TextStyle(
@@ -304,7 +304,7 @@ class ThemThoiHocHoanPhiScreen extends StatelessWidget {
                             ]
                           ),
                         ),
-                        const SizedBox(height: t10Size,),
+                        SizedBox(height: t10Size,),
                         CustomButtonWidget(
                           width: double.infinity,
                           color: const Color(0xFFF6A800),
@@ -318,7 +318,7 @@ class ThemThoiHocHoanPhiScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: t15Size),
+            SizedBox(height: t15Size),
           ],
         ),
       ),
@@ -337,7 +337,7 @@ class FieldValueWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(t5Size),
+      padding: EdgeInsets.all(t5Size),
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
@@ -354,9 +354,9 @@ class FieldValueWidget extends StatelessWidget {
               fontFamily: 'Inter'
             ),
           ),
-          const SizedBox(height: t5Size,),
+          SizedBox(height: t5Size,),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: t5Size),
+            padding: EdgeInsets.symmetric(horizontal: t5Size),
             child: Text(
               value,
               style: const TextStyle(

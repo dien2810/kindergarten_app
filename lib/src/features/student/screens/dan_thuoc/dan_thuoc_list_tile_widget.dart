@@ -44,7 +44,7 @@ class DanThuocListTileWidget extends StatelessWidget {
             Icons.calendar_today,
             color: Color(0xFF176D88),
           ),
-          const SizedBox(width: t10Size),
+          SizedBox(width: t10Size),
           Expanded(
             child: Text(
               subtitle,

@@ -1,11 +1,11 @@
+import 'package:get/get.dart';
+import 'package:kindergarten_app/src/constants/sizes.dart';
+
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 import 'remark_info_model.dart';
 export 'remark_info_model.dart';
@@ -45,7 +45,7 @@ class _RemarkInfoWidgetState extends State<RemarkInfoWidget> {
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           automaticallyImplyLeading: false,
-          actions: [],
+          actions: const [],
           flexibleSpace: FlexibleSpaceBar(
             background: Stack(
               children: [
@@ -60,7 +60,7 @@ class _RemarkInfoWidgetState extends State<RemarkInfoWidget> {
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(-0.3, -0.38),
+                      alignment: const AlignmentDirectional(-0.3, -0.38),
                       child: Text(
                         'Nhận xét',
                         style: FlutterFlowTheme.of(context).bodyLarge.override(
@@ -73,7 +73,7 @@ class _RemarkInfoWidgetState extends State<RemarkInfoWidget> {
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(-0.9, -0.6),
+                      alignment: const AlignmentDirectional(-0.9, -0.6),
                       child: FlutterFlowIconButton(
                         borderRadius: 8,
                         buttonSize: 50,
@@ -83,7 +83,7 @@ class _RemarkInfoWidgetState extends State<RemarkInfoWidget> {
                           size: 40,
                         ),
                         onPressed: () {
-                          print('IconButton pressed ...');
+                          Get.back();
                         },
                       ),
                     ),
@@ -93,7 +93,7 @@ class _RemarkInfoWidgetState extends State<RemarkInfoWidget> {
             ),
           ),
           bottom: PreferredSize(
-            preferredSize: Size.fromHeight(70),
+            preferredSize: Size.fromHeight(t10Size*7),
             child: Container(),
           ),
           centerTitle: false,
@@ -104,15 +104,15 @@ class _RemarkInfoWidgetState extends State<RemarkInfoWidget> {
           child: Stack(
             children: [
               Align(
-                alignment: AlignmentDirectional(0, -1),
+                alignment: const AlignmentDirectional(0, -1),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                   child: Container(
                     width: 300,
                     height: 40,
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
-                      boxShadow: [
+                      boxShadow: const [
                         BoxShadow(
                           blurRadius: 2,
                           color: Color(0x33000000),
@@ -127,34 +127,34 @@ class _RemarkInfoWidgetState extends State<RemarkInfoWidget> {
                       shape: BoxShape.rectangle,
                     ),
                     child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 6, 0, 0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(0, 6, 0, 0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Align(
-                            alignment: AlignmentDirectional(0, 0),
+                            alignment: const AlignmentDirectional(0, 0),
                             child: Text(
                               'Nhận xét',
                               style: FlutterFlowTheme.of(context)
                                   .bodyLarge
                                   .override(
                                 fontFamily: 'Inter',
-                                color: Color(0xFF00154D),
+                                color: const Color(0xFF00154D),
                                 letterSpacing: 0.0,
                                 fontWeight: FontWeight.w800,
                               ),
                             ),
                           ),
                           Align(
-                            alignment: AlignmentDirectional(0, 0),
+                            alignment: const AlignmentDirectional(0, 0),
                             child: Padding(
                               padding:
-                              EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
+                              const EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
                               child: Container(
                                 width: 100,
                                 height: 4,
                                 decoration: BoxDecoration(
-                                  color: Color(0xFF4B39EF),
+                                  color: const Color(0xFF4B39EF),
                                   borderRadius: BorderRadius.circular(4),
                                 ),
                               ),
@@ -167,20 +167,20 @@ class _RemarkInfoWidgetState extends State<RemarkInfoWidget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(0, 1),
+                alignment: const AlignmentDirectional(0, 1),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 25),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 25),
                   child: FFButtonWidget(
                     onPressed: () {
-                      print('Button pressed ...');
+                      Get.back();
                     },
                     text: 'Quay lại trang trước',
                     options: FFButtonOptions(
                       width: 250,
                       height: 50,
-                      padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
-                      iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                      color: Color(0xFF03045E),
+                      padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
+                      iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                      color: const Color(0xFF03045E),
                       textStyle:
                       FlutterFlowTheme.of(context).titleSmall.override(
                         fontFamily: 'Inter Tight',
@@ -189,7 +189,7 @@ class _RemarkInfoWidgetState extends State<RemarkInfoWidget> {
                         shadows: [
                           Shadow(
                             color: FlutterFlowTheme.of(context).secondaryText,
-                            offset: Offset(3.0, 2.0),
+                            offset: const Offset(3.0, 2.0),
                             blurRadius: 2.0,
                           )
                         ],
@@ -201,13 +201,13 @@ class _RemarkInfoWidgetState extends State<RemarkInfoWidget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(0, -0.2),
+                alignment: const AlignmentDirectional(0, -0.2),
                 child: Container(
                   width: 330,
                   height: 500,
                   decoration: BoxDecoration(
-                    color: Color(0x0B313131),
-                    boxShadow: [
+                    color: const Color(0x0B313131),
+                    boxShadow: const [
                       BoxShadow(
                         blurRadius: 2,
                         color: Color(0x33000000),
@@ -221,7 +221,7 @@ class _RemarkInfoWidgetState extends State<RemarkInfoWidget> {
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Padding(
-                    padding: EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(8),
                     child: RichText(
                       textScaler: MediaQuery.of(context).textScaler,
                       text: TextSpan(

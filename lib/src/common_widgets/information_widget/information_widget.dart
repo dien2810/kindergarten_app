@@ -15,7 +15,7 @@ class InformationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(t10Size),
+      padding: EdgeInsets.all(t10Size),
       decoration: BoxDecoration(
           shape: BoxShape.rectangle,
           color: color

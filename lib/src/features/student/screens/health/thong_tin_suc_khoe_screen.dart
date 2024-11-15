@@ -27,7 +27,7 @@ class ThongTinSucKhoeScreen extends StatelessWidget {
       child: Scaffold(
         appBar: const GuardianAppBarWithTitleWidget(title: tThongTinSucKhoe),
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: t10Size),
+          padding: EdgeInsets.symmetric(horizontal: t10Size),
           child: Column(
             children: [
               ClipRRect(
@@ -64,7 +64,7 @@ class ThongTinSucKhoeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: t15Size),
+              SizedBox(height: t15Size),
               SizedBox(
                 height: 5.75*t100Size,
                 child: TabBarView(
@@ -74,8 +74,8 @@ class ThongTinSucKhoeScreen extends StatelessWidget {
                       length: 4,
                       child: SingleChildScrollView(
                         child: Container(
-                          height: 600,
-                          padding: const EdgeInsets.all(t10Size),
+                          height: t100Size*6,
+                          padding: EdgeInsets.all(t10Size),
                           decoration: BoxDecoration(
                             color: Colors.white,
                             border: Border.all(width:2,color:const Color(0xFFC4C4C4)),
@@ -141,7 +141,7 @@ class ThongTinSucKhoeScreen extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              const SizedBox(height: t15Size),
+                              SizedBox(height: t15Size),
                               Expanded(
                                 child: TabBarView(
                                   children: [

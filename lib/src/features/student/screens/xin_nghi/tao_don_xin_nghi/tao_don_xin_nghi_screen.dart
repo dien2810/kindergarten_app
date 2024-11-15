@@ -22,7 +22,7 @@ class TaoDonXinNghiScreen extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(25.0),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: t10Size),
+                padding: EdgeInsets.symmetric(horizontal: t10Size),
                 child: Container(
                   decoration: const BoxDecoration(
                       color: Colors.white,
@@ -47,14 +47,14 @@ class TaoDonXinNghiScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: t15Size),
+            SizedBox(height: t15Size),
             Expanded(
               child: TabBarView(
                 children: [
                   SingleChildScrollView(
                     child: Container(
                       height: t150Size*100,
-                      padding: const EdgeInsets.all(t15Size),
+                      padding: EdgeInsets.all(t15Size),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: const BorderRadius.all(Radius.circular(25.0)),
@@ -80,7 +80,7 @@ class TaoDonXinNghiScreen extends StatelessWidget {
                               enableWeeknumberText: false,
                             ),
                           )),
-                          const SizedBox(height: t10Size,),
+                          SizedBox(height: t10Size,),
                           const Text(
                             tThu5,
                             style: TextStyle(
@@ -118,7 +118,7 @@ class TaoDonXinNghiScreen extends StatelessWidget {
                             print('Render---------');
                             if (taoDonXinNghiController.xinNghiStatus.value == XinNghi.theoTiet){
                               return Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: t10Size),
+                                padding: EdgeInsets.symmetric(horizontal: t10Size),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -142,15 +142,15 @@ class TaoDonXinNghiScreen extends StatelessWidget {
                                       },
                                     ),
 
-                                    const SizedBox(height: t5Size,)
+                                    SizedBox(height: t5Size,)
                                   ],
                                 ),
                               );
                             }
-                            return const SizedBox(height: t5Size,);
+                            return SizedBox(height: t5Size,);
                           }
                           ),
-                          const SizedBox(height: t15Size,),
+                          SizedBox(height: t15Size,),
                           SizedBox(
                             width: double.infinity,
                             height: t100Size*2,
@@ -161,7 +161,7 @@ class TaoDonXinNghiScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Padding(
-                                padding: const EdgeInsets.all(t10Size),
+                                padding: EdgeInsets.all(t10Size),
                                 child: TextFormField(
                                   maxLines: null,
                                   controller: taoDonXinNghiController.lyDoNghi,
@@ -182,7 +182,7 @@ class TaoDonXinNghiScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          const SizedBox(height: t10Size,),
+                          SizedBox(height: t10Size,),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
@@ -197,7 +197,7 @@ class TaoDonXinNghiScreen extends StatelessWidget {
 
                                 },
                                 child: Container(
-                                  padding: const EdgeInsets.all(t15Size),
+                                  padding: EdgeInsets.all(t15Size),
                                   child: const Text(
                                     tXinNghi,
                                     style: TextStyle(
@@ -208,7 +208,7 @@ class TaoDonXinNghiScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              const SizedBox(width: t5Size),
+                              SizedBox(width: t5Size),
                               SizedBox(
                                 width: t120Size,
                                 child: ElevatedButton(
@@ -219,7 +219,7 @@ class TaoDonXinNghiScreen extends StatelessWidget {
                                       )
                                   ),
                                   child: Container(
-                                    padding: const EdgeInsets.all(t15Size),
+                                    padding: EdgeInsets.all(t15Size),
                                     child: const Text(
                                       tHuy,
                                       style: TextStyle(

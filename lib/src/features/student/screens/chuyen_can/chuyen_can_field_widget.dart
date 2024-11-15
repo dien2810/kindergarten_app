@@ -34,7 +34,7 @@ class ChuyenCanFieldWidget extends StatelessWidget {
 
   Widget _buildChuyenCanWithButton() {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: t5Size),
+      padding: EdgeInsets.symmetric(horizontal: t5Size),
       height: t50Size,
       color: fillColor,
       child: Row(
@@ -64,7 +64,7 @@ class ChuyenCanFieldWidget extends StatelessWidget {
 
   Widget _buildChuyenCanWithoutButton() {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: t5Size),
+      padding: EdgeInsets.symmetric(horizontal: t5Size),
       height: t50Size,
       color: fillColor,
       child: Row(

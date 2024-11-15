@@ -22,7 +22,7 @@ class HoatDongSuKienScreen extends StatelessWidget {
         appBar: const GuardianAppBarWithTitleWidget(title: tHoatDongSuKien),
         bottomNavigationBar: BottomNavigationBarWidget(controller: guardianNavigationMenuController),
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: t10Size),
+          padding: EdgeInsets.symmetric(horizontal: t10Size),
           child: Column(
             children: [
               ClipRRect(
@@ -52,9 +52,9 @@ class HoatDongSuKienScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: t15Size),
+              SizedBox(height: t15Size),
               SizedBox(
-                height: 600,
+                height: t100Size*5.3,
                 child: TabBarView(
                   children: [
                     HoatDongWidget(),

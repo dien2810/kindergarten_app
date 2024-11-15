@@ -20,12 +20,12 @@ class LoginScreen extends StatelessWidget {
           const AuthenticationBackgroundWidget(),
           SingleChildScrollView(
             child: Container(
-              padding: const EdgeInsets.all(t20Size),
+              padding: EdgeInsets.all(t20Size),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const LogoWidget(),
-                  const SizedBox(height: t40Size),
+                  SizedBox(height: t40Size),
                   LoginFormWidget(formKey: formKey)
                 ],
               ),

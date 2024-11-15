@@ -25,12 +25,12 @@ class OTPScreen extends StatelessWidget {
               const AuthenticationBackgroundWidget(),
               SingleChildScrollView(
                 child: Container(
-                  padding: const EdgeInsets.all(t5Size),
+                  padding: EdgeInsets.all(t5Size),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const LogoWidget(),
-                      const SizedBox(height: t5Size),
+                      SizedBox(height: t5Size),
                       Container(
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
@@ -65,7 +65,7 @@ class OTPScreen extends StatelessWidget {
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),
-                              const SizedBox(height: t30Size),
+                              SizedBox(height: t30Size),
                               OtpTextField(
                                   numberOfFields: 6,
                                   filled: true,
@@ -76,7 +76,7 @@ class OTPScreen extends StatelessWidget {
                                     otpController.verifyOTP(otp);
                                   }
                               ),
-                              const SizedBox(height: t10Size),
+                              SizedBox(height: t10Size),
                               TextButton(
                                   onPressed: (){},
                                   child: Text.rich(
@@ -96,7 +96,7 @@ class OTPScreen extends StatelessWidget {
                                       )
                                   )
                               ),
-                              const SizedBox(height: t30Size),
+                              SizedBox(height: t30Size),
                               SizedBox(
                                 width: t10Size*20,
                                 child: Container(
@@ -128,7 +128,7 @@ class OTPScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: t20Size),
+                              SizedBox(height: t20Size),
                               const Text(
                                   tDontHaveAccount,
                                   style: TextStyle(
@@ -138,7 +138,7 @@ class OTPScreen extends StatelessWidget {
                                       color: Color(0xff39647F)
                                   )
                               ),
-                              const SizedBox(height: t20Size),
+                              SizedBox(height: t20Size),
                               SizedBox(
                                 width: t10Size*20,
                                 child: ElevatedButton(

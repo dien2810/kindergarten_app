@@ -15,7 +15,7 @@ class DanThuocStatusWidget extends StatelessWidget {
     return Container(
       width: t120Size,
       height: t40Size,
-      padding: const EdgeInsets.symmetric(horizontal: t5Size),
+      padding: EdgeInsets.symmetric(horizontal: t5Size),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25),
           color: color

@@ -34,7 +34,7 @@ class ChiTietDanThuocScreen extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(25.0),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: t10Size),
+                padding: EdgeInsets.symmetric(horizontal: t10Size),
                 child: Container(
                   decoration: const BoxDecoration(
                       color: Colors.white,
@@ -59,13 +59,13 @@ class ChiTietDanThuocScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: t15Size),
+            SizedBox(height: t15Size),
             Expanded(
               child: TabBarView(
                 children: [
                   SingleChildScrollView(
                     child: Container(
-                      padding: const EdgeInsets.all(t15Size),
+                      padding: EdgeInsets.all(t15Size),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: const BorderRadius.all(Radius.circular(25.0)),
@@ -82,7 +82,7 @@ class ChiTietDanThuocScreen extends StatelessWidget {
                                 color: Color(0xFF03045E)
                             ),
                           ),
-                          const SizedBox(height: t15Size),
+                          SizedBox(height: t15Size),
                           DanThuocListTileWidget(
                             image: image,
                             title: medicine.prescription,
@@ -90,7 +90,7 @@ class ChiTietDanThuocScreen extends StatelessWidget {
                             status: medicine.status,
                             color: color,
                           ),
-                          const SizedBox(height: t10Size,),
+                          SizedBox(height: t10Size,),
                           Container(
                             color: const Color(0xFFDAF6F4),
                             height: t80Size,
@@ -103,7 +103,7 @@ class ChiTietDanThuocScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          const SizedBox(height: t10Size,),
+                          SizedBox(height: t10Size,),
                           Container(
                             color: const Color(0xFFDAF6F4),
                             height: t120Size,
@@ -116,7 +116,7 @@ class ChiTietDanThuocScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          const SizedBox(height: t10Size,),
+                          SizedBox(height: t10Size,),
                           Container(
                             color: const Color(0xFFDAF6F4),
                             height: t100Size,
@@ -129,7 +129,7 @@ class ChiTietDanThuocScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          const SizedBox(height: t50Size,),
+                          SizedBox(height: t50Size,),
                           Align(
                             alignment: Alignment.bottomCenter,
                             child: SizedBox(

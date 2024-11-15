@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kindergarten_app/src/constants/sizes.dart';
 import 'package:kindergarten_app/src/features/student/screens/hoat_dong_su_kien/widget/chi_tiet_su_kien_widget.dart';
 
 class SuKienWidget extends StatelessWidget {
@@ -15,7 +16,7 @@ class SuKienWidget extends StatelessWidget {
     {"time": "16:00 - 17:00", "event": "Điểm danh/ Trả bé cho phụ huynh"},
   ];
 
-  SuKienWidget({Key? key}) : super(key: key);
+  SuKienWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class SuKienWidget extends StatelessWidget {
         backgroundColor: const Color(0xFFD74971),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(t10Size+t3Size*2),
         child: Container(
           decoration: BoxDecoration(
             color: const Color(0xFFF6E8E8),
@@ -59,8 +60,8 @@ class SuKienWidget extends StatelessWidget {
                   ],
                 );
               }).toList(),
-              headingRowColor: MaterialStateColor.resolveWith((states) => Color(0xFFD74971)),
-              dataRowColor: MaterialStateColor.resolveWith((states) => Color(0xFFF6E8E8)),
+              headingRowColor: WidgetStateColor.resolveWith((states) => const Color(0xFFD74971)),
+              dataRowColor: WidgetStateColor.resolveWith((states) => const Color(0xFFF6E8E8)),
               dataRowHeight: 60,
               headingRowHeight: 70,
             ),

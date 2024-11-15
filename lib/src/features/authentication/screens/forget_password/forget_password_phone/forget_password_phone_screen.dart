@@ -26,12 +26,12 @@ class ForgetPasswordPhoneScreen extends StatelessWidget {
               const AuthenticationBackgroundWidget(),
               SingleChildScrollView(
                 child: Container(
-                  padding: const EdgeInsets.all(t20Size),
+                  padding: EdgeInsets.all(t20Size),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const LogoWidget(),
-                      const SizedBox(height: t40Size),
+                      SizedBox(height: t40Size),
                       Form(
                           key: formKey,
                           child: Container(
@@ -65,7 +65,7 @@ class ForgetPasswordPhoneScreen extends StatelessWidget {
                                         fontFamily: 'Outfit',
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  const SizedBox(height: t15Size),
+                                  SizedBox(height: t15Size),
                                   TextFormField(
                                     controller: controller.emailOrPhone,
                                     decoration: InputDecoration(
@@ -76,7 +76,7 @@ class ForgetPasswordPhoneScreen extends StatelessWidget {
                                         )
                                     ),
                                   ),
-                                  const SizedBox(height: t5Size),
+                                  SizedBox(height: t5Size),
                                   Align(
                                     alignment: Alignment.center,
                                     child: TextButton(
@@ -97,7 +97,7 @@ class ForgetPasswordPhoneScreen extends StatelessWidget {
                                         )
                                     ),
                                   ),
-                                  const SizedBox(height: t20Size),
+                                  SizedBox(height: t20Size),
                                   SizedBox(
                                       width: double.infinity,
                                       child: Container(
@@ -128,7 +128,7 @@ class ForgetPasswordPhoneScreen extends StatelessWidget {
                                         ),
                                       ),
                                   ),
-                                  const SizedBox(height: t20Size),
+                                  SizedBox(height: t20Size),
                                   const Align(
                                     alignment: Alignment.center,
                                     child: Text(
@@ -141,7 +141,7 @@ class ForgetPasswordPhoneScreen extends StatelessWidget {
                                         )
                                     ),
                                   ),
-                                  const SizedBox(height: t20Size),
+                                  SizedBox(height: t20Size),
                                   Align(
                                     alignment: Alignment.center,
                                     child: SizedBox(

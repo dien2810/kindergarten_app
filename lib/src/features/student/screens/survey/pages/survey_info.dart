@@ -1,13 +1,13 @@
+import 'package:get/get.dart';
+import 'package:kindergarten_app/src/constants/sizes.dart';
+
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_radio_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 import 'survey_info_model.dart';
 export 'survey_info_model.dart';
@@ -47,7 +47,7 @@ class _SurveyInfoWidgetState extends State<SurveyInfoWidget> {
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           automaticallyImplyLeading: false,
-          actions: [],
+          actions: const [],
           flexibleSpace: FlexibleSpaceBar(
             background: Stack(
               children: [
@@ -57,12 +57,12 @@ class _SurveyInfoWidgetState extends State<SurveyInfoWidget> {
                       borderRadius: BorderRadius.circular(0),
                       child: Image.asset(
                         'assets/images/homepage_images/Vector.png',
-                        width: 360,
+                        width: t100Size*4.2,
                         fit: BoxFit.fill,
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(-0.3, -0.38),
+                      alignment: const AlignmentDirectional(-0.3, -0.38),
                       child: Text(
                         'Câu hỏi khảo sát',
                         style: FlutterFlowTheme.of(context).bodyLarge.override(
@@ -75,7 +75,7 @@ class _SurveyInfoWidgetState extends State<SurveyInfoWidget> {
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(-0.9, -0.6),
+                      alignment: const AlignmentDirectional(-0.9, -0.6),
                       child: FlutterFlowIconButton(
                         borderRadius: 8,
                         buttonSize: 50,
@@ -85,7 +85,7 @@ class _SurveyInfoWidgetState extends State<SurveyInfoWidget> {
                           size: 40,
                         ),
                         onPressed: () {
-                          print('IconButton pressed ...');
+                          Get.back();
                         },
                       ),
                     ),
@@ -95,7 +95,7 @@ class _SurveyInfoWidgetState extends State<SurveyInfoWidget> {
             ),
           ),
           bottom: PreferredSize(
-            preferredSize: Size.fromHeight(70),
+            preferredSize: const Size.fromHeight(70),
             child: Container(),
           ),
           centerTitle: false,
@@ -106,17 +106,17 @@ class _SurveyInfoWidgetState extends State<SurveyInfoWidget> {
           child: Stack(
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 6, 0, 0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 6, 0, 0),
                 child: Container(
-                  width: 360,
-                  height: 550,
+                  width: t100Size*4.2,
+                  height: t100Size*6.3,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                     boxShadow: [
                       BoxShadow(
                         blurRadius: 4,
                         color: FlutterFlowTheme.of(context).secondaryText,
-                        offset: Offset(
+                        offset: const Offset(
                           2,
                           2,
                         ),
@@ -125,7 +125,7 @@ class _SurveyInfoWidgetState extends State<SurveyInfoWidget> {
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
+                    padding: const EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -140,13 +140,13 @@ class _SurveyInfoWidgetState extends State<SurveyInfoWidget> {
                                     .bodyMedium
                                     .override(
                                   fontFamily: 'Inter',
-                                  color: Color(0xFF416FAE),
+                                  color: const Color(0xFF416FAE),
                                   fontSize: 16,
                                   letterSpacing: 0.0,
                                   fontWeight: FontWeight.w800,
                                 ),
                               ),
-                              TextSpan(
+                              const TextSpan(
                                 text: 'I. TỔNG QUAN\n',
                                 style: TextStyle(
                                   color: Color(0xFF416FAE),
@@ -162,7 +162,7 @@ class _SurveyInfoWidgetState extends State<SurveyInfoWidget> {
                                   fontWeight: FontWeight.w900,
                                 ),
                               ),
-                              TextSpan(
+                              const TextSpan(
                                 text:
                                 'Tôi hài lòng với việc lựa chọn Vinschool là trường học cho con  ',
                                 style: TextStyle(),
@@ -186,7 +186,7 @@ class _SurveyInfoWidgetState extends State<SurveyInfoWidget> {
                           textAlign: TextAlign.justify,
                         ),
                         Align(
-                          alignment: AlignmentDirectional(-1, 0),
+                          alignment: const AlignmentDirectional(-1, 0),
                           child: FlutterFlowRadioButton(
                             options: [
                               '10 - Hoàn toàn đồng ý',
@@ -233,9 +233,9 @@ class _SurveyInfoWidgetState extends State<SurveyInfoWidget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(-1, 1),
+                alignment: const AlignmentDirectional(-1, 1),
                 child: Container(
-                  width: 360,
+                  width: t100Size*4.2,
                   height: 100,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -243,7 +243,7 @@ class _SurveyInfoWidgetState extends State<SurveyInfoWidget> {
                       BoxShadow(
                         blurRadius: 4,
                         color: FlutterFlowTheme.of(context).secondaryText,
-                        offset: Offset(
+                        offset: const Offset(
                           2,
                           2,
                         ),
@@ -252,33 +252,34 @@ class _SurveyInfoWidgetState extends State<SurveyInfoWidget> {
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Align(
-                    alignment: AlignmentDirectional(0, 0),
+                    alignment: const AlignmentDirectional(0, 0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Align(
-                          alignment: AlignmentDirectional(-1, 0),
+                          alignment: const AlignmentDirectional(-1, 0),
                           child: Padding(
                             padding:
-                            EdgeInsetsDirectional.fromSTEB(40, 0, 0, 0),
+                            EdgeInsetsDirectional.fromSTEB(t10Size, 0, 0, 0),
                             child: FFButtonWidget(
                               onPressed: () {
-                                print('Button pressed ...');
+                                Get.back();
                               },
                               text: 'Quay lại',
                               options: FFButtonOptions(
-                                width: 120,
-                                height: 50,
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                width: t100Size*1.2,
+                                height: t50Size,
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     16, 0, 16, 0),
                                 iconPadding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                                color: Color(0xFFADE8F4),
+                                const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                                color: const Color(0xFFADE8F4),
                                 textStyle: FlutterFlowTheme.of(context)
                                     .titleMedium
                                     .override(
                                   fontFamily: 'Inter Tight',
-                                  color: Color(0xFF12524D),
+                                  color: const Color(0xFF12524D),
                                   letterSpacing: 0.0,
                                   fontWeight: FontWeight.w800,
                                 ),
@@ -289,23 +290,23 @@ class _SurveyInfoWidgetState extends State<SurveyInfoWidget> {
                           ),
                         ),
                         Align(
-                          alignment: AlignmentDirectional(1, 0),
+                          alignment: const AlignmentDirectional(1, 0),
                           child: Padding(
                             padding:
-                            EdgeInsetsDirectional.fromSTEB(40, 0, 0, 0),
+                            EdgeInsetsDirectional.fromSTEB(t20Size, 0, 0, 0),
                             child: FFButtonWidget(
                               onPressed: () {
                                 print('Button pressed ...');
                               },
                               text: 'Gửi',
                               options: FFButtonOptions(
-                                width: 120,
-                                height: 50,
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                width: t100Size*1.2,
+                                height: t50Size,
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     16, 0, 16, 0),
                                 iconPadding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                                color: Color(0xFF0096C7),
+                                const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                                color: const Color(0xFF0096C7),
                                 textStyle: FlutterFlowTheme.of(context)
                                     .titleMedium
                                     .override(

@@ -25,12 +25,12 @@ class SignupScreen extends StatelessWidget {
               const AuthenticationBackgroundWidget(),
               SingleChildScrollView(
                 child: Container(
-                  padding: const EdgeInsets.all(t5Size),
+                  padding: EdgeInsets.all(t5Size),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const LogoWidget(),
-                      const SizedBox(height: t5Size),
+                      SizedBox(height: t5Size),
                       Form(
                         key: formKey,
                         child: Container(
@@ -64,7 +64,7 @@ class SignupScreen extends StatelessWidget {
                                       fontFamily: 'Outfit',
                                       fontWeight: FontWeight.bold),
                                 ),
-                                const SizedBox(height: t15Size),
+                                SizedBox(height: t15Size),
                                 TextFormField(
                                   controller: controller.fullname,
                                   decoration: InputDecoration(
@@ -78,7 +78,7 @@ class SignupScreen extends StatelessWidget {
                                       )
                                   ),
                                 ),
-                                const SizedBox(height: t20Size),
+                                SizedBox(height: t20Size),
                                 TextFormField(
                                   controller: controller.email,
                                   decoration: InputDecoration(
@@ -93,7 +93,7 @@ class SignupScreen extends StatelessWidget {
                                       )
                                   ),
                                 ),
-                                const SizedBox(height: t20Size),
+                                SizedBox(height: t20Size),
                                 TextFormField(
                                   controller: controller.phone,
                                   decoration: InputDecoration(
@@ -108,7 +108,7 @@ class SignupScreen extends StatelessWidget {
                                       )
                                   ),
                                 ),
-                                const SizedBox(height: t20Size),
+                                SizedBox(height: t20Size),
                                 TextFormField(
                                   controller: controller.password,
                                   decoration: InputDecoration(
@@ -124,7 +124,7 @@ class SignupScreen extends StatelessWidget {
                                       suffixIcon: const Icon(Icons.remove_red_eye_sharp)
                                   ),
                                 ),
-                                const SizedBox(height: t30Size),
+                                SizedBox(height: t30Size),
                                 Obx(()=> Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -156,7 +156,7 @@ class SignupScreen extends StatelessWidget {
                                   ],
                                 ),
                                 ),
-                                const SizedBox(height: t15Size),
+                                SizedBox(height: t15Size),
                                 Align(
                                   alignment: Alignment.center,
                                   child: SizedBox(
@@ -205,7 +205,7 @@ class SignupScreen extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                const SizedBox(height: t20Size),
+                                SizedBox(height: t20Size),
                                 Align(
                                   alignment: Alignment.center,
                                   child: TextButton(

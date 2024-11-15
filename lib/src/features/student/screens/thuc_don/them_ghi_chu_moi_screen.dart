@@ -21,7 +21,7 @@ class ThemGhiChuMoiScreen extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(25.0),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: t10Size),
+                padding: EdgeInsets.symmetric(horizontal: t10Size),
                 child: Container(
                   decoration: const BoxDecoration(
                       color: Colors.white,
@@ -46,14 +46,14 @@ class ThemGhiChuMoiScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: t15Size),
+            SizedBox(height: t15Size),
             Expanded(
               child: TabBarView(
                 children: [
                   SingleChildScrollView(
                     child: Container(
-                      height: 600,
-                      padding: const EdgeInsets.all(t15Size),
+                      height: t100Size*6,
+                      padding: EdgeInsets.all(t15Size),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: const BorderRadius.all(Radius.circular(25.0)),
@@ -62,7 +62,7 @@ class ThemGhiChuMoiScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const SizedBox(height: t10Size,),
+                          SizedBox(height: t10Size,),
                           const Text(
                             tThemGhiChuMoi,
                             style: TextStyle(
@@ -83,7 +83,7 @@ class ThemGhiChuMoiScreen extends StatelessWidget {
                                   Expanded(
                                     flex: 2,
                                     child: Container(
-                                        padding: const EdgeInsets.all(t10Size),
+                                        padding: EdgeInsets.all(t10Size),
                                         child: const Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
@@ -102,11 +102,11 @@ class ThemGhiChuMoiScreen extends StatelessWidget {
                                         )
                                     ),
                                   ),
-                                  const Expanded(
+                                  Expanded(
                                     flex: 1,
                                     child: SizedBox(
                                       height: t10Size*12,
-                                      child: ClipRRect(
+                                      child: const ClipRRect(
                                         child: Image(
                                           fit: BoxFit.cover,
                                           image: AssetImage(tThucDonBuaSang)
@@ -117,7 +117,7 @@ class ThemGhiChuMoiScreen extends StatelessWidget {
                                 ],
                               )
                           ),
-                          const SizedBox(height: t10Size,),
+                          SizedBox(height: t10Size,),
                           SizedBox(
                             width: double.infinity,
                             height: t100Size*2,
@@ -128,7 +128,7 @@ class ThemGhiChuMoiScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Padding(
-                                padding: const EdgeInsets.all(t20Size),
+                                padding: EdgeInsets.all(t20Size),
                                 child: TextFormField(
                                   maxLines: null,
                                   controller: themMoiGhiChuController.noiDungGhiChu,
@@ -164,7 +164,7 @@ class ThemGhiChuMoiScreen extends StatelessWidget {
 
                                 },
                                 child: Container(
-                                  padding: const EdgeInsets.all(t10Size),
+                                  padding: EdgeInsets.all(t10Size),
                                   child: const Text(
                                     tThemMoi,
                                     style: TextStyle(
@@ -175,7 +175,7 @@ class ThemGhiChuMoiScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              const SizedBox(width: t5Size),
+                              SizedBox(width: t5Size),
                               SizedBox(
                                 width: t120Size,
                                 child: ElevatedButton(
@@ -186,7 +186,7 @@ class ThemGhiChuMoiScreen extends StatelessWidget {
                                       )
                                   ),
                                   child: Container(
-                                    padding: const EdgeInsets.all(t10Size),
+                                    padding: EdgeInsets.all(t10Size),
                                     child: const Text(
                                       tHuy,
                                       style: TextStyle(

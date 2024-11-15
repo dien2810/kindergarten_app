@@ -13,7 +13,7 @@ class TrangChuGiaoVien extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          padding: const EdgeInsets.all(t10Size),
+          padding: EdgeInsets.all(t10Size),
           child: Column(
             children: [
               const Center(child: Text("Trang chủ Giáo Viên")),

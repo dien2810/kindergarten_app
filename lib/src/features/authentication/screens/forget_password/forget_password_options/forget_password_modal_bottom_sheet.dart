@@ -14,7 +14,7 @@ class ForgetPasswordModalBottomSheet{
         context: context,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
         builder: (context)=>Container(
-            padding: const EdgeInsets.all(t10Size),
+            padding: EdgeInsets.all(t10Size),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

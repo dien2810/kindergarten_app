@@ -27,10 +27,10 @@ class InformationInputWithIconWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var flex = 0;
     if (widget != null){
-      const flex = 1;
+      flex = 1;
     }
     return Container(
-      padding: const EdgeInsets.all(t5Size),
+      padding: EdgeInsets.all(t5Size),
       decoration: BoxDecoration(
           shape: BoxShape.rectangle,
           color: color

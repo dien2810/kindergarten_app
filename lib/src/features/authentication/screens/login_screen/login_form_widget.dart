@@ -52,7 +52,7 @@ class LoginFormWidget extends StatelessWidget {
                       fontFamily: 'Outfit',
                       fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: t15Size),
+                SizedBox(height: t15Size),
                 TextFormField(
                   controller: controller.email,
                   decoration: InputDecoration(
@@ -66,7 +66,7 @@ class LoginFormWidget extends StatelessWidget {
                       )
                   ),
                 ),
-                const SizedBox(height: t20Size),
+                SizedBox(height: t20Size),
                 Obx(()=>TextFormField(
                     controller: controller.password,
                     obscureText: controller.obscureText.value,
@@ -89,7 +89,7 @@ class LoginFormWidget extends StatelessWidget {
                         )),
                   ),
                 ),
-                const SizedBox(height: t5Size),
+                SizedBox(height: t5Size),
                 Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
@@ -108,7 +108,7 @@ class LoginFormWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: t5Size),
+                SizedBox(height: t5Size),
                 Obx(()=> Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -140,7 +140,7 @@ class LoginFormWidget extends StatelessWidget {
                   ],
                 ),
                 ),
-                const SizedBox(height: t15Size),
+                SizedBox(height: t15Size),
                 Align(
                   alignment: Alignment.center,
                   child: SizedBox(
@@ -175,7 +175,7 @@ class LoginFormWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: t20Size),
+                SizedBox(height: t20Size),
                 // const Align(
                 //   alignment: Alignment.center,
                 //   child: Text(

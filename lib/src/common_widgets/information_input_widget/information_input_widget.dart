@@ -52,7 +52,7 @@ class InformationInput extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(width: t5Size),
+                SizedBox(width: t5Size),
                 Text(
                   defaultInput,
                 ),

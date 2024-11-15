@@ -7,6 +7,8 @@ import 'package:kindergarten_app/src/features/student/screens/dan_thuoc/dan_thuo
 import 'package:kindergarten_app/src/features/student/screens/health/thong_tin_suc_khoe_screen.dart';
 import 'package:kindergarten_app/src/features/student/screens/hoat_dong_su_kien/screen/hoat_dong_su_kien_screen.dart';
 import 'package:kindergarten_app/src/features/student/screens/ngoai_khoa/screen/ngoai_khoa_screen.dart';
+import 'package:kindergarten_app/src/features/student/screens/remark/pages/remark.dart';
+import 'package:kindergarten_app/src/features/student/screens/survey/pages/survey.dart';
 import 'package:kindergarten_app/src/features/student/screens/thoi_hoc_hoan_phi/thoi_hoc_hoan_phi_screen.dart';
 import 'package:kindergarten_app/src/features/student/screens/thuc_don/thuc_don_screen.dart';
 import 'package:kindergarten_app/src/features/student/screens/xin_nghi/xin_nghi_screen.dart';
@@ -22,7 +24,7 @@ class HocSinhScreen extends StatelessWidget {
     return Scaffold(
       appBar: const GuardianAppBarWithTitleWidget(title: tHocSinh),
       body: Padding(
-        padding: const EdgeInsets.all(t10Size),
+        padding: EdgeInsets.all(t10Size),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -34,7 +36,7 @@ class HocSinhScreen extends StatelessWidget {
                   fontWeight: FontWeight.bold
               ),
             ),
-            const SizedBox(height: t20Size,),
+            SizedBox(height: t20Size,),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -81,7 +83,7 @@ class HocSinhScreen extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: t10Size,),
+            SizedBox(height: t10Size,),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -92,7 +94,7 @@ class HocSinhScreen extends StatelessWidget {
                       imageString: tNhanXetImage,
                       title: tNhanXet,
                       onTap: (){
-
+                        Get.to(const RemarkWidget());
                       }
                   ),
                 ),
@@ -128,7 +130,7 @@ class HocSinhScreen extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: t30Size),
+            SizedBox(height: t30Size),
             const Text(
               tDichVuHocDuong,
               style: TextStyle(
@@ -137,7 +139,7 @@ class HocSinhScreen extends StatelessWidget {
                   fontWeight: FontWeight.bold
               ),
             ),
-            const SizedBox(height: t20Size,),
+            SizedBox(height: t20Size,),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -165,7 +167,9 @@ class HocSinhScreen extends StatelessWidget {
                   child: HocSinhNavigationWidget(
                     imageString: tKhaoSatImage,
                     title: tKhaoSat,
-                    onTap: (){},
+                    onTap: (){
+                      Get.to(const SurveyWidget());
+                    },
                   ),
                 ),
                 const Expanded(

@@ -63,9 +63,9 @@ class CoBanTabWidget extends StatelessWidget {
             title: tTheChat,
             textEditingController: controller.theChat,
           ),
-          const SizedBox(height: t10Size),
+          SizedBox(height: t10Size),
           GhiChuWidget(controller: controller),
-          const SizedBox(height: t10Size),
+          SizedBox(height: t10Size),
           CustomButtonWidget(
             width: t10Size*20,
             color: const Color(0xFF03045E),

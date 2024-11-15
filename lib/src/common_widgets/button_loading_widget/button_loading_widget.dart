@@ -6,16 +6,16 @@ class Buttonloadingwidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
           width: t20Size,
           height: t20Size,
-          child: CircularProgressIndicator(color: Colors.white,)
+          child: const CircularProgressIndicator(color: Colors.white,)
         ),
         SizedBox(width: t10Size),
-        Text("Loading...")
+        const Text("Loading...")
       ],
     );
   }

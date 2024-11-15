@@ -27,7 +27,7 @@ class ThucDonScreen extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(25.0),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: t10Size),
+                padding: EdgeInsets.symmetric(horizontal: t10Size),
                 child: Container(
                   decoration: const BoxDecoration(
                       color: Colors.white,
@@ -52,14 +52,14 @@ class ThucDonScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: t15Size),
+            SizedBox(height: t15Size),
             Expanded(
               child: TabBarView(
                 children: [
                   SingleChildScrollView(
                     child: Container(
                       height: 600,
-                      padding: const EdgeInsets.all(t15Size),
+                      padding: EdgeInsets.all(t15Size),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: const BorderRadius.all(Radius.circular(25.0)),
@@ -85,15 +85,15 @@ class ThucDonScreen extends StatelessWidget {
                               enableWeeknumberText: false,
                             ),
                           )),
-                          const SizedBox(height: t10Size,),
+                          SizedBox(height: t10Size,),
                           Expanded(
                             child: ListView.builder(
                               itemCount: 3,
                               itemBuilder: (context,index){
-                                return const Column(
+                                return Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
+                                    const Text(
                                       tBuaSang,
                                       style: TextStyle(
                                         fontSize: 18,
@@ -102,7 +102,7 @@ class ThucDonScreen extends StatelessWidget {
                                       ),
                                     ),
                                     SizedBox(height: t5Size,),
-                                    ThucDonCardWidget()
+                                    const ThucDonCardWidget()
                                   ],
                                 );
                               },

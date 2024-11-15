@@ -19,7 +19,7 @@ class ThongTinSucKhoeChungWidget extends StatelessWidget {
     final formKey = GlobalKey<FormState>();
     return SingleChildScrollView(
       child: Container(
-        padding: const EdgeInsets.all(t10Size),
+        padding: EdgeInsets.all(t10Size),
         decoration: BoxDecoration(
           color: Colors.white,
           border: Border.all(width:2,color:const Color(0xFFC4C4C4)),
@@ -37,7 +37,7 @@ class ThongTinSucKhoeChungWidget extends StatelessWidget {
                     fontSize: 18
                 ),
               ),
-              const SizedBox(height: t10Size),
+              SizedBox(height: t10Size),
               const Text(tThongTinTieuSuGiaDinh),
               Obx(()=> Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -68,7 +68,7 @@ class ThongTinSucKhoeChungWidget extends StatelessWidget {
                 ],
               ),
               ),
-              const SizedBox(height: t5Size),
+              SizedBox(height: t5Size),
               const Text(
                 tTieuSuBanThan,
                 style: TextStyle(
@@ -229,7 +229,7 @@ class ThongTinSucKhoeChungWidget extends StatelessWidget {
               ),
               ),
               const Text(tBenhKhac),
-              const SizedBox(height: t15Size),
+              SizedBox(height: t15Size),
               TextFormField(
                 controller: controller.benhKhac,
                 decoration: const InputDecoration(
@@ -239,7 +239,7 @@ class ThongTinSucKhoeChungWidget extends StatelessWidget {
                   border: InputBorder.none
                 ),
               ),
-              const SizedBox(height: t15Size),
+              SizedBox(height: t15Size),
               Align(
                 alignment: Alignment.center,
                 child: SizedBox(

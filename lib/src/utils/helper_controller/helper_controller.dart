@@ -14,7 +14,7 @@ class Helper extends GetxController{
       backgroundColor: Colors.green,
       snackPosition: SnackPosition.BOTTOM,
       duration: const Duration(seconds: 6),
-      margin: const EdgeInsets.all(t10Size),
+      margin: EdgeInsets.all(t10Size),
       icon: const Icon(LineAwesomeIcons.check_circle, color: Colors.white),
     );
   }
@@ -29,7 +29,7 @@ class Helper extends GetxController{
       backgroundColor: Colors.yellowAccent,
       snackPosition: SnackPosition.BOTTOM,
       duration: const Duration(seconds: 6),
-      margin: const EdgeInsets.all(t10Size),
+      margin: EdgeInsets.all(t10Size),
       icon: const Icon(LineAwesomeIcons.check_circle, color: Colors.white),
     );
   }
@@ -44,7 +44,7 @@ class Helper extends GetxController{
       backgroundColor: Colors.redAccent,
       snackPosition: SnackPosition.BOTTOM,
       duration: const Duration(seconds: 6),
-      margin: const EdgeInsets.all(t10Size),
+      margin: EdgeInsets.all(t10Size),
       icon: const Icon(LineAwesomeIcons.check_circle, color: Colors.white),
     );
   }
@@ -59,7 +59,7 @@ class Helper extends GetxController{
       backgroundColor: Colors.blue,
       snackPosition: SnackPosition.BOTTOM,
       duration: const Duration(seconds: 6),
-      margin: const EdgeInsets.all(t10Size),
+      margin: EdgeInsets.all(t10Size),
       icon: const Icon(LineAwesomeIcons.check_circle, color: Colors.white),
     );
   }

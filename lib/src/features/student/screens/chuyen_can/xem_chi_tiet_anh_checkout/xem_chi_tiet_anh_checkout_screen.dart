@@ -25,7 +25,7 @@ class XemChiTietAnhCheckoutScreen extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(25.0),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: t10Size),
+                padding: EdgeInsets.symmetric(horizontal: t10Size),
                 child: Container(
                   decoration: const BoxDecoration(
                       color: Colors.white,
@@ -50,14 +50,14 @@ class XemChiTietAnhCheckoutScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: t15Size),
+            SizedBox(height: t15Size),
             Expanded(
               child: TabBarView(
                 children: [
                   SingleChildScrollView(
                     child: Container(
-                      height: 600,
-                      padding: const EdgeInsets.all(t15Size),
+                      height: t100Size*6,
+                      padding: EdgeInsets.all(t15Size),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: const BorderRadius.all(Radius.circular(25.0)),
@@ -83,7 +83,7 @@ class XemChiTietAnhCheckoutScreen extends StatelessWidget {
                               enableWeeknumberText: false,
                             ),
                           )),
-                          const SizedBox(height: t10Size,),
+                          SizedBox(height: t10Size,),
                           const Text(
                             tThu5,
                             style: TextStyle(
@@ -92,26 +92,26 @@ class XemChiTietAnhCheckoutScreen extends StatelessWidget {
                                 color: Color(0xFF03045E)
                             ),
                           ),
-                          const SizedBox(height: t15Size),
+                          SizedBox(height: t15Size),
                           const Text(
                             tAnhCheckin,
                             style: TextStyle(
                               fontSize: 18,
                             ),
                           ),
-                          const SizedBox(height: t15Size),
+                          SizedBox(height: t15Size),
                           const Text(
                             '$tThoiGianRaKhoiLop : (thời gian ra về)',
                             style: TextStyle(
                               fontSize: 18,
                             ),
                           ),
-                          const SizedBox(height: t10Size),
+                          SizedBox(height: t10Size),
                           Container(
                             height: t100Size*3,
                             color: const Color(0xFFD9D9D9),
                           ),
-                          const SizedBox(height: t15Size),
+                          SizedBox(height: t15Size),
                           Align(
                             alignment: Alignment.bottomCenter,
                             child: SizedBox(

@@ -24,7 +24,7 @@ class DanThuocScreen extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           backgroundColor: const Color(0xFFADE25D),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(t50Size)),
-          child: const Icon(
+          child: Icon(
             Icons.add_rounded,
             color: Colors.white,
             size: t50Size,
@@ -38,7 +38,7 @@ class DanThuocScreen extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(25.0),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: t10Size),
+                padding: EdgeInsets.symmetric(horizontal: t10Size),
                 child: Container(
                   decoration: const BoxDecoration(
                       color: Colors.white,
@@ -63,23 +63,23 @@ class DanThuocScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: t15Size),
+            SizedBox(height: t15Size),
             Expanded(
               child: TabBarView(
                 children: [
                   SingleChildScrollView(
                     child: Container(
-                      height: 600,
-                      padding: const EdgeInsets.all(t15Size),
+                      height: t100Size*6,
+                      padding: EdgeInsets.all(t15Size),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: const BorderRadius.all(Radius.circular(25.0)),
                         border: Border.all(width:2,color:const Color(0xFFC4C4C4)),
                       ),
-                      child: const Column(
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             tLichSuDanThuoc,
                             style: TextStyle(
                               fontWeight: FontWeight.w800,
@@ -88,7 +88,7 @@ class DanThuocScreen extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: t15Size),
-                          Expanded(
+                          const Expanded(
                             child: DanThuocListViewWidget(),
                           )
                         ],

@@ -24,12 +24,12 @@ class ChangePasswordScreen extends StatelessWidget {
               const AuthenticationBackgroundWidget(),
               SingleChildScrollView(
                 child: Container(
-                  padding: const EdgeInsets.all(t20Size),
+                  padding: EdgeInsets.all(t20Size),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const LogoWidget(),
-                      const SizedBox(height: t40Size),
+                      SizedBox(height: t40Size),
                       Form(
                           key: formKey,
                           child: Container(
@@ -66,7 +66,7 @@ class ChangePasswordScreen extends StatelessWidget {
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ),
-                                  const SizedBox(height: t15Size),
+                                  SizedBox(height: t15Size),
                                   TextFormField(
                                     controller: controller.password,
                                     decoration: InputDecoration(
@@ -77,7 +77,7 @@ class ChangePasswordScreen extends StatelessWidget {
                                         )
                                     ),
                                   ),
-                                  const SizedBox(height: t10Size),
+                                  SizedBox(height: t10Size),
                                   const Align(
                                     alignment: Alignment.centerLeft,
                                     child: Text(
@@ -89,7 +89,7 @@ class ChangePasswordScreen extends StatelessWidget {
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ),
-                                  const SizedBox(height: t15Size),
+                                  SizedBox(height: t15Size),
                                   TextFormField(
                                     controller: controller.confirmPassword,
                                     obscureText: true,
@@ -101,7 +101,7 @@ class ChangePasswordScreen extends StatelessWidget {
                                         )
                                     ),
                                   ),
-                                  const SizedBox(height: t20Size),
+                                  SizedBox(height: t20Size),
                                   SizedBox(
                                     width: t10Size*20,
                                     child: Container(
@@ -130,7 +130,7 @@ class ChangePasswordScreen extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  const SizedBox(height: t20Size),
+                                  SizedBox(height: t20Size),
                                   const Text(
                                     tDontHaveAccount,
                                     style: TextStyle(
@@ -140,7 +140,7 @@ class ChangePasswordScreen extends StatelessWidget {
                                         color: Color(0xff39647F)
                                     )
                                   ),
-                                  const SizedBox(height: t20Size),
+                                  SizedBox(height: t20Size),
                                   SizedBox(
                                     width: t10Size*20,
                                     child: ElevatedButton(

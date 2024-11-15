@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/common_widgets/app_bar_widgets/guardian_app_bar_with_title.dart';
-import 'package:kindergarten_app/src/constants/colors.dart';
 import 'package:kindergarten_app/src/constants/text_strings.dart';
-import 'package:kindergarten_app/src/features/student/controllers/thong_tin_suc_khoe/thong_tin_suc_khoe_controller.dart';
 import 'package:kindergarten_app/src/features/student/screens/ngoai_khoa/widget/danh_sach_clb_cua_toi_widget.dart';
 import '../../../../../constants/sizes.dart';
 import '../../../controllers/guardian_navigation_menu_controller.dart';
@@ -23,7 +21,7 @@ class NgoaiKhoaScreen extends StatelessWidget {
         appBar: const GuardianAppBarWithTitleWidget(title: tNgoaiKhoa),
         bottomNavigationBar: BottomNavigationBarWidget(controller: guardianNavigationMenuController),
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: t10Size),
+          padding: EdgeInsets.symmetric(horizontal: t10Size),
           child: Column(
             children: [
               ClipRRect(
@@ -53,10 +51,10 @@ class NgoaiKhoaScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: t15Size),
-              const SizedBox(
-                height: 600,
-                child: TabBarView(
+              SizedBox(height: t15Size),
+              SizedBox(
+                height: t100Size*5.3,
+                child: const TabBarView(
                   children: [
                     DanhSachClbWidget(), // Hiển thị widget cho "Danh sách CLB"
                     DanhSachClbCuaToiWidget(), // Hiển thị widget cho "CLB của Tôi"

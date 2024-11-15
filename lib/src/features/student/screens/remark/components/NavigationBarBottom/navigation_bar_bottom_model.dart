@@ -14,7 +14,6 @@ class NavigationBarBottomModel
   @override
   void dispose() {}
 
-  @override
   toWidgetClassDebugData() {
     // TODO: implement toWidgetClassDebugData
     throw UnimplementedError();

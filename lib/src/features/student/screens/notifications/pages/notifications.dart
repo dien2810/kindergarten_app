@@ -1,16 +1,15 @@
+import 'package:get/get.dart';
+import 'package:kindergarten_app/src/constants/sizes.dart';
+import 'package:kindergarten_app/src/features/student/screens/notifications/pages/notification_info.dart';
+
 import '../components/NavigationBarBottom/navigation_bar_bottom_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 import 'notifications_model.dart';
 export 'notifications_model.dart';
@@ -54,15 +53,15 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 300.0.ms,
-            begin: Offset(0.0, 20.0),
-            end: Offset(0.0, 0.0),
+            begin: const Offset(0.0, 20.0),
+            end: const Offset(0.0, 0.0),
           ),
           TiltEffect(
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 300.0.ms,
-            begin: Offset(0.698, 0),
-            end: Offset(0, 0),
+            begin: const Offset(0.698, 0),
+            end: const Offset(0, 0),
           ),
         ],
       ),
@@ -86,7 +85,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
           automaticallyImplyLeading: false,
-          actions: [],
+          actions: const [],
           flexibleSpace: FlexibleSpaceBar(
             background: Stack(
               children: [
@@ -96,15 +95,15 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                       borderRadius: BorderRadius.circular(0),
                       child: Image.asset(
                         'assets/images/homepage_images/Vector.png',
-                        width: 360,
+                        width: t100Size*4.2,
                         fit: BoxFit.fill,
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(-0.84, 0.14),
+                      alignment: const AlignmentDirectional(-0.84, 0.14),
                       child: Container(
                         clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                         ),
                         child: Image.asset(
@@ -114,24 +113,24 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(0.06, -0.24),
+                      alignment: const AlignmentDirectional(0.06, -0.24),
                       child: Text(
                         'Nguyễn Văn Thành',
                         style: FlutterFlowTheme.of(context).bodyLarge.override(
                           fontFamily: 'Inter',
-                          color: Color(0xFFCAF0F8),
+                          color: const Color(0xFFCAF0F8),
                           letterSpacing: 0.0,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(0.04, 0.12),
+                      alignment: const AlignmentDirectional(0.04, 0.12),
                       child: Text(
                         'Thông tin học sinh',
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Inter',
-                          color: Color(0xFFCAF0F8),
+                          color: const Color(0xFFCAF0F8),
                           letterSpacing: 0.0,
                           fontWeight: FontWeight.w600,
                           decoration: TextDecoration.underline,
@@ -139,7 +138,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(0.55, 0.16),
+                      alignment: const AlignmentDirectional(0.55, 0.16),
                       child: FlutterFlowIconButton(
                         borderColor: Colors.transparent,
                         borderRadius: 8,
@@ -160,7 +159,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
             ),
           ),
           bottom: PreferredSize(
-            preferredSize: Size.fromHeight(70),
+            preferredSize: Size.fromHeight(t10Size*7),
             child: Container(),
           ),
           centerTitle: false,
@@ -171,9 +170,9 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
           child: Stack(
             children: [
               Align(
-                alignment: AlignmentDirectional(0, -1),
+                alignment: const AlignmentDirectional(0, -1),
                 child: Padding(
-                  padding: EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(12),
                   child: TextFormField(
                     controller: _model.textController,
                     focusNode: _model.textFieldFocusNode,
@@ -184,7 +183,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                       labelStyle:
                       FlutterFlowTheme.of(context).labelMedium.override(
                         fontFamily: 'Plus Jakarta Sans',
-                        color: Color(0xFF57636C),
+                        color: const Color(0xFF57636C),
                         fontSize: 14,
                         letterSpacing: 0.0,
                         fontWeight: FontWeight.w600,
@@ -193,34 +192,34 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                       hintStyle:
                       FlutterFlowTheme.of(context).labelMedium.override(
                         fontFamily: 'Plus Jakarta Sans',
-                        color: Color(0xFF57636C),
+                        color: const Color(0xFF57636C),
                         fontSize: 14,
                         letterSpacing: 0.0,
                         fontWeight: FontWeight.w500,
                       ),
                       enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Color(0xFFE0E3E7),
                           width: 2,
                         ),
                         borderRadius: BorderRadius.circular(16),
                       ),
                       focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Color(0xFF4B39EF),
                           width: 2,
                         ),
                         borderRadius: BorderRadius.circular(16),
                       ),
                       errorBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Color(0xFFFF5963),
                           width: 2,
                         ),
                         borderRadius: BorderRadius.circular(16),
                       ),
                       focusedErrorBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Color(0xFFFF5963),
                           width: 2,
                         ),
@@ -228,19 +227,19 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                       ),
                       filled: true,
                       contentPadding:
-                      EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
-                      prefixIcon: Icon(
+                      const EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
+                      prefixIcon: const Icon(
                         Icons.list_rounded,
                         size: 28,
                       ),
-                      suffixIcon: Icon(
+                      suffixIcon: const Icon(
                         Icons.search_rounded,
                         size: 28,
                       ),
                     ),
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                       fontFamily: 'Plus Jakarta Sans',
-                      color: Color(0xFF14181B),
+                      color: const Color(0xFF14181B),
                       fontSize: 14,
                       letterSpacing: 0.0,
                       fontWeight: FontWeight.w500,
@@ -252,9 +251,9 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(0, 0),
+                alignment: const AlignmentDirectional(-1, -0.65),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
                   child: Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
@@ -262,7 +261,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 12),
+                      padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 12),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -274,831 +273,197 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                             shrinkWrap: true,
                             scrollDirection: Axis.vertical,
                             children: [
-                              Padding(
-                                padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 7),
-                                child: Container(
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 2,
-                                        color: Color(0xFFE0E3E7),
-                                        offset: Offset(
-                                          3,
-                                          2,
-                                        ),
-                                      )
-                                    ],
-                                    borderRadius: BorderRadius.circular(16),
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            4, 0, 0, 0),
-                                        child: FaIcon(
-                                          FontAwesomeIcons.calendar,
-                                          color: Color(0xFFF9BD3A),
-                                          size: 20,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Padding(
-                                          padding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              12, 0, 12, 0),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 0, 0, 2),
-                                                child: Text(
-                                                  'Khởi động Cuộc thi Innovation Challenge năm học 2024 - 2025',
-                                                  style: FlutterFlowTheme.of(
-                                                      context)
-                                                      .labelSmall
-                                                      .override(
-                                                    fontFamily:
-                                                    'Plus Jakarta Sans',
-                                                    color:
-                                                    Color(0xFF57636C),
-                                                    fontSize: 13,
-                                                    letterSpacing: 0.0,
-                                                    fontWeight:
-                                                    FontWeight.w800,
-                                                  ),
-                                                ),
-                                              ),
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Expanded(
-                                                    child: Text(
-                                                      '14/03/2024',
-                                                      style: FlutterFlowTheme
-                                                          .of(context)
-                                                          .bodyMedium
-                                                          .override(
-                                                        fontFamily:
-                                                        'Plus Jakarta Sans',
-                                                        color: Color(
-                                                            0xFF14181B),
-                                                        fontSize: 11.5,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                        FontWeight.w500,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
+                              GestureDetector(
+                                onTap: (){
+                                  Get.to(const NotificationInfoWidget());
+                                },
+                                child: Padding(
+                                  padding:
+                                  const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 7),
+                                  child: Container(
+                                    height: t60Size,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      boxShadow: const [
+                                        BoxShadow(
+                                          blurRadius: 2,
+                                          color: Color(0xFFE0E3E7),
+                                          offset: Offset(
+                                            3,
+                                            2,
+                                          ),
+                                        )
+                                      ],
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        const Padding(
+                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                              4, 0, 0, 0),
+                                          child: FaIcon(
+                                            FontAwesomeIcons.calendar,
+                                            color: Color(0xFFF9BD3A),
+                                            size: 20,
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                        Expanded(
+                                          child: Padding(
+                                            padding:
+                                            const EdgeInsetsDirectional.fromSTEB(
+                                                12, 0, 12, 0),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsetsDirectional
+                                                      .fromSTEB(0, 0, 0, 2),
+                                                  child: Text(
+                                                    'Khởi động Cuộc thi Innovation Challenge năm học 2024 - 2025',
+                                                    style: FlutterFlowTheme.of(
+                                                        context)
+                                                        .labelSmall
+                                                        .override(
+                                                      fontFamily:
+                                                      'Plus Jakarta Sans',
+                                                      color:
+                                                      const Color(0xFF57636C),
+                                                      fontSize: 13,
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                      FontWeight.w800,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Row(
+                                                  mainAxisSize: MainAxisSize.max,
+                                                  children: [
+                                                    Expanded(
+                                                      child: Text(
+                                                        '14/03/2024',
+                                                        style: FlutterFlowTheme
+                                                            .of(context)
+                                                            .bodyMedium
+                                                            .override(
+                                                          fontFamily:
+                                                          'Plus Jakarta Sans',
+                                                          color: const Color(
+                                                              0xFF14181B),
+                                                          fontSize: 11.5,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                          FontWeight.w500,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                              Padding(
-                                padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 7),
-                                child: Container(
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 2,
-                                        color: Color(0xFFE0E3E7),
-                                        offset: Offset(
-                                          3,
-                                          2,
-                                        ),
-                                      )
-                                    ],
-                                    borderRadius: BorderRadius.circular(16),
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            4, 0, 0, 0),
-                                        child: FaIcon(
-                                          FontAwesomeIcons.calendar,
-                                          color: Color(0xFFF9BD3A),
-                                          size: 20,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Padding(
-                                          padding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              12, 0, 12, 0),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 0, 0, 2),
-                                                child: Text(
-                                                  'Thư ngỏ v/v đóng góp đề xuất địa điểm hỗ trợ xây dựng trường từ nguồn quỹ EDURUN 2022',
-                                                  style: FlutterFlowTheme.of(
-                                                      context)
-                                                      .labelSmall
-                                                      .override(
-                                                    fontFamily:
-                                                    'Plus Jakarta Sans',
-                                                    color:
-                                                    Color(0xFF57636C),
-                                                    fontSize: 13,
-                                                    letterSpacing: 0.0,
-                                                    fontWeight:
-                                                    FontWeight.w800,
-                                                  ),
-                                                ),
-                                              ),
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Expanded(
-                                                    child: Text(
-                                                      '14/03/2024',
-                                                      style: FlutterFlowTheme
-                                                          .of(context)
-                                                          .bodyMedium
-                                                          .override(
-                                                        fontFamily:
-                                                        'Plus Jakarta Sans',
-                                                        color: Color(
-                                                            0xFF14181B),
-                                                        fontSize: 11.5,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                        FontWeight.w500,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
+                              GestureDetector(
+                                onTap: (){
+                                  Get.to(const NotificationInfoWidget());
+                                },
+                                child: Padding(
+                                  padding:
+                                  const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 7),
+                                  child: Container(
+                                    height: t60Size,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      boxShadow: const [
+                                        BoxShadow(
+                                          blurRadius: 2,
+                                          color: Color(0xFFE0E3E7),
+                                          offset: Offset(
+                                            3,
+                                            2,
+                                          ),
+                                        )
+                                      ],
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        const Padding(
+                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                              4, 0, 0, 0),
+                                          child: FaIcon(
+                                            FontAwesomeIcons.calendar,
+                                            color: Color(0xFFF9BD3A),
+                                            size: 20,
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 7),
-                                child: Container(
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 2,
-                                        color: Color(0xFFE0E3E7),
-                                        offset: Offset(
-                                          3,
-                                          2,
-                                        ),
-                                      )
-                                    ],
-                                    borderRadius: BorderRadius.circular(16),
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            4, 0, 0, 0),
-                                        child: FaIcon(
-                                          FontAwesomeIcons.calendar,
-                                          color: Color(0xFFF9BD3A),
-                                          size: 20,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Padding(
-                                          padding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              12, 0, 12, 0),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 0, 0, 2),
-                                                child: Text(
-                                                  'Giải đáp về Chương trình Giáo dục Vinschool',
-                                                  style: FlutterFlowTheme.of(
-                                                      context)
-                                                      .labelSmall
-                                                      .override(
-                                                    fontFamily:
-                                                    'Plus Jakarta Sans',
-                                                    color:
-                                                    Color(0xFF57636C),
-                                                    fontSize: 13,
-                                                    letterSpacing: 0.0,
-                                                    fontWeight:
-                                                    FontWeight.w800,
-                                                  ),
-                                                ),
-                                              ),
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Expanded(
-                                                    child: Text(
-                                                      '14/03/2024',
-                                                      style: FlutterFlowTheme
-                                                          .of(context)
-                                                          .bodyMedium
-                                                          .override(
-                                                        fontFamily:
-                                                        'Plus Jakarta Sans',
-                                                        color: Color(
-                                                            0xFF14181B),
-                                                        fontSize: 11.5,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                        FontWeight.w500,
-                                                      ),
+                                        Expanded(
+                                          child: Padding(
+                                            padding:
+                                            const EdgeInsetsDirectional.fromSTEB(
+                                                12, 0, 12, 0),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsetsDirectional
+                                                      .fromSTEB(0, 0, 0, 2),
+                                                  child: Text(
+                                                    'Khởi động Cuộc thi Innovation Challenge năm học 2024 - 2025',
+                                                    style: FlutterFlowTheme.of(
+                                                        context)
+                                                        .labelSmall
+                                                        .override(
+                                                      fontFamily:
+                                                      'Plus Jakarta Sans',
+                                                      color:
+                                                      const Color(0xFF57636C),
+                                                      fontSize: 13,
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                      FontWeight.w800,
                                                     ),
                                                   ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 7),
-                                child: Container(
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 2,
-                                        color: Color(0xFFE0E3E7),
-                                        offset: Offset(
-                                          3,
-                                          2,
-                                        ),
-                                      )
-                                    ],
-                                    borderRadius: BorderRadius.circular(16),
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            4, 0, 0, 0),
-                                        child: FaIcon(
-                                          FontAwesomeIcons.calendar,
-                                          color: Color(0xFFF9BD3A),
-                                          size: 20,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Padding(
-                                          padding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              12, 0, 12, 0),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 0, 0, 2),
-                                                child: Text(
-                                                  'Thông báo V/v Phòng chống dịch bệnh trong thời tiết giao mùa 2024',
-                                                  style: FlutterFlowTheme.of(
-                                                      context)
-                                                      .labelSmall
-                                                      .override(
-                                                    fontFamily:
-                                                    'Plus Jakarta Sans',
-                                                    color:
-                                                    Color(0xFF57636C),
-                                                    fontSize: 13,
-                                                    letterSpacing: 0.0,
-                                                    fontWeight:
-                                                    FontWeight.w800,
-                                                  ),
                                                 ),
-                                              ),
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Expanded(
-                                                    child: Text(
-                                                      '14/03/2024',
-                                                      style: FlutterFlowTheme
-                                                          .of(context)
-                                                          .bodyMedium
-                                                          .override(
-                                                        fontFamily:
-                                                        'Plus Jakarta Sans',
-                                                        color: Color(
-                                                            0xFF14181B),
-                                                        fontSize: 11.5,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                        FontWeight.w500,
+                                                Row(
+                                                  mainAxisSize: MainAxisSize.max,
+                                                  children: [
+                                                    Expanded(
+                                                      child: Text(
+                                                        '14/03/2024',
+                                                        style: FlutterFlowTheme
+                                                            .of(context)
+                                                            .bodyMedium
+                                                            .override(
+                                                          fontFamily:
+                                                          'Plus Jakarta Sans',
+                                                          color: const Color(
+                                                              0xFF14181B),
+                                                          fontSize: 11.5,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                          FontWeight.w500,
+                                                        ),
                                                       ),
                                                     ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 7),
-                                child: Container(
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 2,
-                                        color: Color(0xFFE0E3E7),
-                                        offset: Offset(
-                                          3,
-                                          2,
-                                        ),
-                                      )
-                                    ],
-                                    borderRadius: BorderRadius.circular(16),
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            4, 0, 0, 0),
-                                        child: FaIcon(
-                                          FontAwesomeIcons.calendar,
-                                          color: Color(0xFFF9BD3A),
-                                          size: 20,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Padding(
-                                          padding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              12, 0, 12, 0),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 0, 0, 2),
-                                                child: Text(
-                                                  'Thư mời tham dự Hội sách Vinschool Book Fair 2024 “Vietnamese Pride - Global Mind” ...',
-                                                  style: FlutterFlowTheme.of(
-                                                      context)
-                                                      .labelSmall
-                                                      .override(
-                                                    fontFamily:
-                                                    'Plus Jakarta Sans',
-                                                    color:
-                                                    Color(0xFF57636C),
-                                                    fontSize: 13,
-                                                    letterSpacing: 0.0,
-                                                    fontWeight:
-                                                    FontWeight.w800,
-                                                  ),
+                                                  ],
                                                 ),
-                                              ),
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Expanded(
-                                                    child: Text(
-                                                      '14/03/2024',
-                                                      style: FlutterFlowTheme
-                                                          .of(context)
-                                                          .bodyMedium
-                                                          .override(
-                                                        fontFamily:
-                                                        'Plus Jakarta Sans',
-                                                        color: Color(
-                                                            0xFF14181B),
-                                                        fontSize: 11.5,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                        FontWeight.w500,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 7),
-                                child: Container(
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 2,
-                                        color: Color(0xFFE0E3E7),
-                                        offset: Offset(
-                                          3,
-                                          2,
-                                        ),
-                                      )
-                                    ],
-                                    borderRadius: BorderRadius.circular(16),
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            4, 0, 0, 0),
-                                        child: FaIcon(
-                                          FontAwesomeIcons.calendar,
-                                          color: Color(0xFFF9BD3A),
-                                          size: 20,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Padding(
-                                          padding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              12, 0, 12, 0),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 0, 0, 2),
-                                                child: Text(
-                                                  'Thông báo v/v Lịch nghỉ lễ Giỗ tổ Hùng Vương, 30/4 và 1/5',
-                                                  style: FlutterFlowTheme.of(
-                                                      context)
-                                                      .labelSmall
-                                                      .override(
-                                                    fontFamily:
-                                                    'Plus Jakarta Sans',
-                                                    color:
-                                                    Color(0xFF57636C),
-                                                    fontSize: 13,
-                                                    letterSpacing: 0.0,
-                                                    fontWeight:
-                                                    FontWeight.w800,
-                                                  ),
-                                                ),
-                                              ),
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Expanded(
-                                                    child: Text(
-                                                      '14/03/2024',
-                                                      style: FlutterFlowTheme
-                                                          .of(context)
-                                                          .bodyMedium
-                                                          .override(
-                                                        fontFamily:
-                                                        'Plus Jakarta Sans',
-                                                        color: Color(
-                                                            0xFF14181B),
-                                                        fontSize: 11.5,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                        FontWeight.w500,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 7),
-                                child: Container(
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 2,
-                                        color: Color(0xFFE0E3E7),
-                                        offset: Offset(
-                                          3,
-                                          2,
-                                        ),
-                                      )
-                                    ],
-                                    borderRadius: BorderRadius.circular(16),
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            4, 0, 0, 0),
-                                        child: FaIcon(
-                                          FontAwesomeIcons.calendar,
-                                          color: Color(0xFFF9BD3A),
-                                          size: 20,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Padding(
-                                          padding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              12, 0, 12, 0),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 0, 0, 2),
-                                                child: Text(
-                                                  'Quy định tính điểm Văn minh cho Học sinh năm học 2024 - 2025',
-                                                  style: FlutterFlowTheme.of(
-                                                      context)
-                                                      .labelSmall
-                                                      .override(
-                                                    fontFamily:
-                                                    'Plus Jakarta Sans',
-                                                    color:
-                                                    Color(0xFF57636C),
-                                                    fontSize: 13,
-                                                    letterSpacing: 0.0,
-                                                    fontWeight:
-                                                    FontWeight.w800,
-                                                  ),
-                                                ),
-                                              ),
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Expanded(
-                                                    child: Text(
-                                                      '14/03/2024',
-                                                      style: FlutterFlowTheme
-                                                          .of(context)
-                                                          .bodyMedium
-                                                          .override(
-                                                        fontFamily:
-                                                        'Plus Jakarta Sans',
-                                                        color: Color(
-                                                            0xFF14181B),
-                                                        fontSize: 11.5,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                        FontWeight.w500,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 7),
-                                child: Container(
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 2,
-                                        color: Color(0xFFE0E3E7),
-                                        offset: Offset(
-                                          3,
-                                          2,
-                                        ),
-                                      )
-                                    ],
-                                    borderRadius: BorderRadius.circular(16),
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            4, 0, 0, 0),
-                                        child: FaIcon(
-                                          FontAwesomeIcons.calendar,
-                                          color: Color(0xFFF9BD3A),
-                                          size: 20,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Padding(
-                                          padding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              12, 0, 12, 0),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 0, 0, 2),
-                                                child: Text(
-                                                  'Kế hoạch tăng cường công tác phòng, chống dịch Covid-19 khi đón trẻ quay trở lại trường',
-                                                  style: FlutterFlowTheme.of(
-                                                      context)
-                                                      .labelSmall
-                                                      .override(
-                                                    fontFamily:
-                                                    'Plus Jakarta Sans',
-                                                    color:
-                                                    Color(0xFF57636C),
-                                                    fontSize: 13,
-                                                    letterSpacing: 0.0,
-                                                    fontWeight:
-                                                    FontWeight.w800,
-                                                  ),
-                                                ),
-                                              ),
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Expanded(
-                                                    child: Text(
-                                                      '14/03/2024',
-                                                      style: FlutterFlowTheme
-                                                          .of(context)
-                                                          .bodyMedium
-                                                          .override(
-                                                        fontFamily:
-                                                        'Plus Jakarta Sans',
-                                                        color: Color(
-                                                            0xFF14181B),
-                                                        fontSize: 11.5,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                        FontWeight.w500,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 7),
-                                child: Container(
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 2,
-                                        color: Color(0xFFE0E3E7),
-                                        offset: Offset(
-                                          3,
-                                          2,
-                                        ),
-                                      )
-                                    ],
-                                    borderRadius: BorderRadius.circular(16),
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            4, 0, 0, 0),
-                                        child: FaIcon(
-                                          FontAwesomeIcons.calendar,
-                                          color: Color(0xFFF9BD3A),
-                                          size: 20,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Padding(
-                                          padding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              12, 0, 12, 0),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 0, 0, 2),
-                                                child: Text(
-                                                  'Khởi động Cuộc thi Innovation Challenge năm học 2024 - 2025',
-                                                  style: FlutterFlowTheme.of(
-                                                      context)
-                                                      .labelSmall
-                                                      .override(
-                                                    fontFamily:
-                                                    'Plus Jakarta Sans',
-                                                    color:
-                                                    Color(0xFF57636C),
-                                                    fontSize: 13,
-                                                    letterSpacing: 0.0,
-                                                    fontWeight:
-                                                    FontWeight.w800,
-                                                  ),
-                                                ),
-                                              ),
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Expanded(
-                                                    child: Text(
-                                                      '14/03/2024',
-                                                      style: FlutterFlowTheme
-                                                          .of(context)
-                                                          .bodyMedium
-                                                          .override(
-                                                        fontFamily:
-                                                        'Plus Jakarta Sans',
-                                                        color: Color(
-                                                            0xFF14181B),
-                                                        fontSize: 11.5,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                        FontWeight.w500,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -1112,11 +477,11 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(0, 1),
+                alignment: const AlignmentDirectional(0, 1),
                 child: wrapWithModel(
                   model: _model.navigationBarBottomModel,
                   updateCallback: () => safeSetState(() {}),
-                  child: NavigationBarBottomWidget(),
+                  child: const NavigationBarBottomWidget(),
                 ),
               ),
             ],

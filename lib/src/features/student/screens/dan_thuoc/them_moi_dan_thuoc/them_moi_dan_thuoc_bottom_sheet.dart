@@ -29,7 +29,7 @@ class ThemMoiDanThuocBottomSheet{
         builder: (context) {
           return SingleChildScrollView(
             child: Container(
-                padding: const EdgeInsets.all(t10Size),
+                padding: EdgeInsets.all(t10Size),
                 height: MediaQuery
                     .of(context)
                     .size
@@ -45,42 +45,42 @@ class ThemMoiDanThuocBottomSheet{
                           color: Color(0xFF03045E)
                       ),
                     ),
-                    const SizedBox(height: t10Size),
+                    SizedBox(height: t10Size),
                     InformationInputWithIconWidget(
                       textEdittingController: themMoiDanThuocConTroller.prescription,
                       color: const Color(0xFFE9EFF7),
                       title: tDonThuoc,
                       hintText: '',
                     ),
-                    const SizedBox(height: t10Size),
+                    SizedBox(height: t10Size),
                     InformationInputWithIconWidget(
                       textEdittingController: themMoiDanThuocConTroller.note,
                       color: const Color(0xFFE9EFF7),
                       title: tGhiChu,
                       hintText: '',
                     ),
-                    const SizedBox(height: t10Size),
+                    SizedBox(height: t10Size),
                     InformationInputWithIconWidget(
                       color: const Color(0xFFE9EFF7),
                       title: tNgayNhanThuoc,
                       hintText: themMoiDanThuocConTroller.createDate,
                       readOnly: true,
                     ),
-                    const SizedBox(height: t10Size),
+                    SizedBox(height: t10Size),
                     InformationInputWithIconWidget(
                       color: const Color(0xFFE9EFF7),
                       title: tHoVaTenPhuHuynhDanThuoc,
                       hintText: themMoiDanThuocConTroller.hoVaTenPhuHuynhDanThuoc.text,
                       readOnly: true,
                     ),
-                    const SizedBox(height: t10Size),
+                    SizedBox(height: t10Size),
                     InformationInputWithIconWidget(
                       color: const Color(0xFFE9EFF7),
                       title: tNguoiNhanDonThuoc,
                       hintText: themMoiDanThuocConTroller.lop.text,
                       readOnly: true,
                     ),
-                    const SizedBox(height: t5Size),
+                    SizedBox(height: t5Size),
                     const Spacer(flex: 1),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -121,7 +121,7 @@ class ThemMoiDanThuocBottomSheet{
                             ),
                           ),
                         ),
-                        const SizedBox(width: t5Size),
+                        SizedBox(width: t5Size),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFF6BC5FF),
