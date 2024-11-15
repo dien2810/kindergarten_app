@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kindergarten_app/src/features/student/screens/hoat_dong_su_kien/screen/hoat_dong_su_kien_screen.dart';
+import 'package:kindergarten_app/src/features/authentication/screens/login_screen/login_screen.dart';
 import 'package:kindergarten_app/src/utils/theme.dart';
 import 'firebase_options.dart';
 
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       //home: const DanThuocScreen(),
       //home : const ThongTinHocSinhScreen(),
       //home: const NgoaiKhoaScreen(),
-      home: const HoatDongSuKienScreen(),
+      home: const LoginScreen(),
       //home:  const DanhSachClbScreen(),
       //home: ThongTinSucKhoeScreen(),
       defaultTransition: Transition.leftToRightWithFade,

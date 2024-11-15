@@ -4,7 +4,7 @@ import '../../../../../common_widgets/button_widget/custom_button_widget.dart';
 import '../../../../../common_widgets/information_input_widget/information_input_widget.dart';
 import '../../../../../constants/sizes.dart';
 import '../../../../../constants/text_strings.dart';
-import '../../../controllers/thong_tin_suc_khoe_controller.dart';
+import '../../../controllers/thong_tin_suc_khoe/thong_tin_suc_khoe_controller.dart';
 import 'ghi_chu_widget.dart';
 
 class CoBanTabWidget extends StatelessWidget {
@@ -66,10 +66,13 @@ class CoBanTabWidget extends StatelessWidget {
           const SizedBox(height: t10Size),
           GhiChuWidget(controller: controller),
           const SizedBox(height: t10Size),
-          const CustomButtonWidget(
+          CustomButtonWidget(
             width: t10Size*20,
-            color: Color(0xFF03045E),
+            color: const Color(0xFF03045E),
             text: tCapNhat,
+            onPressed: (){
+              controller.updateHealthInformation();
+            },
           ),
         ],
       ),

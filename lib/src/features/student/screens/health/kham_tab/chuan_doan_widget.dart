@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../constants/sizes.dart';
 import '../../../../../constants/text_strings.dart';
-import '../../../controllers/thong_tin_suc_khoe_controller.dart';
+import '../../../controllers/thong_tin_suc_khoe/thong_tin_suc_khoe_controller.dart';
 
 class ChuanDoanWidget extends StatelessWidget {
   const ChuanDoanWidget({

@@ -25,7 +25,7 @@ class Helper extends GetxController{
       message,
       isDismissible: true,
       shouldIconPulse: true,
-      colorText: Colors.white,
+      colorText: Colors.black,
       backgroundColor: Colors.yellowAccent,
       snackPosition: SnackPosition.BOTTOM,
       duration: const Duration(seconds: 6),

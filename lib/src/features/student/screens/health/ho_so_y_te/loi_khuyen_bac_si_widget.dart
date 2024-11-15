@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kindergarten_app/src/constants/image_strings.dart';
 import 'package:kindergarten_app/src/constants/text_strings.dart';
 
-import '../../../controllers/thong_tin_suc_khoe_controller.dart';
+import '../../../controllers/thong_tin_suc_khoe/thong_tin_suc_khoe_controller.dart';
 
 class LoiKhuyenBacSiWidget extends StatelessWidget {
   const LoiKhuyenBacSiWidget({
@@ -53,10 +53,10 @@ class LoiKhuyenBacSiWidget extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       padding: const EdgeInsets.all(16),
-                      child: const Column(
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             tLoiKhuyenBacSiHeader,
                             style: TextStyle(
                               fontSize: 18,
@@ -64,10 +64,17 @@ class LoiKhuyenBacSiWidget extends StatelessWidget {
                               color: Colors.black87,
                             ),
                           ),
-                          SizedBox(height: 8),
-                          Text(
-                            'Không phát hiện các bệnh lý nghiêm trọng liên quan đến mắt, tai, mũi, họng. Tuy nhiên, phụ huynh nên chú ý kiểm tra mắt của trẻ thường xuyên vì một số trẻ có thể gặp vấn đề về thị lực sau thời gian dài sử dụng thiết bị điện tử. Đồng thời, cần giữ vệ sinh tai và mũi của trẻ để tránh viêm nhiễm. Đặc biệt, nếu trẻ có triệu chứng đau tai, mũi nghẹt hoặc ho kéo dài, cần đưa trẻ đến khám ngay để tránh biến chứng.',
-                            style: TextStyle(
+                          const SizedBox(height: 8),
+                          TextFormField(
+                            maxLines: null,
+                            controller: controller.loiKhuyenCuaBacSi,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                borderRadius: BorderRadius.circular(15)
+                              )
+                            ),
+                            style: const TextStyle(
                               fontSize: 14,
                               height: 1.5,
                               color: Colors.black87,

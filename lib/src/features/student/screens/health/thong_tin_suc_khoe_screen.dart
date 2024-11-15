@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:kindergarten_app/src/common_widgets/app_bar_widgets/guardian_app_bar_with_title.dart';
 import 'package:kindergarten_app/src/constants/colors.dart';
 import 'package:kindergarten_app/src/constants/text_strings.dart';
-import 'package:kindergarten_app/src/features/student/controllers/thong_tin_suc_khoe_controller.dart';
+import 'package:kindergarten_app/src/features/student/controllers/thong_tin_suc_khoe/thong_tin_suc_khoe_controller.dart';
 import 'package:kindergarten_app/src/features/student/screens/health/kham_tab/kham_tab_widget.dart';
 import 'package:kindergarten_app/src/features/student/screens/health/thong_tin_suc_khoe_form_widget.dart';
 
@@ -66,7 +66,7 @@ class ThongTinSucKhoeScreen extends StatelessWidget {
               ),
               const SizedBox(height: t15Size),
               SizedBox(
-                height: 575,
+                height: 5.75*t100Size,
                 child: TabBarView(
                   children: [
                     ThongTinSucKhoeChungWidget(controller: controller),

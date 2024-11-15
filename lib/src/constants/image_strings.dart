@@ -23,7 +23,12 @@ const String tDanThuocItemImage1 = 'assets/images/dan_thuoc_images/dan_thuoc_ite
 const String tDanThuocItemImage2 = 'assets/images/dan_thuoc_images/dan_thuoc_item_2.png';
 const String tDanThuocItemImage3 = 'assets/images/dan_thuoc_images/dan_thuoc_item_3.png';
 const String tDanThuocItemImage4 = 'assets/images/dan_thuoc_images/dan_thuoc_item_4.png';
-
+//ThoiHocHoanPhiScreen
+const String tThoiHocHoanPhiImage1 = 'assets/images/thoi_hoc_hoan_phi_images/Circle.png';
+const String tThoiHocHoanPhiImage2 = 'assets/images/thoi_hoc_hoan_phi_images/Group 989.png';
+const String tThoiHocHoanPhiImage3 = 'assets/images/thoi_hoc_hoan_phi_images/Circle (1).png';
+const String tThoiHocHoanPhiImage4 = 'assets/images/thoi_hoc_hoan_phi_images/Circle (2).png';
+const String tThoiHocHoanPhiImage5 = 'assets/images/thoi_hoc_hoan_phi_images/Circle (3).png';
 // Ho So Y Te : LoiKhuyenBacSi Screen
 const String tLoiKhuyenBacSiItemImage1 = 'assets/images/ho_so_y_te_images/loi_khuyen_bac_si_item_1.png';
 const String tLoiKhuyenBacSiItemImage2 = 'assets/images/ho_so_y_te_images/loi_khuyen_bac_si_item_2.png';

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:kindergarten_app/src/common_widgets/app_bar_widgets/guardian_app_bar_with_title.dart';
 import 'package:kindergarten_app/src/constants/colors.dart';
 import 'package:kindergarten_app/src/constants/text_strings.dart';
-import 'package:kindergarten_app/src/features/student/controllers/thong_tin_suc_khoe_controller.dart';
+import 'package:kindergarten_app/src/features/student/controllers/thong_tin_suc_khoe/thong_tin_suc_khoe_controller.dart';
 import 'package:kindergarten_app/src/features/student/screens/ngoai_khoa/widget/danh_sach_clb_cua_toi_widget.dart';
 import '../../../../../constants/sizes.dart';
 import '../../../controllers/guardian_navigation_menu_controller.dart';

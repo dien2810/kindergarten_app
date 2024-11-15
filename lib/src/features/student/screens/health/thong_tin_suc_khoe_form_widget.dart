@@ -4,7 +4,7 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import '../../../../constants/colors.dart';
 import '../../../../constants/sizes.dart';
 import '../../../../constants/text_strings.dart';
-import '../../controllers/thong_tin_suc_khoe_controller.dart';
+import '../../controllers/thong_tin_suc_khoe/thong_tin_suc_khoe_controller.dart';
 
 class ThongTinSucKhoeChungWidget extends StatelessWidget {
   const ThongTinSucKhoeChungWidget({
@@ -232,14 +232,11 @@ class ThongTinSucKhoeChungWidget extends StatelessWidget {
               const SizedBox(height: t15Size),
               TextFormField(
                 controller: controller.benhKhac,
-                decoration: InputDecoration(
-                    filled: true,
-                    fillColor: const Color(0xFFDEDBDB),
-                    focusColor: Colors.transparent,
-                    border: OutlineInputBorder(
-                        borderSide: const BorderSide(width: 0),
-                        borderRadius: BorderRadius.circular(t40Size)
-                    )
+                decoration: const InputDecoration(
+                  filled: true,
+                  fillColor: Color(0xFFDEDBDB),
+                  focusColor: Colors.transparent,
+                  border: InputBorder.none
                 ),
               ),
               const SizedBox(height: t15Size),
@@ -257,6 +254,7 @@ class ThongTinSucKhoeChungWidget extends StatelessWidget {
                           backgroundColor: Colors.transparent
                       ),
                       onPressed: () {
+                        controller.updateHealthHistory();
 
                       },
                       child: const Text(
@@ -272,7 +270,6 @@ class ThongTinSucKhoeChungWidget extends StatelessWidget {
                   ),
                 ),
               ),
-
             ],
           ),
 

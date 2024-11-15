@@ -98,6 +98,7 @@ flutter:
     - assets/images/thuc_don_images/
     - assets/images/ngoai_khoa_images/
     - assets/images/hoc_sinh_screen_images/
+    - assets/images/thoi_hoc_hoan_phi_images/
 
 
   # To add assets to your application, add an assets section, like this:

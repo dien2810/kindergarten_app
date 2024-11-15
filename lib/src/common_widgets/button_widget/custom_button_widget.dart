@@ -5,11 +5,12 @@ import '../../constants/sizes.dart';
 
 class CustomButtonWidget extends StatelessWidget {
   const CustomButtonWidget({
-    super.key, required this.width, required this.color, required this.text,
+    super.key, required this.width, required this.color, required this.text, required this.onPressed,
   });
   final double width;
   final Color color;
   final String text;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +27,7 @@ class CustomButtonWidget extends StatelessWidget {
             style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.transparent
             ),
-            onPressed: () {
-
-            },
+            onPressed: onPressed,
             child: Text(
               text,
               style: const TextStyle(

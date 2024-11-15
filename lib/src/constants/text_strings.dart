@@ -103,12 +103,51 @@ const String tKhongCo = 'Không có';
 const String tNone = 'None';
 const String tKhac = 'Khác';
 const String tTinhTrangRang = 'Tình trạng răng';
-const String tTinhTrangTai = 'Tình trạng răng';
+const String tTinhTrangTai = 'Tình trạng tai';
 const String tBenhLyKhac = 'Bệnh lý khác';
 const String tChuanDoanCuaBacSi = 'Chuẩn đoán của bác sĩ';
 const String tKhongCoBenhDangLoNgai = 'Không có bệnh lý đáng lo ngại';
 const String tLoiKhuyenCuaBacSi = 'Lời khuyên của bác sĩ';
 const String tThongTinLichSuTiemChung = 'Thông tin lịch sử tiêm chủng';
+//ChuyenCanScreen
+const String tThu5 = 'Thứ 5 - 19/9/2024';
+const String tKhungGioVang = 'Khung giờ vắng';
+const String tKhungGioHoatDongTuDo = 'Khung giờ hoạt động tự do';
+const String tTinhTrang = 'Tình trạng';
+const String tVangCoPhep = 'Vắng có phép';
+const String tAnhCheckin = 'Ảnh checkin';
+const String tXemAnh = 'Xem ảnh';
+const String tAnhCheckout = 'Ảnh checkout';
+const String tThoiGianVaoLop = 'Thời gian vào lớp';
+const String t7h = '7:00';
+const String t7h30 = '7:30';
+const String tThoiGianRaKhoiLop = 'Thời gian ra khỏi lớp';
+const String tLyDo = 'Lý do';
+const String tBiOm = 'Bị ốm';
+const String tVangKhongPhep = 'Vắng không phép';
+const String tDungGio = 'Đúng giờ';
+const String tDenMuon = 'Đến muộn';
+//XinNghiScreen
+const String tDanhSachDonXinNghi = 'Danh sách đơn xin nghỉ';
+const String tDon1 = 'Đơn 1';
+const String tNgay = 'Ngày: ';
+const String tNgay30 = '30/08/2024: ';
+const String tTrangThai = 'Trạng thái: ';
+const String tDaDuyet = 'Đã duyệt';
+const String tNgayNghi = 'Ngày nghỉ: ';
+const String tNoiDung = 'Nội dung: ';
+const String tXinNghiViBiBenh = 'Xin nghỉ vì bị bệnh ngày 31/08/2024';
+const String tTaoDonXinNghi = 'Tạo đơn xin nghỉ';
+const String tNghiCaNgay = 'Nghỉ cả ngày';
+const String tNghiTheoTietTrongNgay = 'Nghỉ theo tiết trong ngày';
+const String tDonTreDiemDanhTaiLop = 'Đón trẻ - Điểm danh tại lớp';
+const String tTapTheDucBuoiSang = 'Tập thể dục buổi sáng';
+const String tAnSang = 'Ăn sáng';
+const String tHocTap = 'Học tập';
+const String tHoatDongTuDo = 'Hoạt động tự do/Giờ chơi tự do';
+const String tAnTrua = 'Ăn trưa';
+const String tNguTrua = 'Ngủ trưa';
+const String tLyDoNghi = 'Lý do nghỉ';
 //DanThuocScreen
 const String tLichSuDanThuoc = 'Lịch sử dặn thuốc';
 const String tThuocViemHongCap = 'Thuốc viêm họng cấp';
@@ -150,6 +189,39 @@ const String tThanhPhanCoTrongMonAn = 'Thành phần có trong món ăn:\nthịt
 //ThemGhiChuMoiScreen
 const String tThemGhiChuMoi = 'Thêm ghi chú mới';
 const String tNoiDungGhiChu = 'Nội dung ghi chú';
+//ThoiHocHoanPhiScreen
+const String tThoiHocVaHoanPhi = 'Thôi học và hoàn phí';
+const String tYeuCauThoiHoc = 'Yêu cầu thôi học';
+const String tHoanPhiCLB = 'Hoàn phí câu lạc bộ';
+const String tDaTiepNhan = 'Đã tiếp nhận';
+const String tHoanPhiSach = 'Hoàn phí sách';
+const String tHoanPhiBHYT = 'Hoàn phí BHYT';
+const String tHoanPhiDongPhuc = 'Hoàn phí đồng phục';
+const String tDaHoanPhi = 'Đã hoàn phí';
+const String tDaHuy = 'Đã hủy';
+const String tChoDuyet = 'Chờ duyệt';
+const String tLoaiHoanPhi = 'Loại hoàn phí: ';
+const String tHoVaTen = 'Họ và tên: ';
+const String tSoTien = 'Số tiền';
+const String t100000d = '100.000 đ';
+const String tNhungThongTinDuoiDay = 'Những thông tin dưới đây sẽ được Ban giám hiệu '
+    'nhà trường dùng để phê duyệt yêu cầu';
+const String tThongTinYeuCau = 'Thông tin yêu cầu';
+const String tChonLoaiYeuCau = 'Chọn loại yêu cầu';
+const String tLyDoThoiHoc = 'Lý do thôi học: ';
+const String tChuyenTruong = 'Chuyển trường: ';
+const String tTruongChuyenDen = 'Trường chuyển đến (nếu có)';
+const String tThongTinPhuHuynh = 'Thông tin phụ huynh';
+const String tThongTinTaiKhoanNganHang = 'Thông tin tài khoản ngân hàng';
+const String tSoDienThoai = 'Số điện thoại: ';
+const String tDiaChi = 'Địa chỉ: ';
+const String tSoTaiKhoan = 'Số tài khoản: ';
+const String tChuTaiKhoan = 'Chủ tài khoản: ';
+const String tNganHang = 'Ngân hàng: ';
+const String tChiNhanh = 'Chi nhánh: ';
+const String tQuyPhuHuynhVuiLong = 'Quý phụ huynh vui lòng tham khảo Mục V- Quy định '
+    'về phí khi học sinh rút hồ sơ/Bảo lưu/Thôi học/ Trường hợp bất khả kháng : ';
+const String tTaiDay = 'TẠI ĐÂY';
 
 // HoSoYTe / loi_khuyen_bac_si_widget
 const String tLoiKhuyenBacSiHeader =  "Lời khuyên của bác sĩ ";

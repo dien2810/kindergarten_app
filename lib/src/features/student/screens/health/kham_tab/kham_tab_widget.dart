@@ -5,7 +5,7 @@ import '../../../../../common_widgets/button_widget/custom_button_widget.dart';
 import '../../../../../common_widgets/information_input_widget/information_input_widget.dart';
 import '../../../../../constants/sizes.dart';
 import '../../../../../constants/text_strings.dart';
-import '../../../controllers/thong_tin_suc_khoe_controller.dart';
+import '../../../controllers/thong_tin_suc_khoe/thong_tin_suc_khoe_controller.dart';
 
 class KhamTabWidget extends StatelessWidget {
   const KhamTabWidget({super.key, required this.controller});
@@ -78,19 +78,19 @@ class KhamTabWidget extends StatelessWidget {
             color: Colors.transparent,
             title: tTinhTrangRang,
             textEditingController: controller.tinhTrangRang,
-            defaultInput: tBinhThuong,
+            //defaultInput: tBinhThuong,
           ),
           InformationInput(
             color: const Color(0xFFE9EFF7),
             title: tTinhTrangTai,
             textEditingController: controller.tinhTrangTai,
-            defaultInput: tBinhThuong,
+            //defaultInput: tBinhThuong,
           ),
           InformationInput(
             color: Colors.transparent,
             title: tBenhLyKhac,
             textEditingController: controller.benhLyKhac,
-            defaultInput: tKhongCo,
+            //defaultInput: tKhongCo,
           ),
           const SizedBox(height: t10Size),
           const Text(
@@ -104,10 +104,13 @@ class KhamTabWidget extends StatelessWidget {
           const SizedBox(height: t10Size),
           ChuanDoanWidget(controller: controller),
           const SizedBox(height: t10Size),
-          const CustomButtonWidget(
+          CustomButtonWidget(
             width: t10Size*20,
-            color: Color(0xFF03045E),
+            color: const Color(0xFF03045E),
             text: tCapNhat,
+            onPressed: (){
+              controller.updateMedicalRecordKhamTab();
+            },
           ),
 
         ],

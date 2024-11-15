@@ -25,10 +25,10 @@ class LoginController extends GetxController{
       final account = await accountRepo.getAccountDetails(emailText);
       print("-------------------Role: "+account.role.toString());
       if (role.value == Role.guardian && account.role == Role.guardian) {
-        accountRepo.userId = account.id!;
+        accountRepo.userId = account.username;
         Get.offAll(() => const GuardianNavigationMenu());
       } else if (role.value == Role.teacher && account.role == Role.teacher) {
-        accountRepo.userId = account.id!;
+        accountRepo.userId = account.username;
         Get.offAll(() => const TrangChuGiaoVien());
       }
       else{

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../../../../common_widgets/rounder_asset_image_widget/rounded_asset_image_widget.dart';
 import '../../../../constants/sizes.dart';
-import 'dan_thuoc_status_widget.dart';
+import '../dan_thuoc/dan_thuoc_status_widget.dart';
 
-class DanThuocListTileWidget extends StatelessWidget {
-  const DanThuocListTileWidget({
+class ThoiHocHoanPhiListtileWidget extends StatelessWidget {
+  const ThoiHocHoanPhiListtileWidget({
     super.key,
     required this.image,
     required this.title,
@@ -55,8 +55,8 @@ class DanThuocListTileWidget extends StatelessWidget {
         ],
       ),
       trailing: DanThuocStatusWidget(
-        status: status,
-        color: color
+          status: status,
+          color: color
       ),
     );
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../../constants/text_strings.dart';
-import '../../../controllers/thong_tin_suc_khoe_controller.dart';
+import '../../../controllers/thong_tin_suc_khoe/thong_tin_suc_khoe_controller.dart';
 
 class DanhSachLichSuTiemChungWidget extends StatelessWidget {
   const DanhSachLichSuTiemChungWidget({super.key, required this.controller});

@@ -2,21 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/constants/image_strings.dart';
 import 'package:kindergarten_app/src/constants/sizes.dart';
+import 'package:kindergarten_app/src/features/student/screens/chuyen_can/chuyen_can_screen.dart';
 import 'package:kindergarten_app/src/features/student/screens/dan_thuoc/dan_thuoc_screen.dart';
 import 'package:kindergarten_app/src/features/student/screens/health/thong_tin_suc_khoe_screen.dart';
+import 'package:kindergarten_app/src/features/student/screens/hoat_dong_su_kien/screen/hoat_dong_su_kien_screen.dart';
 import 'package:kindergarten_app/src/features/student/screens/ngoai_khoa/screen/ngoai_khoa_screen.dart';
+import 'package:kindergarten_app/src/features/student/screens/thoi_hoc_hoan_phi/thoi_hoc_hoan_phi_screen.dart';
 import 'package:kindergarten_app/src/features/student/screens/thuc_don/thuc_don_screen.dart';
+import 'package:kindergarten_app/src/features/student/screens/xin_nghi/xin_nghi_screen.dart';
 
 import '../../../../common_widgets/app_bar_widgets/guardian_app_bar_with_title.dart';
 import '../../../../constants/text_strings.dart';
-import '../../controllers/guardian_navigation_menu_controller.dart';
 import 'hoc_sinh_navigation_widget.dart';
 class HocSinhScreen extends StatelessWidget {
   const HocSinhScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final guardianNavigationMenuController = Get.put(GuardianNavigationMenuController());
     return Scaffold(
       appBar: const GuardianAppBarWithTitleWidget(title: tHocSinh),
       body: Padding(
@@ -42,7 +44,9 @@ class HocSinhScreen extends StatelessWidget {
                   child: HocSinhNavigationWidget(
                     imageString: tHoatDongSuKienImage,
                     title: tHoatDongVaSuKien,
-                    onTap: (){}
+                    onTap: (){
+                      Get.to(()=>const HoatDongSuKienScreen());
+                    }
                   ),
                 ),
                 Expanded(
@@ -60,7 +64,9 @@ class HocSinhScreen extends StatelessWidget {
                   child: HocSinhNavigationWidget(
                     imageString: tChuyenCanImage,
                     title: tChuyenCan,
-                    onTap: (){},
+                    onTap: (){
+                      Get.to(()=>const ChuyenCanScreen());
+                    },
                   ),
                 ),
                 Expanded(
@@ -68,7 +74,9 @@ class HocSinhScreen extends StatelessWidget {
                   child: HocSinhNavigationWidget(
                     imageString: tXinNghiImage,
                     title: tXinNghi,
-                    onTap: (){},
+                    onTap: (){
+                      Get.to(()=>const XinNghiScreen());
+                    },
                   ),
                 ),
               ],
@@ -137,7 +145,9 @@ class HocSinhScreen extends StatelessWidget {
                   child: HocSinhNavigationWidget(
                       imageString: tThoiHocHoanPhiImage,
                       title: tThoiHocHoanPhi,
-                      onTap: (){}
+                      onTap: (){
+                        Get.to(()=>const ThoiHocHoanPhiScreen());
+                      }
                   ),
                 ),
                 Expanded(
