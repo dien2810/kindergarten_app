@@ -1,77 +1,85 @@
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 
-class HoatDong {
-  final String activityName;
-  final String startTime;
-  final String endTime;
-  final String duration;
-  final String typeOfActivity;
-  final String location;
-  final List<String> image;
-  final String videoLive;
+class HoatDongSuKienController extends GetxController {
+  // Selected day for the weekly date picker
+  var selectedDay = DateTime.now().obs;
 
-  HoatDong({
-    required this.activityName,
-    required this.startTime,
-    required this.endTime,
-    required this.duration,
-    required this.typeOfActivity,
-    required this.location,
-    required this.image,
-    required this.videoLive,
-  });
+  // Dummy event data, replace with your actual data fetching logic
+  var eventsForDay = <Event>[].obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    // Initialize with some dummy data
+    eventsForDay.value = [
+      Event(
+        startTime : '6:30',
+        endTime : '7:30',
+        name: 'Đón trẻ - điểm danh ngày ',
+        location: 'Phòng học A',
+      ),
+      Event(
+        startTime : '7:30',
+        endTime : '7:40',
+        name: 'Tập thể dục buổi sáng',
+        location: 'Sân chơi ngoài trời 1',
+      ),
+      Event(
+        startTime : '7:40',
+        endTime : '8:30',
+        name: 'Ăn sáng ngày ',
+        location: 'Căn teen trường khu A1',
+      ),
+      Event(
+        startTime : '9:30',
+        endTime : '10:30',
+        name: 'Hoạt động tự do/ Giờ chơi tự do ',
+        location: 'Khu A201',
+      ),
+    ];
+  }
+
+  // Function to fetch events for a specific day (you can replace with your own API call or logic)
+  void fetchEventsForDay(DateTime day) {
+    selectedDay.value = day;
+    // For now, we simulate data fetching by assigning predefined events
+    // Replace this with actual data fetching logic
+    eventsForDay.value = [
+      Event(
+        startTime : '6:30',
+        endTime : '7:30',
+        name: 'Đón trẻ - điểm danh ngày ',
+        location: 'Phòng học A',
+      ),
+      Event(
+        startTime : '7:30',
+        endTime : '7:40',
+        name: 'Tập thể dục buổi sáng',
+        location: 'Sân chơi ngoài trời 1',
+      ),
+      Event(
+        startTime : '7:40',
+        endTime : '8:30',
+        name: 'Ăn sáng ngày ',
+        location: 'Căn teen trường khu A1',
+      ),
+      Event(
+        startTime : '9:30',
+        endTime : '10:30',
+        name: 'Hoạt động tự do/ Giờ chơi tự do ',
+        location: 'Khu A201',
+      ),
+    ];
+  }
 }
 
-class HoatDongController extends GetxController {
-  var selectedDate = DateTime.now().obs;
-  var hoatDongList = <HoatDong>[].obs;
-  var videoGiamSatLive = ''.obs;
+// Event model to store event data
+class Event {
+  final String startTime;
+  final String endTime;
+  final String name;
+  final String location;
 
-  final activities = {
-    "activities_class_id_1": {
-      "semester": "semester_id_1",
-      "classID": "class_id_1",
-      "dates": {
-        "23/09/2024": {
-          "videoGiamSatLive": "urlVideoGiamSat",
-          "events": [
-            {
-              "activityName": "Đón trẻ - điểm danh ngày 23/09/2024",
-              "startTime": "6:45",
-              "endTime": "7:30",
-              "duration": "45 - 60 phút",
-              "typeOfActivity": "type_id_sinhhoat1",
-              "location": "A201",
-              "image": ["linkanh1", "linkanh2"],
-              "videoLive": "linkvideo/URL",
-            },
-            // Add more activities here
-          ],
-        },
-        // Add more dates here
-      },
-    },
-  };
-
-  void loadHoatDongForDate(String date) {
-    final dateData = (activities as Map<String, dynamic>)["activities_class_id_1"]?["dates"]?[date] as Map<String, dynamic>?;
-    if (dateData != null) {
-      videoGiamSatLive.value = dateData["videoGiamSatLive"];
-      hoatDongList.value = (dateData["events"] as List<dynamic>)
-          .map((event) => HoatDong(
-        activityName: event["activityName"],
-        startTime: event["startTime"],
-        endTime: event["endTime"],
-        duration: event["duration"],
-        typeOfActivity: event["typeOfActivity"],
-        location: event["location"],
-        image: List<String>.from(event["image"]),
-        videoLive: event["videoLive"],
-      ))
-          .toList();
-    } else {
-      videoGiamSatLive.value = '';
-      hoatDongList.clear();
-    }
-  }
+  Event({required this.startTime , required this.endTime, required this.name, required this.location});
 }

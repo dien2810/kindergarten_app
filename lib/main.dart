@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:kindergarten_app/src/features/student/screens/dan_thuoc/dan_thuoc_screen.dart';
 import 'package:kindergarten_app/src/features/student/screens/hoat_dong_su_kien/screen/hoat_dong_su_kien_screen.dart';
 import 'package:kindergarten_app/src/features/student/screens/ngoai_khoa/screen/ngoai_khoa_screen.dart';
+import 'package:kindergarten_app/src/features/student/screens/thuc_don/thuc_don_screen.dart';
 import 'package:kindergarten_app/src/repository/authentication_repository/authentication_repository.dart';
 import 'package:kindergarten_app/src/utils/theme.dart';
 import 'firebase_options.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
       //home: const SplashScreen(),
       //home: const DanThuocScreen(),
       //home : const ThongTinHocSinhScreen(),
-
+      //home: const ThucDonScreen(),
       //home: const NgoaiKhoaScreen(),
       home: const HoatDongSuKienScreen(),
       //home:  const DanhSachClbScreen(),

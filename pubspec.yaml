@@ -92,6 +92,8 @@ flutter:
     - assets/images/app_bar_images/
     - assets/images/dan_thuoc_images/
     - assets/images/ho_so_y_te_images/
+    - assets/images/ngoai_khoa_images/
+    - assets/images/thuc_don_images/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
