@@ -80,7 +80,8 @@ class HoatDongWidget extends StatelessWidget {
                         ElevatedButton(
                           onPressed: () {
                             //Navigate to video screen
-                            //Get.to(() => VideoGiamSatScreen());
+                            String videoLink = 'URL_CUA_VIDEO'; // Thay thế bằng giá trị thực tế
+                            Get.to(() => VideoGiamSatScreen());
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFFD74971),

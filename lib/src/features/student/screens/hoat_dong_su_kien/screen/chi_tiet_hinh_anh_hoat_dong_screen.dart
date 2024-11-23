@@ -19,7 +19,10 @@ class _HinhAnhScreenState extends State<HinhAnhScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Hình Ảnh Hoạt Động',
+
+      appBar: AppBar(
+        toolbarHeight: 100.0,
+        title: const Text('Hình Ảnh Hoạt Động',
         style: TextStyle(
           color: Color(0xFFD74971), // Set color to D74971
           fontSize: 26, // Increase font size

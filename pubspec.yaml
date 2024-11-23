@@ -54,6 +54,7 @@ dependencies:
   youtube_player_flutter: ^8.0.0
   flutter_screenutil: ^5.9.3
   permission_handler: ^10.0.0
+  camera: ^0.10.0+1
 
 dev_dependencies:
   flutter_test:

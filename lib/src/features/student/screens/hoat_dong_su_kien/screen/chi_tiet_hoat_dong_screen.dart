@@ -14,6 +14,7 @@ class ChiTietHoatDongScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 100.0, // điều chỉnh độ cao header
         title: const Text(
           'Chi Tiết Hoạt Động',
           style: TextStyle(
@@ -150,26 +151,30 @@ class ChiTietHoatDongScreen extends StatelessWidget {
             // Nút quay lại danh sách
             Align(
               alignment: Alignment.bottomCenter,
-              child: SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF0B2384),
-                    padding: EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30), // Corner radius of 30
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 30.0), // Khoảng cách 30px tới cuối màn hình
+                child: SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF0B2384),
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30), // Góc bo tròn 30px
+                      ),
                     ),
-                  ),
-                  onPressed: () {
-                    Get.back();
-                  },
-                  child: Text(
-                    'Quay lại danh sách',
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+                    onPressed: () {
+                      Get.back();
+                    },
+                    child: const Text(
+                      'Quay lại danh sách',
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    ),
                   ),
                 ),
               ),
             ),
+
           ],
         ),
       ),

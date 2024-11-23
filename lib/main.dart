@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
       //home: const ThucDonScreen(),
       //home: const NgoaiKhoaScreen(),
       home: const HoatDongSuKienScreen(),
+
       //home:  const DanhSachClbScreen(),
       //home: ThongTinSucKhoeScreen(),
       //home: const ThongTinSucKhoeScreen(),

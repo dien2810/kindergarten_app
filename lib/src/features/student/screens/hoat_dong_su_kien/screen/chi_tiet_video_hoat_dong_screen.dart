@@ -76,9 +76,11 @@ class _VideoScreenState extends State<VideoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          toolbarHeight: 100.0, // điều chỉnh độ cao header
+          flexibleSpace: Container(color: Colors.transparent),
           leading: Padding(
             padding: const EdgeInsets.only(
-                top: 30.0), // Điều chỉnh vị trí nút quay lại
+                top: 50.0), // Điều chỉnh vị trí nút quay lại
             child: IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: () {
@@ -87,12 +89,12 @@ class _VideoScreenState extends State<VideoScreen> {
             ),
           ),
           title: const Padding(
-            padding: EdgeInsets.only(top: 35.0), // Hạ tiêu đề xuống 20px
+            padding: EdgeInsets.only(top: 50.0), // Hạ tiêu đề xuống 20px
             child: Text(
               'Video Hoạt Động',
               style: TextStyle(
                 color: Color(0xFFD74971), // Set color to D74971
-                fontSize: 20, // Increase font size
+                fontSize: 25, // Increase font size
                 fontWeight: FontWeight.bold, // Make the text bold
               ),
             ),
