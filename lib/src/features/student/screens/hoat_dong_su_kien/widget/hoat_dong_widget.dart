@@ -172,11 +172,10 @@ class HoatDongWidget extends StatelessWidget {
                                               ElevatedButton(
                                                 onPressed: () {
                                                   // Navigate to event details page
-                                                  Get.to(() =>
-                                                      ChiTietHoatDongScreen());
+                                                  Get.to(() => ChiTietHoatDongScreen(event: event));
                                                 },
                                                 style: ElevatedButton.styleFrom(
-                                                  backgroundColor: Color(
+                                                  backgroundColor: const Color(
                                                       0xFFD74971), // Background color
                                                   side: const BorderSide(
                                                       color: Color(
