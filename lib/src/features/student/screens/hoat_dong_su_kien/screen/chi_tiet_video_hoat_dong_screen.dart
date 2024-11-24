@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:kindergarten_app/src/constants/sizes.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:video_player/video_player.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -76,7 +77,7 @@ class _VideoScreenState extends State<VideoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          toolbarHeight: 100.0, // điều chỉnh độ cao header
+          toolbarHeight: t80Size, // điều chỉnh độ cao header
           flexibleSpace: Container(color: Colors.transparent),
           leading: Padding(
             padding: const EdgeInsets.only(

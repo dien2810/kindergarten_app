@@ -19,7 +19,7 @@ class HoatDongWidget extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(25.0),
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: t10Size),
+              padding: EdgeInsets.symmetric(horizontal: t10Size),
               child: Container(
                 decoration: const BoxDecoration(
                     color: Colors.white,
@@ -28,12 +28,12 @@ class HoatDongWidget extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: t15Size),
+          SizedBox(height: t15Size),
           Expanded(
             child: SingleChildScrollView(
               child: Container(
                 height: 600,
-                padding: const EdgeInsets.all(t15Size),
+                padding: EdgeInsets.all(t15Size),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: const BorderRadius.all(Radius.circular(25.0)),
@@ -61,7 +61,7 @@ class HoatDongWidget extends StatelessWidget {
                             enableWeeknumberText: false,
                           ),
                         )),
-                    const SizedBox(height: t10Size),
+                    SizedBox(height: t10Size),
 // Video button
                     const Row(children: [
                       Expanded(
@@ -105,7 +105,7 @@ class HoatDongWidget extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: t20Size),
+                    SizedBox(height: t20Size),
                     const Text(
                       'Lịch sử hoạt động',
                       style: TextStyle(
@@ -155,7 +155,7 @@ class HoatDongWidget extends StatelessWidget {
                                         ),
                                         elevation: 4,
                                         child: Container(
-                                          width: 360, // Increased card width
+                                          width: t100Size*1.9, // Increased card width
                                           padding: const EdgeInsets.all(15.0),
                                           child: Column(
                                             crossAxisAlignment:

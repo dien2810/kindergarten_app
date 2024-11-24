@@ -54,10 +54,10 @@ class HoatDongSuKienScreen extends StatelessWidget {
               ),
               SizedBox(height: t15Size),
               SizedBox(
-                height: t100Size*5.3,
+                height: t100Size*3.2,
                 child: TabBarView(
                   children: [
-                    HoatDongWidget(),
+                    const HoatDongWidget(),
                     SuKienWidget()
                   ],
                 ),

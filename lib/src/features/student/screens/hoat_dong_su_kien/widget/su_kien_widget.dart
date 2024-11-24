@@ -136,17 +136,38 @@ class SuKienWidget extends StatelessWidget {
         backgroundColor: const Color(0xFFD74971),
       ),
       body: Padding(
-        padding: EdgeInsets.all(t10Size+t3Size*2),
+        padding: EdgeInsets.all(t10Size),
         child: Container(
           decoration: BoxDecoration(
             color: const Color(0xFFF6E8E8),
-            borderRadius: BorderRadius.circular(10.0),
+            borderRadius: BorderRadius.circular(t5Size),
           ),
           child: SingleChildScrollView(
             child: DataTable(
-              columns: const [
-                DataColumn(label: Text('THỜI GIAN', style: TextStyle(fontWeight: FontWeight.bold))),
-                DataColumn(label: Text('SỰ KIỆN', style: TextStyle(fontWeight: FontWeight.bold))),
+              columns: [
+                DataColumn(
+                  label: SizedBox(
+                    width: t60Size,
+                    child: const Text(
+                      'THỜI GIAN',
+                    maxLines:null,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16
+                    )
+                    ),
+                  )
+                ),
+                const DataColumn(
+                  label: Text(
+                    'SỰ KIỆN',
+                    maxLines: null,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16
+                    )
+                  )
+                ),
               ],
               rows: events.map((event) {
                 return DataRow(
@@ -189,8 +210,8 @@ class SuKienWidget extends StatelessWidget {
               }).toList(),
               headingRowColor: WidgetStateColor.resolveWith((states) => const Color(0xFFD74971)),
               dataRowColor: WidgetStateColor.resolveWith((states) => const Color(0xFFF6E8E8)),
-              dataRowHeight: 60,
-              headingRowHeight: 70,
+              dataRowHeight: t30Size+t5Size,
+              headingRowHeight: t30Size,
             ),
           ),
         ),
