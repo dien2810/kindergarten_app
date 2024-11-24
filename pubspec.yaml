@@ -98,6 +98,10 @@ dependency_overrides:
   protobuf: 3.1.0
   uuid: ^4.0.0
   web: 0.5.1
+  youtube_player_flutter: ^8.0.0
+  flutter_screenutil: ^5.9.3
+  permission_handler: ^10.0.0
+  camera: ^0.10.0+1
 
 dev_dependencies:
   flutter_launcher_icons: 0.13.1
@@ -157,7 +161,6 @@ flutter:
     - assets/images/ngoai_khoa_images/
     - assets/images/hoc_sinh_screen_images/
     - assets/images/thoi_hoc_hoan_phi_images/
-
     - assets/images/homepage_images/
 
   # To add assets to your application, add an assets section, like this:
