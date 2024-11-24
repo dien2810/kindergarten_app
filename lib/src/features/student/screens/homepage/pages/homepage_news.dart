@@ -1,11 +1,12 @@
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:kindergarten_app/flutter_flow/flutter_flow_util.dart';
 import 'package:kindergarten_app/src/constants/sizes.dart';
 
 import '../../../../../../flutter_flow/flutter_flow_icon_button.dart';
 import '../../../../../../flutter_flow/flutter_flow_theme.dart';
-import '../components/NavigationBarBottom/navigation_bar_bottom_widget.dart';
+import '../../student_information/screen/student_information_screen.dart';
 import '../components/TabBar/tab_bar_widget.dart';
 import 'homepage_news_model.dart';
 
@@ -107,7 +108,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         size: 40,
                       ),
                       onPressed: () {
-                        print('IconButton pressed ...');
+                        Get.to(const ThongTinHocSinhScreen());
                       },
                     ),
                   ),

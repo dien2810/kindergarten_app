@@ -24,8 +24,8 @@ class DanThuocListTileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: RoundedAssetImageWidget(
-        width: t60Size,
-        height: t60Size,
+        width: t30Size,
+        height: t30Size,
         image: image,
       ),
       title: Text(title,
@@ -44,7 +44,7 @@ class DanThuocListTileWidget extends StatelessWidget {
             Icons.calendar_today,
             color: Color(0xFF176D88),
           ),
-          SizedBox(width: t10Size),
+          SizedBox(width: t5Size),
           Expanded(
             child: Text(
               subtitle,

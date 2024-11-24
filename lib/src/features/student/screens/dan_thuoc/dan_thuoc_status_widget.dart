@@ -13,8 +13,8 @@ class DanThuocStatusWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: t120Size,
-      height: t40Size,
+      width: t10Size*7.5,
+      height: t30Size,
       padding: EdgeInsets.symmetric(horizontal: t5Size),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25),

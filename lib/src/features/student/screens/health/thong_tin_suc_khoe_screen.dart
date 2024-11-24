@@ -66,7 +66,7 @@ class ThongTinSucKhoeScreen extends StatelessWidget {
               ),
               SizedBox(height: t15Size),
               SizedBox(
-                height: 5.75*t100Size,
+                height: 3.7*t100Size,
                 child: TabBarView(
                   children: [
                     ThongTinSucKhoeChungWidget(controller: controller),
@@ -101,7 +101,7 @@ class ThongTinSucKhoeScreen extends StatelessWidget {
                                         tCoBan,
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 18
+                                            fontSize: 16
                                         ),
                                       ),
                                     )
@@ -112,7 +112,7 @@ class ThongTinSucKhoeScreen extends StatelessWidget {
                                           tKham,
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
-                                              fontSize: 18
+                                              fontSize: 16
                                           ),
                                         ),
                                       )
@@ -123,7 +123,7 @@ class ThongTinSucKhoeScreen extends StatelessWidget {
                                           tLoiKhuyen,
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
-                                              fontSize: 18
+                                              fontSize: 16
                                           ),
                                         ),
                                       )
@@ -134,7 +134,7 @@ class ThongTinSucKhoeScreen extends StatelessWidget {
                                         tTiemChung,
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 18
+                                            fontSize: 16
                                         ),
                                       ),
                                     )

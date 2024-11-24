@@ -36,7 +36,7 @@ class HocSinhScreen extends StatelessWidget {
                   fontWeight: FontWeight.bold
               ),
             ),
-            SizedBox(height: t20Size,),
+            SizedBox(height: t10Size,),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -139,7 +139,7 @@ class HocSinhScreen extends StatelessWidget {
                   fontWeight: FontWeight.bold
               ),
             ),
-            SizedBox(height: t20Size,),
+            SizedBox(height: t10Size,),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

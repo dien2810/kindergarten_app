@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:kindergarten_app/src/constants/sizes.dart';
 import 'package:kindergarten_app/src/features/student/screens/notifications/pages/notification_info.dart';
 
+import '../../student_information/screen/student_information_screen.dart';
 import '../components/NavigationBarBottom/navigation_bar_bottom_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -149,7 +150,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                           size: 40,
                         ),
                         onPressed: () {
-                          print('IconButton pressed ...');
+                          Get.to(const ThongTinHocSinhScreen());
                         },
                       ),
                     ),

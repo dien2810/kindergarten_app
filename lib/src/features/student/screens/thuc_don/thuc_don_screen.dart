@@ -58,7 +58,7 @@ class ThucDonScreen extends StatelessWidget {
                 children: [
                   SingleChildScrollView(
                     child: Container(
-                      height: 600,
+                      height: t60Size*10,
                       padding: EdgeInsets.all(t15Size),
                       decoration: BoxDecoration(
                         color: Colors.white,

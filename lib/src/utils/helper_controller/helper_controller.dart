@@ -4,6 +4,27 @@ import 'package:kindergarten_app/src/constants/sizes.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
 class Helper extends GetxController{
+  static String formatDateTime(DateTime dateTime) {
+    const daysOfWeek = [
+      "Chủ nhật",
+      "Thứ 2",
+      "Thứ 3",
+      "Thứ 4",
+      "Thứ 5",
+      "Thứ 6",
+      "Thứ 7"
+    ];
+
+    // Lấy ngày trong tuần
+    String dayOfWeek = daysOfWeek[dateTime.weekday % 7];
+
+    // Định dạng ngày/tháng/năm
+    String formattedDate = "${dateTime.day.toString().padLeft(2, '0')}/"
+        "${dateTime.month.toString().padLeft(2, '0')}/"
+        "${dateTime.year}";
+
+    return "$dayOfWeek - $formattedDate";
+  }
   static successSnackBar({required title, message}){
     Get.snackbar(
       title,

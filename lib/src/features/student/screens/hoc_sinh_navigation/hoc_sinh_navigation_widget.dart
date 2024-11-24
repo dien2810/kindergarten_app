@@ -17,8 +17,8 @@ class HocSinhNavigationWidget extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              width: t50Size,
-              height: t50Size,
+              width: t30Size,
+              height: t30Size,
               decoration: BoxDecoration(
                   color: const Color(0xFFD9D9D9),
                   borderRadius: BorderRadius.circular(15)

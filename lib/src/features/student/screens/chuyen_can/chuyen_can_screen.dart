@@ -60,7 +60,7 @@ class ChuyenCanScreen extends StatelessWidget {
                 children: [
                   SingleChildScrollView(
                     child: Container(
-                      height: 600,
+                      height: 3.5*t100Size,
                       padding: EdgeInsets.all(t15Size),
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -96,7 +96,7 @@ class ChuyenCanScreen extends StatelessWidget {
                                 color: Color(0xFF03045E)
                             ),
                           ),
-                          SizedBox(height: t15Size),
+                          SizedBox(height: t5Size),
                           const ChuyenCanFieldWidget(
                             fillColor: Colors.white,
                             field: tKhungGioVang,
@@ -104,7 +104,7 @@ class ChuyenCanScreen extends StatelessWidget {
                             value: tKhungGioHoatDongTuDo,
                             valueColor: Color(0xFFF91313),
                           ),
-                          SizedBox(height: t10Size),
+                          SizedBox(height: t5Size),
                           const ChuyenCanFieldWidget(
                             fillColor: Color(0xFFE9EFF7),
                             field: tTinhTrang,
@@ -112,7 +112,7 @@ class ChuyenCanScreen extends StatelessWidget {
                             value: tVangCoPhep,
                             valueColor: Color(0xFF284CB2),
                           ),
-                          SizedBox(height: t10Size),
+                          SizedBox(height: t5Size),
                           ChuyenCanFieldWidget(
                             fillColor: Colors.white,
                             field: tAnhCheckin,
@@ -124,7 +124,7 @@ class ChuyenCanScreen extends StatelessWidget {
                               Get.to(const XemChiTietAnhCheckinScreen());
                             },
                           ),
-                          SizedBox(height: t10Size),
+                          SizedBox(height: t5Size),
                           ChuyenCanFieldWidget(
                             fillColor: const Color(0xFFE9EFF7),
                             field: tAnhCheckout,
@@ -136,7 +136,7 @@ class ChuyenCanScreen extends StatelessWidget {
                               Get.to(const XemChiTietAnhCheckoutScreen());
                             },
                           ),
-                          SizedBox(height: t10Size),
+                          SizedBox(height: t5Size),
                           const ChuyenCanFieldWidget(
                             fillColor: Colors.white,
                             field: tThoiGianVaoLop,
@@ -144,7 +144,7 @@ class ChuyenCanScreen extends StatelessWidget {
                             value: t7h,
                             valueColor: Colors.black,
                           ),
-                          SizedBox(height: t10Size),
+                          SizedBox(height: t5Size),
                           const ChuyenCanFieldWidget(
                             fillColor: Color(0xFFE9EFF7),
                             field: tThoiGianRaKhoiLop,
@@ -152,7 +152,7 @@ class ChuyenCanScreen extends StatelessWidget {
                             value: t7h30,
                             valueColor: Colors.black,
                           ),
-                          SizedBox(height: t10Size),
+                          SizedBox(height: t5Size),
                           const ChuyenCanFieldWidget(
                             fillColor: Colors.white,
                             field: tLyDo,

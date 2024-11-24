@@ -41,7 +41,7 @@ class ThucDonCardWidget extends StatelessWidget {
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
-                              fontSize: 16
+                              fontSize: 14
                           ),
                         ),
                         const Text(
@@ -80,7 +80,7 @@ class ThucDonCardWidget extends StatelessWidget {
               Expanded(
                   flex: 1,
                   child: SizedBox(
-                    height: t10Size*14,
+                    height: t90Size,
                     child: const ClipRRect(
                       child: Image(
                         fit: BoxFit.cover,

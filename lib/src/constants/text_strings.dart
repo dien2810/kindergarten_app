@@ -129,7 +129,7 @@ const String tDungGio = 'Đúng giờ';
 const String tDenMuon = 'Đến muộn';
 //XinNghiScreen
 const String tDanhSachDonXinNghi = 'Danh sách đơn xin nghỉ';
-const String tDon1 = 'Đơn 1';
+const String tDon = 'Đơn ';
 const String tNgay = 'Ngày: ';
 const String tNgay30 = '30/08/2024: ';
 const String tTrangThai = 'Trạng thái: ';

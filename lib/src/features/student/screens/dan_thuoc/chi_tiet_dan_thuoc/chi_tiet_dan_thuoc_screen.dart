@@ -82,7 +82,7 @@ class ChiTietDanThuocScreen extends StatelessWidget {
                                 color: Color(0xFF03045E)
                             ),
                           ),
-                          SizedBox(height: t15Size),
+                          SizedBox(height: t10Size),
                           DanThuocListTileWidget(
                             image: image,
                             title: medicine.prescription,

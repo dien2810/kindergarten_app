@@ -52,7 +52,7 @@ class ThemGhiChuMoiScreen extends StatelessWidget {
                 children: [
                   SingleChildScrollView(
                     child: Container(
-                      height: t100Size*6,
+                      height: t100Size*4.5,
                       padding: EdgeInsets.all(t15Size),
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -62,7 +62,7 @@ class ThemGhiChuMoiScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(height: t10Size,),
+                          SizedBox(height: t5Size,),
                           const Text(
                             tThemGhiChuMoi,
                             style: TextStyle(
@@ -105,7 +105,7 @@ class ThemGhiChuMoiScreen extends StatelessWidget {
                                   Expanded(
                                     flex: 1,
                                     child: SizedBox(
-                                      height: t10Size*12,
+                                      height: t10Size*7.5,
                                       child: const ClipRRect(
                                         child: Image(
                                           fit: BoxFit.cover,
@@ -120,7 +120,7 @@ class ThemGhiChuMoiScreen extends StatelessWidget {
                           SizedBox(height: t10Size,),
                           SizedBox(
                             width: double.infinity,
-                            height: t100Size*2,
+                            height: t100Size*1.5,
                             child: Card(
                               color: const Color(0xFF2A2424),
                               elevation: 1,
@@ -149,7 +149,7 @@ class ThemGhiChuMoiScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          const Spacer(flex: 5),
+                          const Spacer(flex: 3),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
@@ -177,7 +177,7 @@ class ThemGhiChuMoiScreen extends StatelessWidget {
                               ),
                               SizedBox(width: t5Size),
                               SizedBox(
-                                width: t120Size,
+                                width: t100Size,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                       backgroundColor: const Color(0xFF6BC5FF),

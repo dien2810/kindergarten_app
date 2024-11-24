@@ -27,7 +27,7 @@ class DanThuocScreen extends StatelessWidget {
           child: Icon(
             Icons.add_rounded,
             color: Colors.white,
-            size: t50Size,
+            size: t30Size,
           ),
           onPressed: (){
             ThemMoiDanThuocBottomSheet.buildShowModalBottomSheet(context);
@@ -69,7 +69,7 @@ class DanThuocScreen extends StatelessWidget {
                 children: [
                   SingleChildScrollView(
                     child: Container(
-                      height: t100Size*6,
+                      height: t100Size*5,
                       padding: EdgeInsets.all(t15Size),
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -87,7 +87,7 @@ class DanThuocScreen extends StatelessWidget {
                               color: Color(0xFF03045E)
                             ),
                           ),
-                          SizedBox(height: t15Size),
+                          SizedBox(height: t10Size),
                           const Expanded(
                             child: DanThuocListViewWidget(),
                           )

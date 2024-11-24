@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kindergarten_app/src/constants/sizes.dart';
 import 'package:kindergarten_app/src/constants/text_strings.dart';
 import '../../../controllers/student_document_controller.dart';
 
@@ -11,7 +12,7 @@ class StudentDocumentWidget extends StatelessWidget {
     final StudentDocumentController controller = Get.put(StudentDocumentController());
 
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(t15Size),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

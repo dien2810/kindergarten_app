@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/constants/text_strings.dart';
 import 'package:kindergarten_app/src/features/student/controllers/xin_nghi/tao_don_xin_nghi_controller.dart';
+import 'package:kindergarten_app/src/features/student/models/daily_routine/daily_routine_model.dart';
+import 'package:kindergarten_app/src/utils/helper_controller/helper_controller.dart';
 import 'package:weekly_date_picker/weekly_date_picker.dart';
 
 import '../../../../../common_widgets/app_bar_widgets/guardian_app_bar_with_title.dart';
@@ -53,7 +55,7 @@ class TaoDonXinNghiScreen extends StatelessWidget {
                 children: [
                   SingleChildScrollView(
                     child: Container(
-                      height: t150Size*100,
+                      height: t150Size*7,
                       padding: EdgeInsets.all(t15Size),
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -71,6 +73,7 @@ class TaoDonXinNghiScreen extends StatelessWidget {
                               selectedDay: taoDonXinNghiController.selectedDay.value, // DateTime
                               changeDay: (value) {
                                 taoDonXinNghiController.selectedDay.value = value;
+                                taoDonXinNghiController.changeDay();
                               },
                               backgroundColor: const Color(0xFFCAF0F8),
                               selectedDigitBackgroundColor: const Color(0xFFBA83DE),
@@ -81,13 +84,19 @@ class TaoDonXinNghiScreen extends StatelessWidget {
                             ),
                           )),
                           SizedBox(height: t10Size,),
-                          const Text(
-                            tThu5,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w800,
-                                fontSize: 24,
-                                color: Color(0xFF03045E)
-                            ),
+                          Obx((){
+                            taoDonXinNghiController.thuNgay = Helper.formatDateTime(
+                                taoDonXinNghiController.selectedDay.value
+                            );
+                            return Text(
+                              taoDonXinNghiController.thuNgay,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.w800,
+                                  fontSize: 24,
+                                  color: Color(0xFF03045E)
+                              ),
+                            );
+                          }
                           ),
                           Obx(()=> Column(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -114,46 +123,60 @@ class TaoDonXinNghiScreen extends StatelessWidget {
                             ],
                           ),
                           ),
-                          Obx((){
+                          Obx(() {
                             print('Render---------');
-                            if (taoDonXinNghiController.xinNghiStatus.value == XinNghi.theoTiet){
-                              return Padding(
-                                padding: EdgeInsets.symmetric(horizontal: t10Size),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    CheckboxListTile(
-                                      title: const Text(tNghiCaNgay),
-                                      value: taoDonXinNghiController.donTre.value,
-                                      tileColor: Colors.deepPurple.shade50,
-                                      controlAffinity: ListTileControlAffinity.leading,
-                                      onChanged: (val){
-                                        taoDonXinNghiController.donTre.value = val!;
-                                      },
-                                    ),
-                                    CheckboxListTile(
-                                      title: const Text(tNghiTheoTietTrongNgay),
-                                      value: taoDonXinNghiController.tapTheDucBuoiSang.value,
-                                      tileColor: Colors.deepPurple.shade50,
-                                      controlAffinity: ListTileControlAffinity.leading,
-                                      onChanged: (val){
-                                        taoDonXinNghiController.tapTheDucBuoiSang.value = val!;
-                                      },
-                                    ),
-
-                                    SizedBox(height: t5Size,)
-                                  ],
-                                ),
+                            if (taoDonXinNghiController.xinNghiStatus.value == XinNghi.theoTiet) {
+                              return FutureBuilder<DailyRoutineModel?>(
+                                future: taoDonXinNghiController.getListTietTrongNgay(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState == ConnectionState.waiting) {
+                                    return const Center(child: CircularProgressIndicator());
+                                  } else if (snapshot.hasError) {
+                                    return const Center(child: Text("Có lỗi xảy ra!"));
+                                  } else if (snapshot.hasData && snapshot.data != null) {
+                                    // Dữ liệu đã sẵn sàng
+                                    final dailyRoutine = snapshot.data;
+                                    return Padding(
+                                      padding: EdgeInsets.symmetric(horizontal: t10Size),
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children:dailyRoutine!.routine.entries.map((entry){
+                                          final routineId = entry.key; // ID của routine
+                                          final routine = entry.value; // Dữ liệu routine
+                                          return Obx((){
+                                            final isChecked = taoDonXinNghiController.selectedRoutines.contains(routineId);
+                                            return CheckboxListTile(
+                                              tileColor: Colors.deepPurple.shade50,
+                                              title: Text(routine.eventName),
+                                              subtitle: Text('${routine.startTime} - ${routine.endTime}'),
+                                              value: isChecked,
+                                              onChanged: (bool? value) {
+                                                if (value == true) {
+                                                  taoDonXinNghiController.selectedRoutines.add(routineId);
+                                                } else {
+                                                  taoDonXinNghiController.selectedRoutines.remove(routineId);
+                                                }
+                                              },
+                                              controlAffinity: ListTileControlAffinity.leading,
+                                            );
+                                          });
+                                        }).toList(),
+                                      ),
+                                    );
+                                  } else {
+                                    return const Center(child: Text("Không có dữ liệu"));
+                                  }
+                                },
                               );
                             }
                             return SizedBox(height: t5Size,);
                           }
                           ),
-                          SizedBox(height: t15Size,),
+                          SizedBox(height: t5Size,),
                           SizedBox(
                             width: double.infinity,
-                            height: t100Size*2,
+                            height: t70Size*2,
                             child: Card(
                               color: const Color(0xFFCAF0F8),
                               elevation: 1,
@@ -171,12 +194,13 @@ class TaoDonXinNghiScreen extends StatelessWidget {
                                         color: Colors.black,
                                         fontSize: 16,
                                       ),
+                                      fillColor: Colors.black,
                                       border: OutlineInputBorder(
                                           borderSide: BorderSide.none
                                       )
                                   ),
                                   style: const TextStyle(
-                                    color: Colors.white,
+                                    color: Colors.black,
                                   ),
                                 ),
                               ),
@@ -188,16 +212,16 @@ class TaoDonXinNghiScreen extends StatelessWidget {
                             children: [
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color(0xFF2058E9),
+                                    backgroundColor: const Color(0xFF03045E),
                                     shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(30)
+                                        borderRadius: BorderRadius.circular(20)
                                     )
                                 ),
                                 onPressed: () {
-
+                                  taoDonXinNghiController.addDayOff();
                                 },
                                 child: Container(
-                                  padding: EdgeInsets.all(t15Size),
+                                  padding: EdgeInsets.all(t10Size),
                                   child: const Text(
                                     tXinNghi,
                                     style: TextStyle(
@@ -210,16 +234,16 @@ class TaoDonXinNghiScreen extends StatelessWidget {
                               ),
                               SizedBox(width: t5Size),
                               SizedBox(
-                                width: t120Size,
+                                width: t90Size,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                       backgroundColor: const Color(0xFF6BC5FF),
                                       shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(30)
+                                          borderRadius: BorderRadius.circular(20)
                                       )
                                   ),
                                   child: Container(
-                                    padding: EdgeInsets.all(t15Size),
+                                    padding: EdgeInsets.all(t10Size),
                                     child: const Text(
                                       tHuy,
                                       style: TextStyle(

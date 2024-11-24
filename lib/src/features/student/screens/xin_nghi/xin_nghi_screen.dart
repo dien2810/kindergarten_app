@@ -7,13 +7,14 @@ import 'package:kindergarten_app/src/features/student/screens/xin_nghi/tao_don_x
 import '../../../../common_widgets/app_bar_widgets/guardian_app_bar_with_title.dart';
 import '../../../../constants/colors.dart';
 import '../../../../constants/sizes.dart';
+import '../../models/dayoff_model/dayoff_model.dart';
 
 class XinNghiScreen extends StatelessWidget {
   const XinNghiScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final xinNghi = Get.put(XinNghiController());
+    final xinNghiController = Get.put(XinNghiController());
     return DefaultTabController(
       length: 1,
       child: Scaffold(
@@ -54,7 +55,7 @@ class XinNghiScreen extends StatelessWidget {
                 children: [
                   SingleChildScrollView(
                     child: Container(
-                      height: t100Size*6,
+                      height: t100Size*4,
                       padding: EdgeInsets.all(t15Size),
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -65,72 +66,96 @@ class XinNghiScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(
-                            child: ListView.builder(
-                              itemCount: 3,
-                              itemBuilder: (context,index){
-                                return Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      padding: EdgeInsets.all(t10Size),
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20),
-                                          color: const Color(0xFFE9EFF7)
-                                      ),
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          const Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            child: FutureBuilder<DayoffModel?>(
+                              future: xinNghiController.getXinNghiData(),
+                              builder: (context,snapshot){
+                                // Trạng thái đang tải
+                                if (snapshot.connectionState == ConnectionState.waiting) {
+                                  return const Center(child: CircularProgressIndicator());
+                                }
+
+                                // Trạng thái lỗi
+                                if (snapshot.hasError) {
+                                  return Center(child: Text('Error: ${snapshot.error}'));
+                                }
+
+                                // Kiểm tra dữ liệu null
+                                if (!snapshot.hasData || snapshot.data == null) {
+                                  return const Center(child: Text('No Data Available'));
+                                }
+                                //Có dữ liệu
+                                final dayOff = snapshot.data!;
+                                final dateEntries = dayOff.dates.entries.toList(); // Lấy tất cả các field
+                                return ListView.builder(
+                                  itemCount: dateEntries.length,
+                                  itemBuilder: (context, index){
+                                    final date = dateEntries[index].key;
+                                    final details = dateEntries[index].value;
+                                    return Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          padding: EdgeInsets.all(t10Size),
+                                          decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(20),
+                                              color: const Color(0xFFE9EFF7)
+                                          ),
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    tDon+(index+1).toString(),
+                                                    style: const TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 18,
+                                                        fontWeight: FontWeight.bold
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    tNgay+date,
+                                                    style: const TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 18,
+                                                        fontWeight: FontWeight.bold
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                              SizedBox(height: t5Size,),
                                               Text(
-                                                tDon1,
-                                                style: TextStyle(
+                                                tTrangThai+details.status,
+                                                style: const TextStyle(
                                                   color: Colors.black,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold
+                                                  fontSize: 16,
                                                 ),
                                               ),
+                                              SizedBox(height: t5Size,),
                                               Text(
-                                                '$tNgay $tNgay30',
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 18,
-                                                    fontWeight: FontWeight.bold
+                                                tNgayNghi+date,
+                                                style: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 16,
+                                                ),
+                                              ),
+                                              SizedBox(height: t5Size,),
+                                              Text(
+                                                tNoiDung+details.content,
+                                                maxLines: null,
+                                                style: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 16,
                                                 ),
                                               )
                                             ],
                                           ),
-                                          SizedBox(height: t5Size,),
-                                          const Text(
-                                            tTrangThai+tDaDuyet,
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 16,
-                                            ),
-                                          ),
-                                          SizedBox(height: t5Size,),
-                                          const Text(
-                                            tNgayNghi+tNgay30,
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 16,
-                                            ),
-                                          ),
-                                          SizedBox(height: t5Size,),
-                                          const Text(
-                                            tNoiDung+tXinNghiViBiBenh,
-                                            maxLines: null,
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 16,
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(height: t10Size)
-                                  ],
+                                        ),
+                                        SizedBox(height: t10Size)
+                                      ],
+                                    );
+                                  }
                                 );
                               },
                             ),
@@ -166,6 +191,7 @@ class XinNghiScreen extends StatelessWidget {
                               ),
                             ),
                           ),
+                          SizedBox(height: t30Size,)
 
                         ],
                       ),

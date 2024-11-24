@@ -4,7 +4,6 @@ import 'package:kindergarten_app/src/features/student/screens/student_informatio
 import 'package:kindergarten_app/src/features/student/screens/student_information/widget/student_info_widget.dart';
 
 import '../../../../../common_widgets/app_bar_widgets/guardian_app_bar_with_title.dart';
-import '../../../../../constants/sizes.dart';
 import '../../../../../constants/text_strings.dart';
 import '../../../controllers/guardian_navigation_menu_controller.dart';
 import '../../guardian_navigation_menu/bottom_navigation_bar_widget.dart';
