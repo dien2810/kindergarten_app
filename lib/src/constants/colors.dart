@@ -12,3 +12,7 @@ const tDarkColor = Color(0xFF000000);
 const tDarkBlue = Color(0xFF002C74);
 const tLightBlue = Color(0xFF48CAE4);
 const tOnBoardingPage3Color = Color(0xffffdcbd);
+
+// teacher colors
+
+const tDarkPurple = Color(0xFF7209B7);

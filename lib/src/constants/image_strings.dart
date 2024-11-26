@@ -6,6 +6,8 @@ const String tSplashLogo = 'assets/images/splash_images/splash_image_2.png';
 const String tLoginBackground = 'assets/images/login_images/background.png';
 //Guardian App Bar
 const String tGuardianAppBarImage = 'assets/images/app_bar_images/guardian_app_bar_image.png';
+const String tTeacherAppBarImageHeader1 = 'assets/images/app_bar_images/teacher_app_bar_image_1.png';
+const String tTeacherAppBarImageHeader2 = 'assets/images/app_bar_images/teacher_app_bar_image_2.png';
 //DanThuoc Screen
 const String tDanThuocItemImage1 = 'assets/images/dan_thuoc_images/dan_thuoc_item_1.png';
 const String tDanThuocItemImage2 = 'assets/images/dan_thuoc_images/dan_thuoc_item_2.png';
@@ -20,4 +22,9 @@ const String tDanThuocDeleteIcon = 'assets/images/dan_thuoc_images/delete_icon.p
 const String tThucDonBuaSang = 'assets/images/thuc_don_images/thuc_don_bua_sang.png';
 
 
-// Ngoại khóa : ngoai_khoa_screen.dart
+// GIAO VIEN SCREEN
+// -- Hoc Duong Screen --
+const String tDanThuocScreenLinkIcon = 'assets/images/hoc_duong_images/dan_thuoc_screen_link_icon.png';
+const String tGiangDayScreenLinkIcon = 'assets/images/hoc_duong_images/giang_day_screen_link_icon.png';
+const String tNgoaiKhoaScreenLinkIcon = 'assets/images/hoc_duong_images/ngoai_khoa_screen_link_icon.png';
+const String tThucDonScreenLinkIcon = 'assets/images/hoc_duong_images/thuc_don_screen_link_icon.png';

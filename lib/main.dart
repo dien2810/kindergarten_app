@@ -5,6 +5,9 @@ import 'package:kindergarten_app/src/features/student/screens/dan_thuoc/dan_thuo
 import 'package:kindergarten_app/src/features/student/screens/hoat_dong_su_kien/screen/hoat_dong_su_kien_screen.dart';
 import 'package:kindergarten_app/src/features/student/screens/ngoai_khoa/screen/ngoai_khoa_screen.dart';
 import 'package:kindergarten_app/src/features/student/screens/thuc_don/thuc_don_screen.dart';
+import 'package:kindergarten_app/src/features/teacher/route/hoc_duong_route.dart';
+import 'package:kindergarten_app/src/features/teacher/screens/dan_thuoc/screen/teacher_dan_thuoc_screen.dart';
+import 'package:kindergarten_app/src/features/teacher/screens/hoc_duong/screen/hoc_duong_screen.dart';
 import 'package:kindergarten_app/src/repository/authentication_repository/authentication_repository.dart';
 import 'package:kindergarten_app/src/utils/theme.dart';
 import 'firebase_options.dart';
@@ -29,16 +32,9 @@ class MyApp extends StatelessWidget {
       theme: TAppTheme.lightTheme,
       darkTheme: TAppTheme.darkTheme,
       themeMode: ThemeMode.light,
-      //home: const SplashScreen(),
-      //home: const DanThuocScreen(),
-      //home : const ThongTinHocSinhScreen(),
-      //home: const ThucDonScreen(),
-      //home: const NgoaiKhoaScreen(),
-      home: const HoatDongSuKienScreen(),
-
-      //home:  const DanhSachClbScreen(),
-      //home: ThongTinSucKhoeScreen(),
-      //home: const ThongTinSucKhoeScreen(),
+      // đường dẫn của học đường bên giáo viên
+      initialRoute: '/HocDuong',
+      getPages: HocDuongRoutes.routes,
       defaultTransition: Transition.leftToRightWithFade,
       transitionDuration: const Duration(milliseconds: 500),
     );
