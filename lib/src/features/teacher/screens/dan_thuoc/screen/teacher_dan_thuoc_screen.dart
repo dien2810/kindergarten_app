@@ -5,7 +5,6 @@ import 'package:kindergarten_app/src/constants/text_strings.dart';
 import 'package:kindergarten_app/src/features/teacher/controllers/dan_thuoc/teacher_dan_thuoc_controller.dart';
 import 'package:weekly_date_picker/weekly_date_picker.dart';
 
-import '../../../../../common_widgets/app_bar_widgets/teacher_app_bar_with_title_header_1.dart';
 import '../../../../../common_widgets/app_bar_widgets/teacher_app_bar_with_title_header_2.dart';
 import '../../../../../constants/sizes.dart';
 import '../../../controllers/teacher_navigation_menu_controller.dart';
@@ -31,7 +30,7 @@ class TeacherDanThuocScreen extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(25.0),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: t10Size),
+                padding: EdgeInsets.symmetric(horizontal: t10Size),
                 child: Container(
                   decoration: const BoxDecoration(
                       color: Colors.white,
@@ -41,7 +40,7 @@ class TeacherDanThuocScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: t15Size),
+            SizedBox(height: t15Size),
             Expanded(
               child: TabBarView(
                 children: [
@@ -50,7 +49,7 @@ class TeacherDanThuocScreen extends StatelessWidget {
               offset: const Offset(0, 0),
               child: Container(
                       height: 900,
-                      padding: const EdgeInsets.all(t15Size),
+                      padding: EdgeInsets.all(t15Size),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: const BorderRadius.all(Radius.circular(35.0)),
@@ -79,7 +78,7 @@ class TeacherDanThuocScreen extends StatelessWidget {
                       ),
                     )),
                           SizedBox(height: t15Size),
-                          Expanded(
+                          const Expanded(
                             child: TeacherDanThuocListViewWidget(),
                           )
                         ],

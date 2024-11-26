@@ -4,8 +4,6 @@ import 'package:kindergarten_app/src/common_widgets/app_bar_widgets/teacher_app_
 import 'package:kindergarten_app/src/constants/text_strings.dart';
 import 'package:kindergarten_app/src/features/student/models/medicine/medicine_model.dart';
 
-import '../../../../../common_widgets/information_widget/information_widget.dart';
-import '../../../../../constants/colors.dart';
 import '../../../../../constants/sizes.dart';
 import '../widget/teacher_dan_thuoc_list_tile_widget.dart';
 
@@ -43,7 +41,7 @@ class TeacherChiTietDanThuocScreen extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(25.0),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: t10Size),
+                padding: EdgeInsets.symmetric(horizontal: t10Size),
                 child: Container(
                   decoration: const BoxDecoration(
                     color: Colors.white,
@@ -53,7 +51,7 @@ class TeacherChiTietDanThuocScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: t15Size),
+            SizedBox(height: t15Size),
             Expanded(
               child: TabBarView(
                 children: [
@@ -61,7 +59,7 @@ class TeacherChiTietDanThuocScreen extends StatelessWidget {
                     child: Container(
                       // Điều chỉnh width theo thiết bị
                       width: deviceWidth * 0.9, // Chiếm 90% chiều rộng thiết bị
-                      padding: const EdgeInsets.all(t15Size),
+                      padding: EdgeInsets.all(t15Size),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius:
@@ -80,7 +78,7 @@ class TeacherChiTietDanThuocScreen extends StatelessWidget {
                               color: Color(0xFFBA83DE),
                             ),
                           ),
-                          const SizedBox(height: t10Size),
+                          SizedBox(height: t10Size),
                           TeacherDanThuocListTileWidget(
                             image: image,
                             title: medicine.prescription,
@@ -91,37 +89,37 @@ class TeacherChiTietDanThuocScreen extends StatelessWidget {
                             sentGuardian: medicine.sentGuardian,
                             receivedPerson: medicine.receivedPerson,
                           ),
-                          const SizedBox(height: t10Size),
+                          SizedBox(height: t10Size),
                           _buildInformationBox(
                             title: tDonThuoc,
                             value: medicine.prescription,
                             deviceWidth: deviceWidth,
                           ),
-                          const SizedBox(height: t10Size),
+                          SizedBox(height: t10Size),
                           _buildInformationBox(
                             title: tGhiChuDanThuoc,
                             value: medicine.note,
                             deviceWidth: deviceWidth,
                           ),
-                          const SizedBox(height: t10Size),
+                          SizedBox(height: t10Size),
                           _buildInformationBox(
                             title: tNgayNhanThuoc,
                             value: medicine.createDate,
                             deviceWidth: deviceWidth,
                           ),
-                          const SizedBox(height: t10Size),
+                          SizedBox(height: t10Size),
                           _buildInformationBox(
                             title: tHoVaTenPhuHuynhDanThuoc,
                             value: medicine.sentGuardian,
                             deviceWidth: deviceWidth,
                           ),
-                          const SizedBox(height: t10Size),
+                          SizedBox(height: t10Size),
                           _buildInformationBox(
                             title: tNguoiNhanDonThuoc,
                             value: medicine.receivedPerson,
                             deviceWidth: deviceWidth,
                           ),
-                          const SizedBox(height: t15Size),
+                          SizedBox(height: t15Size),
                           DropdownButtonFormField<String>(
                             onChanged: (newValue) {},
                             items: ['Đã gửi', 'Đang thực hiện', 'Đã hoàn thành']
@@ -157,7 +155,7 @@ class TeacherChiTietDanThuocScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          const SizedBox(height: t10Size),
+                          SizedBox(height: t10Size),
                           Align(
                             alignment: Alignment.bottomCenter,
                             child: SizedBox(
@@ -258,7 +256,7 @@ class TeacherChiTietDanThuocScreen extends StatelessWidget {
     required double deviceWidth,
   }) {
     return Container(
-      padding: const EdgeInsets.all(t10Size),
+      padding: EdgeInsets.all(t10Size),
       width: deviceWidth * 0.98, // Chiếm 90% chiều rộng thiết bị
       decoration: BoxDecoration(
         color: const Color(0xFFF5EDF9),

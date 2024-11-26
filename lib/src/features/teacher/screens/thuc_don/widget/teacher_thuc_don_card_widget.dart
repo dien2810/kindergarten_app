@@ -37,7 +37,7 @@ class TeacherThucDonCardWidget extends StatelessWidget {
             Expanded(
               flex: 2,
               child: Container(
-                padding: const EdgeInsets.all(t10Size),
+                padding: EdgeInsets.all(t10Size),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -60,7 +60,7 @@ class TeacherThucDonCardWidget extends StatelessWidget {
                         fontSize: 14,
                       ),
                     ),
-                    const SizedBox(height: t5Size),
+                    SizedBox(height: t5Size),
                     ElevatedButton(
                       onPressed: () {
                         Get.to(const TeacherThemGhiChuMoiScreen());
@@ -69,7 +69,7 @@ class TeacherThucDonCardWidget extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFFCAF0F8),
                         foregroundColor: const Color(0xFF727070),
-                        padding: const EdgeInsets.symmetric(horizontal: t40Size),
+                        padding: EdgeInsets.symmetric(horizontal: t40Size),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(40),
 
@@ -87,11 +87,11 @@ class TeacherThucDonCardWidget extends StatelessWidget {
                 ),
               ),
             ),
-            const Expanded(
+            Expanded(
               flex: 1,
               child: SizedBox(
                 height: t10Size * 14,
-                child: ClipRRect(
+                child: const ClipRRect(
                   child: Image(
                     fit: BoxFit.cover,
                     image: AssetImage(tThucDonBuaSang),
