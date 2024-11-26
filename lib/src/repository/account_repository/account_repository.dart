@@ -7,6 +7,7 @@ class AccountRepository extends GetxController {
   static AccountRepository get instance => Get.find();
   final _db = FirebaseFirestore.instance;
   var userId = '';
+  var fullName = '';
 
   createAccount(AccountModel account) async {
     final isExist = await isAccountExist(account.username);

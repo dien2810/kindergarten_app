@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/flutter_flow/flutter_flow_util.dart';
 import 'package:kindergarten_app/src/constants/sizes.dart';
+import 'package:kindergarten_app/src/repository/account_repository/account_repository.dart';
 
 import '../../../../../../flutter_flow/flutter_flow_icon_button.dart';
 import '../../../../../../flutter_flow/flutter_flow_theme.dart';
@@ -39,6 +40,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final _accountRepo = Get.put(AccountRepository());
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -75,7 +77,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   Align(
                     alignment: const AlignmentDirectional(0.06, -0.24),
                     child: Text(
-                      'Nguyễn Văn Thành',
+                      _accountRepo.fullName,
                       style: FlutterFlowTheme.of(context).bodyLarge.override(
                         fontFamily: 'Inter',
                         color: const Color(0xFFCAF0F8),
@@ -86,14 +88,19 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   ),
                   Align(
                     alignment: const AlignmentDirectional(0.04, 0.12),
-                    child: Text(
-                      'Thông tin học sinh',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Inter',
-                        color: const Color(0xFFCAF0F8),
-                        letterSpacing: 0.0,
-                        fontWeight: FontWeight.w600,
-                        decoration: TextDecoration.underline,
+                    child: TextButton(
+                      onPressed: (){
+                        Get.to(const ThongTinHocSinhScreen());
+                      },
+                      child: Text(
+                        'Thông tin học sinh',
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily: 'Inter',
+                          color: const Color(0xFFCAF0F8),
+                          letterSpacing: 0.0,
+                          fontWeight: FontWeight.w600,
+                          decoration: TextDecoration.underline,
+                        ),
                       ),
                     ),
                   ),
