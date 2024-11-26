@@ -162,7 +162,7 @@ flutter:
     - assets/images/hoc_sinh_screen_images/
     - assets/images/thoi_hoc_hoan_phi_images/
     - assets/images/homepage_images/
-
+    - assets/images/hoc_duong_images/
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

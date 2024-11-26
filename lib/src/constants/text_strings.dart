@@ -161,7 +161,7 @@ const String tGhiChuDanThuoc = 'Ghi chú: ';
 const String tNgayNhanThuoc = 'Ngày nhận thuốc: ';
 const String tHoVaTenPhuHuynhDanThuoc = 'Họ và tên phụ huynh dặn thuốc: ';
 const String tNguoiNhanDonThuoc = 'Người nhận đơn thuốc (GVCN lớp): ';
-const String tCanUongNhieuNuoc = 'Cần uống nhiều nước';
+const String tCanUongNhieuNuoc = 'Cần uống nhiều nước ';
 const String tNgayUong = 'Ngày uống: ';
 const String tNgayBatDau = 'Ngày bắt đầu: ';
 const String tNgayKetThuc = 'Ngày kết thúc: ';
@@ -285,3 +285,8 @@ const String tChiTietCauLacBo = "Chi tiết câu lạc bộ";
 const String tHoatDongSuKien = "Hoạt động - Sự kiện ";
 const String tHoatDong = "Hoạt động";
 const String tSuKien = "Sự kiện ";
+
+
+// giao vien const string
+// giao dien teacher_chi_tiet_dan_thuoc_screen
+
