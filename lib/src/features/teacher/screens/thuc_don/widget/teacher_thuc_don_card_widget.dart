@@ -4,7 +4,6 @@ import '../../../../../constants/image_strings.dart';
 import '../../../../../constants/sizes.dart';
 import '../../../../../constants/text_strings.dart';
 import '../screen/teacher_chi_tiet_mon_an_screen.dart';
-import '../screen/teacher_them_ghi_chu_moi_screen.dart';
 
 class TeacherThucDonCardWidget extends StatelessWidget {
   const TeacherThucDonCardWidget({
@@ -63,7 +62,7 @@ class TeacherThucDonCardWidget extends StatelessWidget {
                     const SizedBox(height: t5Size),
                     ElevatedButton(
                       onPressed: () {
-                        Get.to(const TeacherThemGhiChuMoiScreen());
+                        Get.to(const TeacherChiTietMonAnScreen());
                       },
 
                       style: ElevatedButton.styleFrom(

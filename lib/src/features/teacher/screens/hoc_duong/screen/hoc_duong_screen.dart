@@ -73,7 +73,7 @@ class HocDuongScreen extends StatelessWidget {
                               Get.toNamed("/TeacherThucDon");  // Đổi link cho màn hình thực đơn
                             }),
                             _buildIconButton(tGiangDayScreenLinkIcon, "Giảng dạy", () {
-                              //Get.toNamed("/giangday");  // Đổi link cho màn hình giảng dạy
+                              Get.toNamed("/TeacherGiangDay");  // Đổi link cho màn hình giảng dạy
                             }),
                             _buildIconButton(tNgoaiKhoaScreenLinkIcon, "Ngoại khóa", () {
                               //Get.toNamed("/ngoaihoa");  // Đổi link cho màn hình ngoại khóa

@@ -157,11 +157,11 @@ const String tLieuTiepTheo = 'Liều tiếp theo:';
 const String tTienTrinhTiem = 'Tiến trình tiêm:';
 const String tQuayLaiDanhSach = 'Quay lại danh sách';
 
-// Thông tin học sinh screen : student_information_screen.dart
+// Thông tin học sinh screen : thong_tin_hoc_sinh_screen.dart
 const String tThongTinHocSinh = "Thông tin học sinh";
 const String tHoSoGiayTo = "Hồ sơ giấy tờ";
 
-// Thông tin học sinh widget : student_info_widget.dart
+// Thông tin học sinh widget : teacher_thong_tin_hoc_sinh_widget.dart
 const String tHoTen = "Họ tên : ";
 const String tMaHocSinh = "Mã học sinh : ";
 const String tNgaySinh = "Ngày sinh : ";
@@ -171,7 +171,7 @@ const String tHe = "Hệ : ";
 const String tKhoi = "Khối : ";
 const String tLop = "Lớp : ";
 
-// Hồ sơ giấy tờ widget: student_document_widget.dart
+// Hồ sơ giấy tờ widget: teacher_thong_tin_ca_nhan_hoc_sinh_screen.dart
 const String tHoTenCha = "Họ tên cha : ";
 const String tHoTenMe = "Họ tên mẹ : ";
 const String tNgheNghiepCuaCha = "Nghề nghiệp của cha : ";
@@ -181,6 +181,7 @@ const String tAnhGiayKhaiSinh = "Ảnh giấy khai sinh : ";
 const String tAnhSoHoKhau = "Ảnh sổ hộ khẩu : ";
 const String tBamVaoDeNop = "Bấm vào để nộp";
 const String tDaNop = "Đã nộp";
+
 
 // Ngoại khóa : ngoai_khoa_screen.dart
 const String tNgoaiKhoa = "Ngoại khóa";
@@ -203,5 +204,15 @@ const String tSuKien = "Sự kiện ";
 
 
 // giao vien const string
-// giao dien teacher_chi_tiet_dan_thuoc_screen
-
+// giao dien teacher_giang_day_screen
+const String tGiangDay  = "Giảng dạy";
+// danh_sach_hoc_sinh_screen
+const String tDanhSachHocSinh = 'Danh sách học sinh';
+// teacher_thong_tin_ca_nhan_screen
+const String tThongTinCaNhan = 'Thông tin cá nhân';
+// teacher_ho_so_giay_to_widget
+const String tSoDienThoai = 'Số điện thoại : ';
+const String tDiaChiEmail = 'Địa chỉ email : ';
+const String tDiaChiThuongTru = 'Địa chỉ thường trú : ';
+// teacher_lich_su_nhan_xet_screen
+const String tLichSuNhanXet = 'Lịch sử nhận xét';

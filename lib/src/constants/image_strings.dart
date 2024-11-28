@@ -28,3 +28,8 @@ const String tDanThuocScreenLinkIcon = 'assets/images/hoc_duong_images/dan_thuoc
 const String tGiangDayScreenLinkIcon = 'assets/images/hoc_duong_images/giang_day_screen_link_icon.png';
 const String tNgoaiKhoaScreenLinkIcon = 'assets/images/hoc_duong_images/ngoai_khoa_screen_link_icon.png';
 const String tThucDonScreenLinkIcon = 'assets/images/hoc_duong_images/thuc_don_screen_link_icon.png';
+
+// -- Giang day : Danh sach hoc sinh screen
+const String tHocSinhAvatarItem1 = 'assets/images/giang_day_images/hoc_sinh_avatar_item_1.jpg';
+const String tHocSinhAvatarItem2 = 'assets/images/giang_day_images/hoc_sinh_avatar_item_2.png';
+const String tHocSinhAvatarItem3 = 'assets/images/giang_day_images/hoc_sinh_avatar_image_3.png';

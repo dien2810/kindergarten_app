@@ -1,0 +1,224 @@
+import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:kindergarten_app/src/features/teacher/routes/hoc_duong_route.dart';
+
+class ChiTietHocSinhBottomSheet extends StatefulWidget {
+  final String studentName; // Student's name
+  final String imageUrl; // Student's image URL
+
+  const ChiTietHocSinhBottomSheet({
+    Key? key,
+    required this.studentName,
+    required this.imageUrl,
+  }) : super(key: key);
+
+  @override
+  State<ChiTietHocSinhBottomSheet> createState() =>
+      _ChiTietHocSinhBottomSheetState();
+}
+
+class _ChiTietHocSinhBottomSheetState extends State<ChiTietHocSinhBottomSheet> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        bottom: MediaQuery
+            .of(context)
+            .viewInsets
+            .bottom,
+        left: 16,
+        right: 16,
+        top: 12, // Reduced top padding for a more compact look
+      ),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(
+          maxHeight: 750, // Giảm chiều cao tối đa của BottomSheet
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Title
+              const Text(
+                "Chi tiết học sinh",
+                style: TextStyle(
+                  fontSize: 22, // Reduced font size for title
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF580B8B),
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 12), // Reduced space below the title
+
+              // Circle Avatar for Image
+              Center(
+                child: CircleAvatar(
+                  radius: 90, // Giảm kích thước avatar
+                  backgroundImage: widget.imageUrl.startsWith('http')
+                      ? NetworkImage(widget.imageUrl)
+                      : AssetImage(widget.imageUrl) as ImageProvider,
+                ),
+              ),
+              const SizedBox(height: 12), // Reduced space below the avatar
+
+              // Display student name
+              Center(
+                child: Text(
+                  widget.studentName,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 12), // Reduced space below the names
+
+              // Bottom buttons
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  // First row with 2 buttons
+                  Row(
+                    children: [
+                      Expanded(
+                        child: _buildButton(
+                            'Thông tin cá nhân',
+                            HocDuongRoutes.thongTinCaNhan,
+                            { 'studentName': widget.studentName, 'imageUrl': widget.imageUrl}
+                        ),
+                      ),
+                      const SizedBox(width: 10), // Space between the buttons
+                      Expanded(
+                        child: _buildButton(
+                          'Thông tin sức khỏe',
+                          HocDuongRoutes.thongTinSucKhoe,
+                          { 'studentName': widget.studentName, 'imageUrl': widget.imageUrl},
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  // Second row with 2 buttons
+                  Row(
+                    children: [
+                      Expanded(
+                        child: _buildButton(
+                          'Lịch sử nhận xét',
+                          HocDuongRoutes.lichSuNhanXet,
+                          {
+                            'studentName': widget.studentName,
+                            'imageUrl': widget.imageUrl
+                          }, // Truyền dữ liệu
+                        ),
+                      ),
+                      const SizedBox(width: 10), // Space between the buttons
+                      Expanded(
+                        child: _buildButton(
+                          'Chuyên cần',
+                          HocDuongRoutes.thongTinCaNhan,
+                          {
+                            'studentName': widget.studentName,
+                            'imageUrl': widget.imageUrl
+                          }, // Truyền dữ liệu
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 12), // Reduced space below the buttons
+
+              // Thêm nhận xét mới button
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  // Evenly space buttons
+                  children: [
+                    // "Thêm nhận xét mới" button
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          // Handle add new comment
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF9317AE),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 12), // Reduced padding
+                        ),
+                        child: const Text(
+                          "Thêm nhận xét mới",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16, // Reduced font size
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 10), // Space between buttons
+                    // "Hủy" button
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          // Handle cancel
+                          Navigator.pop(context);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.grey,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 12), // Reduced padding
+                        ),
+                        child: const Text(
+                          "Hủy",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16, // Reduced font size
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+  Widget _buildButton(String text, String route, Map<String, dynamic> data) {
+    return ElevatedButton(
+      onPressed: () {
+        Get.toNamed(route, arguments: data); // Truyền dữ liệu bằng GetX
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: const Color(0xFF79DBB1),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        padding: const EdgeInsets.symmetric(vertical: 15),
+      ),
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+        ),
+      ),
+    );
+  }
+
+

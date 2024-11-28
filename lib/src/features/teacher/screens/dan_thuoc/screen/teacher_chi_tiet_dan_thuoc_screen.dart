@@ -129,7 +129,7 @@ class TeacherChiTietDanThuocScreen extends StatelessWidget {
                               return DropdownMenuItem<String>(
                                 value: status,
                                 child: Container(
-                                  width: 350, // Set a fixed width for each item
+                                  width: 300, // Set a fixed width for each item
                                   height:
                                       40, // Set a fixed height for each item
                                   decoration: BoxDecoration(

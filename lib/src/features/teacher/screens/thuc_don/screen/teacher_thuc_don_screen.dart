@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/common_widgets/app_bar_widgets/teacher_app_bar_with_title_header_2.dart';
 import 'package:kindergarten_app/src/constants/text_strings.dart';
+import 'package:kindergarten_app/src/features/teacher/screens/thuc_don/widget/teacher_them_mon_an_bottom_sheet.dart';
 import 'package:weekly_date_picker/weekly_date_picker.dart';
 import '../../../../../constants/sizes.dart';
-import '../../../controllers/teacher_navigation_menu_controller.dart';
 import '../../../controllers/thuc_don/teacher_thuc_don_controller.dart';
-import '../../teacher_navigation_menu/teacher_bottom_navigation_bar_widget.dart';
 import '../widget/teacher_thuc_don_card_widget.dart';
 
 class TeacherThucDonScreen extends StatelessWidget {
@@ -39,24 +38,29 @@ class TeacherThucDonScreen extends StatelessWidget {
                           padding: const EdgeInsets.all(t15Size),
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: const BorderRadius.all(Radius.circular(25.0)),
-                            border: Border.all(width: 2, color: const Color(0xFFC4C4C4)),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(25.0)),
+                            border: Border.all(
+                                width: 2, color: const Color(0xFFC4C4C4)),
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Obx(
-                                    () => Container(
+                                () => Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(40.0),
                                   ),
                                   child: WeeklyDatePicker(
-                                    selectedDay: thucDonController.selectedDay.value, // DateTime
+                                    selectedDay: thucDonController
+                                        .selectedDay.value, // DateTime
                                     changeDay: (value) {
-                                      thucDonController.selectedDay.value = value;
+                                      thucDonController.selectedDay.value =
+                                          value;
                                     },
                                     backgroundColor: const Color(0xFFCAF0F8),
-                                    selectedDigitBackgroundColor: const Color(0xFFBA83DE),
+                                    selectedDigitBackgroundColor:
+                                        const Color(0xFFBA83DE),
                                     selectedDigitColor: const Color(0xFF03045E),
                                     digitsColor: const Color(0xFF03045E),
                                     weekdayTextColor: const Color(0xFF03045E),
@@ -70,7 +74,8 @@ class TeacherThucDonScreen extends StatelessWidget {
                                   itemCount: 3,
                                   itemBuilder: (context, index) {
                                     return const Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           tBuaSang,
@@ -103,22 +108,34 @@ class TeacherThucDonScreen extends StatelessWidget {
               right: 0,
               child: Container(
                 color: Colors.white,
-                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: t20Size),
+                padding: const EdgeInsets.symmetric(
+                    vertical: 10, horizontal: t20Size),
                 child: ElevatedButton(
                   onPressed: () {
                     // Hành động khi nhấn nút
+                    showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.vertical(top: Radius.circular(20)),
+                      ),
+                      builder: (BuildContext context) {
+                        return const TeacherThemMonAnBottomSheet();
+                      },
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF9317AE), // Màu nền
                     foregroundColor: Colors.white, // Màu chữ
                     padding: const EdgeInsets.symmetric(vertical: t10Size),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(40),
                     ),
                   ),
                   child: const Text(
-                    "Thêm mới thực đơn",
-                    style: TextStyle(fontSize: 16),
+                    "Thêm mới món ăn",
+                    style: TextStyle(fontSize: 20),
                   ),
                 ),
               ),
