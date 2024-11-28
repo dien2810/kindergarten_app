@@ -2,16 +2,21 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:kindergarten_app/src/features/teacher/controllers/nhan_xet_hoc_sinh/teacher_nhan_xet_hoc_sinh_controller.dart';
 import 'package:kindergarten_app/src/features/teacher/routes/hoc_duong_route.dart';
+
+import '../../chi_tiet_hoc_sinh/teacher_lich_su_nhan_xet/widget/teacher_them_moi_nhan_xet_bottom_sheet.dart';
 
 class ChiTietHocSinhBottomSheet extends StatefulWidget {
   final String studentName; // Student's name
   final String imageUrl; // Student's image URL
+  final CommentData commentData;
 
   const ChiTietHocSinhBottomSheet({
     Key? key,
     required this.studentName,
     required this.imageUrl,
+    required this.commentData,
   }) : super(key: key);
 
   @override
@@ -20,6 +25,12 @@ class ChiTietHocSinhBottomSheet extends StatefulWidget {
 }
 
 class _ChiTietHocSinhBottomSheetState extends State<ChiTietHocSinhBottomSheet> {
+  late final TeacherThongTinNhanxetController nhanxetController;
+  @override
+  void initState(){
+    super.initState();
+    nhanxetController = Get.find<TeacherThongTinNhanxetController>();
+  }
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -118,7 +129,7 @@ class _ChiTietHocSinhBottomSheetState extends State<ChiTietHocSinhBottomSheet> {
                       Expanded(
                         child: _buildButton(
                           'Chuyên cần',
-                          HocDuongRoutes.thongTinCaNhan,
+                          HocDuongRoutes.chuyenCan,
                           {
                             'studentName': widget.studentName,
                             'imageUrl': widget.imageUrl
@@ -143,7 +154,24 @@ class _ChiTietHocSinhBottomSheetState extends State<ChiTietHocSinhBottomSheet> {
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () {
-                          // Handle add new comment
+                          // Hiển thị BottomSheet
+                          showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            builder: (BuildContext context) {
+                              return TeacherThemMoiNhanXetBottomSheet(
+                                teacherID: widget.commentData.teacherID,
+                                parentName: widget.studentName,
+                                currentDate: widget.commentData.currentDate,
+                                guardianID: widget.commentData.guardianID,
+                                replyContent: widget.commentData.replyContent,
+                                commentDate: widget.commentData.commentDate,
+                                onAddComment: (String comment) {
+                                  print("Nhận xét được thêm: $comment"); // Thay đổi với logic thực tế
+                                },
+                              );
+                            },
+                          );
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF9317AE),

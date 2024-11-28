@@ -216,3 +216,6 @@ const String tDiaChiEmail = 'Địa chỉ email : ';
 const String tDiaChiThuongTru = 'Địa chỉ thường trú : ';
 // teacher_lich_su_nhan_xet_screen
 const String tLichSuNhanXet = 'Lịch sử nhận xét';
+const String tChiTietNhanXet = 'Chi tiết nhận xét ';
+// teacher_chuyen_can_hoc_sinh_screen
+const String tChuyenCan = 'Chuyên cần';

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kindergarten_app/src/features/teacher/screens/giang_day/widget/chi_tiet_hoc_sinh_bottom_sheet.dart'; // Import the ChiTietHocSinhBottomSheet
+import 'package:kindergarten_app/src/features/teacher/controllers/nhan_xet_hoc_sinh/teacher_nhan_xet_hoc_sinh_controller.dart';
+import 'package:kindergarten_app/src/features/teacher/screens/giang_day/widget/chi_tiet_hoc_sinh_bottom_sheet.dart';
+
+import '../../../controllers/nhan_xet_hoc_sinh/teacher_nhan_xet_hoc_sinh_controller.dart'; // Import the ChiTietHocSinhBottomSheet
 
 class HocSinhWidget extends StatelessWidget {
   // Khai báo tham số cho constructor
@@ -15,6 +18,7 @@ class HocSinhWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TeacherThongTinNhanxetController  nhanxetController= Get.put(TeacherThongTinNhanxetController());
     return GestureDetector(
       onTap: () {
         // Hành động khi nhấn nút
@@ -29,6 +33,7 @@ class HocSinhWidget extends StatelessWidget {
             return ChiTietHocSinhBottomSheet(
               studentName: tenHocSinh,
               imageUrl: imageUrl,
+              commentData: nhanxetController.commentData, // Use data from the controller
             );
           },
         );
