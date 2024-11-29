@@ -40,9 +40,9 @@ class MyApp extends StatelessWidget {
       darkTheme: TAppTheme.darkTheme,
       themeMode: ThemeMode.light,
       // đường dẫn của học đường bên giáo viên
-      //initialRoute: '/HocDuong',
-      //getPages: HocDuongRoutes.routes,
-      home: const TeacherThongBaoScreen(sentBy: "teacher_id_1"),
+      initialRoute: '/HocDuong',
+      getPages: HocDuongRoutes.routes,
+      //home: const TeacherThongBaoScreen(sentBy: "teacher_id_1"),
       //home:ThongTinSucKhoeScreen() ,
       //home: const TeacherThongTinSucKhoeHocSinhScreen(studentName: 'sss', imageUrl: tHocSinhAvatarItem3),
       defaultTransition: Transition.leftToRightWithFade,

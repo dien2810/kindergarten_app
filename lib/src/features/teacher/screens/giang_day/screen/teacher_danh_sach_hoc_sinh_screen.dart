@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/constants/image_strings.dart';
+import 'package:kindergarten_app/src/features/teacher/screens/xin_nghi/screen/teacher_danh_sach_xin_nghi_screen.dart';
 
 import '../../../../../common_widgets/app_bar_widgets/teacher_app_bar_with_title_header_2.dart';
 import '../../../../../constants/text_strings.dart';
@@ -107,7 +108,7 @@ class _TeacherDanhSachHocSinhScreenState
                       padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
                     ),
                     onPressed: () {
-                      // Chuyển sang trang "Xin Nghỉ"
+                     Get.to(TeacherDanhSachXinNghiScreen());
                     },
                     child: const Text(
                       'XIN NGHỈ',
