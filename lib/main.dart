@@ -14,6 +14,7 @@ import 'package:kindergarten_app/src/features/teacher/screens/dan_thuoc/screen/t
 import 'package:kindergarten_app/src/features/teacher/screens/giang_day/screen/teacher_danh_sach_hoc_sinh_screen.dart';
 import 'package:kindergarten_app/src/features/teacher/screens/giang_day/screen/teacher_giang_day_screen.dart';
 import 'package:kindergarten_app/src/features/teacher/screens/hoc_duong/screen/hoc_duong_screen.dart';
+import 'package:kindergarten_app/src/features/teacher/screens/thong_bao/screen/teacher_thong_bao_screen.dart';
 import 'package:kindergarten_app/src/repository/authentication_repository/authentication_repository.dart';
 import 'package:kindergarten_app/src/utils/theme.dart';
 import 'firebase_options.dart';
@@ -39,8 +40,9 @@ class MyApp extends StatelessWidget {
       darkTheme: TAppTheme.darkTheme,
       themeMode: ThemeMode.light,
       // đường dẫn của học đường bên giáo viên
-      initialRoute: '/HocDuong',
-      getPages: HocDuongRoutes.routes,
+      //initialRoute: '/HocDuong',
+      //getPages: HocDuongRoutes.routes,
+      home: const TeacherThongBaoScreen(sentBy: "teacher_id_1"),
       //home:ThongTinSucKhoeScreen() ,
       //home: const TeacherThongTinSucKhoeHocSinhScreen(studentName: 'sss', imageUrl: tHocSinhAvatarItem3),
       defaultTransition: Transition.leftToRightWithFade,

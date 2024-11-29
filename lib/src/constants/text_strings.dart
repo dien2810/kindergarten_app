@@ -219,3 +219,9 @@ const String tLichSuNhanXet = 'Lịch sử nhận xét';
 const String tChiTietNhanXet = 'Chi tiết nhận xét ';
 // teacher_chuyen_can_hoc_sinh_screen
 const String tChuyenCan = 'Chuyên cần';
+// teacher_thong_bao_screen
+const String tThongBao = 'Thông báo';
+const String tThongBaoChung = 'Thông báo chung';
+const String tThongBaoDaTao = 'Thông báo đã tạo';
+const String tChiTietThongBao = 'Chi tiết thông báo';
+
