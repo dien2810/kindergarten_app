@@ -226,4 +226,6 @@ const String tThongBaoDaTao = 'Thông báo đã tạo';
 const String tChiTietThongBao = 'Chi tiết thông báo';
 // teacher_danh_sach_xin_nghi_screen
 const String tXinNghi = 'XIN NGHỈ';
+// teacher_diem_danh_screen
+const String tDiemDanh = 'ĐIỂM DANH';
 

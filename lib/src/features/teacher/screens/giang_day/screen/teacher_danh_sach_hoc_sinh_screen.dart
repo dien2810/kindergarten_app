@@ -7,6 +7,7 @@ import '../../../../../common_widgets/app_bar_widgets/teacher_app_bar_with_title
 import '../../../../../constants/text_strings.dart';
 import '../../../controllers/giang_day/teacher_giang_day_controller.dart';
 import '../../../controllers/teacher_navigation_menu_controller.dart';
+import '../../diem_danh/screen/teacher_diem_danh_screen.dart';
 import '../../teacher_navigation_menu/teacher_bottom_navigation_bar_widget.dart';
 import '../widget/hoc_sinh_widget.dart';
 
@@ -95,6 +96,7 @@ class _TeacherDanhSachHocSinhScreenState
                     ),
                     onPressed: () {
                       // Chuyển sang trang "Điểm Danh"
+                      Get.to(TeacherDiemDanhScreen());
                     },
                     child: const Text(
                       'ĐIỂM DANH',

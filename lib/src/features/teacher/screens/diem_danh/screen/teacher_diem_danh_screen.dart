@@ -2,27 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/common_widgets/app_bar_widgets/teacher_app_bar_with_color_and_title.dart';
 import 'package:kindergarten_app/src/constants/text_strings.dart';
-import 'package:kindergarten_app/src/features/teacher/controllers/xin_nghi/teacher_xin_nghi_controller.dart';
-import 'package:kindergarten_app/src/features/teacher/screens/xin_nghi/screen/teacher_chi_tiet_don_xin_nghi_screen.dart';
+import 'package:kindergarten_app/src/features/teacher/controllers/diem_danh/teacher_diem_danh_controller.dart';
+import 'package:kindergarten_app/src/features/teacher/screens/diem_danh/widget/teacher_diem_danh_card_widget.dart';
 import 'package:weekly_date_picker/weekly_date_picker.dart';
 import '../../../../../constants/sizes.dart';
 import '../../../controllers/teacher_navigation_menu_controller.dart';
 import '../../teacher_navigation_menu/teacher_bottom_navigation_bar_widget.dart';
-import '../../xin_nghi/widget/teacher_xin_nghi_card_widget.dart';
 
-class TeacherDanhSachXinNghiScreen extends StatelessWidget {
-  const TeacherDanhSachXinNghiScreen({super.key});
+class TeacherDiemDanhScreen extends StatelessWidget {
+  const TeacherDiemDanhScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final teacherNavigationMenuController = Get.put(TeacherNavigationMenuController());
-    final teacherXinNghiController = Get.put(TeacherXinNghiController());
+    final teacherDiemDanhController = Get.put(TeacherDiemDanhController());
 
     return DefaultTabController(
       length: 1,
       child: Scaffold(
-        appBar: const TeacherAppBarWithColorAndTitle(title: tXinNghi, hexColor: "#480CA8"),
-        bottomNavigationBar: TeacherBottomNavigationBarWidget(controller: teacherNavigationMenuController),
+        appBar: const TeacherAppBarWithColorAndTitle(title: tDiemDanh, hexColor: "#7209B7"),
         body: Column(
           children: [
             ClipRRect(
@@ -60,9 +57,9 @@ class TeacherDanhSachXinNghiScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(40.0),
                               ),
                               child: WeeklyDatePicker(
-                                selectedDay: teacherXinNghiController.selectedDay.value,
+                                selectedDay: teacherDiemDanhController.selectedDay.value,
                                 changeDay: (value) {
-                                  teacherXinNghiController.selectedDay.value = value; // Cập nhật ngày đã chọn
+                                  teacherDiemDanhController.selectedDay.value = value; // Cập nhật ngày đã chọn
                                 },
                                 backgroundColor: const Color(0xFFCAF0F8),
                                 selectedDigitBackgroundColor: const Color(0xFFBA83DE),
@@ -74,42 +71,25 @@ class TeacherDanhSachXinNghiScreen extends StatelessWidget {
                             )),
                             SizedBox(height: t15Size),
                             Obx(() {
-                              var events = teacherXinNghiController.fetchEventsForDay(teacherXinNghiController.selectedDay.value);
-                              // Kiểm tra xem có đơn xin nghỉ nào không
-                              if (events.isEmpty) {
+                              var attendanceData = teacherDiemDanhController.fetchAttendanceForDay(teacherDiemDanhController.selectedDay.value);
+                              // Kiểm tra xem có dữ liệu điểm danh nào không
+                              if (attendanceData.isEmpty) {
                                 return const Center(
                                   child: Text(
-                                    "Không có đơn xin nghỉ",
+                                    "Không có dữ liệu điểm danh",
                                     style: TextStyle(fontSize: 18, color: Colors.grey),
                                   ),
                                 );
                               }
                               return Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: events.map<Widget>((event) {
-                                  var activityNames = teacherXinNghiController.getActivityNamesFromPeriod(event['details']['period']);
+                                children: attendanceData.map<Widget>((studentData) {
+                                  String studentName = studentData['name'];
+                                  var attendanceDetails = studentData['attendanceDetails'];
 
-                                  return GestureDetector(
-                                    onTap: () {
-                                      Get.to(() => TeacherChiTietDonXinNghiScreen(
-                                        studentId: event['studentId'],
-                                        date: event['date'],
-                                        details: event['details'],
-                                      ));
-                                    },
-                                    child: TeacherXinNghiCardWidget(
-                                      dayOffData: {
-                                        event['studentId']: {
-                                          'dates': {
-                                            event['date']: {
-                                              'content': event['details']['content'],
-                                              'period': activityNames.isNotEmpty ? activityNames : ['Cả ngày'],
-                                              'status': event['details']['status'],
-                                            },
-                                          },
-                                        },
-                                      },
-                                    ),
+                                  return TeacherDiemDanhCardWidget(
+                                    studentName: studentName,
+                                    attendanceDetails: attendanceDetails,
                                   );
                                 }).toList(),
                               );
@@ -119,6 +99,58 @@ class TeacherDanhSachXinNghiScreen extends StatelessWidget {
                       ),
                     ),
                   )
+                ],
+              ),
+            ),
+            // Hai nút ở footer
+            Padding(
+              padding: const EdgeInsets.all(t15Size),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: t5Size),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0), // Bo góc
+                          ),
+                          padding: const EdgeInsets.symmetric(vertical: 16.0), // Kích thước nút
+                        ),
+                        onPressed: () {
+                          // Logic lưu
+                        },
+                        child: const Text(
+                          "Lưu",
+                          style: TextStyle(fontSize: 18, color: Colors.white), // Kích thước và màu chữ
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: t5Size),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF7209B7), // Màu tím
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0), // Bo góc
+                          ),
+                          padding: const EdgeInsets.symmetric(vertical: 16.0), // Kích thước nút
+                        ),
+                        onPressed: () {
+                          // Logic quay lại
+                          Get.back();
+                        },
+                        child: const Text(
+                          "Quay lại",
+                          style: TextStyle(fontSize: 18, color: Colors.white), // Kích thước và màu chữ
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
