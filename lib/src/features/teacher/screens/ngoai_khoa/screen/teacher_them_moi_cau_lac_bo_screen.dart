@@ -480,6 +480,7 @@ class _TeacherThemMoiCauLacBoScreenState extends State<TeacherThemMoiCauLacBoScr
                       filled: true,
                       fillColor: Color(0xFFF4E9F7), // Màu nền cho TextField
                     ),
+                    style: TextStyle(fontSize: 16.0), // Thay đổi kích thước chữ ở đây
                     readOnly: true, // Đặt trường này chỉ đọc để không cho người dùng nhập trực tiếp
                   ),
                 ),
@@ -565,7 +566,7 @@ class _TeacherThemMoiCauLacBoScreenState extends State<TeacherThemMoiCauLacBoScr
           hintText: hint,
           hintStyle: const TextStyle(color: Color(0xFF580B8B)), // Màu chữ cho hint
         ),
-        style: const TextStyle(color: Color(0xFF580B8B)), // Màu chữ cho TextField
+        style: const TextStyle(color: Color(0xFF580B8B), fontSize: 16.0 ), // Màu chữ cho TextField
       ),
     );
   }
