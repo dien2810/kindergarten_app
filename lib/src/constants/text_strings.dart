@@ -161,7 +161,7 @@ const String tQuayLaiDanhSach = 'Quay lại danh sách';
 const String tThongTinHocSinh = "Thông tin học sinh";
 const String tHoSoGiayTo = "Hồ sơ giấy tờ";
 
-// Thông tin học sinh widget : teacher_thong_tin_hoc_sinh_widget.dart
+// Thông tin học sinh widget : teacher_clb_thong_tin_hoc_sinh_widget.dart
 const String tHoTen = "Họ tên : ";
 const String tMaHocSinh = "Mã học sinh : ";
 const String tNgaySinh = "Ngày sinh : ";
@@ -228,4 +228,6 @@ const String tChiTietThongBao = 'Chi tiết thông báo';
 const String tXinNghi = 'XIN NGHỈ';
 // teacher_diem_danh_screen
 const String tDiemDanh = 'ĐIỂM DANH';
+// teacher_ngoai_khoa_screen
+const String tThanhVienCLB = 'Thành viên CLB';
 

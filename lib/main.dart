@@ -6,6 +6,7 @@ import 'package:kindergarten_app/src/features/student/screens/dan_thuoc/dan_thuo
 import 'package:kindergarten_app/src/features/student/screens/hoat_dong_su_kien/screen/hoat_dong_su_kien_screen.dart';
 import 'package:kindergarten_app/src/features/student/screens/ngoai_khoa/screen/ngoai_khoa_screen.dart';
 import 'package:kindergarten_app/src/features/student/screens/thuc_don/thuc_don_screen.dart';
+import 'package:kindergarten_app/src/features/teacher/controllers/ngoai_khoa/teacher_ngoai_khoa_controller.dart';
 import 'package:kindergarten_app/src/features/teacher/routes/hoc_duong_route.dart';
 import 'package:kindergarten_app/src/features/teacher/screens/chi_tiet_hoc_sinh/teacher_suc_khoe_hoc_sinh/ho_so_y_te/teacher_danh_sach_lich_su_tiem_chung_widget.dart';
 import 'package:kindergarten_app/src/features/teacher/screens/chi_tiet_hoc_sinh/teacher_suc_khoe_hoc_sinh/teacher_thong_tin_suc_khoe_hoc_sinh_screen.dart';
@@ -25,7 +26,9 @@ void main()  async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
       .then((value) => Get.put(AuthenticationRepository()));
+  Get.put(TeacherNgoaiKhoaController()); // Đăng ký ClubController
   runApp(const MyApp());
+
 }
 
 class MyApp extends StatelessWidget {
