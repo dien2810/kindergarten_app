@@ -73,12 +73,10 @@ class XinNghiScreen extends StatelessWidget {
                                 if (snapshot.connectionState == ConnectionState.waiting) {
                                   return const Center(child: CircularProgressIndicator());
                                 }
-
                                 // Trạng thái lỗi
                                 if (snapshot.hasError) {
                                   return Center(child: Text('Error: ${snapshot.error}'));
                                 }
-
                                 // Kiểm tra dữ liệu null
                                 if (!snapshot.hasData || snapshot.data == null) {
                                   return const Center(child: Text('No Data Available'));

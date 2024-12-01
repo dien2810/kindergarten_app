@@ -1,7 +1,7 @@
 class StudentDocument {
-  final String birthCertificate;
-  final String householdRegistration;
-  final String image;
+  late String birthCertificate;
+  late String householdRegistration;
+  late String image;
 
   StudentDocument({
     required this.birthCertificate,

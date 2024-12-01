@@ -86,26 +86,65 @@ class ThucDonScreen extends StatelessWidget {
                             ),
                           )),
                           SizedBox(height: t10Size,),
-                          Expanded(
-                            child: ListView.builder(
-                              itemCount: 3,
-                              itemBuilder: (context,index){
-                                return Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Text(
-                                      tBuaSang,
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                        color: Color(0xFF03045E)
-                                      ),
+                          Obx(()=>FutureBuilder(
+                              future: thucDonController.getMenuData(
+                                thucDonController.selectedDay.value
+                              ),
+                              builder: (context, snapshot){
+                                print(thucDonController.selectedDay.value);
+                                // Trạng thái đang tải
+                                if (snapshot.connectionState == ConnectionState.waiting) {
+                                  return const Center(child: CircularProgressIndicator());
+                                }
+                                // Trạng thái lỗi
+                                if (snapshot.hasError) {
+                                  return Center(child: Text('Error: ${snapshot.error}'));
+                                }
+                                // Kiểm tra dữ liệu null
+                                if (!snapshot.hasData || snapshot.data?.isEmpty == true) {
+                                  return const Center(child: Text('No Data Available'));
+                                }
+                                else{
+                                  final menuItemList = snapshot.data;
+                                  return Expanded(
+                                    child: ListView.builder(
+                                      shrinkWrap: true,
+                                      physics: const NeverScrollableScrollPhysics(),
+                                      itemCount: menuItemList?.length,
+                                      itemBuilder: (context,index){
+                                        var meal = tBuaSang;
+                                        if (menuItemList?[index].meal == 'lunch'){
+                                          meal = 'Bữa trưa';
+                                        }
+                                        else if (menuItemList?[index].meal == 'afternoonSnack'){
+                                          meal = 'Bữa xế';
+                                        }
+                                        else if (menuItemList?[index].meal == 'dinner'){
+                                          meal = 'Bữa tối';
+                                        }
+                                        return Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              meal,
+                                              style: const TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Color(0xFF03045E)
+                                              ),
+                                            ),
+                                            SizedBox(height: t5Size,),
+                                            ThucDonCardWidget(
+                                              menuItem: menuItemList![index],
+                                            )
+                                          ],
+                                        );
+                                      },
                                     ),
-                                    SizedBox(height: t5Size,),
-                                    const ThucDonCardWidget()
-                                  ],
-                                );
+                                  );
+                                }
                               },
+
                             ),
                           )
                         ],

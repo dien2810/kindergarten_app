@@ -24,20 +24,19 @@ class ThoiHocHoanPhiListtileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: RoundedAssetImageWidget(
-        width: t60Size,
-        height: t60Size,
+        width: t30Size,
+        height: t30Size,
         image: image,
       ),
       title: Text(title,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         style: const TextStyle(
-            fontSize: 20, fontWeight: FontWeight.bold),
+            fontSize: 18, fontWeight: FontWeight.bold),
 
       ),
       isThreeLine: true,
       subtitle: Row(
-
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const Icon(

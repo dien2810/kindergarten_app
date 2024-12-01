@@ -16,7 +16,7 @@ class ThoiHocHoanPhiListviewWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final thoiHocHoanPhiController = Get.put(ThoiHocHoanPhiController());
     return FutureBuilder<List<ThoiHocHoanPhiModel>>(
-        future: thoiHocHoanPhiController.getRefundData("student_id_1"),
+        future: thoiHocHoanPhiController.getRefundData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting){
             return const Center(child: CircularProgressIndicator());

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:kindergarten_app/src/constants/text_strings.dart';
 import 'package:kindergarten_app/src/repository/classes_repository/classes_respository.dart';
 import 'package:kindergarten_app/src/repository/student_repository/student_repository.dart';
 
@@ -9,6 +11,8 @@ class ThongTinHocSinhController extends GetxController{
   static ThongTinHocSinhController get instance => Get.find();
   final _studentRepo = Get.put(StudentRepository());
   final _classesRepo = Get.put(ClassesRepository());
+  final ImagePicker _picker = ImagePicker();
+  var imageList = [];
 
   final hoTen = TextEditingController();
   final maHocSinh = TextEditingController();
@@ -18,6 +22,7 @@ class ThongTinHocSinhController extends GetxController{
   final he = TextEditingController();
   final khoi = TextEditingController();
   final lop = TextEditingController();
+
   final hoCha = TextEditingController();
   final hoMe = TextEditingController();
   final ngheCha = TextEditingController();
@@ -25,6 +30,9 @@ class ThongTinHocSinhController extends GetxController{
   final anhHocSinh = TextEditingController();
   final anhGiayKhaiSinh = TextEditingController();
   final anhSoHoKhau = TextEditingController();
+  var hasPhoto4x6 = false.obs;
+  var hasBirthCertificate = false.obs;
+  var hasHouseholdRegistration = false.obs;
 
   late StudentModel studentModel;
 
@@ -48,27 +56,76 @@ class ThongTinHocSinhController extends GetxController{
     hoMe.text = studentProfile.motherFullname;
     ngheCha.text = studentProfile.fatherOccupation;
     ngheMe.text = studentProfile.motherOccupation;
-    anhHocSinh.text = studentDocument.image;
-    anhGiayKhaiSinh.text = studentDocument.birthCertificate;
-    anhSoHoKhau.text = studentDocument.householdRegistration;
+    anhHocSinh.text = studentDocument.image=='Chưa nộp'?tBamVaoDeNop:studentDocument.image;
+    anhGiayKhaiSinh.text = studentDocument.birthCertificate=='Chưa nộp'?tBamVaoDeNop:studentDocument.birthCertificate;
+    anhSoHoKhau.text = studentDocument.householdRegistration=='Chưa nộp'?tBamVaoDeNop:studentDocument.householdRegistration;
+    hasPhoto4x6.value = studentDocument.image=='Chưa nộp'?false:true;
+    hasBirthCertificate.value = studentDocument.birthCertificate=='Chưa nộp'?false:true;
+    hasHouseholdRegistration.value = studentDocument.householdRegistration=='Chưa nộp'?false:true;
+    imageList = [];
   }
 
   Future<void> updateThongTinHocSinh() async {
-    if (int.tryParse(khoi.text) == false){
-      Helper.warningSnackBar(title: 'Lỗi dữ liệu', message: 'Dữ liệu nhập vào'
-          'không hợp lệ');
-      return;
+    try{
+      if (int.tryParse(khoi.text) == false) {
+        Helper.warningSnackBar(title: 'Lỗi dữ liệu', message: 'Dữ liệu nhập vào'
+            'không hợp lệ');
+        return;
+      }
+      studentModel.id = maHocSinh.text;
+      studentModel.studentProfile.name = hoTen.text;
+      studentModel.studentProfile.dateOfBirth = ngaySinh.text;
+      studentModel.studentProfile.gender = gioiTinh.text;
+      studentModel.studentProfile.school = truong.text;
+      studentModel.studentProfile.educationSystem = he.text;
+      studentModel.studentProfile.gradeLevel = int.parse(khoi.text);
+      //print(studentModel.studentDocument);
+      await _studentRepo.updateStudent(studentModel);
+      Helper.successSnackBar(title: 'Cập nhật thành công', message: 'Cập nhật thông tin học sinh thành công');
+    }catch(e){
+      Helper.errorSnackBar(title: 'Cập nhật thất bại', message: 'Cập nhật thông tin cá nhân thất bại');
     }
-    studentModel.studentProfile.name = hoTen.text;
-    studentModel.studentProfile.dateOfBirth = ngaySinh.text;
-    studentModel.studentProfile.gender = gioiTinh.text;
-    studentModel.studentProfile.school = truong.text;
-    studentModel.studentProfile.educationSystem = he.text;
-    studentModel.studentProfile.gradeLevel = khoi.text as int;
-    await _studentRepo.updateStudent(studentModel);
   }
 
-  void updateHoSoGiayTo(){
+  Future<void> updateHoSoGiayTo() async{
+    try{
+      studentModel.id = maHocSinh.text;
+      studentModel.studentProfile.fatherFullname = hoCha.text;
+      studentModel.studentProfile.motherFullname = hoMe.text;
+      studentModel.studentProfile.fatherOccupation = ngheCha.text;
+      studentModel.studentProfile.motherOccupation = ngheMe.text;
+      studentModel.studentDocument.image = anhHocSinh.text == tBamVaoDeNop ? 'Chưa nộp' : anhHocSinh.text;
+      studentModel.studentDocument.birthCertificate = anhGiayKhaiSinh.text == tBamVaoDeNop ? 'Chưa nộp' : anhGiayKhaiSinh.text;
+      studentModel.studentDocument.householdRegistration = anhSoHoKhau.text == tBamVaoDeNop ? 'Chưa nộp' : anhSoHoKhau.text;
+      await _studentRepo.updateStudent(studentModel);
+      for (XFile? image in imageList){
+        if (image != null){
+          await Helper.uploadImage(image);
+          print('Da upload image${image.path}');
+        }
+      }
+      Helper.successSnackBar(title: 'Cập nhật thành công', message: 'Cập nhật thông tin học sinh thành công');
+    } catch(e){
+      print(e);
+      Helper.errorSnackBar(title: 'Cập nhật thất bại', message: 'Cập nhật thông tin cá nhân thất bại');
+    }
+  }
 
+  Future<XFile?> pickImage(String type) async {
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      imageList.add(image);
+      if (type == 'photo4x6') {
+        hasPhoto4x6.value = true;
+        anhHocSinh.text = image.path;
+      } else if (type == 'birthCertificate') {
+        hasBirthCertificate.value = true;
+        anhGiayKhaiSinh.text = image.path;
+      } else if (type == 'householdRegistration') {
+        hasHouseholdRegistration.value = true;
+        anhSoHoKhau.text = image.path;
+      }
+    }
+    return image;
   }
 }

@@ -23,18 +23,24 @@ class InformationWidget extends StatelessWidget {
       child: Row(
         //mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            title,
-            style: const TextStyle(
-                fontSize: 16
+          Expanded(
+            flex: 1,
+            child: Text(
+              title,
+              style: const TextStyle(
+                  fontSize: 16
+              ),
             ),
           ),
-          Text(
-            maxLines: null,
-            value,
-            style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold
+          Expanded(
+            flex: 3,
+            child: Text(
+              maxLines: null,
+              value,
+              style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold
+              ),
             ),
           ),
         ],

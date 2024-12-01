@@ -6,9 +6,11 @@ import '../../../../common_widgets/app_bar_widgets/guardian_app_bar_with_title.d
 import '../../../../constants/image_strings.dart';
 import '../../../../constants/sizes.dart';
 import '../../../../constants/text_strings.dart';
+import '../../models/menu/menu_item.dart';
 
 class ChiTietMonAnScreen extends StatelessWidget {
-  const ChiTietMonAnScreen({super.key});
+  const ChiTietMonAnScreen({super.key, required this.menuItem});
+  final MenuItem menuItem;
 
   @override
   Widget build(BuildContext context) {
@@ -84,14 +86,14 @@ class ChiTietMonAnScreen extends StatelessWidget {
                                     flex: 2,
                                     child: Container(
                                         padding: EdgeInsets.all(t10Size),
-                                        child: const Column(
+                                        child: Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Center(
                                               child: Text(
-                                                tTenMon,
+                                                '$tTenMon ${menuItem.name}',
                                                 overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     color: Colors.white,
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 16
@@ -128,9 +130,9 @@ class ChiTietMonAnScreen extends StatelessWidget {
                               ),
                               child: Padding(
                                 padding: EdgeInsets.all(t10Size),
-                                child: const Text(
-                                  tThanhPhanCoTrongMonAn,
-                                  style: TextStyle(
+                                child: Text(
+                                  '$tThanhPhanCoTrongMonAn${menuItem.ingredients.toString()}',
+                                  style: const TextStyle(
                                     color: Colors.black
                                   ),
                                 ),
@@ -141,40 +143,29 @@ class ChiTietMonAnScreen extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color(0xFF2058E9),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(30)
-                                    )
-                                ),
-                                onPressed: () {
-                                  Get.off(const ThemGhiChuMoiScreen());
-                                  // final medicine = MedicineModel(
-                                  //   prescription: themMoiDanThuocConTroller.prescription.text,
-                                  //   note: themMoiDanThuocConTroller.prescription.text,
-                                  //   dates: [
-                                  //     themMoiDanThuocConTroller.startDate.text,
-                                  //     themMoiDanThuocConTroller.endDate.text
-                                  //   ],
-                                  //   status: tDaGui,
-                                  //   medicineDetails: themMoiDanThuocConTroller.listChiTietDonThuoc,
-                                  //   studentID: 'student_id_1',
-                                  // );
-                                  // themMoiDanThuocConTroller.addMedicine(medicine);
-                                },
-                                child: const Text(
-                                  tThemGhiChu,
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold
+                              Expanded(
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: const Color(0xFF2058E9),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(30)
+                                      )
+                                  ),
+                                  onPressed: () {
+                                    Get.off(ThemGhiChuMoiScreen(menuItem: menuItem,));
+                                  },
+                                  child: const Text(
+                                    tThemGhiChu,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold
+                                    ),
                                   ),
                                 ),
                               ),
                               SizedBox(width: t5Size),
-                              SizedBox(
-                                width: t10Size*13,
+                              Expanded(
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                       backgroundColor: const Color(0xFF6BC5FF),

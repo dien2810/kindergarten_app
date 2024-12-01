@@ -4,6 +4,7 @@ import 'package:kindergarten_app/src/common_widgets/app_bar_widgets/guardian_app
 import 'package:kindergarten_app/src/common_widgets/button_widget/custom_button_widget.dart';
 import 'package:kindergarten_app/src/constants/text_strings.dart';
 import 'package:kindergarten_app/src/features/student/controllers/thoi_hoc_hoan_phi/them_thoi_hoc_hoan_phi_controller.dart';
+import 'package:kindergarten_app/src/repository/account_repository/account_repository.dart';
 
 import '../../../../../constants/sizes.dart';
 
@@ -15,6 +16,7 @@ class ThemThoiHocHoanPhiScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themThoiHocHoanPhiController = Get.put(ThemThoiHocHoanPhiController());
+    final accountRepo = Get.put(AccountRepository());
     return Scaffold(
       appBar: const GuardianAppBarWithTitleWidget(title: tThoiHocVaHoanPhi),
       body: SingleChildScrollView(
@@ -70,9 +72,10 @@ class ThemThoiHocHoanPhiScreen extends StatelessWidget {
                             onChanged: (val){
                               themThoiHocHoanPhiController.selectedValDropdown.value = val as String;
                             },
-                            icon: const Icon(
+                            icon: Icon(
                               Icons.arrow_drop_down_circle,
-                              color: Color(0xFF0B2384),
+                              color: const Color(0xFF0B2384),
+                              size: t20Size,
                             ),
                           dropdownColor: const Color(0xFFE9EFF7),
                           decoration: const InputDecoration(
@@ -149,7 +152,7 @@ class ThemThoiHocHoanPhiScreen extends StatelessWidget {
                                               border: OutlineInputBorder(
                                                   borderSide: BorderSide.none
                                               ),
-                                              hintText: 'Truong mam non...',
+                                              hintText: 'Tên trường chuyền đến...',
                                               hintStyle: TextStyle(
                                                 fontSize: 12,
                                               )
@@ -206,82 +209,90 @@ class ThemThoiHocHoanPhiScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: t10Size,),
-                        const FieldValueWidget(
-                          color: Color(0xFFE4E4E4),
-                          label: tHoVaTen,
-                          value: 'Nguyen Thi Hai Vy'
-                        ),
-                        SizedBox(height: t5Size,),
-                        const FieldValueWidget(
-                            color: Color(0xFFE4E4E4),
-                            label: tMaHocSinh,
-                            value: '2111001'
-                        ),
-                        SizedBox(height: t5Size,),
-                        const FieldValueWidget(
-                            color: Color(0xFFE4E4E4),
-                            label: tLop,
-                            value: 'Pool 1'
-                        ),
-                        SizedBox(height: t10Size,),
-                        const Text(
-                          tThongTinPhuHuynh,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w800,
-                              color: Color(0xFF7B7B7B),
-                              fontSize: 16
+                        FutureBuilder(
+                          future: themThoiHocHoanPhiController.onInit(),
+                          builder: (context, snapshot)=>Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              FieldValueWidget(
+                                color: const Color(0xFFE4E4E4),
+                                label: tHoVaTen,
+                                value: themThoiHocHoanPhiController.hoVaTenHocSinh
+                              ),
+                              SizedBox(height: t5Size,),
+                              FieldValueWidget(
+                                  color: const Color(0xFFE4E4E4),
+                                  label: tMaHocSinh,
+                                  value: accountRepo.userId
+                              ),
+                              SizedBox(height: t5Size,),
+                              FieldValueWidget(
+                                  color: const Color(0xFFE4E4E4),
+                                  label: tLop,
+                                  value: themThoiHocHoanPhiController.lop
+                              ),
+                              SizedBox(height: t10Size,),
+                              const Text(
+                                tThongTinPhuHuynh,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w800,
+                                    color: Color(0xFF7B7B7B),
+                                    fontSize: 16
+                                ),
+                              ),
+                              SizedBox(height: t10Size,),
+                              FieldValueWidget(
+                                  color: const Color(0xFFE4E4E4),
+                                  label: tHoVaTen,
+                                  value: themThoiHocHoanPhiController.hoVaTenPhuHuynh
+                              ),
+                              SizedBox(height: t5Size,),
+                              FieldValueWidget(
+                                  color: const Color(0xFFE4E4E4),
+                                  label: tSoDienThoai,
+                                  value: themThoiHocHoanPhiController.phone
+                              ),
+                              SizedBox(height: t5Size,),
+                              FieldValueWidget(
+                                  color: const Color(0xFFE4E4E4),
+                                  label: tDiaChi,
+                                  value: themThoiHocHoanPhiController.address
+                              ),
+                              SizedBox(height: t10Size,),
+                              const Text(
+                                tThongTinTaiKhoanNganHang,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w800,
+                                    color: Color(0xFF7B7B7B),
+                                    fontSize: 16
+                                ),
+                              ),
+                              SizedBox(height: t10Size,),
+                              FieldValueWidget(
+                                  color: const Color(0xFFE4E4E4),
+                                  label: tSoTaiKhoan,
+                                  value: themThoiHocHoanPhiController.accountNumber
+                              ),
+                              SizedBox(height: t5Size,),
+                              FieldValueWidget(
+                                  color: const Color(0xFFE4E4E4),
+                                  label: tChuTaiKhoan,
+                                  value: themThoiHocHoanPhiController.chuTaiKhoan
+                              ),
+                              SizedBox(height: t5Size,),
+                              FieldValueWidget(
+                                  color: const Color(0xFFE4E4E4),
+                                  label: tNganHang,
+                                  value: themThoiHocHoanPhiController.bankName
+                              ),
+                              SizedBox(height: t5Size,),
+                              FieldValueWidget(
+                                  color: const Color(0xFFE4E4E4),
+                                  label: tChiNhanh,
+                                  value: themThoiHocHoanPhiController.chiNhanh
+                              ),
+                            ],
                           ),
-                        ),
-                        SizedBox(height: t10Size,),
-                        const FieldValueWidget(
-                            color: Color(0xFFE4E4E4),
-                            label: tHoVaTen,
-                            value: 'Hoang Van Thai'
-                        ),
-                        SizedBox(height: t5Size,),
-                        const FieldValueWidget(
-                            color: Color(0xFFE4E4E4),
-                            label: tSoDienThoai,
-                            value: '0862215568'
-                        ),
-                        SizedBox(height: t5Size,),
-                        const FieldValueWidget(
-                            color: Color(0xFFE4E4E4),
-                            label: tDiaChi,
-                            value: '0862215568'
-                        ),
-                        SizedBox(height: t10Size,),
-                        const Text(
-                          tThongTinTaiKhoanNganHang,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w800,
-                              color: Color(0xFF7B7B7B),
-                              fontSize: 16
-                          ),
-                        ),
-                        SizedBox(height: t10Size,),
-                        const FieldValueWidget(
-                            color: Color(0xFFE4E4E4),
-                            label: tSoTaiKhoan,
-                            value: '0123456789123'
-                        ),
-                        SizedBox(height: t5Size,),
-                        const FieldValueWidget(
-                            color: Color(0xFFE4E4E4),
-                            label: tChuTaiKhoan,
-                            value: 'HOANG VAN THAI'
-                        ),
-                        SizedBox(height: t5Size,),
-                        const FieldValueWidget(
-                            color: Color(0xFFE4E4E4),
-                            label: tNganHang,
-                            value: 'NH TMCP KY THUONG VN-310-TECHCOMBANK'
-                        ),
-                        SizedBox(height: t5Size,),
-                        const FieldValueWidget(
-                            color: Color(0xFFE4E4E4),
-                            label: tChiNhanh,
-                            value: 'HA NOI'
                         ),
                         SizedBox(height: t10Size,),
                         RichText(
@@ -309,7 +320,9 @@ class ThemThoiHocHoanPhiScreen extends StatelessWidget {
                           width: double.infinity,
                           color: const Color(0xFFF6A800),
                           text: 'Gửi',
-                          onPressed: (){}
+                          onPressed: () async {
+                            await themThoiHocHoanPhiController.addRefund();
+                          }
                         )
                       ],
                     ),

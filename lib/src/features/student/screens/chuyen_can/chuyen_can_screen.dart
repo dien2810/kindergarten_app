@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/constants/text_strings.dart';
+import 'package:kindergarten_app/src/features/student/models/absent/absent_date_entry.dart';
 import 'package:kindergarten_app/src/features/student/screens/chuyen_can/xem_chi_tiet_anh_checkin/xem_chi_tiet_anh_checkin_screen.dart';
 import 'package:kindergarten_app/src/features/student/screens/chuyen_can/xem_chi_tiet_anh_checkout/xem_chi_tiet_anh_checkout_screen.dart';
+import 'package:kindergarten_app/src/utils/helper_controller/helper_controller.dart';
 import 'package:weekly_date_picker/weekly_date_picker.dart';
 
 import '../../../../common_widgets/app_bar_widgets/guardian_app_bar_with_title.dart';
@@ -88,77 +90,116 @@ class ChuyenCanScreen extends StatelessWidget {
                             ),
                           )),
                           SizedBox(height: t10Size,),
-                          const Text(
-                            tThu5,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w800,
-                                fontSize: 24,
-                                color: Color(0xFF03045E)
+                          Obx((){
+                            final thu = Helper.formatDateTime(chuyenCanController.selectedDay.value);
+                            return Text(
+                              thu,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.w800,
+                                  fontSize: 24,
+                                  color: Color(0xFF03045E)
+                              ),
+                            );
+                          }
+                          ),
+                          SizedBox(height: t5Size),
+                          Obx(()=>FutureBuilder<AbsentDateEntry?>(
+                              future: chuyenCanController.getAbsentByDateTime(
+                                chuyenCanController.selectedDay.value
+                              ),
+                              builder: (context, snapshot){
+                                if (snapshot.connectionState == ConnectionState.waiting){
+                                  return const Center(child: CircularProgressIndicator());
+                                }
+                                else if (snapshot.hasError) {
+                                  return Center(child: Text('Error: ${snapshot.error}'));
+                                }
+                                else if (!snapshot.hasData || snapshot.data==null) {
+                                  return const Center(child: Text('Không có dữ liệu.'));
+                                }
+                                else{
+                                  final absentDate = snapshot.data!;
+                                  var color = const Color(0xFF2F9B6C);
+                                  if (absentDate.absentStatus == tVangCoPhep){
+                                    color = const Color(0xFF284CB2);
+                                  }
+                                  else if (absentDate.absentStatus == tVangKhongPhep){
+                                    color = const Color(0xFFE53935);
+                                  }
+                                  else if (absentDate.absentStatus == tDenMuon){
+                                    color = Colors.black;
+                                  }
+                                  return Column(
+                                    children: [
+                                      const ChuyenCanFieldWidget(
+                                        fillColor: Colors.white,
+                                        field: tKhungGioVang,
+                                        fieldColor: Color(0xFFF91313),
+                                        value: tKhungGioHoatDongTuDo,
+                                        valueColor: Color(0xFFF91313),
+                                      ),
+                                      SizedBox(height: t5Size),
+                                      ChuyenCanFieldWidget(
+                                        fillColor: const Color(0xFFE9EFF7),
+                                        field: tTinhTrang,
+                                        fieldColor: Colors.black,
+                                        value: absentDate.absentStatus,
+                                        valueColor: color,
+                                      ),
+                                      SizedBox(height: t5Size),
+                                      ChuyenCanFieldWidget(
+                                        fillColor: Colors.white,
+                                        field: tAnhCheckin,
+                                        fieldColor: Colors.black,
+                                        value: tXemAnh,
+                                        valueColor: Colors.black,
+                                        isButton: true,
+                                        onPressed: (){
+                                          Get.to(const XemChiTietAnhCheckinScreen());
+                                        },
+                                      ),
+                                      SizedBox(height: t5Size),
+                                      ChuyenCanFieldWidget(
+                                        fillColor: const Color(0xFFE9EFF7),
+                                        field: tAnhCheckout,
+                                        fieldColor: Colors.black,
+                                        value: tXemAnh,
+                                        valueColor: Colors.black,
+                                        isButton: true,
+                                        onPressed: (){
+                                          Get.to(const XemChiTietAnhCheckoutScreen());
+                                        },
+                                      ),
+                                      SizedBox(height: t5Size),
+                                      ChuyenCanFieldWidget(
+                                        fillColor: Colors.white,
+                                        field: tThoiGianVaoLop,
+                                        fieldColor: Colors.black,
+                                        value: absentDate.checkinTime,
+                                        valueColor: Colors.black,
+                                      ),
+                                      SizedBox(height: t5Size),
+                                      ChuyenCanFieldWidget(
+                                        fillColor: const Color(0xFFE9EFF7),
+                                        field: tThoiGianRaKhoiLop,
+                                        fieldColor: Colors.black,
+                                        value: absentDate.checkoutTime,
+                                        valueColor: Colors.black,
+                                      ),
+                                      SizedBox(height: t5Size),
+                                      ChuyenCanFieldWidget(
+                                        fillColor: Colors.white,
+                                        field: tLyDo,
+                                        fieldColor: Colors.black,
+                                        value: absentDate.reason,
+                                        valueColor: Colors.black,
+                                      ),
+                                    ],
+                                  );
+                                }
+                              }
+
                             ),
-                          ),
-                          SizedBox(height: t5Size),
-                          const ChuyenCanFieldWidget(
-                            fillColor: Colors.white,
-                            field: tKhungGioVang,
-                            fieldColor: Color(0xFFF91313),
-                            value: tKhungGioHoatDongTuDo,
-                            valueColor: Color(0xFFF91313),
-                          ),
-                          SizedBox(height: t5Size),
-                          const ChuyenCanFieldWidget(
-                            fillColor: Color(0xFFE9EFF7),
-                            field: tTinhTrang,
-                            fieldColor: Colors.black,
-                            value: tVangCoPhep,
-                            valueColor: Color(0xFF284CB2),
-                          ),
-                          SizedBox(height: t5Size),
-                          ChuyenCanFieldWidget(
-                            fillColor: Colors.white,
-                            field: tAnhCheckin,
-                            fieldColor: Colors.black,
-                            value: tXemAnh,
-                            valueColor: Colors.black,
-                            isButton: true,
-                            onPressed: (){
-                              Get.to(const XemChiTietAnhCheckinScreen());
-                            },
-                          ),
-                          SizedBox(height: t5Size),
-                          ChuyenCanFieldWidget(
-                            fillColor: const Color(0xFFE9EFF7),
-                            field: tAnhCheckout,
-                            fieldColor: Colors.black,
-                            value: tXemAnh,
-                            valueColor: Colors.black,
-                            isButton: true,
-                            onPressed: (){
-                              Get.to(const XemChiTietAnhCheckoutScreen());
-                            },
-                          ),
-                          SizedBox(height: t5Size),
-                          const ChuyenCanFieldWidget(
-                            fillColor: Colors.white,
-                            field: tThoiGianVaoLop,
-                            fieldColor: Colors.black,
-                            value: t7h,
-                            valueColor: Colors.black,
-                          ),
-                          SizedBox(height: t5Size),
-                          const ChuyenCanFieldWidget(
-                            fillColor: Color(0xFFE9EFF7),
-                            field: tThoiGianRaKhoiLop,
-                            fieldColor: Colors.black,
-                            value: t7h30,
-                            valueColor: Colors.black,
-                          ),
-                          SizedBox(height: t5Size),
-                          const ChuyenCanFieldWidget(
-                            fillColor: Colors.white,
-                            field: tLyDo,
-                            fieldColor: Colors.black,
-                            value: tBiOm,
-                            valueColor: Colors.black,
                           ),
                         ],
                       ),

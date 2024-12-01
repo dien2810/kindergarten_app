@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/constants/sizes.dart';
+import 'package:kindergarten_app/src/features/student/models/activities/activities_event.dart';
+import 'package:kindergarten_app/src/features/student/models/type_of_activity/type_of_activity_model.dart';
 
-import '../../../controllers/hoat_dong_su_kien_controller.dart';
+import '../../../../../constants/text_strings.dart';
 import 'chi_tiet_hinh_anh_hoat_dong_screen.dart';
 import 'chi_tiet_video_hoat_dong_screen.dart';
 
 class ChiTietHoatDongScreen extends StatelessWidget {
-  final Event event;
+  final ActivityEvent activityEvent;
+  final TypeOfActivityModel? typeOfActivity;
 
-  ChiTietHoatDongScreen({required this.event});
+  const ChiTietHoatDongScreen({super.key, required this.activityEvent, required this.typeOfActivity});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +32,7 @@ class ChiTietHoatDongScreen extends StatelessWidget {
         padding: EdgeInsets.all(t10Size),
         child: SingleChildScrollView(
           child: SizedBox(
-            height: t100Size*5.2,
+            height: t100Size*7,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -38,27 +41,27 @@ class ChiTietHoatDongScreen extends StatelessWidget {
                 _buildCard(
                   children: [
                     const Text('Tên hoạt động: ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16,color: Color(0xFF7B7B7B))),
-                    Text('${event.name}', style: _contentStyle), // Content here
+                    Text(activityEvent.activityName, style: _contentStyle), // Content here
 
                     const SizedBox(height: 8),
 
                     const Text('Thời gian: ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16,color: Color(0xFF7B7B7B))),
-                    Text('${event.startTime} - ${event.endTime}', style: _contentStyle),
-
-                    SizedBox(height: 8),
-
-                    const Text('Thời lượng: ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16,color: Color(0xFF7B7B7B))),
-                    Text('${event.duration}', style: _contentStyle),
+                    Text('${activityEvent.startTime} - ${activityEvent.endTime}', style: _contentStyle),
 
                     const SizedBox(height: 8),
 
-                    Text('Loại hoạt động: ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16,color: Color(0xFF7B7B7B))),
-                    Text('${event.typeOfActivityName}', style: _contentStyle),
+                    const Text('Thời lượng: ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16,color: Color(0xFF7B7B7B))),
+                    Text(activityEvent.duration, style: _contentStyle),
+
+                    const SizedBox(height: 8),
+
+                    const Text('Loại hoạt động: ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16,color: Color(0xFF7B7B7B))),
+                    Text(typeOfActivity!.typeName, style: _contentStyle),
 
                     const SizedBox(height: 8),
 
                     const Text('Địa điểm: ', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16 ,color: Color(0xFF7B7B7B))),
-                    Text('${event.location}', style: _contentStyle),
+                    Text(activityEvent.location, style: _contentStyle),
                   ],
                 ),
                 SizedBox(height: t10Size),
@@ -68,15 +71,15 @@ class ChiTietHoatDongScreen extends StatelessWidget {
                 _buildCard(
                   children: [
                     ListTile(
-                      title: Text('Hình ảnh hoạt động', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16,color: Color(0xFF7B7B7B))),
-                      subtitle: Text('Số lượng:  ${event.images.length}', style: _contentStyle),
+                      title: const Text('Hình ảnh hoạt động', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16,color: Color(0xFF7B7B7B))),
+                      subtitle: Text('Số lượng:  ${activityEvent.image.length}', style: _contentStyle),
                       trailing: SizedBox(
                         child: ElevatedButton(
                           onPressed: () {
-                            Get.to(() => HinhAnhScreen(images: event.images));
+                            Get.to(() => HinhAnhScreen(images: activityEvent.image));
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFFD74971), // Background color
+                            backgroundColor: const Color(0xFFD74971), // Background color
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10), // Rounded corners
                             ),
@@ -98,17 +101,17 @@ class ChiTietHoatDongScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Divider(),
+                    const Divider(),
                     ListTile(
                       title: const Text('Video hoạt động', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16,color: Color(0xFF7B7B7B))),
                       trailing: SizedBox(
                         width: 150, // Set the fixed width for the button
                         child: ElevatedButton(
                           onPressed: () {
-                            Get.to(() => VideoScreen(videoLink: event.videoLive));
+                            Get.to(() => VideoScreen(videoLink: activityEvent.videoLive));
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFFD74971), // Background color
+                            backgroundColor: const Color(0xFFD74971), // Background color
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10), // Rounded corners
                             ),
@@ -145,12 +148,12 @@ class ChiTietHoatDongScreen extends StatelessWidget {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16,color: Color(0xFF7B7B7B))),
                     SizedBox(height: t10Size),
                     Text(
-                      'Ghi chú: ${event.studentsNote}',
+                      'Ghi chú: ${activityEvent.studentsNote.isNotEmpty?activityEvent.studentsNote:tKhongCo}',
                       style: _contentStyle,
                     ),
                   ],
                 ),
-                Spacer(),
+                const Spacer(),
 
                 // Nút quay lại danh sách
                 Align(
@@ -191,7 +194,7 @@ class ChiTietHoatDongScreen extends StatelessWidget {
   Widget _buildSectionTitle(String title) {
     return Text(
       title,
-      style: TextStyle(
+      style: const TextStyle(
         fontWeight: FontWeight.bold,
         fontSize: 18,
         color: Color(0xFFD74971), // Màu D74971
@@ -206,7 +209,7 @@ class ChiTietHoatDongScreen extends StatelessWidget {
       widthFactor: 1, // Ensure the card takes the full width of the parent
       child: Card(
         elevation: 4,
-        margin: EdgeInsets.symmetric(vertical: 8),
+        margin: const EdgeInsets.symmetric(vertical: 8),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         child: Padding(
           padding: const EdgeInsets.all(16.0),

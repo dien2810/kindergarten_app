@@ -27,6 +27,7 @@ class LoginController extends GetxController{
       if (role.value == Role.guardian && account.role == Role.guardian) {
         accountRepo.userId = account.username;
         accountRepo.fullName = account.fullname;
+
         Get.offAll(() => const GuardianNavigationMenu());
       } else if (role.value == Role.teacher && account.role == Role.teacher) {
         accountRepo.userId = account.username;

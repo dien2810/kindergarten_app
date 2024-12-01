@@ -13,10 +13,8 @@ class StudentRepository extends GetxController{
   // Thêm một document mới vào Firestore
   Future<StudentModel?> getStudentById() async {
     final snapshot = await _studentCollection.doc(_accountRepo.userId).get();
-
     if (snapshot.exists && snapshot.data() != null) {
       final data = snapshot.data() as Map<String, dynamic>;
-      print('Data: $data');
       return StudentModel.fromMap(data); // Chuyển đổi dữ liệu thành model
     } else {
       return null; // Document không tồn tại hoặc không có dữ liệu

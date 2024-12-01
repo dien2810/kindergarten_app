@@ -1,16 +1,16 @@
 class StudentProfile {
-  final String studentID;
-  late final String name;
-  late final String gender;
-  late final String dateOfBirth;
-  late final String school;
-  late final String educationSystem;
-  final String fatherFullname;
-  final String fatherOccupation;
-  final String motherFullname;
-  final String motherOccupation;
+  String studentID;
+  late String name;
+  late String gender;
+  late String dateOfBirth;
+  late String school;
+  late String educationSystem;
+  late String fatherFullname;
+  late String fatherOccupation;
+  late String motherFullname;
+  late String motherOccupation;
   final String studentClass;
-  late final int gradeLevel;
+  late int gradeLevel;
 
   StudentProfile({
     required this.studentID,

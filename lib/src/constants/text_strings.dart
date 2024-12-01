@@ -179,13 +179,13 @@ const String tHuy = 'Hủy';
 const String tDaThemThanhCong = 'Đã thêm thành công';
 //ThucDonScreen
 const String tBuaSang = 'Bữa sáng';
-const String tTenMon = 'Tên món: Bánh mì Sandwich';
+const String tTenMon = 'Tên món:';
 const String tLuaChon = 'Lựa chọn: Cháo thịt bò, cháo cá, cháo rau củ';
 const String tThemGhiChu = 'Thêm ghi chú';
 const String tTuan = 'Tuần';
 //ChiTietMonAnScreen
 const String tChiTietMonAn = 'Chi tiết món ăn';
-const String tThanhPhanCoTrongMonAn = 'Thành phần có trong món ăn:\nthịt bò\nhành tây';
+const String tThanhPhanCoTrongMonAn = 'Thành phần có trong món ăn:\n';
 //ThemGhiChuMoiScreen
 const String tThemGhiChuMoi = 'Thêm ghi chú mới';
 const String tNoiDungGhiChu = 'Nội dung ghi chú';

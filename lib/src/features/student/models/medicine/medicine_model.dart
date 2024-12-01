@@ -43,7 +43,7 @@ class MedicineModel{
   // Chuyển đổi MedicineModel thành một Map để lưu trữ trong Firestore
   Map<String, dynamic> toJson() {
     return {
-      'dates': createDate,
+      'createDate': createDate,
       //'medicineDetails': medicineDetails.map((detail) => detail.toMap()).toList(),
       'note': note,
       'prescription': prescription,

@@ -43,6 +43,7 @@ class ThongTinSucKhoeController extends GetxController{
   final chiSoBMI = TextEditingController();
   final theChat = TextEditingController();
   final ghiChu = TextEditingController(text: 'Không có');
+  var vaccineInformationId = '';
 
   final matPhaiKhongKinh = TextEditingController();
   final matTraiKhongKinh = TextEditingController();
@@ -100,6 +101,7 @@ class ThongTinSucKhoeController extends GetxController{
     chiSoBMI.text = healthInformation.BMIIndex.toString();
     theChat.text = healthInformation.physicalType;
     ghiChu.text = healthInformation.note;
+    vaccineInformationId = healthInformation.vaccineInformation;
   }
 
   void loadHealthHistoryData(HealthHistoryModel healthHistory){
@@ -331,7 +333,7 @@ class ThongTinSucKhoeController extends GetxController{
       bloodpressure: huyetAp.text,
       BMIIndex: bmiIndex,
       physicalType: theChat.text,
-      vaccineInformation: '',
+      vaccineInformation: vaccineInformationId,
       note: ghiChu.text.toString().trim(),
       studentID: _accountRepo.userId,
     );
@@ -347,7 +349,6 @@ class ThongTinSucKhoeController extends GetxController{
           message: e.toString()
       );
     }
-
   }
 
   void updateMedicalRecordKhamTab() async{

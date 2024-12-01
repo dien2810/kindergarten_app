@@ -6,6 +6,7 @@ import 'package:weekly_date_picker/weekly_date_picker.dart';
 import '../../../../../common_widgets/app_bar_widgets/guardian_app_bar_with_title.dart';
 import '../../../../../constants/colors.dart';
 import '../../../../../constants/sizes.dart';
+import '../../../../../utils/helper_controller/helper_controller.dart';
 import '../../../controllers/chuyen_can/chuyen_can_controller.dart';
 
 class XemChiTietAnhCheckinScreen extends StatelessWidget {
@@ -56,7 +57,7 @@ class XemChiTietAnhCheckinScreen extends StatelessWidget {
                 children: [
                   SingleChildScrollView(
                     child: Container(
-                      height: 600,
+                      height: t100Size*6,
                       padding: EdgeInsets.all(t15Size),
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -84,32 +85,59 @@ class XemChiTietAnhCheckinScreen extends StatelessWidget {
                             ),
                           )),
                           SizedBox(height: t10Size,),
-                          const Text(
-                            tThu5,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w800,
-                                fontSize: 24,
-                                color: Color(0xFF03045E)
+                          Obx(()=>FutureBuilder(
+                              future: chuyenCanController.getAbsentByDateTime(
+                                  chuyenCanController.selectedDay.value
+                              ),
+                              builder: (context, snapshot){
+                                if (snapshot.connectionState == ConnectionState.waiting){
+                                  return const Center(child: CircularProgressIndicator());
+                                }
+                                else if (snapshot.hasError) {
+                                  return Center(child: Text('Error: ${snapshot.error}'));
+                                }
+                                else if (!snapshot.hasData || snapshot.data==null) {
+                                  return const Center(child: Text('Không có dữ liệu.'));
+                                }
+                                else {
+                                  final thu = Helper.formatDateTime(chuyenCanController.selectedDay.value);
+                                  final absentDate = snapshot.data!;
+                                  return Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        thu,
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.w800,
+                                            fontSize: 24,
+                                            color: Color(0xFF03045E)
+                                        ),
+                                      ),
+                                      SizedBox(height: t15Size),
+                                      const Text(
+                                        tAnhCheckin,
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                      SizedBox(height: t15Size),
+                                      Text(
+                                        '$tThoiGianVaoLop: ${absentDate.checkinTime}',
+                                        style: const TextStyle(
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                      SizedBox(height: t10Size),
+                                      Container(
+                                        height: t100Size * 2.5,
+                                        color: const Color(0xFFD9D9D9),
+                                      ),
+                                    ],
+                                  );
+                                }
+                              }
+
                             ),
-                          ),
-                          SizedBox(height: t15Size),
-                          const Text(
-                            tAnhCheckin,
-                            style: TextStyle(
-                                fontSize: 18,
-                            ),
-                          ),
-                          SizedBox(height: t15Size),
-                          const Text(
-                            '$tThoiGianVaoLop : (thời gian vào lớp)',
-                            style: TextStyle(
-                              fontSize: 18,
-                            ),
-                          ),
-                          SizedBox(height: t10Size),
-                          Container(
-                            height: t100Size*3,
-                            color: const Color(0xFFD9D9D9),
                           ),
                           SizedBox(height: t15Size),
                           Align(

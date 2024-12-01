@@ -2,7 +2,7 @@ import 'package:kindergarten_app/src/features/student/models/student/studentDocu
 import 'package:kindergarten_app/src/features/student/models/student/studentProfile_model.dart';
 
 class StudentModel {
-  final String? id;
+  String? id;
   final StudentDocument studentDocument;
   final StudentProfile studentProfile;
 

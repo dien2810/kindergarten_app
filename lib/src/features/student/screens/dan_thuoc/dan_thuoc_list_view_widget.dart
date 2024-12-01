@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/features/student/controllers/dan_thuoc/dan_thuoc_controller.dart';
+import 'package:kindergarten_app/src/repository/account_repository/account_repository.dart';
 
 import '../../../../constants/colors.dart';
 import '../../../../constants/image_strings.dart';
@@ -17,8 +18,9 @@ class DanThuocListViewWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final danThuocController = Get.put(DanThuocController());
+    final accountRepo = Get.put(AccountRepository());
     return FutureBuilder<List<MedicineModel>>(
-      future: danThuocController.getMedicineData("student_id_1"),
+      future: danThuocController.getMedicineData(accountRepo.userId),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting){
           return const Center(child: CircularProgressIndicator());

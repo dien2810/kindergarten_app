@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:kindergarten_app/src/constants/image_strings.dart';
 import 'package:kindergarten_app/src/constants/text_strings.dart';
 
+import '../../../../../common_widgets/button_widget/custom_button_widget.dart';
+import '../../../../../constants/sizes.dart';
 import '../../../controllers/thong_tin_suc_khoe/thong_tin_suc_khoe_controller.dart';
 
 class LoiKhuyenBacSiWidget extends StatelessWidget {
@@ -27,8 +29,7 @@ class LoiKhuyenBacSiWidget extends StatelessWidget {
               fontSize: 18,
             ),
           ),
-          const SizedBox(height: 16),
-
+          SizedBox(height: t10Size),
           // Row chứa ảnh và nội dung dạng khung hội thoại
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -100,6 +101,15 @@ class LoiKhuyenBacSiWidget extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+          SizedBox(height: t20Size),
+          CustomButtonWidget(
+            width: t10Size*20,
+            color: const Color(0xFF03045E),
+            text: tCapNhat,
+            onPressed: (){
+              controller.updateMedicalRecordKhamTab();
+            },
           ),
         ],
       ),

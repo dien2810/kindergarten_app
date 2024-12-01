@@ -74,7 +74,7 @@ class ThongTinSucKhoeScreen extends StatelessWidget {
                       length: 4,
                       child: SingleChildScrollView(
                         child: Container(
-                          height: t100Size*6,
+                          height: t100Size*6.5,
                           padding: EdgeInsets.all(t10Size),
                           decoration: BoxDecoration(
                             color: Colors.white,

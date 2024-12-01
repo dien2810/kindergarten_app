@@ -5,9 +5,11 @@ import '../../../../common_widgets/app_bar_widgets/guardian_app_bar_with_title.d
 import '../../../../constants/image_strings.dart';
 import '../../../../constants/sizes.dart';
 import '../../../../constants/text_strings.dart';
+import '../../models/menu/menu_item.dart';
 
 class ThemGhiChuMoiScreen extends StatelessWidget {
-  const ThemGhiChuMoiScreen({super.key});
+  const ThemGhiChuMoiScreen({super.key, required this.menuItem});
+  final MenuItem menuItem;
 
   @override
   Widget build(BuildContext context) {
@@ -84,14 +86,14 @@ class ThemGhiChuMoiScreen extends StatelessWidget {
                                     flex: 2,
                                     child: Container(
                                         padding: EdgeInsets.all(t10Size),
-                                        child: const Column(
+                                        child: Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Center(
                                               child: Text(
-                                                tTenMon,
+                                                '$tTenMon${menuItem.name}',
                                                 overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     color: Colors.white,
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 16
@@ -160,8 +162,8 @@ class ThemGhiChuMoiScreen extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(30)
                                     )
                                 ),
-                                onPressed: () {
-
+                                onPressed: () async {
+                                  await themMoiGhiChuController.themMoiGhiChu(menuItem);
                                 },
                                 child: Container(
                                   padding: EdgeInsets.all(t10Size),

@@ -1,7 +1,10 @@
+import 'package:cloudinary_flutter/cloudinary_context.dart';
+import 'package:cloudinary_url_gen/cloudinary.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kindergarten_app/src/constants/cloud_params.dart';
 import 'package:kindergarten_app/src/features/authentication/screens/login_screen/login_screen.dart';
 import 'package:kindergarten_app/src/utils/theme.dart';
 import 'firebase_options.dart';
@@ -11,6 +14,8 @@ void main()  async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
       // .then((value) => Get.put(AuthenticationRepository()));
+  CloudinaryContext.cloudinary =
+      Cloudinary.fromCloudName(cloudName: tCloudName);
   runApp(const MyApp());
 }
 

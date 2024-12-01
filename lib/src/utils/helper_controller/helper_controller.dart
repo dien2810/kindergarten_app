@@ -1,7 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:kindergarten_app/src/constants/cloud_params.dart';
 import 'package:kindergarten_app/src/constants/sizes.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:http/http.dart' as http;
 
 class Helper extends GetxController{
   static String formatDateTime(DateTime dateTime) {
@@ -84,4 +89,29 @@ class Helper extends GetxController{
       icon: const Icon(LineAwesomeIcons.check_circle, color: Colors.white),
     );
   }
+
+  static Future<String> uploadImage(XFile? imageFile) async{
+    final url = Uri.parse('https://api.cloudinary.com/v1_1/$tCloudName/upload');
+    final request = http.MultipartRequest('POST', url)
+    ..fields['upload_preset'] = tUploadPreset
+    ..files.add(await http.MultipartFile.fromPath('file', imageFile!.path));
+    final response = await request.send();
+    if (response.statusCode == 200) {
+      final responseData = await response.stream.toBytes();
+      final responseString = String.fromCharCodes(responseData);
+      final jsonMap = jsonDecode(responseString);
+      return jsonMap['url'];
+    }
+    else{
+      return '';
+    }
+  }
+
+  static String formatDateToString(DateTime dateTime) {
+    final day = dateTime.day.toString().padLeft(2, '0'); // Đảm bảo có 2 chữ số
+    final month = dateTime.month.toString().padLeft(2, '0'); // Đảm bảo có 2 chữ số
+    final year = dateTime.year.toString();
+    return "$day/$month/$year";
+  }
+
 }

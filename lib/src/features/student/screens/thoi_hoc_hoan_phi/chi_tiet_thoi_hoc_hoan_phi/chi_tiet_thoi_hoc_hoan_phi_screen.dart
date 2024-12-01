@@ -7,6 +7,7 @@ import 'package:kindergarten_app/src/features/student/screens/thoi_hoc_hoan_phi/
 
 import '../../../../../constants/colors.dart';
 import '../../../../../constants/sizes.dart';
+import '../../../../../repository/account_repository/account_repository.dart';
 
 class ChiTietThoiHocHoanPhiScreen extends StatelessWidget {
   const ChiTietThoiHocHoanPhiScreen({
@@ -22,7 +23,7 @@ class ChiTietThoiHocHoanPhiScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+  final accountRepo = Get.put(AccountRepository());
     return DefaultTabController(
       length: 1,
       child: Scaffold(
@@ -108,7 +109,7 @@ class ChiTietThoiHocHoanPhiScreen extends StatelessWidget {
                                 ),
                                 SizedBox(height: t5Size,),
                                 Text(
-                                    tHoVaTen+refund.formType
+                                    '$tHoVaTen${accountRepo.fullName}'
                                 ),
                                 SizedBox(height: t5Size,),
                               ],

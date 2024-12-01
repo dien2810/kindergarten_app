@@ -6,17 +6,19 @@ import 'package:kindergarten_app/src/features/student/screens/thuc_don/them_ghi_
 import '../../../../constants/image_strings.dart';
 import '../../../../constants/sizes.dart';
 import '../../../../constants/text_strings.dart';
+import '../../models/menu/menu_item.dart';
 
 class ThucDonCardWidget extends StatelessWidget {
   const ThucDonCardWidget({
-    super.key,
+    super.key, required this.menuItem,
   });
+  final MenuItem menuItem;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        Get.to(const ChiTietMonAnScreen());
+        Get.to(ChiTietMonAnScreen(menuItem: menuItem,));
       },
       child: Container(
           decoration: BoxDecoration(
@@ -34,11 +36,11 @@ class ThucDonCardWidget extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          tTenMon,
+                        Text(
+                          '$tTenMon${menuItem.name}',
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 14
@@ -56,7 +58,7 @@ class ThucDonCardWidget extends StatelessWidget {
                         SizedBox(height: t5Size,),
                         ElevatedButton(
                           onPressed: (){
-                            Get.to(const ThemGhiChuMoiScreen());
+                            Get.to(ThemGhiChuMoiScreen(menuItem: menuItem,));
                           },
                           style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFFCAF0F8),

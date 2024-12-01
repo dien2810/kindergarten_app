@@ -23,11 +23,11 @@ class ThoiHocHoanPhiScreen extends StatelessWidget {
         bottomNavigationBar: BottomNavigationBarWidget(controller: guardianNavigationMenuController),
         floatingActionButton: FloatingActionButton(
           backgroundColor: const Color(0xFFADE25D),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(t50Size)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
           child: Icon(
             Icons.add_rounded,
             color: Colors.white,
-            size: t50Size,
+            size: t40Size,
           ),
           onPressed: (){
             Get.to(const ThemThoiHocHoanPhiScreen());

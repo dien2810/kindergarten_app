@@ -93,7 +93,7 @@ class ChiTietDanThuocScreen extends StatelessWidget {
                           SizedBox(height: t10Size,),
                           Container(
                             color: const Color(0xFFDAF6F4),
-                            height: t80Size,
+                            //height: t80Size,
                             child: Align(
                               alignment: Alignment.topLeft,
                               child: InformationWidget(
@@ -106,7 +106,7 @@ class ChiTietDanThuocScreen extends StatelessWidget {
                           SizedBox(height: t10Size,),
                           Container(
                             color: const Color(0xFFDAF6F4),
-                            height: t120Size,
+                            //height: t120Size,
                             child: Align(
                               alignment: Alignment.topLeft,
                               child: InformationWidget(
@@ -119,7 +119,7 @@ class ChiTietDanThuocScreen extends StatelessWidget {
                           SizedBox(height: t10Size,),
                           Container(
                             color: const Color(0xFFDAF6F4),
-                            height: t100Size,
+                            //height: t100Size,
                             child: Align(
                               alignment: Alignment.topLeft,
                               child: InformationWidget(
