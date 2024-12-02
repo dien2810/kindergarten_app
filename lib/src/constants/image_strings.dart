@@ -46,3 +46,15 @@ const String tGiangDayScreenLinkIcon = 'assets/images/hoc_duong_images/giang_day
 const String tNgoaiKhoaScreenLinkIcon = 'assets/images/hoc_duong_images/ngoai_khoa_screen_link_icon.png';
 const String tThucDonScreenLinkIcon = 'assets/images/hoc_duong_images/thuc_don_screen_link_icon.png';
 // Ngoại khóa : ngoai_khoa_screen.dart
+
+
+// -- Giang day : Danh sach hoc sinh screen
+const String tHocSinhAvatarItem1 = 'assets/images/giang_day_images/hoc_sinh_avatar_item_1.jpg';
+const String tHocSinhAvatarItem2 = 'assets/images/giang_day_images/hoc_sinh_avatar_item_2.png';
+const String tHocSinhAvatarItem3 = 'assets/images/giang_day_images/hoc_sinh_avatar_image_3.png';
+
+
+//  Teacher : teacher_tin_tuc_screen.dart
+const String tTinTucImageItem1 = 'assets/images/tin_tuc_images/tin_tuc_image_item_1.png';
+const String tTaiKhoanGuargianHeader = 'assets/images/tai_khoan_images/tai_khoan_guardian_header.png';
+const String tTaiKhoanAvatarThayThe = 'assets/images/tai_khoan_images/tai_khoan_avatar_thay_the.png';

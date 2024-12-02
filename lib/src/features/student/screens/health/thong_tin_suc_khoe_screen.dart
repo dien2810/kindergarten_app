@@ -84,6 +84,7 @@ class ThongTinSucKhoeScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const TabBar.secondary(
+                                isScrollable: true,
                                 automaticIndicatorColorAdjustment: false,
                                 unselectedLabelColor: Color(0xFF757575),
                                 labelColor: tWhiteColor,

@@ -105,7 +105,7 @@ dependency_overrides:
   flutter_screenutil: ^5.9.3
   permission_handler: ^10.0.0
   camera: ^0.10.0+1
-
+  url_launcher: ^6.0.20
 dev_dependencies:
   flutter_launcher_icons: 0.13.1
   #  flutterflow_debug_panel:
@@ -166,6 +166,9 @@ flutter:
     - assets/images/thoi_hoc_hoan_phi_images/
     - assets/images/homepage_images/
     - assets/images/hoc_duong_images/
+    - assets/images/giang_day_images/
+    - assets/images/tin_tuc_images/
+    - assets/images/tai_khoan_images/
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
