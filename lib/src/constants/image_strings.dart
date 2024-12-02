@@ -37,3 +37,5 @@ const String tHocSinhAvatarItem3 = 'assets/images/giang_day_images/hoc_sinh_avat
 
 //  Teacher : teacher_tin_tuc_screen.dart
 const String tTinTucImageItem1 = 'assets/images/tin_tuc_images/tin_tuc_image_item_1.png';
+const String tTaiKhoanGuargianHeader = 'assets/images/tai_khoan_images/tai_khoan_guardian_header.png';
+const String tTaiKhoanAvatarThayThe = 'assets/images/tai_khoan_images/tai_khoan_avatar_thay_the.png';

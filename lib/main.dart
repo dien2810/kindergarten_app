@@ -5,6 +5,7 @@ import 'package:kindergarten_app/src/constants/image_strings.dart';
 import 'package:kindergarten_app/src/features/student/screens/dan_thuoc/dan_thuoc_screen.dart';
 import 'package:kindergarten_app/src/features/student/screens/hoat_dong_su_kien/screen/hoat_dong_su_kien_screen.dart';
 import 'package:kindergarten_app/src/features/student/screens/ngoai_khoa/screen/ngoai_khoa_screen.dart';
+import 'package:kindergarten_app/src/features/student/screens/tai_khoan/screen/tai_khoan_screen.dart';
 import 'package:kindergarten_app/src/features/student/screens/thuc_don/thuc_don_screen.dart';
 import 'package:kindergarten_app/src/features/teacher/controllers/ngoai_khoa/teacher_ngoai_khoa_controller.dart';
 import 'package:kindergarten_app/src/features/teacher/routes/hoc_duong_route.dart';
@@ -45,8 +46,9 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       //home: TeacherTinTucScreen(),
       // đường dẫn của học đường bên giáo viên
-      initialRoute: '/HocDuong',
-      getPages: HocDuongRoutes.routes,
+     // initialRoute: '/HocDuong',
+      //getPages: HocDuongRoutes.routes,
+      home: TaiKhoanScreen(),
       //home: const TeacherThongBaoScreen(sentBy: "teacher_id_1"),
       //home:ThongTinSucKhoeScreen() ,
       //home: const TeacherThongTinSucKhoeHocSinhScreen(studentName: 'sss', imageUrl: tHocSinhAvatarItem3),
