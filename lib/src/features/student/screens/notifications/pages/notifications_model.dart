@@ -13,7 +13,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class NotificationsModel extends FlutterFlowModel<NotificationsWidget> {
+class NotificationsPageModel extends FlutterFlowModel<NotificationsWidget> {
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for TextField widget.

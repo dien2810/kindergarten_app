@@ -1,7 +1,11 @@
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/constants/sizes.dart';
+import 'package:kindergarten_app/src/features/student/controllers/thong_bao/notifications_controller.dart';
 import 'package:kindergarten_app/src/features/student/screens/notifications/pages/notification_info.dart';
+import 'package:kindergarten_app/src/repository/teacher_repository/teacher_repository.dart';
 
+import '../../../../../repository/account_repository/account_repository.dart';
+import '../../../models/notifications/notifications_model.dart';
 import '../../student_information/screen/student_information_screen.dart';
 import '../components/NavigationBarBottom/navigation_bar_bottom_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
@@ -24,7 +28,7 @@ class NotificationsWidget extends StatefulWidget {
 
 class _NotificationsWidgetState extends State<NotificationsWidget>
     with TickerProviderStateMixin {
-  late NotificationsModel _model;
+  late NotificationsPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -33,7 +37,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => NotificationsModel());
+    _model = createModel(context, () => NotificationsPageModel());
 
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
@@ -78,6 +82,8 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
 
   @override
   Widget build(BuildContext context) {
+    final accountRepo = Get.put(AccountRepository());
+    final notificationController = Get.put(NotificationsController());
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -116,7 +122,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                     Align(
                       alignment: const AlignmentDirectional(0.06, -0.24),
                       child: Text(
-                        'Nguyễn Văn Thành',
+                        accountRepo.fullName,
                         style: FlutterFlowTheme.of(context).bodyLarge.override(
                           fontFamily: 'Inter',
                           color: const Color(0xFFCAF0F8),
@@ -125,16 +131,21 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                         ),
                       ),
                     ),
-                    Align(
-                      alignment: const AlignmentDirectional(0.04, 0.12),
-                      child: Text(
-                        'Thông tin học sinh',
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Inter',
-                          color: const Color(0xFFCAF0F8),
-                          letterSpacing: 0.0,
-                          fontWeight: FontWeight.w600,
-                          decoration: TextDecoration.underline,
+                    GestureDetector(
+                      onTap: (){
+                        Get.to(const ThongTinHocSinhScreen());
+                      },
+                      child: Align(
+                        alignment: const AlignmentDirectional(0.04, 0.12),
+                        child: Text(
+                          'Thông tin học sinh',
+                          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Inter',
+                            color: const Color(0xFFCAF0F8),
+                            letterSpacing: 0.0,
+                            fontWeight: FontWeight.w600,
+                            decoration: TextDecoration.underline,
+                          ),
                         ),
                       ),
                     ),
@@ -268,207 +279,46 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          ListView(
-                            padding: EdgeInsets.zero,
-                            reverse: true,
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            children: [
-                              GestureDetector(
-                                onTap: (){
-                                  Get.to(const NotificationInfoWidget());
-                                },
-                                child: Padding(
-                                  padding:
-                                  const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 7),
-                                  child: Container(
-                                    height: t60Size,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      boxShadow: const [
-                                        BoxShadow(
-                                          blurRadius: 2,
-                                          color: Color(0xFFE0E3E7),
-                                          offset: Offset(
-                                            3,
-                                            2,
-                                          ),
-                                        )
-                                      ],
-                                      borderRadius: BorderRadius.circular(16),
-                                    ),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        const Padding(
-                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                              4, 0, 0, 0),
-                                          child: FaIcon(
-                                            FontAwesomeIcons.calendar,
-                                            color: Color(0xFFF9BD3A),
-                                            size: 20,
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Padding(
-                                            padding:
-                                            const EdgeInsetsDirectional.fromSTEB(
-                                                12, 0, 12, 0),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsetsDirectional
-                                                      .fromSTEB(0, 0, 0, 2),
-                                                  child: Text(
-                                                    'Khởi động Cuộc thi Innovation Challenge năm học 2024 - 2025',
-                                                    style: FlutterFlowTheme.of(
-                                                        context)
-                                                        .labelSmall
-                                                        .override(
-                                                      fontFamily:
-                                                      'Plus Jakarta Sans',
-                                                      color:
-                                                      const Color(0xFF57636C),
-                                                      fontSize: 13,
-                                                      letterSpacing: 0.0,
-                                                      fontWeight:
-                                                      FontWeight.w800,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Row(
-                                                  mainAxisSize: MainAxisSize.max,
-                                                  children: [
-                                                    Expanded(
-                                                      child: Text(
-                                                        '14/03/2024',
-                                                        style: FlutterFlowTheme
-                                                            .of(context)
-                                                            .bodyMedium
-                                                            .override(
-                                                          fontFamily:
-                                                          'Plus Jakarta Sans',
-                                                          color: const Color(
-                                                              0xFF14181B),
-                                                          fontSize: 11.5,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                          FontWeight.w500,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: (){
-                                  Get.to(const NotificationInfoWidget());
-                                },
-                                child: Padding(
-                                  padding:
-                                  const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 7),
-                                  child: Container(
-                                    height: t60Size,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      boxShadow: const [
-                                        BoxShadow(
-                                          blurRadius: 2,
-                                          color: Color(0xFFE0E3E7),
-                                          offset: Offset(
-                                            3,
-                                            2,
-                                          ),
-                                        )
-                                      ],
-                                      borderRadius: BorderRadius.circular(16),
-                                    ),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        const Padding(
-                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                              4, 0, 0, 0),
-                                          child: FaIcon(
-                                            FontAwesomeIcons.calendar,
-                                            color: Color(0xFFF9BD3A),
-                                            size: 20,
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Padding(
-                                            padding:
-                                            const EdgeInsetsDirectional.fromSTEB(
-                                                12, 0, 12, 0),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsetsDirectional
-                                                      .fromSTEB(0, 0, 0, 2),
-                                                  child: Text(
-                                                    'Khởi động Cuộc thi Innovation Challenge năm học 2024 - 2025',
-                                                    style: FlutterFlowTheme.of(
-                                                        context)
-                                                        .labelSmall
-                                                        .override(
-                                                      fontFamily:
-                                                      'Plus Jakarta Sans',
-                                                      color:
-                                                      const Color(0xFF57636C),
-                                                      fontSize: 13,
-                                                      letterSpacing: 0.0,
-                                                      fontWeight:
-                                                      FontWeight.w800,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Row(
-                                                  mainAxisSize: MainAxisSize.max,
-                                                  children: [
-                                                    Expanded(
-                                                      child: Text(
-                                                        '14/03/2024',
-                                                        style: FlutterFlowTheme
-                                                            .of(context)
-                                                            .bodyMedium
-                                                            .override(
-                                                          fontFamily:
-                                                          'Plus Jakarta Sans',
-                                                          color: const Color(
-                                                              0xFF14181B),
-                                                          fontSize: 11.5,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                          FontWeight.w500,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
+                          FutureBuilder(
+                            future: notificationController.getNotificationsListData(),
+                            builder: (context, snapshot){
+                              if (snapshot.connectionState == ConnectionState.waiting){
+                                return const Center(child: CircularProgressIndicator());
+                              }
+                              else if (snapshot.hasError) {
+                                return Center(child: Text('Error: ${snapshot.error}'));
+                              }
+                              else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                                return const Center(child: Text('Không có dữ liệu.'));
+                              }
+                              else{
+                                final notifications = snapshot.data!;
+                                return ListView.builder(
+                                  itemCount: notifications.length,
+                                  padding: EdgeInsets.zero,
+                                  reverse: true,
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.vertical,
+                                  itemBuilder: (context, index){
+                                    final notification = notifications[index];
+                                    notificationController.notification = notification;
+                                    return GestureDetector(
+                                      onTap: () async {
+                                        final teacherRepo = Get.put(TeacherRepository());
+                                        notificationController.teacher = (await teacherRepo.getTeacherById(
+                                          notification.sentBy
+                                        ))!;
+                                        Get.to(const NotificationInfoWidget());
+                                      },
+                                      child: NotificationItem(
+                                        notification: notification
+                                      ),
+                                    );
+                                  }
+                                );
+                              }
+                            },
+
                           ),
                         ],
                       ),
@@ -487,6 +337,109 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class NotificationItem extends StatelessWidget {
+  const NotificationItem({
+    super.key, required this.notification,
+  });
+  final NotificationsModel notification;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding:
+      const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 7),
+      child: Container(
+        height: t60Size,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: const [
+            BoxShadow(
+              blurRadius: 2,
+              color: Color(0xFFE0E3E7),
+              offset: Offset(
+                3,
+                2,
+              ),
+            )
+          ],
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            const Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(
+                  4, 0, 0, 0),
+              child: FaIcon(
+                FontAwesomeIcons.calendar,
+                color: Color(0xFFF9BD3A),
+                size: 20,
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding:
+                const EdgeInsetsDirectional.fromSTEB(
+                    12, 0, 12, 0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment:
+                  CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsetsDirectional
+                          .fromSTEB(0, 0, 0, 2),
+                      child: Text(
+                        notification.title,
+                        style: FlutterFlowTheme.of(
+                            context)
+                            .labelSmall
+                            .override(
+                          fontFamily:
+                          'Plus Jakarta Sans',
+                          color:
+                          const Color(0xFF57636C),
+                          fontSize: 13,
+                          letterSpacing: 0.0,
+                          fontWeight:
+                          FontWeight.w800,
+                        ),
+                      ),
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            notification.dateSent,
+                            style: FlutterFlowTheme
+                                .of(context)
+                                .bodyMedium
+                                .override(
+                              fontFamily:
+                              'Plus Jakarta Sans',
+                              color: const Color(
+                                  0xFF14181B),
+                              fontSize: 11.5,
+                              letterSpacing: 0.0,
+                              fontWeight:
+                              FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

@@ -13,7 +13,7 @@ class NgoaiKhoaScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   // final controller = Get.put(NgoaiKhoaController());
+    // final controller = Get.put(NgoaiKhoaController());
     final guardianNavigationMenuController = Get.put(GuardianNavigationMenuController());
     return DefaultTabController(
       length: 2,

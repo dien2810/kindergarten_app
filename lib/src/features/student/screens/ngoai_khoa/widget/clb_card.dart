@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:kindergarten_app/src/constants/sizes.dart';
+import 'package:kindergarten_app/src/features/student/controllers/ngoai_khoa/ngoai_khoa_controller.dart';
+import 'package:kindergarten_app/src/utils/helper_controller/helper_controller.dart';
 
+import '../../../models/club/club_model.dart';
 import 'chi_tiet_clb_card_screen.dart';
 
 class ClubCard extends StatelessWidget {
@@ -17,19 +22,21 @@ class ClubCard extends StatelessWidget {
   final String xemChiTietCLBIcon = 'assets/images/ngoai_khoa_images/xem_chi_tiet_clb_icon.png';
 
   final int backgroundIndex;
+  final ClubModel club;
 
-  ClubCard({Key? key, required this.backgroundIndex}) : super(key: key);
+  ClubCard({super.key, required this.backgroundIndex, required this.club});
 
   @override
   Widget build(BuildContext context) {
     final String backgroundImage = backgroundImages[backgroundIndex % backgroundImages.length];
-
+    final today = Helper.formatDateToString(DateTime.now());
+    final dayLeft = Helper.calculateDaysDifference(today, club.closedRegistration);
     return Card(
       elevation: 5,
       margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
       clipBehavior: Clip.hardEdge,
       child: Container(
-        width: 285,
+        width: t100Size*2,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(backgroundImage),
@@ -43,22 +50,22 @@ class ClubCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
-              'CLB hội họa',
-              style: TextStyle(
+            Text(
+              club.clubName,
+              style: const TextStyle(
                 fontSize: 18,  // Tăng kích thước chữ ở đây
                 fontWeight: FontWeight.bold,
                 color: Colors.blue,
               ),
             ),
             const SizedBox(height: 4),
-            _buildInfoRow(costIcon, '500000 VND'),
+            _buildInfoRow(costIcon, '${club.tuition} VND'),
             const SizedBox(height: 4),
-            _buildInfoRow(dateIcon, '05/09/2024'),
+            _buildInfoRow(dateIcon, club.openedRegistration),
             const SizedBox(height: 4),
-            _buildInfoRow(participantsIcon, '20'),
+            _buildInfoRow(participantsIcon, '${club.capacity}'),
             const SizedBox(height: 4),
-            _buildInfoRow(timeRemainingIcon, 'Còn 23 ngày'),
+            _buildInfoRow(timeRemainingIcon, 'Còn $dayLeft ngày'),
             const SizedBox(height: 8),
             Align(
               alignment: Alignment.topRight,
@@ -66,13 +73,11 @@ class ClubCard extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 8.0, top: 0.0),
                 child: TextButton(
                   onPressed: () {
+                    final ngoaiKhoaController = Get.put(NgoaiKhoaController());
+                    ngoaiKhoaController.club = club;
                     // Pass the backgroundImage to the detail screen
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ChiTietClbCardScreen(backgroundImage: backgroundImage),
-                      ),
-                    );
+                    Get.to(() =>
+                      ChiTietClbCardScreen(backgroundImage: backgroundImage));
                   },
                   style: TextButton.styleFrom(
                     padding: const EdgeInsets.symmetric(horizontal: 4.0),
@@ -102,7 +107,7 @@ class ClubCard extends StatelessWidget {
   Widget _buildInfoRow(String iconPath, String text) {
     return Row(
       children: [
-        Image.asset(iconPath, width: 16, height: 16),
+        Image.asset(iconPath, width: t10Size, height: t10Size),
         const SizedBox(width: 4),
         Flexible(
           child: Text(
