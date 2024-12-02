@@ -25,7 +25,7 @@ class TeacherKhamTabWidget extends StatelessWidget {
                 fontSize: 18
             ),
           ),
-          const SizedBox(height: t10Size),
+          SizedBox(height: t10Size),
           const Text(
             tMat,
             style: TextStyle(
@@ -63,7 +63,7 @@ class TeacherKhamTabWidget extends StatelessWidget {
             title: tTinhTrangMat,
             textEditingController: controller.tinhTrangMat,
           ),
-          const SizedBox(height: t10Size),
+          SizedBox(height: t10Size),
           const Text(
             tKhac,
             style: TextStyle(
@@ -72,7 +72,7 @@ class TeacherKhamTabWidget extends StatelessWidget {
                 fontSize: 18
             ),
           ),
-          const SizedBox(height: t10Size),
+          SizedBox(height: t10Size),
           InformationInput(
             color: Colors.transparent,
             title: tTinhTrangRang,
@@ -91,7 +91,7 @@ class TeacherKhamTabWidget extends StatelessWidget {
             textEditingController: controller.benhLyKhac,
             defaultInput: tKhongCo,
           ),
-          const SizedBox(height: t10Size),
+          SizedBox(height: t10Size),
           const Text(
             tChuanDoanCuaBacSi,
             style: TextStyle(
@@ -100,9 +100,9 @@ class TeacherKhamTabWidget extends StatelessWidget {
                 fontSize: 18
             ),
           ),
-          const SizedBox(height: t10Size),
+          SizedBox(height: t10Size),
           TeacherChuanDoanWidget(controller: controller),
-          const SizedBox(height: t15Size),
+          SizedBox(height: t15Size),
           Align(
             alignment: Alignment.center,
             child: SizedBox(
@@ -132,7 +132,7 @@ class TeacherKhamTabWidget extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: t15Size,)
+          SizedBox(height: t15Size,)
         ],
       ),
     );

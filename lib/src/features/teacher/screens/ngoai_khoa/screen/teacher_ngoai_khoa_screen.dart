@@ -8,7 +8,7 @@ import '../../../controllers/ngoai_khoa/teacher_ngoai_khoa_controller.dart';
 import '../widget/teacher_cau_lac_bo_card_widget.dart';
 
 class TeacherNgoaiKhoaScreen extends StatefulWidget {
-  const TeacherNgoaiKhoaScreen({Key? key}) : super(key: key);
+  const TeacherNgoaiKhoaScreen({super.key});
 
   @override
   _TeacherNgoaiKhoaScreenState createState() => _TeacherNgoaiKhoaScreenState();
@@ -32,7 +32,7 @@ class _TeacherNgoaiKhoaScreenState extends State<TeacherNgoaiKhoaScreen> {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(25.0),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: t10Size),
+                    padding: EdgeInsets.symmetric(horizontal: t10Size),
                     child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
@@ -67,11 +67,11 @@ class _TeacherNgoaiKhoaScreenState extends State<TeacherNgoaiKhoaScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: t15Size),
+                SizedBox(height: t15Size),
                 Expanded(
                   child: SingleChildScrollView(
                     child: Container(
-                      padding: const EdgeInsets.all(t15Size),
+                      padding: EdgeInsets.all(t15Size),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: const BorderRadius.all(Radius.circular(25.0)),
@@ -80,7 +80,7 @@ class _TeacherNgoaiKhoaScreenState extends State<TeacherNgoaiKhoaScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const SizedBox(height: t20Size),
+                          SizedBox(height: t20Size),
                           Obx(() {
                             // Sử dụng clubController.clubs để lấy danh sách câu lạc bộ
                             return ListView.builder(
@@ -95,7 +95,7 @@ class _TeacherNgoaiKhoaScreenState extends State<TeacherNgoaiKhoaScreen> {
                                     TeacherCauLacBoCardWidget(
                                       club: club, // Gửi club model vào widget
                                     ),
-                                    const SizedBox(height: t5Size),
+                                    SizedBox(height: t5Size),
                                   ],
                                 );
                               },
@@ -115,8 +115,8 @@ class _TeacherNgoaiKhoaScreenState extends State<TeacherNgoaiKhoaScreen> {
               right: 0,
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
-                decoration: BoxDecoration(
-                  color: const Color(0xFF99D98C), // Màu xanh lá nhạt
+                decoration: const BoxDecoration(
+                  color: Color(0xFF99D98C), // Màu xanh lá nhạt
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

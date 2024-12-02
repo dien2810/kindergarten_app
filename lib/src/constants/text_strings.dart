@@ -296,21 +296,20 @@ const String tDanhSachHocSinh = 'Danh sách học sinh';
 // teacher_thong_tin_ca_nhan_screen
 const String tThongTinCaNhan = 'Thông tin cá nhân';
 // teacher_ho_so_giay_to_widget
-const String tSoDienThoai = 'Số điện thoại : ';
 const String tDiaChiEmail = 'Địa chỉ email : ';
 const String tDiaChiThuongTru = 'Địa chỉ thường trú : ';
 // teacher_lich_su_nhan_xet_screen
 const String tLichSuNhanXet = 'Lịch sử nhận xét';
 const String tChiTietNhanXet = 'Chi tiết nhận xét ';
 // teacher_chuyen_can_hoc_sinh_screen
-const String tChuyenCan = 'Chuyên cần';
+
 // teacher_thong_bao_screen
 const String tThongBao = 'Thông báo';
 const String tThongBaoChung = 'Thông báo chung';
 const String tThongBaoDaTao = 'Thông báo đã tạo';
 const String tChiTietThongBao = 'Chi tiết thông báo';
 // teacher_danh_sach_xin_nghi_screen
-const String tXinNghi = 'XIN NGHỈ';
+
 // teacher_diem_danh_screen
 const String tDiemDanh = 'ĐIỂM DANH';
 // teacher_ngoai_khoa_screen

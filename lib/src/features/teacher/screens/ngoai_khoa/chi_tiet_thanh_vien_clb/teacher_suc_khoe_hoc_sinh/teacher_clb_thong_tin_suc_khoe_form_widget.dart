@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../../../constants/colors.dart';
 import '../../../../../../constants/sizes.dart';
 import '../../../../../../constants/text_strings.dart';
 import '../../../../controllers/suc_khoe_hoc_sinh/teacher_suc_khoe_hoc_sinh_controller.dart';
@@ -19,7 +18,7 @@ class TeacherClbThongTinSucKhoeChungWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
     return Container(
-      padding: const EdgeInsets.all(t10Size),
+      padding: EdgeInsets.all(t10Size),
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border.all(width: 2, color: const Color(0xFFC4C4C4)),
@@ -38,7 +37,7 @@ class TeacherClbThongTinSucKhoeChungWidget extends StatelessWidget {
                   fontSize: 18,
                 ),
               ),
-              const SizedBox(height: t10Size),
+              SizedBox(height: t10Size),
               const Text(tThongTinTieuSuGiaDinh),
               Obx(() => Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -67,7 +66,7 @@ class TeacherClbThongTinSucKhoeChungWidget extends StatelessWidget {
                   ),
                 ],
               )),
-              const SizedBox(height: t5Size),
+              SizedBox(height: t5Size),
               const Text(
                 tTieuSuBanThan,
                 style: TextStyle(
@@ -218,7 +217,7 @@ class TeacherClbThongTinSucKhoeChungWidget extends StatelessWidget {
                 ],
               )),
               const Text(tBenhKhac),
-              const SizedBox(height: t15Size),
+              SizedBox(height: t15Size),
               TextFormField(
                 controller: controller.benhKhac,
                 decoration: InputDecoration(
@@ -231,7 +230,7 @@ class TeacherClbThongTinSucKhoeChungWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: t15Size),
+              SizedBox(height: t15Size),
             ],
           ),
         ),

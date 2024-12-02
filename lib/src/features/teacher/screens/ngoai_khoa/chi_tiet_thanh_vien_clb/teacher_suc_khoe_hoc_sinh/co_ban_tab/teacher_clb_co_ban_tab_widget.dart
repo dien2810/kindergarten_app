@@ -66,8 +66,8 @@ class TeacherClbCoBanTabWidget extends StatelessWidget {
           ),
           SizedBox(height: t10Size),
           TeacherClbGhiChuWidget(controller: controller),
-          const SizedBox(height: t10Size),
-          const SizedBox(height: t20Size ,)
+          SizedBox(height: t10Size),
+          SizedBox(height: t20Size ,)
         ],
       ),
     );

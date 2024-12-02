@@ -83,13 +83,11 @@ class TeacherClbLoiKhuyenBacSiWidget extends StatelessWidget {
                     Positioned(
                       bottom: -10,
                       left: 20,
-                      child: Container( // Màu nền
-                        child: CustomPaint(
-                          painter: TrianglePainter(),
-                          child: const SizedBox(
-                            width: 20,
-                            height: 20,
-                          ),
+                      child: CustomPaint(
+                        painter: TrianglePainter(),
+                        child: const SizedBox(
+                          width: 20,
+                          height: 20,
                         ),
                       ),
                     ),
@@ -99,7 +97,7 @@ class TeacherClbLoiKhuyenBacSiWidget extends StatelessWidget {
 
             ],
           ),
-          const SizedBox(height: t30Size,),
+          SizedBox(height: t30Size,),
         ],
       ),
     );
@@ -110,7 +108,7 @@ class TeacherClbLoiKhuyenBacSiWidget extends StatelessWidget {
 class TrianglePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()..color =  Color(0xFFF2E9F7);
+    final paint = Paint()..color =  const Color(0xFFF2E9F7);
     final path = Path();
     path.moveTo(0, 0);
     path.lineTo(size.width / 2, size.height);

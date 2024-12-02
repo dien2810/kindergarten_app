@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:kindergarten_app/src/features/teacher/screens/chi_tiet_hoc_sinh/teacher_suc_khoe_hoc_sinh/kham_tab/teacher_chuan_doan_widget.dart';
 
 import '../../../../../../../common_widgets/information_input_widget/information_input_widget.dart';
-import '../../../../../../../constants/colors.dart';
 import '../../../../../../../constants/sizes.dart';
 import '../../../../../../../constants/text_strings.dart';
 import '../../../../../controllers/suc_khoe_hoc_sinh/teacher_suc_khoe_hoc_sinh_controller.dart';
@@ -27,7 +26,7 @@ class TeacherClbKhamTabWidget extends StatelessWidget {
                 fontSize: 18
             ),
           ),
-          const SizedBox(height: t10Size),
+          SizedBox(height: t10Size),
           const Text(
             tMat,
             style: TextStyle(
@@ -65,7 +64,7 @@ class TeacherClbKhamTabWidget extends StatelessWidget {
             title: tTinhTrangMat,
             textEditingController: controller.tinhTrangMat,
           ),
-          const SizedBox(height: t10Size),
+          SizedBox(height: t10Size),
           const Text(
             tKhac,
             style: TextStyle(
@@ -74,7 +73,7 @@ class TeacherClbKhamTabWidget extends StatelessWidget {
                 fontSize: 18
             ),
           ),
-          const SizedBox(height: t10Size),
+          SizedBox(height: t10Size),
           InformationInput(
             color: Colors.transparent,
             title: tTinhTrangRang,
@@ -93,7 +92,7 @@ class TeacherClbKhamTabWidget extends StatelessWidget {
             textEditingController: controller.benhLyKhac,
             defaultInput: tKhongCo,
           ),
-          const SizedBox(height: t10Size),
+          SizedBox(height: t10Size),
           const Text(
             tChuanDoanCuaBacSi,
             style: TextStyle(
@@ -102,10 +101,10 @@ class TeacherClbKhamTabWidget extends StatelessWidget {
                 fontSize: 18
             ),
           ),
-          const SizedBox(height: t10Size),
+          SizedBox(height: t10Size),
           TeacherChuanDoanWidget(controller: controller),
-          const SizedBox(height: t15Size),
-          const SizedBox(height: t15Size,)
+          SizedBox(height: t15Size),
+          SizedBox(height: t15Size,)
         ],
       ),
     );

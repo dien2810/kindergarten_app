@@ -6,8 +6,6 @@ import 'package:kindergarten_app/src/features/teacher/controllers/diem_danh/teac
 import 'package:kindergarten_app/src/features/teacher/screens/diem_danh/widget/teacher_diem_danh_card_widget.dart';
 import 'package:weekly_date_picker/weekly_date_picker.dart';
 import '../../../../../constants/sizes.dart';
-import '../../../controllers/teacher_navigation_menu_controller.dart';
-import '../../teacher_navigation_menu/teacher_bottom_navigation_bar_widget.dart';
 
 class TeacherDiemDanhScreen extends StatelessWidget {
   const TeacherDiemDanhScreen({super.key});
@@ -25,7 +23,7 @@ class TeacherDiemDanhScreen extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(25.0),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: t10Size),
+                padding: EdgeInsets.symmetric(horizontal: t10Size),
                 child: Container(
                   decoration: const BoxDecoration(
                     color: Colors.white,
@@ -35,7 +33,7 @@ class TeacherDiemDanhScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: t15Size),
+            SizedBox(height: t15Size),
             Expanded(
               child: TabBarView(
                 children: [
@@ -43,7 +41,7 @@ class TeacherDiemDanhScreen extends StatelessWidget {
                     child: Transform.translate(
                       offset: const Offset(0, 0),
                       child: Container(
-                        padding: const EdgeInsets.all(t15Size),
+                        padding: EdgeInsets.all(t15Size),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: const BorderRadius.all(Radius.circular(35.0)),
@@ -104,13 +102,13 @@ class TeacherDiemDanhScreen extends StatelessWidget {
             ),
             // Hai nút ở footer
             Padding(
-              padding: const EdgeInsets.all(t15Size),
+              padding: EdgeInsets.all(t15Size),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.only(right: t5Size),
+                      padding: EdgeInsets.only(right: t5Size),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green,
@@ -131,7 +129,7 @@ class TeacherDiemDanhScreen extends StatelessWidget {
                   ),
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.only(left: t5Size),
+                      padding: EdgeInsets.only(left: t5Size),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF7209B7), // Màu tím

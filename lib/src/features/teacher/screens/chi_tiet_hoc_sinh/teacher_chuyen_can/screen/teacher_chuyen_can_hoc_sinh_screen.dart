@@ -12,10 +12,10 @@ class TeacherChuyenCanHocSinhScreen extends StatelessWidget {
   final String imageUrl;
 
   const TeacherChuyenCanHocSinhScreen({
-    Key? key,
+    super.key,
     required this.studentName,
     required this.imageUrl,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +107,7 @@ class TeacherChuyenCanHocSinhScreen extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              const SizedBox(height: t20Size,),
+                              SizedBox(height: t20Size,),
                               Text(
                                 "Học kỳ: ${studentData['semesterID']}",
                                 style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -126,7 +126,7 @@ class TeacherChuyenCanHocSinhScreen extends StatelessWidget {
                                   date: date,
                                   details: studentData['dates'][date],
                                 );
-                              }).toList(), // Convert the mapped results to a List<Widget>
+                              }), // Convert the mapped results to a List<Widget>
                             ],
                           ),
                         ),

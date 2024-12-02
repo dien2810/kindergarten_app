@@ -16,10 +16,10 @@ class TeacherClbThongTinSucKhoeHocSinhScreen extends StatelessWidget {
   final String studentName; // Tên học sinh
   final String imageUrl; // Đường dẫn ảnh của học sinh
   const TeacherClbThongTinSucKhoeHocSinhScreen({
-    Key? key,
+    super.key,
     required this.studentName,
     required this.imageUrl,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class TeacherClbThongTinSucKhoeHocSinhScreen extends StatelessWidget {
       child: Scaffold(
         appBar: const TeacherAppBarWithTitleHeader2(title: tThongTinSucKhoe),
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: t10Size),
+          padding: EdgeInsets.symmetric(horizontal: t10Size),
           child: NestedScrollView(
             headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
               return [
@@ -144,7 +144,7 @@ class TeacherClbThongTinSucKhoeHocSinhScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const SizedBox(height: t10Size),
+                      SizedBox(height: t10Size),
                       Expanded(
                         child: TabBarView(
                           children: [

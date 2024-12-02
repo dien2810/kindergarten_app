@@ -29,7 +29,7 @@ class TeacherThongBaoScreen extends StatelessWidget {
         appBar: const TeacherAppBarWithTitleHeader1(),
         bottomNavigationBar: TeacherBottomNavigationBarWidget(controller: teacherNavigationMenuController),
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: t10Size),
+          padding: EdgeInsets.symmetric(horizontal: t10Size),
           child: NestedScrollView(
             headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
               return [

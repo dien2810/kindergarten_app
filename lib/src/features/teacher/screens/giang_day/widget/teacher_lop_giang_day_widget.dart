@@ -10,12 +10,12 @@ class TeacherLopGiangDayWidget extends StatelessWidget {
   final String thoiGianKetThuc;
 
   const TeacherLopGiangDayWidget({
-    Key? key,
+    super.key,
     required this.lopName,
     required this.soLuong,
     required this.thoiGianBatDau,
     required this.thoiGianKetThuc,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class TeacherLopGiangDayWidget extends StatelessWidget {
           ],
         ),
         child: Padding(
-          padding: const EdgeInsets.all(t15Size),
+          padding: EdgeInsets.all(t15Size),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -60,7 +60,7 @@ class TeacherLopGiangDayWidget extends StatelessWidget {
                         color: Color(0xFF7209B7),
                       ),
                     ),
-                    const SizedBox(height: t10Size),
+                    SizedBox(height: t10Size),
                     Text(
                       'Số lượng: $soLuong học sinh',
                       style: const TextStyle(
@@ -68,7 +68,7 @@ class TeacherLopGiangDayWidget extends StatelessWidget {
                         fontSize: 18.0,
                       ),
                     ),
-                    const SizedBox(height: t5Size),
+                    SizedBox(height: t5Size),
                     Text(
                       '$thoiGianBatDau - $thoiGianKetThuc',
                       style: const TextStyle(
@@ -79,7 +79,7 @@ class TeacherLopGiangDayWidget extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(width: t15Size),
+              SizedBox(width: t15Size),
               const Icon(
                 Icons.arrow_forward_ios,
                 color: Color(0xFFB5179E),

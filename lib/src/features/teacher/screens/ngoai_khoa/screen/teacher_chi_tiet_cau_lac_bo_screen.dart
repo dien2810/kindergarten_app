@@ -11,7 +11,7 @@ import 'package:intl/intl.dart';
 class TeacherChiTietCauLacBoScreen extends StatefulWidget {
   final String clubId;
 
-  const TeacherChiTietCauLacBoScreen({Key? key, required this.clubId}) : super(key: key);
+  const TeacherChiTietCauLacBoScreen({super.key, required this.clubId});
 
   @override
   _TeacherChiTietCauLacBoScreenState createState() => _TeacherChiTietCauLacBoScreenState();
@@ -163,7 +163,7 @@ class _TeacherChiTietCauLacBoScreenState extends State<TeacherChiTietCauLacBoScr
           Expanded(
             child: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.all(t15Size),
+                padding: EdgeInsets.all(t15Size),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -176,28 +176,28 @@ class _TeacherChiTietCauLacBoScreenState extends State<TeacherChiTietCauLacBoScr
                     _buildMemberCountRow(_capacityController),
                     _buildRoomRow(),
                     _buildSemesterDropdown(),
-                    const SizedBox(height: t10Size),
+                    SizedBox(height: t10Size),
                     const Text("Mô tả khóa học:", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF580B8B))),
-                    const SizedBox(height: t5Size),
+                    SizedBox(height: t5Size),
                     _buildTextField(_aboutCourseController, "Nhập mô tả khóa học"),
-                    const SizedBox(height: t10Size),
+                    SizedBox(height: t10Size),
 
                     // Phần lịch học
                     const Text("Lịch học:", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF580B8B))),
                     ..._buildScheduleList(),
-                    const SizedBox(height: t20Size),
+                    SizedBox(height: t20Size),
 
                     // Nút "Thêm lịch biểu mới"
                     ElevatedButton(
                       onPressed: _addSchedule,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF380543), // Màu nền cho nút
+                        backgroundColor: const Color(0xFF380543), // Màu nền cho nút
                         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                       ),
                       child: const Text("THÊM LỊCH BIỂU MỚI", style: TextStyle(color: Colors.white)),
                     ),
-                    const SizedBox(height: t20Size),
+                    SizedBox(height: t20Size),
                   ],
                 ),
               ),
@@ -210,27 +210,27 @@ class _TeacherChiTietCauLacBoScreenState extends State<TeacherChiTietCauLacBoScr
             children: [
               const SizedBox(width: 2,),
               ElevatedButton(
-                onPressed: _saveChanges,
-                child: const Text("CHỈNH SỬA", style: TextStyle(fontSize: 16, color: Colors.white)), // Tăng kích thước chữ
+                onPressed: _saveChanges, // Tăng kích thước chữ
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFFFFA983), // Màu chỉnh sửa
                   padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 12),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                 ),
+                child: const Text("CHỈNH SỬA", style: TextStyle(fontSize: 16, color: Colors.white)),
               ),
               ElevatedButton(
-                onPressed: () => Get.back(),
-                child: const Text("QUAY LẠI", style: TextStyle(fontSize: 16, color: Colors.white)), // Tăng kích thước chữ
+                onPressed: () => Get.back(), // Tăng kích thước chữ
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF7B7B7B), // Màu quay lại
                   padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 12),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                 ),
+                child: const Text("QUAY LẠI", style: TextStyle(fontSize: 16, color: Colors.white)),
               ),
               const SizedBox(width: 2,),
             ],
           ),
-          const SizedBox(height: t10Size), // Khoảng cách dưới cùng
+          SizedBox(height: t10Size), // Khoảng cách dưới cùng
         ],
       ),
     );
@@ -553,7 +553,7 @@ class _TeacherChiTietCauLacBoScreenState extends State<TeacherChiTietCauLacBoScr
             Row(
               children: [
                 const SizedBox(width: 10),
-                const Text("Từ:", style: const TextStyle(fontSize: 16), ),
+                const Text("Từ:", style: TextStyle(fontSize: 16), ),
                 const SizedBox(width: 10),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -575,7 +575,7 @@ class _TeacherChiTietCauLacBoScreenState extends State<TeacherChiTietCauLacBoScr
                     }
                   },
                   child: Text(
-                    "${schedule.startTime.isEmpty ? 'Chưa chọn' : schedule.startTime}",
+                    schedule.startTime.isEmpty ? 'Chưa chọn' : schedule.startTime,
                     style: const TextStyle(fontSize: 16),
                   ),
                 ),

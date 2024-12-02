@@ -4,7 +4,6 @@ import 'package:kindergarten_app/src/constants/sizes.dart';
 import 'package:kindergarten_app/src/constants/text_strings.dart';
 import 'package:kindergarten_app/src/features/teacher/screens/chi_tiet_hoc_sinh/teacher_suc_khoe_hoc_sinh/ho_so_y_te/teacher_chinh_sua_loi_khuyen_bottom_sheet.dart';
 
-import '../../../../../../constants/colors.dart';
 import '../../../../controllers/suc_khoe_hoc_sinh/teacher_suc_khoe_hoc_sinh_controller.dart';
 
 class TeacherLoiKhuyenBacSiWidget extends StatelessWidget {
@@ -85,13 +84,11 @@ class TeacherLoiKhuyenBacSiWidget extends StatelessWidget {
                     Positioned(
                       bottom: -10,
                       left: 20,
-                      child: Container( // Màu nền
-                        child: CustomPaint(
-                          painter: TrianglePainter(),
-                          child: const SizedBox(
-                            width: 20,
-                            height: 20,
-                          ),
+                      child: CustomPaint(
+                        painter: TrianglePainter(),
+                        child: const SizedBox(
+                          width: 20,
+                          height: 20,
                         ),
                       ),
                     ),
@@ -101,7 +98,7 @@ class TeacherLoiKhuyenBacSiWidget extends StatelessWidget {
 
             ],
           ),
-          const SizedBox(height: t30Size,),
+          SizedBox(height: t30Size,),
           Align(
             alignment: Alignment.center,
             child: SizedBox(
@@ -151,7 +148,7 @@ class TeacherLoiKhuyenBacSiWidget extends StatelessWidget {
 class TrianglePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()..color =  Color(0xFFF2E9F7);
+    final paint = Paint()..color =  const Color(0xFFF2E9F7);
     final path = Path();
     path.moveTo(0, 0);
     path.lineTo(size.width / 2, size.height);

@@ -29,7 +29,7 @@ class TeacherClbChuanDoanWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(t5Size),
+        padding: EdgeInsets.all(t5Size),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,

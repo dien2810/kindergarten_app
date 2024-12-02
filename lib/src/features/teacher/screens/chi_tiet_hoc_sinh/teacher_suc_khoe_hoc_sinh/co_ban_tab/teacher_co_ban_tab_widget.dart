@@ -64,11 +64,11 @@ class TeacherCoBanTabWidget extends StatelessWidget {
             title: tTheChat,
             textEditingController: controller.theChat,
           ),
-          const SizedBox(height: t10Size),
+          SizedBox(height: t10Size),
 
           // Thêm phần ghi chú
           TeacherGhiChuWidget(controller: controller),
-          const SizedBox(height: t10Size),
+          SizedBox(height: t10Size),
           Align(
             alignment: Alignment.center,
             child: SizedBox(
@@ -98,7 +98,7 @@ class TeacherCoBanTabWidget extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: t20Size ,)
+          SizedBox(height: t20Size ,)
         ],
       ),
     );

@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/common_widgets/app_bar_widgets/teacher_app_bar_with_title_header_2.dart';
 import 'package:kindergarten_app/src/constants/text_strings.dart';
-import 'package:kindergarten_app/src/features/student/screens/ngoai_khoa/screen/ngoai_khoa_screen.dart';
 import '../../../controllers/ngoai_khoa/teacher_ngoai_khoa_controller.dart';
 import '../../../../../constants/sizes.dart';
 import 'package:intl/intl.dart';
@@ -11,7 +10,7 @@ import 'package:intl/intl.dart';
 
 
 class TeacherThemMoiCauLacBoScreen extends StatefulWidget {
-  const TeacherThemMoiCauLacBoScreen({Key? key}) : super(key: key);
+  const TeacherThemMoiCauLacBoScreen({super.key});
 
   @override
   _TeacherThemMoiCauLacBoScreenState createState() => _TeacherThemMoiCauLacBoScreenState();
@@ -227,7 +226,7 @@ class _TeacherThemMoiCauLacBoScreenState extends State<TeacherThemMoiCauLacBoScr
           Expanded(
             child: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.all(t15Size),
+                padding: EdgeInsets.all(t15Size),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -240,16 +239,16 @@ class _TeacherThemMoiCauLacBoScreenState extends State<TeacherThemMoiCauLacBoScr
                     _buildMemberCountRow(_capacityController),
                     _buildRoomRow(),
                     _buildSemesterDropdown(),
-                    const SizedBox(height: t10Size),
+                    SizedBox(height: t10Size),
                     const Text("Mô tả khóa học:", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF580B8B))),
-                    const SizedBox(height: t5Size),
+                    SizedBox(height: t5Size),
                     _buildTextField(_aboutCourseController, "Nhập mô tả khóa học"),
-                    const SizedBox(height: t10Size),
+                    SizedBox(height: t10Size),
 
                     // Phần lịch học
                     const Text("Lịch học:", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF580B8B))),
                     ..._buildScheduleList(), // Hiển thị lịch học
-                    const SizedBox(height: t20Size),
+                    SizedBox(height: t20Size),
 
                     // Nút "Thêm lịch biểu mới"
                     ElevatedButton(
@@ -257,13 +256,13 @@ class _TeacherThemMoiCauLacBoScreenState extends State<TeacherThemMoiCauLacBoScr
                         _addSchedule(); // Gọi phương thức thêm lịch
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF380543),
+                        backgroundColor: const Color(0xFF380543),
                         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                       ),
                       child: const Text("THÊM LỊCH BIỂU MỚI", style: TextStyle(color: Colors.white)),
                     ),
-                    const SizedBox(height: t20Size),
+                    SizedBox(height: t20Size),
                   ],
                 ),
               ),
@@ -276,27 +275,27 @@ class _TeacherThemMoiCauLacBoScreenState extends State<TeacherThemMoiCauLacBoScr
             children: [
               const SizedBox(width: 2,),
               ElevatedButton(
-                child: const Text("THÊM MỚI", style: TextStyle(fontSize: 16, color: Colors.white)),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF99D98C),
                   padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 12),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                 ),
                 onPressed: () {},
+                child: const Text("THÊM MỚI", style: TextStyle(fontSize: 16, color: Colors.white)),
               ),
               ElevatedButton(
                 onPressed: () => Get.back(),
-                child: const Text("HỦY", style: TextStyle(fontSize: 16, color: Colors.white)),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFFFFA983),
                   padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 12),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                 ),
+                child: const Text("HỦY", style: TextStyle(fontSize: 16, color: Colors.white)),
               ),
               const SizedBox(width: 2,),
             ],
           ),
-          const SizedBox(height: t10Size),
+          SizedBox(height: t10Size),
         ],
       ),
     );
@@ -364,7 +363,7 @@ class _TeacherThemMoiCauLacBoScreenState extends State<TeacherThemMoiCauLacBoScr
       ),
     );
   }
-  Widget _buildMemberCountRow(TextEditingController _capacityController) {
+  Widget _buildMemberCountRow(TextEditingController capacityController) {
     return Container(
       decoration: BoxDecoration(
         color: const Color(0xFFF4E9F7),
@@ -390,9 +389,9 @@ class _TeacherThemMoiCauLacBoScreenState extends State<TeacherThemMoiCauLacBoScr
                 icon: const Icon(Icons.remove),
                 color: Colors.red,
                 onPressed: () {
-                  int currentValue = int.tryParse(_capacityController.text) ?? 0;
+                  int currentValue = int.tryParse(capacityController.text) ?? 0;
                   if (currentValue > 0) {
-                    _capacityController.text = (currentValue - 1).toString();
+                    capacityController.text = (currentValue - 1).toString();
                     _checkCapacityLimit();
                   }
                 },
@@ -400,7 +399,7 @@ class _TeacherThemMoiCauLacBoScreenState extends State<TeacherThemMoiCauLacBoScr
               SizedBox(
                 width: 160,
                 child: TextField(
-                  controller: _capacityController,
+                  controller: capacityController,
                   keyboardType: TextInputType.number,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   decoration: InputDecoration(
@@ -415,8 +414,8 @@ class _TeacherThemMoiCauLacBoScreenState extends State<TeacherThemMoiCauLacBoScr
                   maxLines: null,
                   onChanged: (value) {
                     if (value.isEmpty) {
-                      _capacityController.text = '0';
-                      _capacityController.selection = TextSelection.fromPosition(const TextPosition(offset: 1));
+                      capacityController.text = '0';
+                      capacityController.selection = TextSelection.fromPosition(const TextPosition(offset: 1));
                     } else {
                       _checkCapacityLimit();
                     }
@@ -428,8 +427,8 @@ class _TeacherThemMoiCauLacBoScreenState extends State<TeacherThemMoiCauLacBoScr
                 icon: const Icon(Icons.add),
                 color: Colors.green,
                 onPressed: () {
-                  int currentValue = int.tryParse(_capacityController.text) ?? 0;
-                  _capacityController.text = (currentValue + 1).toString();
+                  int currentValue = int.tryParse(capacityController.text) ?? 0;
+                  capacityController.text = (currentValue + 1).toString();
                   _checkCapacityLimit();
                 },
               ),
@@ -480,7 +479,7 @@ class _TeacherThemMoiCauLacBoScreenState extends State<TeacherThemMoiCauLacBoScr
                       filled: true,
                       fillColor: Color(0xFFF4E9F7), // Màu nền cho TextField
                     ),
-                    style: TextStyle(fontSize: 16.0), // Thay đổi kích thước chữ ở đây
+                    style: const TextStyle(fontSize: 16.0), // Thay đổi kích thước chữ ở đây
                     readOnly: true, // Đặt trường này chỉ đọc để không cho người dùng nhập trực tiếp
                   ),
                 ),
@@ -620,7 +619,7 @@ class _TeacherThemMoiCauLacBoScreenState extends State<TeacherThemMoiCauLacBoScr
             Row(
               children: [
                 const SizedBox(width: 10),
-                const Text("Từ:", style: const TextStyle(fontSize: 16)),
+                const Text("Từ:", style: TextStyle(fontSize: 16)),
                 const SizedBox(width: 10),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(

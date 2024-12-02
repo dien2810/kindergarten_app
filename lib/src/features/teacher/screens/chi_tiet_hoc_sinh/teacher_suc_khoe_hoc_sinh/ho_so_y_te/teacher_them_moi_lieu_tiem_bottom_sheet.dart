@@ -3,6 +3,8 @@ import 'package:intl/intl.dart';
 import 'package:kindergarten_app/src/constants/sizes.dart';
 
 class TeacherThemMoiLieuTiemBottomSheet extends StatefulWidget {
+  const TeacherThemMoiLieuTiemBottomSheet({super.key});
+
   @override
   _TeacherThemMoiLieuTiemBottomSheetState createState() =>
       _TeacherThemMoiLieuTiemBottomSheetState();
@@ -60,7 +62,7 @@ class _TeacherThemMoiLieuTiemBottomSheetState
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            const SizedBox(
+            SizedBox(
               height: t30Size,
             ),
             Center(
@@ -196,7 +198,7 @@ class _TeacherThemMoiLieuTiemBottomSheetState
                     Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF99D98C),
+                    backgroundColor: const Color(0xFF99D98C),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
@@ -204,7 +206,7 @@ class _TeacherThemMoiLieuTiemBottomSheetState
                         const EdgeInsets.symmetric(horizontal: 60, vertical: 8),
                   ),
                   child:
-                  const Text("Thêm mới", style: const TextStyle(fontSize: 20, color: Colors.white)),
+                  const Text("Thêm mới", style: TextStyle(fontSize: 20, color: Colors.white)),
                 ),
                 ElevatedButton(
                   onPressed: () {
@@ -212,7 +214,7 @@ class _TeacherThemMoiLieuTiemBottomSheetState
                     Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFFFFA983),
+                    backgroundColor: const Color(0xFFFFA983),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
@@ -220,7 +222,7 @@ class _TeacherThemMoiLieuTiemBottomSheetState
                     const EdgeInsets.symmetric(horizontal: 60, vertical: 8),
                   ),
                   child:
-                  const Text("Hủy", style: const TextStyle(fontSize: 20, color: Colors.white)),
+                  const Text("Hủy", style: TextStyle(fontSize: 20, color: Colors.white)),
                 ),
               ],
             ),
