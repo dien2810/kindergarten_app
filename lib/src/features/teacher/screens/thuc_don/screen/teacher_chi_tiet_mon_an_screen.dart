@@ -30,6 +30,7 @@ class TeacherChiTietMonAnScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(35.0),
                         border: Border.all(width: 2, color: const Color(0xFFC4C4C4)),
                       ),
+        child: SingleChildScrollView(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -200,6 +201,7 @@ class TeacherChiTietMonAnScreen extends StatelessWidget {
                         ],
                       ),
                     ),
+                  ),
                   ),
                 ),
               ],

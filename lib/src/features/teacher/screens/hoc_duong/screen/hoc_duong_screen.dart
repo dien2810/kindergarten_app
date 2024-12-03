@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/constants/image_strings.dart';
 import 'package:kindergarten_app/src/features/teacher/routes/hoc_duong_route.dart';
+import 'package:kindergarten_app/src/features/teacher/screens/dan_thuoc/screen/teacher_dan_thuoc_screen.dart';
 import '../../../../../common_widgets/app_bar_widgets/teacher_app_bar_with_title_header_1.dart';
 import '../../../../../constants/sizes.dart';
 import '../../../controllers/teacher_navigation_menu_controller.dart';
+import '../../giang_day/screen/teacher_giang_day_screen.dart';
+import '../../ngoai_khoa/screen/teacher_ngoai_khoa_screen.dart';
 import '../../teacher_navigation_menu/teacher_bottom_navigation_bar_widget.dart';
+import '../../thuc_don/screen/teacher_thuc_don_screen.dart';
 
 
 class HocDuongScreen extends StatelessWidget {
@@ -70,16 +74,16 @@ class HocDuongScreen extends StatelessWidget {
                           mainAxisSpacing: 20.0,
                           children: [
                             _buildIconButton(tThucDonScreenLinkIcon, "Thực đơn", () {
-                              Get.toNamed("/TeacherThucDon");  // Đổi link cho màn hình thực đơn
+                              Get.to(TeacherThucDonScreen());  // Đổi link cho màn hình thực đơn
                             }),
                             _buildIconButton(tGiangDayScreenLinkIcon, "Giảng dạy", () {
-                              Get.toNamed("/TeacherGiangDay");  // Đổi link cho màn hình giảng dạy
+                              Get.to(TeacherGiangDayScreen());  // Đổi link cho màn hình giảng dạy
                             }),
                             _buildIconButton(tNgoaiKhoaScreenLinkIcon, "Ngoại khóa", () {
-                              Get.toNamed("/TeacherNgoaiKhoa");  // Đổi link cho màn hình ngoại khóa
+                              Get.to(TeacherNgoaiKhoaScreen());  // Đổi link cho màn hình ngoại khóa
                             }),
                             _buildIconButton(tDanThuocScreenLinkIcon, "Dặn thuốc", () {
-                              Get.toNamed("/TeacherDanThuoc");  // Đổi link cho màn hình dặn thuốc
+                              Get.to(TeacherDanThuocScreen());  // Đổi link cho màn hình dặn thuốc
                             }),
                           ],
                         ),
