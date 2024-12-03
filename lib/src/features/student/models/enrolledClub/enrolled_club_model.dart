@@ -4,7 +4,7 @@ import 'package:kindergarten_app/src/repository/account_repository/account_repos
 import 'enrolled.dart';
 
 class EnrolledClubModel {
-  final String? id;
+  String? id;
   final List<Enrolled> enrolled;
 
   EnrolledClubModel({this.id, required this.enrolled});

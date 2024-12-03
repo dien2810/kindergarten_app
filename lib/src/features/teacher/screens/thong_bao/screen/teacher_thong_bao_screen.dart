@@ -7,27 +7,21 @@ import 'package:kindergarten_app/src/features/teacher/screens/thong_bao/widget/t
 
 import '../../../../../common_widgets/app_bar_widgets/teacher_app_bar_with_title_header_1.dart';
 import '../../../../../constants/sizes.dart';
-import '../../../controllers/teacher_navigation_menu_controller.dart';
-import '../../teacher_navigation_menu/teacher_bottom_navigation_bar_widget.dart';
 
 
 class TeacherThongBaoScreen extends StatelessWidget {
 
-  final String sentBy;
   const TeacherThongBaoScreen({
     super.key,
-    required this.sentBy,
   });
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(TeacherThongBaoController());
-    final teacherNavigationMenuController = Get.put(TeacherNavigationMenuController());
     return DefaultTabController(
       length: 2,
       child: Scaffold(
         appBar: const TeacherAppBarWithTitleHeader1(),
-        bottomNavigationBar: TeacherBottomNavigationBarWidget(controller: teacherNavigationMenuController),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: t10Size),
           child: NestedScrollView(

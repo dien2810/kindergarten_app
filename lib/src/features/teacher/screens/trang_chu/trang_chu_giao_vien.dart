@@ -16,7 +16,7 @@ class TrangChuGiaoVien extends StatelessWidget {
           padding: EdgeInsets.all(t10Size),
           child: Column(
             children: [
-              const Center(child: Text("Trang chủ Giáo Viên")),
+              const Center(child: Text("Tài khoản Giáo Viên")),
               TextButton(
                 onPressed: () {
                   // await auth.signOut();

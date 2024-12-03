@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kindergarten_app/src/features/teacher/screens/chi_tiet_hoc_sinh/teacher_suc_khoe_hoc_sinh/co_ban_tab/teacher_ghi_chu_widget.dart';
-import '../../../../../../common_widgets/button_widget/custom_button_widget.dart';
 import '../../../../../../common_widgets/information_input_widget/information_input_widget.dart';
 import '../../../../../../constants/colors.dart';
 import '../../../../../../constants/sizes.dart';

@@ -6,6 +6,7 @@ import 'package:kindergarten_app/src/repository/enrolled_club_repository/enrolle
 import 'package:kindergarten_app/src/repository/teacher_repository/teacher_repository.dart';
 import 'package:kindergarten_app/src/utils/helper_controller/helper_controller.dart';
 
+import '../../../../repository/account_repository/account_repository.dart';
 import '../../models/enrolledClub/enrolled.dart';
 
 
@@ -57,7 +58,9 @@ class NgoaiKhoaController extends GetxController{
         paymentStatus: 'Chưa thanh toán',
       );
       enrolledClubModel.enrolled.add(newEnrolled);
-      await _enrolledClubRepo.addEnrolledClub(enrolledClubModel);
+      final accountRepo = Get.put(AccountRepository());
+      enrolledClubModel.id = accountRepo.userId;
+      await _enrolledClubRepo.updateEnrolledClub(enrolledClubModel);
       Helper.successSnackBar(
           title: 'Đăng ký thành công',
           message: 'Đăng ký CLB thành công'

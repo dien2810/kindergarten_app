@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/features/student/screens/guardian_navigation_menu/guardian_navigation_menu.dart';
-import 'package:kindergarten_app/src/features/teacher/screens/trang_chu/trang_chu_giao_vien.dart';
+import 'package:kindergarten_app/src/features/teacher/screens/teacher_navigation_menu/teacher_navigation_menu.dart';
 import 'package:kindergarten_app/src/repository/account_repository/account_repository.dart';
 import 'package:kindergarten_app/src/utils/helper_controller/helper_controller.dart';
 
@@ -32,7 +32,7 @@ class LoginController extends GetxController{
       } else if (role.value == Role.teacher && account.role == Role.teacher) {
         accountRepo.userId = account.username;
         accountRepo.fullName = account.fullname;
-        Get.offAll(() => const TrangChuGiaoVien());
+        Get.offAll(() => const TeacherNavigationMenu());
       }
       else{
         Helper.errorSnackBar(
@@ -42,12 +42,17 @@ class LoginController extends GetxController{
       }
     } catch(e){
       isLoading.value = false;
+      Helper.errorSnackBar(
+          title: 'Đăng nhập thất bại',
+          message: 'Tên đăng nhập hoặc mật khẩu không đúng'
+      );
       print(e.toString());
     }
   }
 
   void signOut(){
     accountRepo.userId = '';
+    accountRepo.fullName = '';
     Get.offAll(()=>const LoginScreen());
   }
 

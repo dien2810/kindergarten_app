@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:kindergarten_app/src/features/teacher/controllers/teacher_navigation_menu_controller.dart';
 import 'teacher_bottom_navigation_bar_widget.dart';
 
-class GuardianNavigationMenu extends StatelessWidget {
-  const GuardianNavigationMenu({super.key});
+class TeacherNavigationMenu extends StatelessWidget {
+  const TeacherNavigationMenu({super.key});
 
   @override
   Widget build(BuildContext context) {

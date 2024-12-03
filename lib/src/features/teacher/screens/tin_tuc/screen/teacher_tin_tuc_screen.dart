@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/constants/image_strings.dart';
 import '../../../../../common_widgets/app_bar_widgets/teacher_app_bar_with_title_header_1.dart';
-import '../../../controllers/teacher_navigation_menu_controller.dart';
+import '../../../../../constants/sizes.dart';
 import '../../../controllers/tin_tuc/teacher_tin_tuc_controller.dart';
-import '../../teacher_navigation_menu/teacher_bottom_navigation_bar_widget.dart';
 
 class TeacherTinTucScreen extends StatelessWidget {
   const TeacherTinTucScreen({super.key});
@@ -12,14 +11,11 @@ class TeacherTinTucScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final teacherTinTucController = Get.put(TeacherTinTucController());
-    final teacherNavigationMenuController = Get.put(TeacherNavigationMenuController());
 
     return DefaultTabController(
       length: 4,
       child: Scaffold(
         appBar: const TeacherAppBarWithTitleHeader1(),
-        bottomNavigationBar: TeacherBottomNavigationBarWidget(
-            controller: teacherNavigationMenuController),
         body: Column(
           children: [
             const TabBar(
@@ -71,10 +67,11 @@ class TeacherTinTucScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
+          padding: EdgeInsets.symmetric(vertical: t5Size, horizontal: t5Size),
           child: Text(
             title,
             style: const TextStyle(
+              color: Color(0xFF7209B7),
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),

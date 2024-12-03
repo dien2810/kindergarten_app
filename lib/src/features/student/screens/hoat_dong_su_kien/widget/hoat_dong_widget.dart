@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/features/student/controllers/hoat_dong_su_kien/hoat_dong_su_kien_controller.dart';
+import 'package:kindergarten_app/src/features/student/screens/hoat_dong_su_kien/livestream_video_sdk/join_screen.dart';
 import 'package:kindergarten_app/src/features/student/screens/hoat_dong_su_kien/screen/chi_tiet_hoat_dong_screen.dart';
 import 'package:weekly_date_picker/weekly_date_picker.dart';
 import '../../../../../constants/sizes.dart';
-import '../screen/video_giam_sat_screen.dart';
 
 class HoatDongWidget extends StatelessWidget {
   const HoatDongWidget({super.key});
@@ -81,7 +81,8 @@ class HoatDongWidget extends StatelessWidget {
                             //Navigate to video screen
                             String videoLink =
                                 'URL_CUA_VIDEO'; // Thay thế bằng giá trị thực tế
-                            Get.to(() => VideoGiamSatScreen());
+                            // Get.to(() => VideoGiamSatScreen());
+                            Get.to(()=>JoinScreen());
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFFD74971),

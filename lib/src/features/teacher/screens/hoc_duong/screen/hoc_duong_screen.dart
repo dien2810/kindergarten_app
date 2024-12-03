@@ -3,21 +3,17 @@ import 'package:get/get.dart';
 import 'package:kindergarten_app/src/constants/image_strings.dart';
 import '../../../../../common_widgets/app_bar_widgets/teacher_app_bar_with_title_header_1.dart';
 import '../../../../../constants/sizes.dart';
-import '../../../controllers/teacher_navigation_menu_controller.dart';
-import '../../teacher_navigation_menu/teacher_bottom_navigation_bar_widget.dart';
 
 class HocDuongScreen extends StatelessWidget {
   const HocDuongScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final teacherNavigationMenuController = Get.put(TeacherNavigationMenuController());
 
     return DefaultTabController(
       length: 1,
       child: Scaffold(
         appBar: const TeacherAppBarWithTitleHeader1(), // Giữ lại Header 1
-        bottomNavigationBar: TeacherBottomNavigationBarWidget(controller: teacherNavigationMenuController), // Giữ lại BottomWidget
         body: SingleChildScrollView(  // Dùng SingleChildScrollView để cuộn nếu không gian không đủ
           child: Column(
             children: [
@@ -36,7 +32,7 @@ class HocDuongScreen extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: 20),  // Khoảng cách giữa text và box chứa button
+              const SizedBox(height: 20),  // Khoảng cách giữa text và box chứa button
 
               // Box chứa các button với bo góc và shadow
               Padding(
@@ -103,7 +99,7 @@ class HocDuongScreen extends StatelessWidget {
       splashColor: Colors.green.withOpacity(0.9), // Màu hiệu ứng khi nhấn
       highlightColor: Colors.blue.withOpacity(0.9), // Màu khi nhấn lâu
       child: AnimatedScale(
-        duration: Duration(milliseconds: 200),  // Thời gian hiệu ứng phóng to
+        duration: const Duration(milliseconds: 200),  // Thời gian hiệu ứng phóng to
         scale: 1.0,  // Tỷ lệ ban đầu
         onEnd: () {
           // Bạn có thể thêm hiệu ứng phóng to hoặc thu nhỏ tùy thuộc vào logic của bạn
@@ -116,12 +112,12 @@ class HocDuongScreen extends StatelessWidget {
               height: 120,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Color(0xFFD9D9D9), // Màu nền cho button
+                color: const Color(0xFFD9D9D9), // Màu nền cho button
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.4),
                     blurRadius: 6,
-                    offset: Offset(2, 6), // Vị trí của shadow
+                    offset: const Offset(2, 6), // Vị trí của shadow
                   ),
                 ],
               ),
@@ -133,10 +129,10 @@ class HocDuongScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 8),  // Khoảng cách giữa button và text
+            const SizedBox(height: 8),  // Khoảng cách giữa button và text
             Text(
               label,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
               textAlign: TextAlign.center,
             ),
           ],

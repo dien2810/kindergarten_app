@@ -32,7 +32,7 @@ class ClubCardCuaToi extends StatelessWidget {
       future: ngoaiKhoaController.getClubById(enrolledClub.clubID),
       builder: (context, snapshot){
         if (snapshot.connectionState == ConnectionState.waiting){
-          return const Center(child: CircularProgressIndicator());
+          return Container();
         }
         else if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
