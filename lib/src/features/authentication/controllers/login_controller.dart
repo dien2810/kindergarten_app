@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/features/student/screens/guardian_navigation_menu/guardian_navigation_menu.dart';
-import 'package:kindergarten_app/src/features/teacher/screens/teacher_navigation_menu/teacher_navigation_menu.dart';
+import 'package:kindergarten_app/src/features/teacher/controllers/teacher_navigation_menu_controller.dart';
+import 'package:kindergarten_app/src/features/teacher/screens/teacher_navigation_menu/teacher_bottom_navigation_bar_widget.dart';
+import 'package:kindergarten_app/src/features/teacher/screens/trang_chu/trang_chu_giao_vien.dart';
 import 'package:kindergarten_app/src/repository/account_repository/account_repository.dart';
 import 'package:kindergarten_app/src/utils/helper_controller/helper_controller.dart';
 
+import '../../teacher/screens/teacher_navigation_menu/teacher_navigation_menu.dart';
 import '../screens/login_screen/login_screen.dart';
 
 class LoginController extends GetxController{

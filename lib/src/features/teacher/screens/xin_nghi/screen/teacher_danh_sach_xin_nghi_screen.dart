@@ -15,14 +15,12 @@ class TeacherDanhSachXinNghiScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final teacherNavigationMenuController = Get.put(TeacherNavigationMenuController());
     final teacherXinNghiController = Get.put(TeacherXinNghiController());
 
     return DefaultTabController(
       length: 1,
       child: Scaffold(
         appBar: const TeacherAppBarWithColorAndTitle(title: tXinNghi, hexColor: "#480CA8"),
-        bottomNavigationBar: TeacherBottomNavigationBarWidget(controller: teacherNavigationMenuController),
         body: Column(
           children: [
             ClipRRect(

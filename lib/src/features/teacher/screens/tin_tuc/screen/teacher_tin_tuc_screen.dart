@@ -16,6 +16,7 @@ class TeacherTinTucScreen extends StatelessWidget {
       length: 4,
       child: Scaffold(
         appBar: const TeacherAppBarWithTitleHeader1(),
+
         body: Column(
           children: [
             const TabBar(

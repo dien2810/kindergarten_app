@@ -33,9 +33,6 @@ class _TeacherDanhSachHocSinhScreenState
       length: 1,
       child: Scaffold(
         appBar: const TeacherAppBarWithTitleHeader2(title: tDanhSachHocSinh),
-        bottomNavigationBar: TeacherBottomNavigationBarWidget(
-          controller: teacherNavigationMenuController,
-        ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(

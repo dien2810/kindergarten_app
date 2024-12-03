@@ -10,9 +10,9 @@ class TeacherNavigationMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(TeacherNavigationMenuController());
     return Scaffold(
-      bottomNavigationBar: TeacherBottomNavigationBarWidget(controller: controller),
-      body: Obx(()=>controller.screens[controller.selectedIndex.value])
-    );
+        bottomNavigationBar:
+            TeacherBottomNavigationBarWidget(controller: controller),
+        body: Obx(() => controller.screens[controller.selectedIndex.value]));
   }
 }
 

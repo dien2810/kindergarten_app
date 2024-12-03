@@ -28,7 +28,6 @@ class HocDuongRoutes {
 
   static const String chuyenCan = '/chuyenCan';
   static final routes = [
-    GetPage(name: '/HocDuong', page: () => const HocDuongScreen()),
     GetPage(name: '/TeacherDanThuoc', page: () => const TeacherDanThuocScreen()),
     GetPage(name: '/TeacherThucDon', page: () => const TeacherThucDonScreen()),
     GetPage(name:  '/TeacherGiangDay', page: ()=> const TeacherGiangDayScreen()),
