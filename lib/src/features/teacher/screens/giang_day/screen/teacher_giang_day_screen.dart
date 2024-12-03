@@ -22,12 +22,10 @@ class _TeacherGiangDayScreenState extends State<TeacherGiangDayScreen> {
   @override
   Widget build(BuildContext context) {
     final giangDayController = Get.put(TeacherGiangDayController());
-    final teacherNavigationMenuController = Get.put(TeacherNavigationMenuController());
     return DefaultTabController(
       length: 1,
       child: Scaffold(
         appBar: const TeacherAppBarWithTitleHeader2(title: tGiangDay),
-        bottomNavigationBar: TeacherBottomNavigationBarWidget(controller: teacherNavigationMenuController), // Giữ lại BottomWidget
         body: Stack(
           children: [
             Column(

@@ -12,11 +12,8 @@ import '../../teacher_navigation_menu/teacher_bottom_navigation_bar_widget.dart'
 
 
 class TeacherThongBaoScreen extends StatelessWidget {
-
-  final String sentBy;
   const TeacherThongBaoScreen({
     super.key,
-    required this.sentBy,
   });
 
   @override
@@ -27,7 +24,6 @@ class TeacherThongBaoScreen extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: const TeacherAppBarWithTitleHeader1(),
-        bottomNavigationBar: TeacherBottomNavigationBarWidget(controller: teacherNavigationMenuController),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: t10Size),
           child: NestedScrollView(

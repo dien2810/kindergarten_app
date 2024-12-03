@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/constants/image_strings.dart';
+import 'package:kindergarten_app/src/features/teacher/routes/hoc_duong_route.dart';
 import '../../../../../common_widgets/app_bar_widgets/teacher_app_bar_with_title_header_1.dart';
 import '../../../../../constants/sizes.dart';
 import '../../../controllers/teacher_navigation_menu_controller.dart';
 import '../../teacher_navigation_menu/teacher_bottom_navigation_bar_widget.dart';
+
 
 class HocDuongScreen extends StatelessWidget {
   const HocDuongScreen({super.key});
@@ -12,12 +14,10 @@ class HocDuongScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final teacherNavigationMenuController = Get.put(TeacherNavigationMenuController());
-
     return DefaultTabController(
       length: 1,
       child: Scaffold(
         appBar: const TeacherAppBarWithTitleHeader1(), // Giữ lại Header 1
-        bottomNavigationBar: TeacherBottomNavigationBarWidget(controller: teacherNavigationMenuController), // Giữ lại BottomWidget
         body: SingleChildScrollView(  // Dùng SingleChildScrollView để cuộn nếu không gian không đủ
           child: Column(
             children: [

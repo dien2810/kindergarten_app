@@ -17,14 +17,12 @@ class TeacherDanThuocScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final teacherNavigationMenuController = Get.put(TeacherNavigationMenuController());
     final teacherDanThuocController = Get.put(TeacherDanThuocController());
 
     return DefaultTabController(
       length: 1,
       child: Scaffold(
         appBar: const TeacherAppBarWithTitleHeader2(title: tDanThuoc),
-        bottomNavigationBar: TeacherBottomNavigationBarWidget(controller: teacherNavigationMenuController),
         body: Column(
           children: [
             ClipRRect(
