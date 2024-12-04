@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import '../../../../constants/sizes.dart';
 import '../../../authentication/controllers/login_controller.dart';
 
-class TaiKhoanScreen extends StatelessWidget {
-  const TaiKhoanScreen({super.key});
+class TaiKhoanScreen1 extends StatelessWidget {
+  const TaiKhoanScreen1({super.key});
 
   @override
   Widget build(BuildContext context) {

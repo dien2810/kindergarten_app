@@ -111,7 +111,7 @@ class ThemMoiDanThuocBottomSheet{
                                 createDate: themMoiDanThuocConTroller.createDate,
                                 status: tDaGui,
                                 sentGuardian: themMoiDanThuocConTroller.hoVaTenPhuHuynhDanThuoc.text,
-                                receivedPerson: 'Giáo viên chủ nhiệm lớp ${themMoiDanThuocConTroller.lop.text}',
+                                receivedPerson: themMoiDanThuocConTroller.lop.text,
                                 studentID: accountRepo.userId,
                               );
                               themMoiDanThuocConTroller.addMedicine(medicine);

@@ -2,16 +2,16 @@
 import 'package:flutter/material.dart';
 import 'package:kindergarten_app/src/common_widgets/cloud_image/cloud_image_widget.dart';
 
-class HinhAnhScreen extends StatefulWidget {
+class TeacherHinhAnhScreen extends StatefulWidget {
   final List<String> images;
 
-  const HinhAnhScreen({super.key, required this.images});
+  const TeacherHinhAnhScreen({super.key, required this.images});
 
   @override
   _HinhAnhScreenState createState() => _HinhAnhScreenState();
 }
 
-class _HinhAnhScreenState extends State<HinhAnhScreen> {
+class _HinhAnhScreenState extends State<TeacherHinhAnhScreen> {
   // Function to create a TransformationController for each image
   TransformationController _getTransformationController(int index) {
     return TransformationController();

@@ -5,7 +5,6 @@ import 'package:kindergarten_app/src/features/teacher/screens/chi_tiet_hoc_sinh/
 import 'package:kindergarten_app/src/features/teacher/screens/chi_tiet_hoc_sinh/teacher_suc_khoe_hoc_sinh/teacher_thong_tin_suc_khoe_hoc_sinh_screen.dart';
 import 'package:kindergarten_app/src/features/teacher/screens/dan_thuoc/screen/teacher_dan_thuoc_screen.dart';
 import 'package:kindergarten_app/src/features/teacher/screens/giang_day/screen/teacher_giang_day_screen.dart';
-import 'package:kindergarten_app/src/features/teacher/screens/hoc_duong/screen/hoc_duong_screen.dart';
 import 'package:kindergarten_app/src/features/teacher/screens/ngoai_khoa/screen/teacher_ngoai_khoa_screen.dart';
 import 'package:kindergarten_app/src/features/teacher/screens/thuc_don/screen/teacher_thuc_don_screen.dart';
 
@@ -39,7 +38,8 @@ class HocDuongRoutes {
         final arguments = Get.arguments;
         final studentName = arguments['studentName'] ?? 'Chưa có tên';
         final imageUrl =arguments['imageUrl'] ?? 'chưa có ảnh';
-        return TeacherThongTinCaNhanHocSinhScreen(studentName: studentName, imageUrl: imageUrl,);
+        final student = arguments['student'];
+        return TeacherThongTinCaNhanHocSinhScreen(student: student);
       },
     ),
     GetPage(name: '/thongTinSucKhoe', page: () {
@@ -47,7 +47,8 @@ class HocDuongRoutes {
       final arguments = Get.arguments;
       final studentName = arguments['studentName'] ?? 'Chưa có tên';
       final imageUrl =arguments['imageUrl'] ?? 'chưa có ảnh';
-      return TeacherThongTinSucKhoeHocSinhScreen(studentName: studentName, imageUrl: imageUrl,);
+      final student = arguments['student'];
+      return TeacherThongTinSucKhoeHocSinhScreen(student: student);
     }, ),
     GetPage(name: '/lichSuNhanXet', page: () {
       // Truyền tham số 'studentName' khi điều hướng

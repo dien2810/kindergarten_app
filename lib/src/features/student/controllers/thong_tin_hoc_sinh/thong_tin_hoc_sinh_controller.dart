@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kindergarten_app/src/constants/text_strings.dart';
+import 'package:kindergarten_app/src/features/student/screens/hoat_dong_su_kien/screen/chi_tiet_hinh_anh_hoat_dong_screen.dart';
 import 'package:kindergarten_app/src/repository/classes_repository/classes_respository.dart';
 import 'package:kindergarten_app/src/repository/student_repository/student_repository.dart';
 
@@ -35,7 +36,6 @@ class ThongTinHocSinhController extends GetxController{
   var hasHouseholdRegistration = false.obs;
 
   late StudentModel studentModel;
-
 
   @override
   Future<void> onInit() async {
@@ -111,19 +111,65 @@ class ThongTinHocSinhController extends GetxController{
     }
   }
 
+  Future<void> toggleImage(String type)async {
+    List<String> images;
+    if (type == 'photo4x6') {
+      if (hasPhoto4x6.value == false){
+        final image = await pickImage('photo4x6');
+        if (image != null){
+          anhHocSinh.text = await Helper.uploadImage(image);
+        }
+      }
+      else{
+        images = [anhHocSinh.text];
+        Get.to(HinhAnhScreen(images: images));
+      }
+    } else{
+      if (type == 'birthCertificate') {
+        if (hasBirthCertificate.value == false){
+          final image = await pickImage('birthCertificate');
+          if (image != null){
+            anhGiayKhaiSinh.text = await Helper.uploadImage(image);
+          }
+        }
+        else{
+          images = [anhGiayKhaiSinh.text];
+          Get.to(HinhAnhScreen(images: images));
+        }
+      }
+      else{
+        if (type == 'householdRegistration') {
+          if (hasHouseholdRegistration.value == false){
+            final image = await pickImage('householdRegistration');
+            if (image != null){
+              anhSoHoKhau.text = await Helper.uploadImage(image);
+            }
+          }
+          else{
+            images = [anhSoHoKhau.text];
+            Get.to(HinhAnhScreen(images: images));
+          }
+        }
+      }
+    }
+  }
+
   Future<XFile?> pickImage(String type) async {
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       imageList.add(image);
       if (type == 'photo4x6') {
         hasPhoto4x6.value = true;
-        anhHocSinh.text = image.path;
+        // anhHocSinh.text = image.path;
+        anhHocSinh.text = await Helper.uploadImage(image);
       } else if (type == 'birthCertificate') {
         hasBirthCertificate.value = true;
-        anhGiayKhaiSinh.text = image.path;
+        // anhGiayKhaiSinh.text = image.path;
+        anhGiayKhaiSinh.text = await Helper.uploadImage(image);
       } else if (type == 'householdRegistration') {
         hasHouseholdRegistration.value = true;
-        anhSoHoKhau.text = image.path;
+        // anhSoHoKhau.text = image.path;
+        anhSoHoKhau.text = await Helper.uploadImage(image);
       }
     }
     return image;

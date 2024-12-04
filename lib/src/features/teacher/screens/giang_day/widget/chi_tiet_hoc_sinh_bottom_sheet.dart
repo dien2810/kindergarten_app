@@ -1,23 +1,23 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+import 'package:kindergarten_app/src/common_widgets/cloud_image/circle_cloud_image_widget.dart';
 import 'package:kindergarten_app/src/features/teacher/controllers/nhan_xet_hoc_sinh/teacher_nhan_xet_hoc_sinh_controller.dart';
 import 'package:kindergarten_app/src/features/teacher/routes/hoc_duong_route.dart';
+import 'package:kindergarten_app/src/features/teacher/screens/chi_tiet_hoc_sinh/teacher_suc_khoe_hoc_sinh/teacher_thong_tin_suc_khoe_hoc_sinh_screen.dart';
 
+import '../../../../student/models/student/student_model.dart';
 import '../../chi_tiet_hoc_sinh/teacher_lich_su_nhan_xet/widget/teacher_them_moi_nhan_xet_bottom_sheet.dart';
+import '../../chi_tiet_hoc_sinh/teacher_thong_tin_hoc_sinh/screen/teacher_thong_tin_ca_nhan_hoc_sinh_screen.dart';
 
 class ChiTietHocSinhBottomSheet extends StatefulWidget {
-  final String studentName; // Student's name
-  final String imageUrl; // Student's image URL
+  final StudentModel student;
   final CommentData commentData;
 
   const ChiTietHocSinhBottomSheet({
-    Key? key,
-    required this.studentName,
-    required this.imageUrl,
+    super.key,
+    required this.student,
     required this.commentData,
-  }) : super(key: key);
+  });
 
   @override
   State<ChiTietHocSinhBottomSheet> createState() =>
@@ -67,9 +67,12 @@ class _ChiTietHocSinhBottomSheetState extends State<ChiTietHocSinhBottomSheet> {
               Center(
                 child: CircleAvatar(
                   radius: 90, // Giảm kích thước avatar
-                  backgroundImage: widget.imageUrl.startsWith('http')
-                      ? NetworkImage(widget.imageUrl)
-                      : AssetImage(widget.imageUrl) as ImageProvider,
+                  child: CircleCloudImageWidget(
+                    publicId: widget.student.studentDocument.image
+                  )
+                  // backgroundImage: widget.imageUrl.startsWith('http')
+                  //     ? NetworkImage(widget.imageUrl)
+                  //     : AssetImage(widget.imageUrl) as ImageProvider,
                 ),
               ),
               const SizedBox(height: 12), // Reduced space below the avatar
@@ -77,7 +80,7 @@ class _ChiTietHocSinhBottomSheetState extends State<ChiTietHocSinhBottomSheet> {
               // Display student name
               Center(
                 child: Text(
-                  widget.studentName,
+                  widget.student.studentProfile.name,
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -98,7 +101,7 @@ class _ChiTietHocSinhBottomSheetState extends State<ChiTietHocSinhBottomSheet> {
                         child: _buildButton(
                             'Thông tin cá nhân',
                             HocDuongRoutes.thongTinCaNhan,
-                            { 'studentName': widget.studentName, 'imageUrl': widget.imageUrl}
+                            widget.student
                         ),
                       ),
                       const SizedBox(width: 10), // Space between the buttons
@@ -106,7 +109,7 @@ class _ChiTietHocSinhBottomSheetState extends State<ChiTietHocSinhBottomSheet> {
                         child: _buildButton(
                           'Thông tin sức khỏe',
                           HocDuongRoutes.thongTinSucKhoe,
-                          { 'studentName': widget.studentName, 'imageUrl': widget.imageUrl},
+                          widget.student,
                         ),
                       ),
                     ],
@@ -119,10 +122,7 @@ class _ChiTietHocSinhBottomSheetState extends State<ChiTietHocSinhBottomSheet> {
                         child: _buildButton(
                           'Lịch sử nhận xét',
                           HocDuongRoutes.lichSuNhanXet,
-                          {
-                            'studentName': widget.studentName,
-                            'imageUrl': widget.imageUrl
-                          }, // Truyền dữ liệu
+                          widget.student, // Truyền dữ liệu
                         ),
                       ),
                       const SizedBox(width: 10), // Space between the buttons
@@ -130,10 +130,8 @@ class _ChiTietHocSinhBottomSheetState extends State<ChiTietHocSinhBottomSheet> {
                         child: _buildButton(
                           'Chuyên cần',
                           HocDuongRoutes.chuyenCan,
-                          {
-                            'studentName': widget.studentName,
-                            'imageUrl': widget.imageUrl
-                          }, // Truyền dữ liệu
+                          widget.student
+                          , // Truyền dữ liệu
                         ),
                       ),
                     ],
@@ -161,7 +159,7 @@ class _ChiTietHocSinhBottomSheetState extends State<ChiTietHocSinhBottomSheet> {
                             builder: (BuildContext context) {
                               return TeacherThemMoiNhanXetBottomSheet(
                                 teacherID: widget.commentData.teacherID,
-                                parentName: widget.studentName,
+                                parentName: widget.student.studentProfile.name,
                                 currentDate: widget.commentData.currentDate,
                                 guardianID: widget.commentData.guardianID,
                                 replyContent: widget.commentData.replyContent,
@@ -226,10 +224,19 @@ class _ChiTietHocSinhBottomSheetState extends State<ChiTietHocSinhBottomSheet> {
     );
   }
 }
-  Widget _buildButton(String text, String route, Map<String, dynamic> data) {
+  Widget _buildButton(String text, String route, StudentModel student) {
     return ElevatedButton(
       onPressed: () {
-        Get.toNamed(route, arguments: data); // Truyền dữ liệu bằng GetX
+        if (route == HocDuongRoutes.thongTinCaNhan){
+          Get.to(()=>TeacherThongTinCaNhanHocSinhScreen(
+            student: student,
+          ));
+        }
+        else if (route == HocDuongRoutes.thongTinSucKhoe){
+          Get.to(()=>TeacherThongTinSucKhoeHocSinhScreen(student: student));
+        }
+
+        // Get.toNamed(route, arguments: data); // Truyền dữ liệu bằng GetX
       },
       style: ElevatedButton.styleFrom(
         backgroundColor: const Color(0xFF79DBB1),

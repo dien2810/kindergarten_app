@@ -22,7 +22,9 @@ class StudentDocumentWidget extends StatelessWidget {
             _buildDocumentField(tNgheNghiepCuaCha, thongTinHocSinhController.ngheCha),
             _buildDocumentField(tNgheNghiepCuaMe, thongTinHocSinhController.ngheMe),
             GestureDetector(
-              onTap: () => thongTinHocSinhController.pickImage('photo4x6'),
+              onTap: () async {
+                await thongTinHocSinhController.toggleImage('photo4x6');
+              },
               child: Obx(() {
                 if (thongTinHocSinhController.hasPhoto4x6.value){
                   return _buildDocumentField(
@@ -34,16 +36,18 @@ class StudentDocumentWidget extends StatelessWidget {
                 }
                 else {
                   return _buildDocumentField(
-                  tAnhHocSinh,
-                  thongTinHocSinhController.anhHocSinh,
-                  textColor: Colors.red,  // Đổi màu thành đỏ
-                  readOnly: true
-                );
+                    tAnhHocSinh,
+                    thongTinHocSinhController.anhHocSinh,
+                    textColor: Colors.red,  // Đổi màu thành đỏ
+                    readOnly: true
+                  );
                 }
               } ),
             ),
             GestureDetector(
-              onTap: () => thongTinHocSinhController.pickImage('birthCertificate'),
+              onTap: () async {
+                await thongTinHocSinhController.toggleImage('birthCertificate');
+              },
               child: Obx((){
                 if (thongTinHocSinhController.hasBirthCertificate.value){
                   return _buildDocumentField(
@@ -58,18 +62,22 @@ class StudentDocumentWidget extends StatelessWidget {
                     tAnhGiayKhaiSinh,
                     thongTinHocSinhController.anhGiayKhaiSinh,
                     textColor: Colors.red,  // Đổi màu thành đỏ
+                    readOnly: true
                   );
                 }
               } ),
             ),
             GestureDetector(
-              onTap: () => thongTinHocSinhController.pickImage('householdRegistration'),
+              onTap: () async {
+                await thongTinHocSinhController.toggleImage('householdRegistration');
+              },
               child: Obx(() {
                 if (thongTinHocSinhController.hasHouseholdRegistration.value){
                   return _buildDocumentField(
                     tAnhSoHoKhau,
                     thongTinHocSinhController.anhSoHoKhau,
                     textColor: Colors.green,  // Đổi màu thành xanh
+                    readOnly: true
                   );
                 }
                 else{
@@ -77,6 +85,7 @@ class StudentDocumentWidget extends StatelessWidget {
                     tAnhSoHoKhau,
                     thongTinHocSinhController.anhSoHoKhau,
                     textColor: Colors.red,  // Đổi màu thành đỏ
+                    readOnly: true
                   );
                 }
               } ),

@@ -7,6 +7,20 @@ class MedicineRepository extends GetxController{
   //final _db = FirebaseFirestore.instance;
   final CollectionReference _medicineCollection = FirebaseFirestore.instance.collection('medicine');
   // Thêm một document medicine mới vào Firestore
+
+  Future<List<MedicineModel>> allMedicineByClassName(String className) async {
+    try{
+      final snapshot =
+      await _medicineCollection.where("receivedPerson", isEqualTo: className).get();
+      print('Snapshot: ${snapshot.docs}');
+      final medicineData = snapshot.docs.map((e) => MedicineModel.fromFirestore(e)).toList();
+      return medicineData;
+    } catch(e){
+      print("Fail to catch medicines: $e");
+      return [];
+    }
+  }
+
   Future<List<MedicineModel>> allMedicine(String studentID) async {
     try{
       final snapshot =

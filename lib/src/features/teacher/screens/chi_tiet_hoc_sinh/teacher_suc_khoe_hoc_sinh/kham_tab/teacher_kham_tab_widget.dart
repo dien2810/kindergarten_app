@@ -117,7 +117,7 @@ class TeacherKhamTabWidget extends StatelessWidget {
                       backgroundColor: Colors.transparent
                   ),
                   onPressed: () {
-
+                    controller.updateHealthInformation();
                   },
                   child: const Text(
                     tCapNhat,

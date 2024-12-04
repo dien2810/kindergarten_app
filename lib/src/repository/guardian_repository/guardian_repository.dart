@@ -10,6 +10,21 @@ class GuardianRepository extends GetxController{
   final CollectionReference _guardianCollection = FirebaseFirestore.instance.collection('guardian');
   final _accountRepo = Get.put(AccountRepository());
   // Thêm một document mới vào Firestore
+  Future<GuardianModel?> getGuardianByStudentId(String studentId) async {
+    final snapshot = await _guardianCollection.
+    where("studentID", isEqualTo: studentId).limit(1).get();
+    if (snapshot.docs.isNotEmpty){
+      final data = snapshot.docs.map((e) => GuardianModel.fromSnapShot(e as DocumentSnapshot<Map<String, dynamic>>)).single;
+      print('Data: $data');
+      return data;
+    }
+    else{
+      return null;
+    }
+    // Chuyển đổi dữ liệu thành model
+
+  }
+
   Future<GuardianModel?> getGuardianById() async {
     final snapshot = await _guardianCollection.
     where("studentID", isEqualTo: _accountRepo.userId).limit(1).get();

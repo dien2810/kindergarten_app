@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../controllers/suc_khoe_hoc_sinh/teacher_suc_khoe_hoc_sinh_controller.dart';
+
 class TeacherChinhSuaLoiKhuyenBottomSheet extends StatefulWidget {
   const TeacherChinhSuaLoiKhuyenBottomSheet({super.key});
 
@@ -13,6 +15,7 @@ class TeacherChinhSuaLoiKhuyenBottomSheet extends StatefulWidget {
 class _TeacherChinhSuaLoiKhuyenBottomSheetState
     extends State<TeacherChinhSuaLoiKhuyenBottomSheet> {
   final TextEditingController _controller = TextEditingController();
+  final teacherController = Get.put(TeacherSucKhoeHocSinhController());
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +61,10 @@ class _TeacherChinhSuaLoiKhuyenBottomSheetState
                     border: InputBorder.none,
                   ),
                   style: const TextStyle(fontSize: 16), // Kiểu chữ mặc định
+                  onChanged: (value){
+                    teacherController.loiKhuyenCuaBacSi.text = value;
+                    _controller.text = value;
+                  },
                 ),
               ),
               const SizedBox(height: 16), // space after textfield
@@ -73,10 +80,7 @@ class _TeacherChinhSuaLoiKhuyenBottomSheetState
                     // Update button
                     ElevatedButton(
                       onPressed: () {
-                        // Handle update advice
-                        String updatedAdvice = _controller.text;
-                        // You can send this to a backend or handle it locally
-                        print('Updated Advice: $updatedAdvice');
+                        teacherController.updateMedicalRecordKhamTab();
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF9317AE),

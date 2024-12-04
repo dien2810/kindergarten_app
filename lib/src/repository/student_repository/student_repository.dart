@@ -10,12 +10,27 @@ class StudentRepository extends GetxController{
   static StudentRepository get instance => Get.find();
   final CollectionReference _studentCollection = FirebaseFirestore.instance.collection('student');
   final _accountRepo = Get.put(AccountRepository());
+
+  Future<StudentModel?> getStudentByStudentId(String studentId) async {
+    final snapshot = await _studentCollection.doc(studentId).get();
+    if (snapshot.exists && snapshot.data() != null) {
+      final data = snapshot.data() as Map<String, dynamic>;
+      final student = StudentModel.fromMap(data); // Chuyển đổi dữ liệu thành model
+      student.id = snapshot.id;
+      return student;
+    } else {
+      return null; // Document không tồn tại hoặc không có dữ liệu
+    }
+  }
+
   // Thêm một document mới vào Firestore
   Future<StudentModel?> getStudentById() async {
     final snapshot = await _studentCollection.doc(_accountRepo.userId).get();
     if (snapshot.exists && snapshot.data() != null) {
       final data = snapshot.data() as Map<String, dynamic>;
-      return StudentModel.fromMap(data); // Chuyển đổi dữ liệu thành model
+      final student = StudentModel.fromMap(data); // Chuyển đổi dữ liệu thành modelfinal student = StudentModel.fromMap(data); // Chuyển đổi dữ liệu thành model
+      student.id = snapshot.id;
+      return student;
     } else {
       return null; // Document không tồn tại hoặc không có dữ liệu
     }

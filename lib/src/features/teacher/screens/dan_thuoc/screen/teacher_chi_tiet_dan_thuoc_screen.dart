@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:kindergarten_app/src/common_widgets/app_bar_widgets/teacher_app_bar_with_title_header_2.dart';
 import 'package:kindergarten_app/src/constants/text_strings.dart';
 import 'package:kindergarten_app/src/features/student/models/medicine/medicine_model.dart';
+import 'package:kindergarten_app/src/features/teacher/controllers/dan_thuoc/teacher_dan_thuoc_controller.dart';
 
 import '../../../../../constants/sizes.dart';
 import '../widget/teacher_dan_thuoc_list_tile_widget.dart';
@@ -121,7 +122,11 @@ class TeacherChiTietDanThuocScreen extends StatelessWidget {
                           ),
                           SizedBox(height: t15Size),
                           DropdownButtonFormField<String>(
-                            onChanged: (newValue) {},
+                            onChanged: (newValue) {
+                              if (newValue!=null){
+                                medicine.status = newValue;
+                              }
+                            },
                             items: ['Đã gửi', 'Đang thực hiện', 'Đã hoàn thành']
                                 .map((status) {
                               return DropdownMenuItem<String>(
@@ -149,7 +154,7 @@ class TeacherChiTietDanThuocScreen extends StatelessWidget {
                               );
                             }).toList(),
                             decoration: InputDecoration(
-                              labelText: 'Trạng thái',
+                              labelText: medicine.status,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
@@ -175,8 +180,10 @@ class TeacherChiTietDanThuocScreen extends StatelessWidget {
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 16.0), // Adjust padding
                                       ),
-                                      onPressed: () {
+                                      onPressed: () async {
                                         // Add update functionality here
+                                        final teacherDanThuocController = Get.put(TeacherDanThuocController());
+                                        await teacherDanThuocController.updateMedicine(medicine);
                                       },
                                       child: const Text(
                                         'Cập Nhật', // Text for the update button

@@ -244,7 +244,7 @@ class TeacherThongTinSucKhoeChungWidget extends StatelessWidget {
                           backgroundColor: Colors.transparent
                       ),
                       onPressed: () {
-
+                        controller.updateHealthHistory();
                       },
                       child: const Text(
                         tCapNhat,

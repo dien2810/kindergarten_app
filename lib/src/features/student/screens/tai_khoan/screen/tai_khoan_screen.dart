@@ -3,18 +3,17 @@ import 'package:get/get.dart';
 import 'package:kindergarten_app/src/features/student/screens/tai_khoan/screen/huong_dan_su_dung_screen.dart';
 import 'package:kindergarten_app/src/features/student/screens/tai_khoan/screen/thong_tin_hoc_sinh_phu_huynh_screen.dart';
 import '../../../../../constants/image_strings.dart';
-import '../../../controllers/guardian_navigation_menu_controller.dart';
-import '../../guardian_navigation_menu/bottom_navigation_bar_widget.dart';
+import '../../../../authentication/controllers/login_controller.dart';
 import 'thong_tin_tai_khoan_screen.dart';
 
 class TaiKhoanScreen extends StatelessWidget {
-  final String urlAvatar = ""; // URL avatar có thể là chuỗi rỗng
+  final String urlAvatar = "";
+
+  const TaiKhoanScreen({super.key}); // URL avatar có thể là chuỗi rỗng
 
   @override
   Widget build(BuildContext context) {
-    final guardianNavigationMenuController = Get.put(GuardianNavigationMenuController());
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBarWidget(controller: guardianNavigationMenuController),
       body: Stack(
         children: [
           // Header với ảnh nền
@@ -84,7 +83,7 @@ class TaiKhoanScreen extends StatelessWidget {
         style: TextButton.styleFrom(
           backgroundColor: Colors.blue,
           foregroundColor: Colors.white,
-          padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
@@ -109,16 +108,20 @@ class TaiKhoanScreen extends StatelessWidget {
               MaterialPageRoute(builder: (context) => HuongDanSuDungScreen()),
             );
           }
+          else if (text == "Đăng xuất"){
+            final loginController = Get.put(LoginController());
+            loginController.signOut();
+          }
           // Các hành động khác cho các button khác có thể được thực hiện ở đây
         },
         child: Row(
           children: [
             Icon(icon, color: Colors.white),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Expanded(
               child: Text(
                 text,
-                style: TextStyle(fontSize: 16),
+                style: const TextStyle(fontSize: 16),
                 overflow: TextOverflow.ellipsis,
               ),
             ),

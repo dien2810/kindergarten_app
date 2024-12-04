@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kindergarten_app/src/common_widgets/cloud_image/circle_cloud_image_widget.dart';
 import 'package:kindergarten_app/src/features/teacher/controllers/nhan_xet_hoc_sinh/teacher_nhan_xet_hoc_sinh_controller.dart';
 import 'package:kindergarten_app/src/features/teacher/screens/giang_day/widget/chi_tiet_hoc_sinh_bottom_sheet.dart';
 
-import '../../../controllers/nhan_xet_hoc_sinh/teacher_nhan_xet_hoc_sinh_controller.dart'; // Import the ChiTietHocSinhBottomSheet
+import '../../../../student/models/student/student_model.dart';
+import '../../../controllers/thong_tin_hoc_sinh/teacher_thong_tin_hoc_sinh_controller.dart';
+
+// Import the ChiTietHocSinhBottomSheet
 
 class HocSinhWidget extends StatelessWidget {
   // Khai báo tham số cho constructor
-  final String imageUrl;
-  final String tenHocSinh;
+  final StudentModel student;
 
   const HocSinhWidget({
-    Key? key,
-    required this.imageUrl,
-    required this.tenHocSinh,
-  }) : super(key: key);
+    super.key,
+    required this.student
+  });
 
   @override
   Widget build(BuildContext context) {
     final TeacherThongTinNhanxetController  nhanxetController= Get.put(TeacherThongTinNhanxetController());
+    final teacherThongTinHocSinhController = Get.put(TeacherThongTinHocSinhController());
     return GestureDetector(
       onTap: () {
         // Hành động khi nhấn nút
@@ -30,9 +33,9 @@ class HocSinhWidget extends StatelessWidget {
           ),
           builder: (BuildContext context) {
             // Pass both imageUrl and tenHocSinh to ChiTietHocSinhBottomSheet
+            teacherThongTinHocSinhController.studentModel = student;
             return ChiTietHocSinhBottomSheet(
-              studentName: tenHocSinh,
-              imageUrl: imageUrl,
+              student: student,
               commentData: nhanxetController.commentData, // Use data from the controller
             );
           },
@@ -61,8 +64,13 @@ class HocSinhWidget extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(top: 16.0),
                 child: CircleAvatar(
-                  radius: 60, // Kích thước hình tròn
-                  backgroundImage: AssetImage(imageUrl), // Ảnh từ asset
+                  radius: 80, // Kích thước hình tròn
+                  child: ClipOval(
+                    child: CircleCloudImageWidget(
+                      publicId: student.studentDocument.image,
+                    ),
+                  ),
+                  // backgroundImage: AssetImage(imageUrl), // Ảnh từ asset
                 ),
               ),
             ),
@@ -79,7 +87,9 @@ class HocSinhWidget extends StatelessWidget {
                 ), // Bo góc cho khung tên
               ),
               child: Text(
-                tenHocSinh.length > 70 ? '${tenHocSinh.substring(0, 70)}...' : tenHocSinh,
+                student.studentProfile.name.length > 70
+                    ? '${student.studentProfile.name.substring(0, 70)}...'
+                    : student.studentProfile.name,
                 style: const TextStyle(
                   fontSize: 16.0, // Font chữ lớn hơn
                   fontWeight: FontWeight.bold, // Đậm hơn để rõ nét

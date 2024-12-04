@@ -1,18 +1,37 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/constants/text_strings.dart';
-import 'package:kindergarten_app/src/repository/account_repository/account_repository.dart';
 import 'package:kindergarten_app/src/utils/helper_controller/helper_controller.dart';
 import '../../features/student/models/classes/classes_model.dart';
 
 class ClassesRepository extends GetxController{
   static ClassesRepository get instance => Get.find();
   final CollectionReference _classesCollection = FirebaseFirestore.instance.collection('classes');
-  final _accountRepo = Get.put(AccountRepository());
   // Thêm một document mới vào Firestore
+
+  Future<ClassesModel?> getClassesByTeacherId(String teacherID) async {
+    try {
+      // Truy vấn Firestore để tìm document với teacherID
+      final querySnapshot = await _classesCollection
+          .where('teacherID', isEqualTo: teacherID)
+          .limit(1) // Lấy 1 lớp đầu tiên khớp
+          .get();
+      // Kiểm tra nếu không có tài liệu phù hợp
+      if (querySnapshot.docs.isEmpty) {
+        return null; // Không tìm thấy
+      }
+      // Lấy className từ tài liệu đầu tiên
+      final Map<String, dynamic> data =
+      querySnapshot.docs.first.data() as Map<String, dynamic>;
+      return ClassesModel.fromMap(data);
+    } catch (e) {
+      print('Lỗi khi truy vấn className với teacherID: $e');
+      return null; // Trả về null nếu có lỗi
+    }
+  }
+
   Future<ClassesModel?> getClassesById(String classID) async {
     final snapshot = await _classesCollection.doc(classID).get();
-
     if (snapshot.exists && snapshot.data() != null) {
       final data = snapshot.data() as Map<String, dynamic>;
       print('Data: $data');

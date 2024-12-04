@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kindergarten_app/src/constants/image_strings.dart';
+import 'package:kindergarten_app/src/features/teacher/screens/hoat_dong_su_kien/screen/hoat_dong_su_kien_screen.dart';
 import 'package:kindergarten_app/src/features/teacher/screens/xin_nghi/screen/teacher_danh_sach_xin_nghi_screen.dart';
 
 import '../../../../../common_widgets/app_bar_widgets/teacher_app_bar_with_title_header_2.dart';
 import '../../../../../constants/text_strings.dart';
 import '../../../controllers/giang_day/teacher_giang_day_controller.dart';
-import '../../../controllers/teacher_navigation_menu_controller.dart';
 import '../../diem_danh/screen/teacher_diem_danh_screen.dart';
-import '../../teacher_navigation_menu/teacher_bottom_navigation_bar_widget.dart';
 import '../widget/hoc_sinh_widget.dart';
 
 class TeacherDanhSachHocSinhScreen extends StatefulWidget {
@@ -26,8 +24,6 @@ class _TeacherDanhSachHocSinhScreenState
   @override
   Widget build(BuildContext context) {
     final giangDayController = Get.put(TeacherGiangDayController());
-    final teacherNavigationMenuController =
-    Get.put(TeacherNavigationMenuController());
 
     return DefaultTabController(
       length: 1,
@@ -79,6 +75,7 @@ class _TeacherDanhSachHocSinhScreenState
                     ),
                     onPressed: () {
                       // Chuyển sang trang "Hoạt Động"
+                      Get.to(const TeacherHoatDongSuKienScreen());
                     },
                     child: const Text(
                       'HOẠT ĐỘNG',
@@ -93,7 +90,7 @@ class _TeacherDanhSachHocSinhScreenState
                     ),
                     onPressed: () {
                       // Chuyển sang trang "Điểm Danh"
-                      Get.to(TeacherDiemDanhScreen());
+                      Get.to(const TeacherDiemDanhScreen());
                     },
                     child: const Text(
                       'ĐIỂM DANH',
@@ -107,7 +104,7 @@ class _TeacherDanhSachHocSinhScreenState
                       padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
                     ),
                     onPressed: () {
-                     Get.to(TeacherDanhSachXinNghiScreen());
+                     Get.to(const TeacherDanhSachXinNghiScreen());
                     },
                     child: const Text(
                       'XIN NGHỈ',
@@ -119,33 +116,67 @@ class _TeacherDanhSachHocSinhScreenState
 
               const SizedBox(height: 10.0), // Khoảng cách giữa button và danh sách
               // Danh sách học sinh
-              const Expanded(
+              Expanded(
                 child: SingleChildScrollView(
-                  child: Wrap(
-                    spacing: 5.0, // Khoảng cách ngang giữa các phần tử
-                    runSpacing: 5.0, // Khoảng cách dọc giữa các phần tử
-                    alignment: WrapAlignment.center,
-                    children: [
-                      HocSinhWidget(
-                          imageUrl: tHocSinhAvatarItem1,
-                          tenHocSinh: 'Nguyễn Văn Trang Anh'),
-                      HocSinhWidget(
-                          imageUrl: tHocSinhAvatarItem2,
-                          tenHocSinh: 'Giản Đình Thái'),
-                      HocSinhWidget(
-                          imageUrl: tHocSinhAvatarItem3,
-                          tenHocSinh: 'Nguyễn Tuấn Đạt'),
-                      HocSinhWidget(
-                          imageUrl: tHocSinhAvatarItem3,
-                          tenHocSinh: 'Nguyễn Tuấn Đạt'),
-                      HocSinhWidget(
-                          imageUrl: tHocSinhAvatarItem3,
-                          tenHocSinh: 'Nguyễn Tuấn Đạt'),
-                      HocSinhWidget(
-                          imageUrl: tHocSinhAvatarItem3,
-                          tenHocSinh: 'Nguyễn Tuấn Đạt'),
-                    ],
-                  ),
+                  child: GridView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2, // Số lượng widget trên một hàng
+                      crossAxisSpacing: 10, // Khoảng cách ngang
+                      mainAxisSpacing: 10, // Khoảng cách dọc
+                    ),
+                    itemCount: giangDayController.classModel?.students.length, // Số lượng widget
+                    itemBuilder: (context, index) {
+                      final studentId = giangDayController.classModel?.students[index];
+                      return FutureBuilder(
+                        future: giangDayController.getStudentByStudentId(studentId!),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState == ConnectionState.waiting){
+                            return const Center(child: CircularProgressIndicator());
+                          }
+                          else if (snapshot.hasError) {
+                            return Center(child: Text('Error: ${snapshot.error}'));
+                          }
+                          else if (!snapshot.hasData) {
+                            return const Center(child: Text('Không có dữ liệu.'));
+                          }
+                          final student = snapshot.data;
+                          return HocSinhWidget(
+                            student: student!,
+                          );
+                        }
+                      );
+                    },
+                  )
+
+                  // child: Wrap(
+                  //   spacing: 5.0, // Khoảng cách ngang giữa các phần tử
+                  //   runSpacing: 5.0, // Khoảng cách dọc giữa các phần tử
+                  //   alignment: WrapAlignment.center,
+                  //   children: [
+                  //     SizedBox(
+                  //       height: t100Size*3,
+                  //       child: ListView.builder(
+                  //         shrinkWrap: true,
+                  //         physics: const NeverScrollableScrollPhysics(),
+                  //         itemCount: 6,
+                  //         // itemCount: giangDayController.classModel?.students.length,
+                  //         itemBuilder: (context, index){
+                  //           return const HocSinhWidget(
+                  //               imageUrl: tHocSinhAvatarItem1,
+                  //               tenHocSinh: 'Nguyễn Văn Trang Anh'
+                  //           );
+                  //         },
+                  //       ),
+                  //     ),
+                  //
+                  //     const HocSinhWidget(
+                  //         imageUrl: tHocSinhAvatarItem1,
+                  //         tenHocSinh: 'Nguyễn Văn Trang Anh'),
+                  //
+                  //   ],
+                  // ),
                 ),
               ),
             ],

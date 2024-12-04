@@ -5,8 +5,6 @@ import 'package:kindergarten_app/src/constants/text_strings.dart';
 import 'package:kindergarten_app/src/features/teacher/controllers/giang_day/teacher_giang_day_controller.dart';
 import 'package:kindergarten_app/src/features/teacher/screens/giang_day/widget/teacher_lop_giang_day_widget.dart';
 import '../../../../../constants/sizes.dart';
-import '../../../controllers/teacher_navigation_menu_controller.dart';
-import '../../teacher_navigation_menu/teacher_bottom_navigation_bar_widget.dart';
 
 class TeacherGiangDayScreen extends StatefulWidget {
   const TeacherGiangDayScreen({super.key});
@@ -83,28 +81,43 @@ class _TeacherGiangDayScreenState extends State<TeacherGiangDayScreen> {
                             border: Border.all(
                                 width: 2, color: const Color(0xFFC4C4C4)),
                           ),
-
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               SizedBox(height: t20Size),
                               Expanded(
-                                child: ListView.builder(
-                                  itemCount: 3,
-                                  itemBuilder: (context, index) {
+                                child: FutureBuilder(
+                                  future: giangDayController.getClassesData(),
+                                  builder: (context, snapshot){
+                                    if (snapshot.connectionState == ConnectionState.waiting){
+                                      return const Center(child: CircularProgressIndicator());
+                                    }
+                                    else if (snapshot.hasError) {
+                                      return Center(child: Text('Error: ${snapshot.error}'));
+                                    }
+                                    else if (!snapshot.hasData) {
+                                      return const Center(child: Text('Không có dữ liệu.'));
+                                    }
+                                    final classes = snapshot.data!;
                                     return Column(
                                       crossAxisAlignment:
                                       CrossAxisAlignment.start,
                                       children: [
                                         // bên trong để 1 widget lớp giảng dạy
-                                        const TeacherLopGiangDayWidget(lopName: 'Lớp Pooh 01', soLuong: 25, thoiGianBatDau: '31/08/2024', thoiGianKetThuc: '31/12/2024'),
+                                        TeacherLopGiangDayWidget(
+                                          lopName: classes.className,
+                                          soLuong: classes.students.length,
+                                          thoiGianBatDau: '31/08/2024',
+                                          thoiGianKetThuc: '31/12/2024'
+                                        ),
                                         SizedBox(height: t5Size),
                                         //TeacherThucDonCardWidget(),
                                         SizedBox(height: t5Size),
                                       ],
                                     );
                                   },
-                                ),
+
+                                )
                               ),
                             ],
                           ),

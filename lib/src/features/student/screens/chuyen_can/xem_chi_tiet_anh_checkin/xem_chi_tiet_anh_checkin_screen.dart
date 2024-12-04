@@ -4,6 +4,7 @@ import 'package:kindergarten_app/src/constants/text_strings.dart';
 import 'package:weekly_date_picker/weekly_date_picker.dart';
 
 import '../../../../../common_widgets/app_bar_widgets/guardian_app_bar_with_title.dart';
+import '../../../../../common_widgets/cloud_image/cloud_image_widget.dart';
 import '../../../../../constants/colors.dart';
 import '../../../../../constants/sizes.dart';
 import '../../../../../utils/helper_controller/helper_controller.dart';
@@ -128,10 +129,13 @@ class XemChiTietAnhCheckinScreen extends StatelessWidget {
                                         ),
                                       ),
                                       SizedBox(height: t10Size),
-                                      Container(
-                                        height: t100Size * 2.5,
-                                        color: const Color(0xFFD9D9D9),
+                                      const CloudImage(
+                                        publicId: 'tet1_bx4pgy',
                                       ),
+                                      // Container(
+                                      //   height: t100Size * 2.5,
+                                      //   color: const Color(0xFFD9D9D9),
+                                      // ),
                                     ],
                                   );
                                 }

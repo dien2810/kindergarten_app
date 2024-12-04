@@ -14,7 +14,7 @@ class TeacherDanThuocStatusWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: t120Size,
-      height: t40Size,
+      height: t20Size+t5Size,
       padding: EdgeInsets.symmetric(horizontal: t5Size),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25),

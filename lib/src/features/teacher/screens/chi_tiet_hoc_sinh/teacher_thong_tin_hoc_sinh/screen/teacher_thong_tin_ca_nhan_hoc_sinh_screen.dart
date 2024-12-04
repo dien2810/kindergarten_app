@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/common_widgets/app_bar_widgets/teacher_app_bar_with_title_header_2.dart';
+import 'package:kindergarten_app/src/common_widgets/cloud_image/circle_cloud_image_widget.dart';
 import 'package:kindergarten_app/src/constants/text_strings.dart';
 import 'package:kindergarten_app/src/features/teacher/controllers/thong_tin_hoc_sinh/teacher_thong_tin_hoc_sinh_controller.dart';
 
+import '../../../../../student/models/student/student_model.dart';
 import '../widget/teacher_ho_so_giay_to_hoc_sinh_widget.dart';
 import '../widget/teacher_thong_tin_hoc_sinh_widget.dart';
 
 class TeacherThongTinCaNhanHocSinhScreen extends StatelessWidget {
-  final String studentName; // Tên học sinh
-  final String imageUrl; // Đường dẫn ảnh của học sinh
+  final StudentModel student;// Đường dẫn ảnh của học sinh
 
   const TeacherThongTinCaNhanHocSinhScreen({
-    Key? key,
-    required this.studentName,
-    required this.imageUrl,
-  }) : super(key: key);
+    super.key,
+    required this.student
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class TeacherThongTinCaNhanHocSinhScreen extends StatelessWidget {
         body: Column(
           children: [
             // Avatar và tên học sinh
-            _buildStudentProfile(imageUrl, studentName),
+            _buildStudentProfile(student.studentDocument.image, student.studentProfile.name),
             const SizedBox(height: 16), // Khoảng cách dưới ảnh
 
             // TabBar
@@ -60,8 +60,8 @@ class TeacherThongTinCaNhanHocSinhScreen extends StatelessWidget {
             Expanded(
               child: TabBarView(
                 children: [
-                  TeacherThongTinHocSinhWidget(studentInfo: student),
-                  TeacherHoSoGiayToHocSinhWidget(studentRecord: record),
+                  TeacherThongTinHocSinhWidget(student: student),
+                  TeacherHoSoGiayToHocSinhWidget(student: student),
                 ],
               ),
             ),
@@ -69,11 +69,7 @@ class TeacherThongTinCaNhanHocSinhScreen extends StatelessWidget {
             // Nút cập nhật thông tin
             UpdateInfoFooterWidget(
               onUpdate: () {
-                Get.snackbar(
-                  "Cập nhật thành công",
-                  "Thông tin học sinh đã được cập nhật!",
-                  snackPosition: SnackPosition.TOP,
-                );
+                controller.updateStudentInfo();
               },
             ),
           ],
@@ -91,9 +87,10 @@ class TeacherThongTinCaNhanHocSinhScreen extends StatelessWidget {
           // Avatar hình tròn
           CircleAvatar(
             radius: 60, // Kích thước avatar
-            backgroundImage: imageUrl.startsWith('http')
-                ? NetworkImage(imageUrl)
-                : AssetImage(imageUrl) as ImageProvider,
+            child: CircleCloudImageWidget(publicId: imageUrl),
+            // backgroundImage: imageUrl.startsWith('http')
+            //     ? NetworkImage(imageUrl)
+            //     : AssetImage(imageUrl) as ImageProvider,
           ),
           const SizedBox(height: 12), // Khoảng cách giữa avatar và tên
 

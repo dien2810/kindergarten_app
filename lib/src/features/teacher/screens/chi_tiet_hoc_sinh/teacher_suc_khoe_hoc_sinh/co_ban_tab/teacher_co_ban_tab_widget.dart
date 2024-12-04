@@ -82,7 +82,7 @@ class TeacherCoBanTabWidget extends StatelessWidget {
                       backgroundColor: Colors.transparent
                   ),
                   onPressed: () {
-
+                    controller.updateHealthInformation();
                   },
                   child: const Text(
                     tCapNhat,

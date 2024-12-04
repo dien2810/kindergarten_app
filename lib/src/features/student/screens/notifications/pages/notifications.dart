@@ -293,28 +293,30 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                               }
                               else{
                                 final notifications = snapshot.data!;
-                                return ListView.builder(
-                                  itemCount: notifications.length,
-                                  padding: EdgeInsets.zero,
-                                  reverse: true,
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.vertical,
-                                  itemBuilder: (context, index){
-                                    final notification = notifications[index];
-                                    notificationController.notification = notification;
-                                    return GestureDetector(
-                                      onTap: () async {
-                                        final teacherRepo = Get.put(TeacherRepository());
-                                        notificationController.teacher = (await teacherRepo.getTeacherById(
-                                          notification.sentBy
-                                        ))!;
-                                        Get.to(const NotificationInfoWidget());
-                                      },
-                                      child: NotificationItem(
-                                        notification: notification
-                                      ),
-                                    );
-                                  }
+                                return Expanded(
+                                  child: ListView.builder(
+                                    itemCount: notifications.length,
+                                    padding: EdgeInsets.zero,
+                                    reverse: true,
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.vertical,
+                                    itemBuilder: (context, index){
+                                      final notification = notifications[index];
+                                      notificationController.notification = notification;
+                                      return GestureDetector(
+                                        onTap: () async {
+                                          final teacherRepo = Get.put(TeacherRepository());
+                                          notificationController.teacher = (await teacherRepo.getTeacherById(
+                                            notification.sentBy
+                                          ))!;
+                                          Get.to(const NotificationInfoWidget());
+                                        },
+                                        child: NotificationItem(
+                                          notification: notification
+                                        ),
+                                      );
+                                    }
+                                  ),
                                 );
                               }
                             },

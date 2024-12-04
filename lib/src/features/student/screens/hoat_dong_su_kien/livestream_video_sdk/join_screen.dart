@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../../../../../common_widgets/app_bar_widgets/teacher_app_bar_with_title_header_2.dart';
+import '../../../../../constants/sizes.dart';
+import '../../../../../constants/text_strings.dart';
 import 'api_call.dart';
 import 'ils_screen.dart';
 import 'package:videosdk/videosdk.dart';
@@ -44,7 +47,7 @@ class JoinScreen extends StatelessWidget {
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text("Please enter valid meeting id"),
+        content: Text("Vui lòng nhập mã hợp lệ! Mã có dạng a1a1-a1a1-a1a1"),
       ));
     }
   }
@@ -53,9 +56,7 @@ class JoinScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: AppBar(
-        title: const Text('Livestream Hoạt động - Sự kiện'),
-      ),
+      appBar: const TeacherAppBarWithTitleHeader2(title: tHoatDongSuKien),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
@@ -64,27 +65,48 @@ class JoinScreen extends StatelessWidget {
             //Creating a new meeting
             ElevatedButton(
               onPressed: () => onCreateButtonPressed(context),
-              child: const Text('Create Meeting'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue
+              ),
+              child: const Text(
+                'Taọ cuộc họp',
+                style: TextStyle(
+                  color: Colors.white
+                ),
+              ),
             ),
             const SizedBox(height: 40),
             TextField(
               style: const TextStyle(color: Colors.white),
               decoration: const InputDecoration(
-                hintText: 'Enter Meeting Id',
+                filled: true,
+                fillColor: Colors.white,
+                hintText: 'Nhập mã cuộc họp',
                 border: OutlineInputBorder(),
-                hintStyle: TextStyle(color: Colors.white),
+                hintStyle: TextStyle(color: Colors.black),
               ),
               controller: _meetingIdController,
             ),
+            SizedBox(height: t10Size,),
             //Joining the meeting as host
             ElevatedButton(
               onPressed: () => onJoinButtonPressed(context, Mode.CONFERENCE),
-              child: const Text('Join Meeting as Host'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.cyan
+              ),
+              child: const Text('Join Meeting as Host', style: TextStyle(
+    color: Colors.white
+    ),),
             ),
             //Joining the meeting as viewer
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.cyan
+              ),
               onPressed: () => onJoinButtonPressed(context, Mode.VIEWER),
-              child: const Text('Join Meeting as Viewer'),
+              child: const Text('Join Meeting as Viewer', style: TextStyle(
+                  color: Colors.white
+              ),),
             ),
           ],
         ),

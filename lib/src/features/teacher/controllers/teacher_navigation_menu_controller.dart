@@ -1,9 +1,8 @@
 import 'package:get/get.dart';
+import 'package:kindergarten_app/src/features/student/screens/tai_khoan/screen/tai_khoan_screen.dart';
 import 'package:kindergarten_app/src/features/teacher/screens/hoc_duong/screen/hoc_duong_screen.dart';
 import 'package:kindergarten_app/src/features/teacher/screens/tin_tuc/screen/teacher_tin_tuc_screen.dart';
 import 'package:kindergarten_app/src/features/teacher/screens/thong_bao/screen/teacher_thong_bao_screen.dart';
-import 'package:kindergarten_app/src/features/teacher/screens/trang_chu/trang_chu_giao_vien.dart';
-
 
 import '../../student/screens/chat/chat_screen.dart';
 
@@ -14,6 +13,6 @@ class TeacherNavigationMenuController extends GetxController{
     const HocDuongScreen(),
     const ChatScreen(),
     const TeacherThongBaoScreen(),
-    const TrangChuGiaoVien(),
+    const TaiKhoanScreen(),
   ];
 }

@@ -30,8 +30,8 @@ class TeacherDanThuocListTileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: RoundedAssetImageWidget(
-        width: t60Size,
-        height: t60Size,
+        width: t30Size,
+        height: t30Size,
         image: image,
       ),
       title: Text(

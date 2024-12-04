@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/features/student/controllers/thuc_don/them_ghi_chu_moi_controller.dart';
 import '../../../../common_widgets/app_bar_widgets/guardian_app_bar_with_title.dart';
-import '../../../../constants/image_strings.dart';
+import '../../../../common_widgets/cloud_image/cloud_image_widget.dart';
 import '../../../../constants/sizes.dart';
 import '../../../../constants/text_strings.dart';
 import '../../models/menu/menu_item.dart';
@@ -108,10 +108,12 @@ class ThemGhiChuMoiScreen extends StatelessWidget {
                                     flex: 1,
                                     child: SizedBox(
                                       height: t10Size*7.5,
-                                      child: const ClipRRect(
-                                        child: Image(
-                                          fit: BoxFit.cover,
-                                          image: AssetImage(tThucDonBuaSang)
+                                      child: ClipRRect(
+                                        child: CloudImage(
+                                            publicId: menuItem.image,
+                                            width: t50Size,
+                                            height: t90Size,
+                                            fit: true
                                         ),
                                       ),
                                     )

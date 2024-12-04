@@ -17,7 +17,7 @@ class TeacherDanThuocListViewWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final danThuocController = Get.put(TeacherDanThuocController());
     return FutureBuilder<List<MedicineModel>>(
-      future: danThuocController.getMedicineData("student_id_1"),
+      future: danThuocController.getMedicineData(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting){
           return const Center(child: CircularProgressIndicator());
