@@ -3,18 +3,30 @@ import 'package:get/get.dart';
 import '../../../../../constants/image_strings.dart';
 import '../../../../../constants/sizes.dart';
 import '../../../../../constants/text_strings.dart';
+import '../../../../student/models/menu/menu_item.dart';
 import '../screen/teacher_chi_tiet_mon_an_screen.dart';
 
 class TeacherThucDonCardWidget extends StatelessWidget {
+  final MenuItem menuItem;
+
   const TeacherThucDonCardWidget({
-    super.key,
-  });
+    Key? key,
+    required this.menuItem,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(const TeacherChiTietMonAnScreen());
+        // Kiểm tra nếu menuItem không phải là null
+        if (menuItem != null) {
+          Get.to(() => TeacherChiTietMonAnScreen(
+            menuItem: menuItem, // Truyền menuItem hợp lệ
+          ));
+        } else {
+          // Thông báo lỗi nếu menuItem là null
+          Get.snackbar('Error', 'Món ăn không hợp lệ');
+        }
       },
       child: Container(
         decoration: BoxDecoration(
@@ -22,10 +34,10 @@ class TeacherThucDonCardWidget extends StatelessWidget {
           color: const Color(0xFFBA83DE),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.3), // Màu shadow
-              spreadRadius: 1, // Độ lan tỏa
-              blurRadius: 5, // Độ mờ
-              offset: const Offset(0, 3), // Vị trí shadow (x, y)
+              color: Colors.black.withOpacity(0.3),
+              spreadRadius: 1,
+              blurRadius: 5,
+              offset: const Offset(0, 3),
             ),
           ],
         ),
@@ -40,46 +52,42 @@ class TeacherThucDonCardWidget extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      tTenMon,
-                      maxLines: 1,
+                    Text(
+                      'Tên: ${menuItem.name}',
+                      maxLines: 3,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                       ),
                     ),
-                    const Text(
-                      tLuaChon,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                      ),
-                    ),
                     SizedBox(height: t5Size),
                     ElevatedButton(
                       onPressed: () {
-                        Get.to(const TeacherChiTietMonAnScreen());
+                        if (menuItem != null) {
+                          Get.to(() => TeacherChiTietMonAnScreen(
+                            menuItem: menuItem,
+                          ));
+                        } else {
+                          Get.snackbar('Error', 'Món ăn không hợp lệ');
+                        }
                       },
-
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFFCAF0F8),
                         foregroundColor: const Color(0xFF727070),
-                        padding: EdgeInsets.symmetric(horizontal: t40Size),
+                        padding: EdgeInsets.symmetric(horizontal: t10Size),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(40),
-
                         ),
                       ),
                       child: const Text(
                         tXemChiTietButton,
-                        style: TextStyle(fontSize: 15,
+                        style: TextStyle(
+                          fontSize: 15,
                           color: Color(0xFF727070),
-                          fontWeight: FontWeight.bold,)
-                        ,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],
@@ -89,11 +97,13 @@ class TeacherThucDonCardWidget extends StatelessWidget {
             Expanded(
               flex: 1,
               child: SizedBox(
-                height: t10Size * 14,
-                child: const ClipRRect(
+                width: t10Size * 10,
+                height: t10Size * 10,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
                   child: Image(
                     fit: BoxFit.cover,
-                    image: AssetImage(tThucDonBuaSang),
+                    image: AssetImage(menuItem.image),
                   ),
                 ),
               ),

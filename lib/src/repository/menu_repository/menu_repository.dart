@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
+import '../../features/student/models/menu/menu_item.dart';
 import '../../features/student/models/menu/menu_model.dart';
+import '../../utils/helper_controller/helper_controller.dart';
 import '../account_repository/account_repository.dart';
 
 class MenuRepository extends GetxController{
@@ -45,6 +47,48 @@ class MenuRepository extends GetxController{
       print("Menu updated successfully");
     } catch (e) {
       print("Failed to update Menu: $e");
+    }
+  }
+
+  Future<void> addMenuItem(String menuId, MenuItem menuItem, String dateKey) async {
+    try {
+      // Lấy tài liệu của menu
+      DocumentSnapshot doc = await _menuCollection.doc(menuId).get();
+
+      // Kiểm tra xem tài liệu có tồn tại hay không
+      if (doc.exists && doc.data() != null) {
+        Map<String, dynamic> menuData = Map<String, dynamic>.from(doc.data() as Map<dynamic, dynamic>);
+
+        // Kiểm tra xem 'dates' có tồn tại hay không
+        if (!menuData.containsKey('dates')) {
+          menuData['dates'] = {};
+        }
+
+        // Chuyển đổi dữ liệu 'dates' thành bản đồ chứa danh sách MenuItem
+        Map<String, dynamic> dates = menuData['dates'] as Map<String, dynamic>;
+
+        // Kiểm tra ngày đã có trong danh sách chưa
+        if (dates.containsKey(dateKey)) {
+          // Nếu ngày đã có, thêm món ăn vào danh sách
+          List<MenuItem> existingItems = (dates[dateKey] as List<dynamic>).map((item) => MenuItem.fromMap(item)).toList();
+          existingItems.add(menuItem);
+
+          // Cập nhật lại ngày với danh sách món ăn mới
+          dates[dateKey] = existingItems.map((item) => item.toMap()).toList();
+        } else {
+          // Nếu ngày chưa có, tạo mới danh sách với món ăn
+          dates[dateKey] = [menuItem.toMap()];
+        }
+
+        // Cập nhật lại tài liệu Firestore
+        await _menuCollection.doc(menuId).update({'dates': dates});
+
+        print("Món ăn đã được thêm thành công!");
+      } else {
+        print("Menu ID '$menuId' không tồn tại trong repository");
+      }
+    } catch (e) {
+      print("Thêm món ăn thất bại: $e");
     }
   }
 }

@@ -4,10 +4,14 @@ import '../../../../../constants/image_strings.dart';
 import '../../../../../constants/sizes.dart';
 import '../../../../../constants/text_strings.dart';
 import '../widget/teacher_chinh_sua_mon_an_bottom_sheet.dart';
+import '../../../../student/models/menu/menu_item.dart';
 
 class TeacherChiTietMonAnScreen extends StatelessWidget {
-  const TeacherChiTietMonAnScreen({super.key});
-
+  const TeacherChiTietMonAnScreen({
+    super.key,
+    required this.menuItem,
+  });
+  final MenuItem menuItem;
 
   @override
   Widget build(BuildContext context) {
@@ -17,203 +21,167 @@ class TeacherChiTietMonAnScreen extends StatelessWidget {
         appBar: const TeacherAppBarWithTitleHeader2(title: tChiTietMonAn),
         body: Stack(
           children: [
-            Column(
-              children: [
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Container(
-                      margin: EdgeInsets.all(t15Size),
-                      padding: EdgeInsets.all(t15Size),
-                      height: 900,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(35.0),
-                        border: Border.all(width: 2, color: const Color(0xFFC4C4C4)),
-                      ),
-        child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            tChiTietMonAn,
-                            style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xFF03045E)
-                            ),
-                          ),
-                          SizedBox(height: t15Size),
-                          Card(
-                            color: const Color(0xFFBA83DE),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Flexible(
-                                  flex: 2,
-                                  child: Padding(
-                                    padding: EdgeInsets.all(t10Size),
-                                    child: const Center(
-                                      child: Text(
-                                        tTenMon,
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 1,
-                                  child: SizedBox(
-                                    height: t10Size * 12,
-                                    child: const ClipRRect(
-                                      borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(15.0), // Bo góc phải trên
-                                        bottomRight: Radius.circular(15.0), // Bo góc phải dưới
-                                      ),
-                                      child: Image(
-                                        fit: BoxFit.cover,
-                                        image: AssetImage(tThucDonBuaSang),
-                                      ),
-                                    ),
-
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(height: t15Size),
-                          const Text(
-                            "Ngày tạo món :",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF3F0A50),
-                            ),
-                          ),
-                          SizedBox(height: t5Size),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width, // Đặt chiều rộng bằng với chiều rộng thiết bị
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: const Color(0xFFE8E6E6), // Màu nền F0EEEE
-                                borderRadius: BorderRadius.circular(5), // Bo góc với bán kính 20
-                              ),
-                              padding: EdgeInsets.all(t10Size),
-                              child: const Text(
-                                "25/11/2024", // Thay bằng dữ liệu ngày gọi món
-                                style: TextStyle(fontSize: 18),
-                              ),
-                            ),
-                          ),
-
-                          SizedBox(height: t15Size),
-                          const Text(
-                            "Thực đơn bữa:",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF3F0A50),
-                            ),
-                          ),
-                          SizedBox(height: t5Size),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width, // Đặt chiều rộng bằng với chiều rộng thiết bị
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: const Color(0xFFE8E6E6), // Màu nền F0EEEE
-                                borderRadius: BorderRadius.circular(5), // Bo góc với bán kính 20
-                              ),
-                              padding: EdgeInsets.all(t10Size),
-                              child: const Text(
-                                "Bữa sáng", // Thay bằng dữ liệu ngày gọi món
-                                style: TextStyle(fontSize: 18),
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: t15Size),
-                          const Text(
-                            "Thành phần nguyên liệu :",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF3F0A50),
-                            ),
-                          ),
-                          SizedBox(height: t15Size),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width, // Đặt chiều rộng bằng với chiều rộng thiết bị
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: const Color(0xFFE8E6E6), // Màu nền F0EEEE
-                                borderRadius: BorderRadius.circular(5), // Bo góc với bán kính 20
-                              ),
-                              padding: EdgeInsets.all(t10Size),
-                              child: const Text(
-                                "Bánh mì, Rau xà lách, Hành tây, Bơ đậu phộng, Thịt bò, Cà chua, Tiêu, Tương ớt, Trứng gà.", // Thay bằng dữ liệu ngày gọi món
-                                style: TextStyle(fontSize: 18),
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: t15Size),
-                          const Text(
-                            "Danh sách ghi chú:",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF3F0A50),
-                            ),
-                          ),
-                          SizedBox(height: t10Size),
-
-                          SizedBox(
-
-                            width: MediaQuery.of(context).size.width, // Đặt chiều rộng bằng với chiều rộng thiết bị
-                            child: Container(
-                              color: const Color(0xFFF0EEEE), // Màu nền F0EEEE
-                              padding: EdgeInsets.all(t10Size),
-                              child: ListView.builder(
-                                shrinkWrap: true, // Đảm bảo chỉ chiếm không gian cần thiết
-                                itemCount: notes.length, // Số lượng ghi chú trong notes
-                                itemBuilder: (context, index) {
-                                  String studentId = notes.keys.elementAt(index); // Lấy student_id
-                                  String noteText = notes[studentId]!; // Lấy nội dung ghi chú
-                                  return Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "${index + 1}. $studentId: $noteText", // Hiển thị số thứ tự và nội dung
-                                        style: TextStyle(fontSize: 18),
-                                      ),
-                                      SizedBox(height: t15Size), // Khoảng cách giữa các ghi chú
-                                    ],
-                                  );
-                                },
-                              ),
-                            ),
-                          ),
-
-                        ],
-                      ),
-                    ),
+            SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.only(
+                  bottom: t15Size * 6, // Chừa khoảng trống cho nút footer
+                ),
+                child: Container(
+                  margin: EdgeInsets.all(t15Size),
+                  padding: EdgeInsets.all(t15Size),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(35.0),
+                    border: Border.all(width: 2, color: const Color(0xFFC4C4C4)),
                   ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        tChiTietMonAn,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF03045E),
+                        ),
+                      ),
+                      SizedBox(height: t15Size),
+                      Card(
+                        color: const Color(0xFFBA83DE),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Flexible(
+                              flex: 2,
+                              child: Padding(
+                                padding: EdgeInsets.all(t10Size),
+                                child: Center(
+                                  child: Text(
+                                    menuItem.name, // Hiển thị tên món ăn
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: SizedBox(
+                                height: t10Size * 12,
+                                child: ClipRRect(
+                                  borderRadius: const BorderRadius.only(
+                                    topRight: Radius.circular(15.0),
+                                    bottomRight: Radius.circular(15.0),
+                                  ),
+                                  child: Image(
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(menuItem.image), // Hiển thị hình ảnh món ăn
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: t15Size),
+                      const Text(
+                        "Thực đơn bữa:",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF3F0A50),
+                        ),
+                      ),
+                      SizedBox(height: t5Size),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(
+                            minHeight: 25, // Đặt chiều cao tối thiểu cho các khung
+                          ),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFE8E6E6),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            padding: EdgeInsets.all(t10Size),
+                            child: Text(
+                              menuItem.meal, // Hiển thị loại bữa ăn
+                              style: const TextStyle(fontSize: 18),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: t15Size),
+                      const Text(
+                        "Thành phần nguyên liệu:",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF3F0A50),
+                        ),
+                      ),
+                      SizedBox(height: t15Size),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFE8E6E6),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        padding: EdgeInsets.all(t10Size),
+                        child: Text(
+                          menuItem.ingredients.join(', '), // Hiển thị thành phần nguyên liệu
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                      ),
+                      SizedBox(height: t15Size),
+                      const Text(
+                        "Danh sách ghi chú:",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF3F0A50),
+                        ),
+                      ),
+                      SizedBox(height: t10Size),
+                      Container(
+                        color: const Color(0xFFF0EEEE),
+                        padding: EdgeInsets.all(t10Size),
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: menuItem.note.length,
+                          itemBuilder: (context, index) {
+                            String studentId = menuItem.note.keys.elementAt(index);
+                            String noteText = menuItem.note[studentId]!;
+                            return Padding(
+                              padding: EdgeInsets.only(bottom: t15Size),
+                              child: Text(
+                                "${index + 1}. $studentId: $noteText",
+                                style: const TextStyle(fontSize: 18),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
+              ),
             ),
-            // Nút footer "Chỉnh sửa"
             Positioned(
               bottom: 0,
               left: 0,
               right: 0,
               child: Container(
-                color: Colors.white, // Màu nền trắng
-                padding: EdgeInsets.all(t20Size), // Thêm padding cho container (nếu cần)
+                color: Colors.white,
+                padding: EdgeInsets.all(t20Size),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF9317AE),
@@ -230,8 +198,7 @@ class TeacherChiTietMonAnScreen extends StatelessWidget {
                       context: context,
                       isScrollControlled: true,
                       shape: const RoundedRectangleBorder(
-                        borderRadius:
-                        BorderRadius.vertical(top: Radius.circular(20)),
+                        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
                       ),
                       builder: (BuildContext context) {
                         return const TeacherChinhSuaMonAnBottomSheet();
@@ -248,17 +215,10 @@ class TeacherChiTietMonAnScreen extends StatelessWidget {
                   ),
                 ),
               ),
-            )
-
+            ),
           ],
         ),
       ),
     );
   }
 }
-Map<String, String> notes = {
-  "Nguyễn Văn A": "Bé thích món ăn này.",
-  "Trần Thị B": "Bé bị dị ứng nhẹ với món ăn này.",
-  "Phạm Minh C": "Bé ăn rất ngoan.",
-  "Nguyễn Thị Hồng Thắm": "Bé ăn rất ngoan nhưng bị dị ứng nhẹ với bơ đậu phộng"
-};
