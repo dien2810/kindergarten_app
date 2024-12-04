@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:kindergarten_app/src/common_widgets/app_bar_widgets/teacher_app_bar_with_title_header_2.dart';
 import 'package:kindergarten_app/src/features/teacher/controllers/thuc_don/teacher_thuc_don_controller.dart';
 import '../../../../../constants/image_strings.dart';
 import '../../../../../constants/sizes.dart';
 import '../../../../../constants/text_strings.dart';
+import '../../../../../repository/student_repository/student_repository.dart';
 import '../widget/teacher_chinh_sua_mon_an_bottom_sheet.dart';
 import '../../../../student/models/menu/menu_item.dart';
 
@@ -19,6 +22,7 @@ class TeacherChiTietMonAnScreen extends StatelessWidget {
   final MenuItem menuItem;
   @override
   Widget build(BuildContext context) {
+    StudentRepository studentRepository = Get.put(StudentRepository());
     return DefaultTabController(
       length: 1,
       child: Scaffold(
@@ -164,12 +168,46 @@ class TeacherChiTietMonAnScreen extends StatelessWidget {
                           itemBuilder: (context, index) {
                             String studentId = menuItem.note.keys.elementAt(index);
                             String noteText = menuItem.note[studentId]!;
-                            return Padding(
-                              padding: EdgeInsets.only(bottom: t15Size),
-                              child: Text(
-                                "${index + 1}. $studentId: $noteText",
-                                style: const TextStyle(fontSize: 18),
-                              ),
+
+                            return FutureBuilder<String?>(
+
+                              future: studentRepository.getStudentNameById(studentId), // Gọi hàm để lấy tên học sinh
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState == ConnectionState.waiting) {
+                                  return Padding(
+                                    padding: EdgeInsets.only(bottom: t15Size),
+                                    child: Text(
+                                      "${index + 1}. Đang tải tên học sinh...",
+                                      style: const TextStyle(fontSize: 18),
+                                    ),
+                                  );
+                                } else if (snapshot.hasError) {
+                                  return Padding(
+                                    padding: EdgeInsets.only(bottom: t15Size),
+                                    child: Text(
+                                      "${index + 1}. Lỗi khi lấy tên học sinh",
+                                      style: const TextStyle(fontSize: 18),
+                                    ),
+                                  );
+                                } else if (snapshot.hasData && snapshot.data != null) {
+                                  String studentName = snapshot.data!;
+                                  return Padding(
+                                    padding: EdgeInsets.only(bottom: t15Size),
+                                    child: Text(
+                                      "${index + 1}. $studentName: $noteText", // Hiển thị tên học sinh và ghi chú
+                                      style: const TextStyle(fontSize: 18),
+                                    ),
+                                  );
+                                } else {
+                                  return Padding(
+                                    padding: EdgeInsets.only(bottom: t15Size),
+                                    child: Text(
+                                      "${index + 1}. Không tìm thấy tên học sinh",
+                                      style: const TextStyle(fontSize: 18),
+                                    ),
+                                  );
+                                }
+                              },
                             );
                           },
                         ),
