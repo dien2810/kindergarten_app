@@ -63,66 +63,70 @@ class TeacherThucDonScreen extends StatelessWidget {
                           borderRadius: const BorderRadius.all(Radius.circular(25.0)),
                           border: Border.all(width: 2, color: const Color(0xFFC4C4C4)),
                         ),
-                        child: Obx(
-                              () => Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(40.0),
+                        child: GetBuilder<TeacherThucDonController>(
+                          init: TeacherThucDonController(),
+                          builder: (controller) {
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(40.0),
+                                  ),
+                                  child: WeeklyDatePicker(
+                                    selectedDay: teacherThucDonController.selectedDay.value,
+                                    changeDay: (value) async {
+                                      teacherThucDonController.selectedDay.value = value;
+                                      teacherThucDonController.update(); // Thông báo cập nhật
+                                      await teacherThucDonController.getMenuData(value); // Lấy dữ liệu mới
+                                    },
+
+                                    backgroundColor: const Color(0xFFCAF0F8),
+                                    selectedDigitBackgroundColor: const Color(0xFFBA83DE),
+                                    selectedDigitColor: const Color(0xFF03045E),
+                                    digitsColor: const Color(0xFF03045E),
+                                    weekdayTextColor: const Color(0xFF03045E),
+                                    enableWeeknumberText: false,
+                                  ),
                                 ),
-                                child: WeeklyDatePicker(
-                                  selectedDay: teacherThucDonController.selectedDay.value,
-                                  changeDay: (value) async {
-                                    teacherThucDonController.selectedDay.value = value;
-                                    // Lấy danh sách món ăn cho ngày được chọn
-                                    await teacherThucDonController.getMenuData(value);
-                                  },
-                                  backgroundColor: const Color(0xFFCAF0F8),
-                                  selectedDigitBackgroundColor: const Color(0xFFBA83DE),
-                                  selectedDigitColor: const Color(0xFF03045E),
-                                  digitsColor: const Color(0xFF03045E),
-                                  weekdayTextColor: const Color(0xFF03045E),
-                                  enableWeeknumberText: false,
+                                SizedBox(height: t10Size), // Khoảng cách giữa WeeklyDatePicker và danh sách món ăn
+                                Expanded(
+                                  child: FutureBuilder<List<MenuItem>?>(
+                                    future: teacherThucDonController.getMenuData(teacherThucDonController.selectedDay.value),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState == ConnectionState.waiting) {
+                                        return const Center(child: CircularProgressIndicator());
+                                      }
+                                      if (snapshot.hasError) {
+                                        return Center(child: Text('Error: ${snapshot.error}'));
+                                      }
+                                      if (!snapshot.hasData || snapshot.data?.isEmpty == true) {
+                                        return const Center(child: Text('Không có món ăn cho ngày này.'));
+                                      } else {
+                                        final menuItems = snapshot.data!;
+                                        return ListView.builder(
+                                          itemCount: menuItems.length,
+                                          itemBuilder: (context, index) {
+                                            return Column(
+                                              children: [
+                                                TeacherThucDonCardWidget(
+                                                  menuItem: menuItems[index],
+                                                  date: teacherThucDonController.selectedDay.value,
+                                                  index: index,
+                                                ),
+                                                SizedBox(height: t10Size), // Khoảng cách giữa các card
+                                              ],
+                                            );
+                                          },
+                                        );
+                                      }
+                                    },
+                                  ),
                                 ),
-                              ),
-                              SizedBox(height: t10Size), // Khoảng cách giữa WeeklyDatePicker và danh sách món ăn
-                              Expanded(
-                                child: FutureBuilder<List<MenuItem>?>(
-                                  future: teacherThucDonController.getMenuData(teacherThucDonController.selectedDay.value),
-                                  builder: (context, snapshot) {
-                                    if (snapshot.connectionState == ConnectionState.waiting) {
-                                      return const Center(child: CircularProgressIndicator());
-                                    }
-                                    if (snapshot.hasError) {
-                                      return Center(child: Text('Error: ${snapshot.error}'));
-                                    }
-                                    if (!snapshot.hasData || snapshot.data?.isEmpty == true) {
-                                      return const Center(child: Text('Không có món ăn cho ngày này.'));
-                                    } else {
-                                      final menuItems = snapshot.data!;
-                                      return ListView.builder(
-                                        itemCount: menuItems.length,
-                                        itemBuilder: (context, index) {
-                                          return Column(
-                                            children: [
-                                              TeacherThucDonCardWidget(
-                                                menuItem: menuItems[index],
-                                                date: teacherThucDonController.selectedDay.value,
-                                                index: index,
-                                              ),
-                                              SizedBox(height: t10Size), // Khoảng cách giữa các card
-                                            ],
-                                          );
-                                        },
-                                      );
-                                    }
-                                  },
-                                ),
-                              ),
-                              SizedBox(height: t50Size), // Khoảng trống nửa sau danh sách
-                            ],
-                          ),
+                                SizedBox(height: t50Size), // Khoảng trống nửa sau danh sách
+                              ],
+                            );
+                          },
                         ),
                       ),
                     ],
@@ -138,8 +142,8 @@ class TeacherThucDonScreen extends StatelessWidget {
                 color: Colors.white,
                 padding: EdgeInsets.symmetric(vertical: 10, horizontal: t20Size),
                 child: ElevatedButton(
-                  onPressed: () {
-                    showModalBottomSheet(
+                  onPressed: () async {
+                    await showModalBottomSheet(
                       context: context,
                       isScrollControlled: true,
                       shape: const RoundedRectangleBorder(
@@ -149,6 +153,8 @@ class TeacherThucDonScreen extends StatelessWidget {
                         return const TeacherThemMonAnBottomSheet();
                       },
                     );
+                    // Làm mới dữ liệu sau khi thêm mới
+                    teacherThucDonController.refreshMenuData(teacherThucDonController.selectedDay.value);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF9317AE),

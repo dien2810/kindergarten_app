@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kindergarten_app/src/common_widgets/app_bar_widgets/teacher_app_bar_with_title_header_2.dart';
+import 'package:kindergarten_app/src/features/teacher/controllers/thuc_don/teacher_thuc_don_controller.dart';
 import '../../../../../constants/image_strings.dart';
 import '../../../../../constants/sizes.dart';
 import '../../../../../constants/text_strings.dart';
@@ -16,7 +17,6 @@ class TeacherChiTietMonAnScreen extends StatelessWidget {
     required this.index,
   });
   final MenuItem menuItem;
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -197,20 +197,20 @@ class TeacherChiTietMonAnScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(30),
                     ),
                   ),
-                  onPressed: () {
-                    showModalBottomSheet(
+                  onPressed: () async {
+                    await showModalBottomSheet(
                       context: context,
                       isScrollControlled: true,
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
                       ),
                       builder: (BuildContext context) {
-                        return   TeacherChinhSuaMonAnBottomSheet(
-                            menuItem: menuItem,
-                            date: date,
-                            index: index, );
-
-                        },
+                        return TeacherChinhSuaMonAnBottomSheet(
+                          menuItem: menuItem,
+                          date: date,
+                          index: index,
+                        );
+                      },
                     );
                   },
                   child: const Text(

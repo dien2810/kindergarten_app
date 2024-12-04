@@ -93,7 +93,6 @@ class _ChinhSuaMonAnBottomSheetState extends State<TeacherChinhSuaMonAnBottomShe
     );
 
     await _teacherThucDonController.editMenuItem(_selectedDate, updatedMenuItem, widget.index);
-
     Get.back(); // Đóng bottom sheet sau khi chỉnh sửa món ăn
     Get.snackbar(
       'Thông báo',
@@ -105,6 +104,7 @@ class _ChinhSuaMonAnBottomSheetState extends State<TeacherChinhSuaMonAnBottomShe
 
   @override
   Widget build(BuildContext context) {
+    final TeacherThucDonController controller = TeacherThucDonController();
     return Padding(
       padding: EdgeInsets.only(
         bottom: MediaQuery.of(context).viewInsets.bottom,
@@ -128,18 +128,6 @@ class _ChinhSuaMonAnBottomSheetState extends State<TeacherChinhSuaMonAnBottomShe
                 decoration: InputDecoration(
                   labelText: "Tên món ăn",
                   labelStyle: const TextStyle(fontSize: 16),
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                ),
-              ),
-              const SizedBox(height: 16),
-              TextField(
-                controller: _ngayTaoMonController,
-                readOnly: true,
-                onTap: _pickDate,
-                decoration: InputDecoration(
-                  labelText: "Ngày tạo món",
-                  labelStyle: const TextStyle(fontSize: 16),
-                  suffixIcon: const Icon(Icons.calendar_today),
                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                 ),
               ),
@@ -199,7 +187,10 @@ class _ChinhSuaMonAnBottomSheetState extends State<TeacherChinhSuaMonAnBottomShe
               ),
               const SizedBox(height: 16),
               ElevatedButton(
-                onPressed: _saveMenuItem,
+                onPressed: () {
+                  _saveMenuItem();
+
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF9317AE), // Màu tím
                   padding: const EdgeInsets.symmetric(vertical: 16),
@@ -209,6 +200,7 @@ class _ChinhSuaMonAnBottomSheetState extends State<TeacherChinhSuaMonAnBottomShe
                   child: Text("Chỉnh sửa món ăn", style: TextStyle(color: Colors.white, fontSize: 20)),
                 ),
               ),
+
               const SizedBox(height: 20),
             ],
           ),

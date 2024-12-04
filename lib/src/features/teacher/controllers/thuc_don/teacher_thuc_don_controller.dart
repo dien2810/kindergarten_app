@@ -38,8 +38,24 @@ class TeacherThucDonController extends GetxController {
 
   Future<void> refreshMenuData(DateTime date) async {
     final newData = await getMenuData(date);
-    menuModel.value = MenuModel(dates: {formatSafeDate(date): newData ?? []});
+    final formattedDate = formatSafeDate(date);
+
+    menuModel.update((model) {
+      model?.dates[formattedDate] = newData ?? [];
+    });
+    update();
   }
+
+  void updateSelectedDay(DateTime date) {
+    selectedDay.value = date;
+    refreshMenuData(date);
+  }
+  void updateMenuItem(MenuItem newMenuItem, DateTime date, int index) {
+    // Cập nhật món ăn trong menuModel với dữ liệu mới
+    menuModel.value.dates[formatSafeDate(date)]?[index] = newMenuItem;
+    update();  // Cập nhật giao diện
+  }
+
 
   String formatSafeDate(DateTime date) {
     return DateFormat('dd-MM-yyyy').format(date);
