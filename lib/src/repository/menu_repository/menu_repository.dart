@@ -1,18 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../features/student/models/menu/menu_item.dart';
 import '../../features/student/models/menu/menu_model.dart';
-import '../../utils/helper_controller/helper_controller.dart';
 import '../account_repository/account_repository.dart';
 
-class MenuRepository extends GetxController{
+class MenuRepository extends GetxController {
   static MenuRepository get instance => Get.find();
   final CollectionReference _menuCollection = FirebaseFirestore.instance.collection('menu');
   final _accountRepo = Get.put(AccountRepository());
+
+  // Định dạng ngày để đảm bảo an toàn cho Firebase
+  String formatSafeDate(DateTime date) {
+    return DateFormat('dd-MM-yyyy').format(date); // Chuyển đổi ngày thành định dạng "dd-MM-yyyy"
+  }
+
   // Thêm một document mới vào Firestore
   Future<MenuModel?> getMenuById() async {
-    print(_accountRepo.userId);
     final snapshot = await _menuCollection.doc("menu_id_hechuan").get();
     if (snapshot.exists && snapshot.data() != null) {
       final data = snapshot.data() as Map<String, dynamic>;
@@ -20,6 +25,19 @@ class MenuRepository extends GetxController{
     } else {
       return null; // Document không tồn tại hoặc không có dữ liệu
     }
+  }
+
+  // Lấy danh sách món ăn theo ngày
+  Future<List<MenuItem>?> getMenuItemsByDate(String date) async {
+    final snapshot = await _menuCollection.doc("menu_id_hechuan").get();
+    if (snapshot.exists && snapshot.data() != null) {
+      final data = snapshot.data() as Map<String, dynamic>;
+      if (data.containsKey(date)) {
+        List<dynamic> items = data[date] as List<dynamic>;
+        return items.map((item) => MenuItem.fromMap(item)).toList();
+      }
+    }
+    return null; // Không có món ăn cho ngày này
   }
 
   // Thêm một document vào Firestore
@@ -31,6 +49,7 @@ class MenuRepository extends GetxController{
       print("Failed to add Menu: $e");
     }
   }
+
   // Xóa một document dựa trên Id
   Future<void> deleteMenu(String menuId) async {
     try {
@@ -40,6 +59,7 @@ class MenuRepository extends GetxController{
       print("Failed to delete Menu: $e");
     }
   }
+
   // Cập nhật một document trong Firestore
   Future<void> updateMenu(MenuModel menu) async {
     try {
@@ -50,45 +70,55 @@ class MenuRepository extends GetxController{
     }
   }
 
-  Future<void> addMenuItem(String menuId, MenuItem menuItem, String dateKey) async {
-    try {
-      // Lấy tài liệu của menu
-      DocumentSnapshot doc = await _menuCollection.doc(menuId).get();
+  // Thêm một món ăn mới vào thực đơn
+  Future<void> addMenuItem(DateTime date, MenuItem menuItem) async {
+    String formattedDate = formatSafeDate(date); // Chuyển đổi ngày thành định dạng "dd-MM-yyyy" để lưu trữ
 
-      // Kiểm tra xem tài liệu có tồn tại hay không
-      if (doc.exists && doc.data() != null) {
-        Map<String, dynamic> menuData = Map<String, dynamic>.from(doc.data() as Map<dynamic, dynamic>);
+    DocumentReference docRef = _menuCollection.doc("menu_id_hechuan");
+    DocumentSnapshot docSnapshot = await docRef.get();
 
-        // Kiểm tra xem 'dates' có tồn tại hay không
-        if (!menuData.containsKey('dates')) {
-          menuData['dates'] = {};
-        }
+    if (docSnapshot.exists) {
+      Map<String, dynamic> data = docSnapshot.data() as Map<String, dynamic>;
 
-        // Chuyển đổi dữ liệu 'dates' thành bản đồ chứa danh sách MenuItem
-        Map<String, dynamic> dates = menuData['dates'] as Map<String, dynamic>;
-
-        // Kiểm tra ngày đã có trong danh sách chưa
-        if (dates.containsKey(dateKey)) {
-          // Nếu ngày đã có, thêm món ăn vào danh sách
-          List<MenuItem> existingItems = (dates[dateKey] as List<dynamic>).map((item) => MenuItem.fromMap(item)).toList();
-          existingItems.add(menuItem);
-
-          // Cập nhật lại ngày với danh sách món ăn mới
-          dates[dateKey] = existingItems.map((item) => item.toMap()).toList();
-        } else {
-          // Nếu ngày chưa có, tạo mới danh sách với món ăn
-          dates[dateKey] = [menuItem.toMap()];
-        }
-
-        // Cập nhật lại tài liệu Firestore
-        await _menuCollection.doc(menuId).update({'dates': dates});
-
-        print("Món ăn đã được thêm thành công!");
+      if (data.containsKey(formattedDate)) {
+        List<dynamic> items = data[formattedDate] as List<dynamic>;
+        items.add(menuItem.toMap());
+        await docRef.update({formattedDate: items});
       } else {
-        print("Menu ID '$menuId' không tồn tại trong repository");
+        await docRef.update({formattedDate: [menuItem.toMap()]});
       }
-    } catch (e) {
-      print("Thêm món ăn thất bại: $e");
+    } else {
+      await docRef.set({
+        formattedDate: [menuItem.toMap()]
+      });
     }
   }
+
+  // Chỉnh sửa món ăn trong thực đơn
+  Future<void> editMenuItem(DateTime date, MenuItem menuItem, int index) async {
+    String formattedDate = formatSafeDate(date); // Chuyển đổi ngày thành định dạng "dd-MM-yyyy" để lưu trữ
+
+    DocumentReference docRef = _menuCollection.doc("menu_id_hechuan");
+    DocumentSnapshot docSnapshot = await docRef.get();
+
+    if (docSnapshot.exists) {
+      Map<String, dynamic> data = docSnapshot.data() as Map<String, dynamic>;
+
+      if (data.containsKey(formattedDate)) {
+        List<dynamic> items = data[formattedDate] as List<dynamic>;
+        if (index < items.length) {
+          items[index] = menuItem.toMap(); // Cập nhật món ăn tại vị trí được chỉ định
+          print('Updating item at index $index: ${menuItem.toMap()}');
+          await docRef.update({formattedDate: items});
+        } else {
+          print("Index out of range");
+        }
+      } else {
+        print("Date not found");
+      }
+    } else {
+      print("Document not found");
+    }
+  }
+
 }

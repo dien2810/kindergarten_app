@@ -8,11 +8,16 @@ import '../screen/teacher_chi_tiet_mon_an_screen.dart';
 
 class TeacherThucDonCardWidget extends StatelessWidget {
   final MenuItem menuItem;
+  final DateTime date;
+  final int index;
 
   const TeacherThucDonCardWidget({
     Key? key,
     required this.menuItem,
+    required this.date,
+    required this.index,
   }) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +26,9 @@ class TeacherThucDonCardWidget extends StatelessWidget {
         // Kiểm tra nếu menuItem không phải là null
         if (menuItem != null) {
           Get.to(() => TeacherChiTietMonAnScreen(
-            menuItem: menuItem, // Truyền menuItem hợp lệ
+              menuItem: menuItem,
+              date: date,
+              index: index,
           ));
         } else {
           // Thông báo lỗi nếu menuItem là null
@@ -68,6 +75,9 @@ class TeacherThucDonCardWidget extends StatelessWidget {
                         if (menuItem != null) {
                           Get.to(() => TeacherChiTietMonAnScreen(
                             menuItem: menuItem,
+                            date: date,
+                            index: index,
+
                           ));
                         } else {
                           Get.snackbar('Error', 'Món ăn không hợp lệ');

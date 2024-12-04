@@ -1,64 +1,47 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-
+import 'package:intl/intl.dart';
 import '../../../../repository/menu_repository/menu_repository.dart';
 import '../../../../utils/helper_controller/helper_controller.dart';
 import '../../../student/models/menu/menu_item.dart';
 import '../../../student/models/menu/menu_model.dart';
 
-class TeacherThucDonController extends GetxController{
+class TeacherThucDonController extends GetxController {
   static TeacherThucDonController get instance => Get.find();
 
   Rx<DateTime> selectedDay = DateTime.now().obs;
-  late MenuModel? menuModel;
+  Rx<MenuModel> menuModel = MenuModel(dates: {}).obs;
 
   final _menuRepo = Get.put(MenuRepository());
 
-  Future<List<MenuItem>?> getMenuData(DateTime date) async {
-    menuModel =  await _menuRepo.getMenuById();
-    final day = Helper.formatDateToString(date);
-    return menuModel?.dates[day];
+  @override
+  void onInit() {
+    super.onInit();
+    // Tự động load dữ liệu khi controller được khởi tạo
+    refreshMenuData(selectedDay.value);
   }
-  // Thêm món ăn mới vào menu
-  Future<void> addMenuItem({
-    required String menuId, // Thêm ID menu để xác định menu
-    required String date,
-    required String image,
-    required List<String> ingredients,
-    required String meal,
-    required String name,
-    required Map<String, String> note,
-  }) async {
-    try {
-      // Tạo MenuItem từ dữ liệu giao diện
-      final newItem = MenuItem(
-        image: image,
-        ingredients: ingredients,
-        meal: meal,
-        name: name,
-        note: note,
-      );
 
-      // Gọi repository để thêm mới
-      await _menuRepo.addMenuItem(menuId, newItem, date);
+  Future<List<MenuItem>?> getMenuData(DateTime date) async {
+    String displayDate = _menuRepo.formatSafeDate(date);
+    return await _menuRepo.getMenuItemsByDate(displayDate);
+  }
 
-      // Thông báo thành công
-      Get.snackbar(
-        'Success',
-        'Menu item added successfully!',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+  Future<void> addMenuItem(DateTime date, MenuItem menuItem) async {
+    await _menuRepo.addMenuItem(date, menuItem);
+    await refreshMenuData(date);
+  }
 
-      // Cập nhật lại menu sau khi thêm món ăn
-      await getMenuData(selectedDay.value);
-    } catch (e) {
-      // Thông báo lỗi
-      print('Failed to add menu item: $e');
-      Get.snackbar(
-        'Error',
-        'Failed to add menu item. Please try again.',
-        snackPosition: SnackPosition.BOTTOM,
-      );
-    }
+  Future<void> editMenuItem(DateTime date, MenuItem menuItem, int index) async {
+    await _menuRepo.editMenuItem(date, menuItem, index);
+    await refreshMenuData(date);
+  }
+
+  Future<void> refreshMenuData(DateTime date) async {
+    final newData = await getMenuData(date);
+    menuModel.value = MenuModel(dates: {formatSafeDate(date): newData ?? []});
+  }
+
+  String formatSafeDate(DateTime date) {
+    return DateFormat('dd-MM-yyyy').format(date);
   }
 }

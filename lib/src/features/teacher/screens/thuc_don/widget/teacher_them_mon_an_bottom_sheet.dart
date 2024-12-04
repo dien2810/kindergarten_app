@@ -1,9 +1,10 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:image_picker/image_picker.dart';
-
+import 'package:get/get.dart';
+import '../../../../student/models/menu/menu_item.dart';
+import '../../../controllers/thuc_don/teacher_thuc_don_controller.dart';
 class TeacherThemMonAnBottomSheet extends StatefulWidget {
   const TeacherThemMonAnBottomSheet({Key? key}) : super(key: key);
 
@@ -20,11 +21,12 @@ class _ThemMonAnBottomSheetState extends State<TeacherThemMonAnBottomSheet> {
   final List<String> _thucDonOptions = ["Bữa sáng", "Bữa trưa", "Bữa tối"];
   final ImagePicker _picker = ImagePicker();
   XFile? _selectedImage;
+  final TeacherThucDonController _teacherThucDonController = Get.put(TeacherThucDonController());
 
   @override
   void initState() {
     super.initState();
-    _ngayTaoMonController.text = DateFormat('dd/MM/yyyy').format(_selectedDate);
+    _ngayTaoMonController.text = DateFormat('dd-MM-yyyy').format(_selectedDate);
   }
 
   Future<void> _pickDate() async {
@@ -37,7 +39,7 @@ class _ThemMonAnBottomSheetState extends State<TeacherThemMonAnBottomSheet> {
     if (picked != null && picked != _selectedDate) {
       setState(() {
         _selectedDate = picked;
-        _ngayTaoMonController.text = DateFormat('dd/MM/yyyy').format(_selectedDate);
+        _ngayTaoMonController.text = DateFormat('dd-MM-yyyy').format(_selectedDate);
       });
     }
   }
@@ -51,6 +53,40 @@ class _ThemMonAnBottomSheetState extends State<TeacherThemMonAnBottomSheet> {
     }
   }
 
+  Future<void> _saveMenuItem() async {
+    if (_tenMonAnController.text.isEmpty || _nguyenLieuController.text.isEmpty || _selectedImage == null) {
+      Get.snackbar(
+        'Thông báo',
+        'Vui lòng nhập đầy đủ thông tin',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+      return;
+    }
+
+    String imageUrl = _selectedImage!.path; // URL hình ảnh sau khi upload, ở đây giả sử là path cục bộ
+    List<String> ingredients = _nguyenLieuController.text.split(',').map((e) => e.trim()).toList();
+    Map<String, String> note = {};
+
+    MenuItem menuItem = MenuItem(
+      image: imageUrl,
+      ingredients: ingredients,
+      meal: _selectedThucDon,
+      name: _tenMonAnController.text,
+      note: note,
+    );
+
+    await _teacherThucDonController.addMenuItem(_selectedDate, menuItem);
+
+    Get.back(); // Đóng bottom sheet sau khi thêm mới món ăn
+    Get.snackbar(
+      'Thông báo',
+      'Đã thêm món ăn thành công',
+      backgroundColor: Colors.green,
+      colorText: Colors.white,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -62,12 +98,13 @@ class _ThemMonAnBottomSheetState extends State<TeacherThemMonAnBottomSheet> {
       ),
       child: Wrap(
         children: [
-          Column(
+        Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
                 "Thêm mới món ăn",
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Color(0xFF580B8B), ), textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Color(0xFF580B8B)),
+                textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),
               TextField(
@@ -93,12 +130,10 @@ class _ThemMonAnBottomSheetState extends State<TeacherThemMonAnBottomSheet> {
               const SizedBox(height: 16),
               DropdownButtonFormField<String>(
                 value: _selectedThucDon,
-                items: _thucDonOptions
-                    .map((thucDon) => DropdownMenuItem(
+                items: _thucDonOptions.map((thucDon) => DropdownMenuItem(
                   value: thucDon,
                   child: Text(thucDon, style: const TextStyle(fontSize: 16)),
-                ))
-                    .toList(),
+                )).toList(),
                 onChanged: (value) {
                   setState(() {
                     _selectedThucDon = value!;
@@ -123,7 +158,8 @@ class _ThemMonAnBottomSheetState extends State<TeacherThemMonAnBottomSheet> {
               const SizedBox(height: 16),
               const Text(
                 "Hình ảnh món ăn",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold , color: Color(0xFF580B8B),), textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF580B8B)),
+                textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),
               GestureDetector(
@@ -152,9 +188,7 @@ class _ThemMonAnBottomSheetState extends State<TeacherThemMonAnBottomSheet> {
               ),
               const SizedBox(height: 16),
               ElevatedButton(
-                onPressed: () {
-                  // Xử lý lưu món ăn
-                },
+                onPressed: _saveMenuItem,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF9317AE), // Màu tím
                   padding: const EdgeInsets.symmetric(vertical: 16),

@@ -6,25 +6,28 @@ class MenuModel {
 
   MenuModel({this.id, required this.dates});
 
-  // Chuyển từ Map sang MenuModel
   factory MenuModel.fromMap(Map<String, dynamic> map) {
+    Map<String, List<MenuItem>> dates = {};
+    map.forEach((key, value) {
+      if (value is List) {
+        dates[key] = (value as List).map((item) => MenuItem.fromMap(item)).toList();
+      }
+    });
     return MenuModel(
-      dates: map.map((key, value) {
-        return MapEntry(
-          key,
-          (value as List<dynamic>).map((item) => MenuItem.fromMap(item)).toList(),
-        );
-      }),
+      id: map['id'] as String?,
+      dates: dates,
     );
   }
 
-  // Chuyển từ MenuModel sang Map
   Map<String, dynamic> toMap() {
-    return dates.map((key, value) {
-      return MapEntry(
-        key,
-        value.map((item) => item.toMap()).toList(),
-      );
+    Map<String, dynamic> map = {};
+    dates.forEach((key, value) {
+      map[key] = value.map((item) => item.toMap()).toList();
     });
+    map['id'] = id;
+    return map;
   }
+
+  // Getter for dates
+  Map<String, List<MenuItem>> get getDates => dates;
 }

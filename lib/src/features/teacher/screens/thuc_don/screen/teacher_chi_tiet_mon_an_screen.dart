@@ -7,9 +7,13 @@ import '../widget/teacher_chinh_sua_mon_an_bottom_sheet.dart';
 import '../../../../student/models/menu/menu_item.dart';
 
 class TeacherChiTietMonAnScreen extends StatelessWidget {
+  final DateTime date;
+  final int index;
   const TeacherChiTietMonAnScreen({
     super.key,
     required this.menuItem,
+    required this.date,
+    required this.index,
   });
   final MenuItem menuItem;
 
@@ -201,8 +205,12 @@ class TeacherChiTietMonAnScreen extends StatelessWidget {
                         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
                       ),
                       builder: (BuildContext context) {
-                        return const TeacherChinhSuaMonAnBottomSheet();
-                      },
+                        return   TeacherChinhSuaMonAnBottomSheet(
+                            menuItem: menuItem,
+                            date: date,
+                            index: index, );
+
+                        },
                     );
                   },
                   child: const Text(

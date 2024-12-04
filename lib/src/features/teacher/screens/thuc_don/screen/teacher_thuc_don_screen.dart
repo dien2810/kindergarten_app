@@ -73,8 +73,10 @@ class TeacherThucDonScreen extends StatelessWidget {
                                 ),
                                 child: WeeklyDatePicker(
                                   selectedDay: teacherThucDonController.selectedDay.value,
-                                  changeDay: (value) {
+                                  changeDay: (value) async {
                                     teacherThucDonController.selectedDay.value = value;
+                                    // Lấy danh sách món ăn cho ngày được chọn
+                                    await teacherThucDonController.getMenuData(value);
                                   },
                                   backgroundColor: const Color(0xFFCAF0F8),
                                   selectedDigitBackgroundColor: const Color(0xFFBA83DE),
@@ -104,7 +106,11 @@ class TeacherThucDonScreen extends StatelessWidget {
                                         itemBuilder: (context, index) {
                                           return Column(
                                             children: [
-                                              TeacherThucDonCardWidget(menuItem: menuItems[index] ),
+                                              TeacherThucDonCardWidget(
+                                                menuItem: menuItems[index],
+                                                date: teacherThucDonController.selectedDay.value,
+                                                index: index,
+                                              ),
                                               SizedBox(height: t10Size), // Khoảng cách giữa các card
                                             ],
                                           );
