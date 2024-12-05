@@ -1,159 +1,113 @@
 import 'package:get/get.dart';
-
-class DayOfWeek {
-  String startTime;  // Đổi từ final sang String
-  String endTime;    // Đổi từ final sang String
-
-  DayOfWeek({required this.startTime, required this.endTime});
-}
-
-class ClubModel {
-  final String clubId;
-  final String clubName;
-  final String semesterID;
-  int tuition; // Thay đổi thành int (có thể gán)
-  String openingDay;
-  int capacity; // Thay đổi thành int (có thể gán)
-  String openedRegistration;
-  String closedRegistration;
-  String room;
-  String aboutCourse;
-  final String teacherID;
-  final Map<String, DayOfWeek> dayOfWeek;
-
-  ClubModel({
-    required this.clubId,
-    required this.clubName,
-    required this.semesterID,
-    required this.tuition,
-    required this.openingDay,
-    required this.capacity,
-    required this.openedRegistration,
-    required this.closedRegistration,
-    required this.room,
-    required this.aboutCourse,
-    required this.teacherID,
-    required this.dayOfWeek,
-  });
-
-  // Phương thức copyWith
-  ClubModel copyWith({
-    String? clubId,
-    String? clubName,
-    String? semesterID,
-    int? tuition,
-    String? openingDay,
-    int? capacity,
-    String? openedRegistration,
-    String? closedRegistration,
-    String? room,
-    String? aboutCourse,
-    String? teacherID,
-    Map<String, DayOfWeek>? dayOfWeek,
-  }) {
-    return ClubModel(
-      clubId: clubId ?? this.clubId,
-      clubName: clubName ?? this.clubName,
-      semesterID: semesterID ?? this.semesterID,
-      tuition: tuition ?? this.tuition,
-      openingDay: openingDay ?? this.openingDay,
-      capacity: capacity ?? this.capacity,
-      openedRegistration: openedRegistration ?? this.openedRegistration,
-      closedRegistration: closedRegistration ?? this.closedRegistration,
-      room: room ?? this.room,
-      aboutCourse: aboutCourse ?? this.aboutCourse,
-      teacherID: teacherID ?? this.teacherID,
-      dayOfWeek: dayOfWeek ?? this.dayOfWeek,
-    );
-  }
-}
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:kindergarten_app/src/features/student/models/teacher/teacher_model.dart';
+import 'package:kindergarten_app/src/repository/club_repository/club_teacher_repository.dart';
+import 'package:kindergarten_app/src/repository/account_repository/account_repository.dart';
+import 'package:kindergarten_app/src/repository/teacher_repository/teacher_repository.dart';
+import '../../../student/models/club/club_model.dart';
+import '../../../student/models/club/day_of_week.dart';
+import '../../../student/models/semester_tc/semester_tc_model.dart';
 
 class TeacherNgoaiKhoaController extends GetxController {
-  Map<String, DayOfWeek> dayOfWeekMap = {};
-  // Danh sách câu lạc bộ
-  final clubs = <ClubModel>[
-    ClubModel(
-      clubId: "club_id_1",
-      clubName: "CLB Bóng đá",
-      semesterID: "semester_id_1",
-      tuition: 500000,
-      openingDay: "05/09/2024",
-      capacity: 20,
-      openedRegistration: "01/08/2024",
-      closedRegistration: "31/08/2024",
-      room: "Sân 1",
-      aboutCourse: "Luyện đá bóng - phát triển tài năng nhí với hoạt động thể thao năng động, trải nghiệm với cảm giác sân bóng khi còn bé, đảm bảo an toàn trên sân.",
-      teacherID: "teacher_id_3",
-      dayOfWeek: {
-        "Friday": DayOfWeek(startTime: "7:30", endTime: "9:00"),
-        "Sunday": DayOfWeek(startTime: "7:30", endTime: "9:00"),
-      },
-    ),
-    ClubModel(
-      clubId: "club_id_2",
-      clubName: "CLB vẽ tranh",
-      semesterID: "semester_id_1",
-      tuition: 500000,
-      openingDay: "05/09/2024",
-      capacity: 20,
-      openedRegistration: "01/08/2024",
-      closedRegistration: "31/08/2024",
-      room: "Sân 1",
-      aboutCourse: "Luyện vẽ tranh - phát triển vẽ tranh nhí với hoạt động thể thao năng động, trải nghiệm với cảm giác sân bóng khi còn bé, đảm bảo an toàn trên sân.",
-      teacherID: "teacher_id_3",
-      dayOfWeek: {
-        "Friday": DayOfWeek(startTime: "7:30", endTime: "9:00"),
-        "Sunday": DayOfWeek(startTime: "7:30", endTime: "9:00"),
-      },
-    ),
-    // Thêm câu lạc bộ khác nếu cần
-  ].obs; // Sử dụng Rx để dễ dàng quản lý trạng thái
+  static TeacherNgoaiKhoaController get instance => Get.find();
+  RxList<ClubModel> clubs = RxList<ClubModel>([]);
+  RxList<SemesterTcModel> semesters = RxList<SemesterTcModel>([]);
+  RxString selectedSemester = ''.obs;
+  RxBool isLoading = false.obs;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  RxMap<String, DayOfWeek> dayOfWeekMap = <String, DayOfWeek>{}.obs;
 
-
-  String convertDayToVietnamese(String englishDay) {
-    switch (englishDay) {
-      case 'Monday':
-        return 'Thứ 2';
-      case 'Tuesday':
-        return 'Thứ 3';
-      case 'Wednesday':
-        return 'Thứ 4';
-      case 'Thursday':
-        return 'Thứ 5';
-      case 'Friday':
-        return 'Thứ 6';
-      case 'Saturday':
-        return 'Thứ 7';
-      case 'Sunday':
-        return 'Chủ nhật';
-      default:
-        return englishDay; // Trả về giá trị gốc nếu không khớp
-    }
+  @override
+  void onInit() {
+    super.onInit();
+    fetchSemesters();
   }
-  String convertVietnameseToDay(String vietnameseDay) {
-    switch (vietnameseDay) {
-      case 'Thứ 2':
-        return 'Monday';
-      case 'Thứ 3':
-        return 'Tuesday';
-      case 'Thứ 4':
-        return 'Wednesday';
-      case 'Thứ 5':
-        return 'Thursday';
-      case 'Thứ 6':
-        return 'Friday';
-      case 'Thứ 7':
-        return 'Saturday';
-      case 'Chủ nhật':
-        return 'Sunday';
-      default:
-        return vietnameseDay; // Trả về giá trị gốc nếu không khớp
+
+  Future<void> fetchSemesters() async {
+    try {
+      final snapshot = await _firestore.collection('semester').get();
+      final semestersData = snapshot.docs.map((doc) => SemesterTcModel.fromFirestore(doc)).toList();
+      semesters.assignAll(semestersData);
+      print("Fetched ${semestersData.length} semesters");
+    } catch (e) {
+      print("Error fetching semesters: $e");
     }
   }
 
-  void addSchedule(String day, DayOfWeek schedule) {
-    dayOfWeekMap[day] = schedule; // Cập nhật lịch biểu cho ngày tương ứng
-    update(); // Cập nhật trạng thái để thông báo cho UI
+  Future<void> fetchClubsBySemesterAndTeacher(String semesterID) async {
+    try {
+      isLoading.value = true;
+      final accountRepo = Get.put(AccountRepository());
+      String username = accountRepo.userId;
+      final teacherRepo = Get.put(TeacherRepository());
+      String teacherID = await teacherRepo.getTeacherIDByTeacherID(username); // Đợi kết quả của Future
+
+      if (teacherID.isEmpty) {
+        print("Error: Teacher ID is empty");
+        return;
+      }
+
+      print("Fetching clubs for teacherID: $teacherID and semesterID: $semesterID");
+      var fetchedClubs = await ClubTeacherRepository.getClubsBySemesterAndTeacher(semesterID, teacherID);
+      clubs.assignAll(fetchedClubs);
+      print("Fetched ${fetchedClubs.length} clubs");
+    } catch (e) {
+      print("Error fetching clubs: $e");
+    } finally {
+      isLoading.value = false;
+    }
   }
 
+  Future<void> addNewClub(ClubModel newClub) async {
+    try {
+      isLoading.value = true;
+      await _firestore.collection('club').add({
+        'aboutCourse': newClub.aboutCourse,
+        'capacity': newClub.capacity,
+        'closedRegistration': newClub.closedRegistration,
+        'clubName': newClub.clubName,
+        'openedRegistration': newClub.openedRegistration,
+        'openingDay': newClub.openingDay,
+        'room': newClub.room,
+        'semesterID': newClub.semesterID,
+        'teacherID': newClub.teacherID,
+        'tuition': newClub.tuition,
+        'dayOfWeek': newClub.dayOfWeek.map((key, value) => MapEntry(key, {
+          'startTime': value.startTime,
+          'endTime': value.endTime,
+        })),
+      });
+      print("New club added successfully");
+      await fetchClubsBySemesterAndTeacher(newClub.semesterID);
+    } catch (e) {
+      print("Error adding new club: $e");
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  List<String> getDaysOfWeek() {
+    return ['Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy', 'Chủ Nhật'];
+  }
+
+  String convertDayToVietnamese(String day) {
+    Map<String, String> days = {
+      'Monday': 'Thứ Hai',
+      'Tuesday': 'Thứ Ba',
+      'Wednesday': 'Thứ Tư',
+      'Thursday': 'Thứ Năm',
+      'Friday': 'Thứ Sáu',
+      'Saturday': 'Thứ Bảy',
+      'Sunday': 'Chủ Nhật'
+    };
+    return days[day] ?? day;
+  }
+
+  Future<Future<String?>> getTeacherID() async {
+    final accountRepo = Get.put(AccountRepository());
+    String username  = accountRepo.userId;
+    final teacherRepo = Get.put(TeacherRepository());
+    Future<String?> teacherID =  teacherRepo.getTeacherIDByTeacherID(username);
+    return  teacherID ;
+  }
 }

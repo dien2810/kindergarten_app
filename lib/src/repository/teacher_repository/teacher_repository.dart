@@ -44,4 +44,24 @@ class TeacherRepository extends GetxController{
       print("Failed to update Teacher: $e");
     }
   }
+
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  Future<String> getTeacherIDByTeacherID(String inputTeacherID) async {
+    try {
+      final snapshot = await _firestore.collection('teacher').where('teacherID', isEqualTo: inputTeacherID).limit(1).get();
+
+      if (snapshot.docs.isNotEmpty) {
+        final teacher = TeacherModel.fromFirestore(snapshot.docs.first);
+        return teacher.id!;
+      } else {
+        throw Exception("No teacher found with teacherID: $inputTeacherID");
+      }
+    } catch (e) {
+      print("Error fetching teacher ID: $e");
+      return "Error fetching teacher ID"; // Trả về chuỗi thông báo lỗi
+    }
+  }
+
+
+
 }

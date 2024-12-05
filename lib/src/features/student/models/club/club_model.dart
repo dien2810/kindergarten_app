@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../semester_tc/semester_tc_model.dart';
 import 'day_of_week.dart';
 
 class ClubModel {
@@ -15,6 +16,7 @@ class ClubModel {
   final String teacherID;
   final int tuition;
   final Map<String, DayOfWeek> dayOfWeek;
+  SemesterTcModel? semester;
 
   ClubModel({
     this.id,
@@ -29,6 +31,7 @@ class ClubModel {
     required this.teacherID,
     required this.tuition,
     required this.dayOfWeek,
+    this.semester,
   });
 
   factory ClubModel.fromFirestore(DocumentSnapshot doc) {
@@ -69,6 +72,7 @@ class ClubModel {
       tuition: map['tuition'] as int,
       dayOfWeek: (map['dayOfWeek'] as Map<String, dynamic>).map(
             (key, value) => MapEntry(key, DayOfWeek.fromMap(value))),
+
     );
   }
 

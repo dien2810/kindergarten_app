@@ -23,6 +23,7 @@ class CommentDetailScreen extends StatelessWidget {
     String parentID = comment.guardianID ?? 'Không xác định'; // Hiển thị ID phụ huynh hoặc thông báo nếu không có ID
     String hoVaTenPhuHuynh = accountRepo.fullName; // Lấy họ và tên phụ huynh từ AccountRepository
 
+
     return Scaffold(
       appBar: const GuardianAppBarWithTitleWidget(title: tChiTietNhanXet),
       body: Padding(

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kindergarten_app/src/constants/image_strings.dart';
-import 'package:kindergarten_app/src/features/teacher/controllers/ngoai_khoa/teacher_ngoai_khoa_controller.dart';
-import 'package:kindergarten_app/src/features/teacher/screens/ngoai_khoa/screen/teacher_chi_tiet_cau_lac_bo_screen.dart';
-import 'package:kindergarten_app/src/features/teacher/screens/ngoai_khoa/widget/thanh_vien_widget.dart';
 import '../../../../../common_widgets/app_bar_widgets/teacher_app_bar_with_title_header_2.dart';
 import '../../../../../constants/text_strings.dart';
+import '../../../controllers/ngoai_khoa/enroll_club_controller.dart';
+import '../widget/thanh_vien_widget.dart';
 
 class TeacherDanhSachThanhVienClbScreen extends StatefulWidget {
-  const TeacherDanhSachThanhVienClbScreen({super.key});
+  final String clubID;
+
+  const TeacherDanhSachThanhVienClbScreen({super.key, required this.clubID});
 
   @override
   _TeacherDanhSachThanhVienClbScreenState createState() =>
@@ -18,10 +18,16 @@ class TeacherDanhSachThanhVienClbScreen extends StatefulWidget {
 class _TeacherDanhSachThanhVienClbScreenState
     extends State<TeacherDanhSachThanhVienClbScreen> {
   final TextEditingController searchController = TextEditingController();
+  final EnrolledClubController enrolledController = Get.put(EnrolledClubController());
+
+  @override
+  void initState() {
+    super.initState();
+    enrolledController.fetchMembers(widget.clubID);
+  }
 
   @override
   Widget build(BuildContext context) {
-    final ngoaiKhoaController = Get.put(TeacherNgoaiKhoaController());
     return DefaultTabController(
       length: 1,
       child: Scaffold(
@@ -60,37 +66,30 @@ class _TeacherDanhSachThanhVienClbScreenState
                 ),
               ),
               // Dãy button
-
               const SizedBox(height: 10.0), // Khoảng cách giữa button và danh sách
               // Danh sách học sinh
-              const Expanded(
-                child: SingleChildScrollView(
-                  child: Wrap(
-                    spacing: 5.0, // Khoảng cách ngang giữa các phần tử
-                    runSpacing: 5.0, // Khoảng cách dọc giữa các phần tử
-                    alignment: WrapAlignment.center,
-                    children: [
-                      ThanhVienWidget(
-                          imageUrl: tHocSinhAvatarItem1,
-                          tenHocSinh: 'Nguyễn Văn Trang Anh'),
-                      ThanhVienWidget(
-                          imageUrl: tHocSinhAvatarItem2,
-                          tenHocSinh: 'Giản Đình Thái'),
-                      ThanhVienWidget(
-                          imageUrl: tHocSinhAvatarItem3,
-                          tenHocSinh: 'Nguyễn Tuấn Đạt'),
-                      ThanhVienWidget(
-                          imageUrl: tHocSinhAvatarItem3,
-                          tenHocSinh: 'Nguyễn Tuấn Đạt'),
-                      ThanhVienWidget(
-                          imageUrl: tHocSinhAvatarItem3,
-                          tenHocSinh: 'Nguyễn Tuấn Đạt'),
-                      ThanhVienWidget(
-                          imageUrl: tHocSinhAvatarItem3,
-                          tenHocSinh: 'Nguyễn Tuấn Đạt'),
-                    ],
-                  ),
-                ),
+              Expanded(
+                child: Obx(() {
+                  if (enrolledController.isLoading.value) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  if (enrolledController.members.isEmpty) {
+                    return const Center(child: Text('Không có thành viên nào trong câu lạc bộ này.'));
+                  }
+                  return SingleChildScrollView(
+                    child: Wrap(
+                      spacing: 5.0,
+                      runSpacing: 5.0,
+                      alignment: WrapAlignment.center,
+                      children: enrolledController.members.map((member) {
+                        return ThanhVienWidget(
+                          imageUrl: member.studentDocument.image,
+                          tenHocSinh: member.studentProfile.name,
+                        );
+                      }).toList(),
+                    ),
+                  );
+                }),
               ),
               // Footer với 2 button
               Container(
@@ -108,12 +107,7 @@ class _TeacherDanhSachThanhVienClbScreenState
                               vertical: 12.0, horizontal: 24.0),
                         ),
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => TeacherChiTietCauLacBoScreen(clubId: "club_id_1"), // Thay "club_id_1" bằng ID thực tế
-                            ),
-                          );
+                          // Thêm logic chi tiết câu lạc bộ nếu cần
                         },
                         child: const Text(
                           'CHI TIẾT CLB',

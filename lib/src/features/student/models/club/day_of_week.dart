@@ -1,7 +1,7 @@
 class DayOfWeek {
   final String? id;
-  final String startTime;
-  final String endTime;
+    String startTime;
+    String endTime;
 
   DayOfWeek({
     this.id,
