@@ -9,6 +9,18 @@ class AbsentRepository extends GetxController{
   final CollectionReference _absentCollection = FirebaseFirestore.instance.collection('absent');
   final _accountRepo = Get.put(AccountRepository());
   // Thêm một document mới vào Firestore
+
+  Future<AbsentModel?> getAbsentByStudentId(String studentId) async {
+    print(studentId);
+    final snapshot = await _absentCollection.doc(studentId).get();
+    if (snapshot.exists && snapshot.data() != null) {
+      final data = snapshot.data() as Map<String, dynamic>;
+      return AbsentModel.fromMap(data); // Chuyển đổi dữ liệu thành model
+    } else {
+      return null; // Document không tồn tại hoặc không có dữ liệu
+    }
+  }
+
   Future<AbsentModel?> getAbsentById() async {
     print(_accountRepo.userId);
     final snapshot = await _absentCollection.doc(_accountRepo.userId).get();

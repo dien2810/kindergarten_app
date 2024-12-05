@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
-import 'package:kindergarten_app/src/constants/sizes.dart';
 
 import '../screen/teacher_xem_chi_tiet_anh_screen.dart';
 
@@ -11,10 +10,10 @@ class TeacherDiemDanhCardWidget extends StatefulWidget {
   final Map<String, dynamic> attendanceDetails;
 
   const TeacherDiemDanhCardWidget({
-    Key? key,
+    super.key,
     required this.studentName,
     required this.attendanceDetails,
-  }) : super(key: key);
+  });
 
   @override
   _TeacherDiemDanhCardWidgetState createState() => _TeacherDiemDanhCardWidgetState();

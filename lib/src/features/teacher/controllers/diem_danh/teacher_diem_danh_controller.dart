@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:kindergarten_app/src/repository/absent_repository/absent_repository.dart';
+
 
 class AttendanceRecord {
   final String studentId;
@@ -39,11 +41,41 @@ class AttendanceDetail {
 class TeacherDiemDanhController extends GetxController {
   var selectedDay = DateTime.now().obs; // Ngày được chọn
   var attendanceRecords = <String, AttendanceRecord>{}.obs; // Dữ liệu điểm danh
+  late List<dynamic> studentIds;
 
-  @override
-  void onInit() {
+  void loadAbsent() {
     super.onInit();
-    fetchAttendanceData(); // Gọi hàm để tải dữ liệu điểm danh
+    getAbsentData();
+    //fetchAttendanceData(); // Gọi hàm để tải dữ liệu điểm danh
+  }
+
+  Future<void> getAbsentData() async {
+    final absentRepo = Get.put(AbsentRepository());
+    for (var studentId in studentIds){
+      final absent = await absentRepo.getAbsentByStudentId(studentId);
+      attendanceRecords[studentId] = AttendanceRecord(
+        studentId: studentId,
+        semesterID: absent!.semesterID, // Ép kiểu String
+        amountOfDayOff: absent.amountOfDayOff, // Ép kiểu int
+        dates: (absent.dates).map(
+              (date, details) {
+            return MapEntry(
+              date,
+              AttendanceDetail(
+                period: List<String>.from(details.period ?? [""]),
+                absentTime: details.absentTime, // Ép kiểu String
+                absentStatus: details.absentStatus, // Ép kiểu String
+                checkinImage: details.checkinImage, // Ép kiểu String
+                checkoutImage: details.checkoutImage, // Ép kiểu String
+                checkinTime: details.checkinTime, // Ép kiểu String
+                checkoutTime: details.checkoutTime, // Ép kiểu String
+                reason: details.reason, // Ép kiểu String
+              ),
+            );
+          },
+        ),
+      );
+    }
   }
 
   // Hàm để tải dữ liệu điểm danh

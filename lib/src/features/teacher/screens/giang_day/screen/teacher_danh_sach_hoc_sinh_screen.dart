@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kindergarten_app/src/features/teacher/controllers/diem_danh/teacher_diem_danh_controller.dart';
 import 'package:kindergarten_app/src/features/teacher/screens/hoat_dong_su_kien/screen/hoat_dong_su_kien_screen.dart';
 import 'package:kindergarten_app/src/features/teacher/screens/xin_nghi/screen/teacher_danh_sach_xin_nghi_screen.dart';
 
@@ -90,6 +91,8 @@ class _TeacherDanhSachHocSinhScreenState
                     ),
                     onPressed: () {
                       // Chuyển sang trang "Điểm Danh"
+                      final teacherDiemDanhController = Get.put(TeacherDiemDanhController());
+                      teacherDiemDanhController.studentIds = giangDayController.classModel!.students;
                       Get.to(const TeacherDiemDanhScreen());
                     },
                     child: const Text(
@@ -104,7 +107,9 @@ class _TeacherDanhSachHocSinhScreenState
                       padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
                     ),
                     onPressed: () {
-                     Get.to(const TeacherDanhSachXinNghiScreen());
+                      final diemDanhController = Get.put(TeacherDiemDanhController());
+                      diemDanhController.studentIds = giangDayController.classModel!.students;
+                      Get.to(const TeacherDanhSachXinNghiScreen());
                     },
                     child: const Text(
                       'XIN NGHỈ',

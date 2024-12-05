@@ -8,7 +8,6 @@ import '../../../../../common_widgets/logo_widgets/logo_login_page.dart';
 import '../../../../../constants/colors.dart';
 import '../../../../../constants/sizes.dart';
 import '../../../controllers/otp_controller.dart';
-import '../../signup_screen/signup_screen.dart';
 
 class OTPScreen extends StatelessWidget {
   const OTPScreen({super.key});
@@ -139,29 +138,29 @@ class OTPScreen extends StatelessWidget {
                                   )
                               ),
                               SizedBox(height: t20Size),
-                              SizedBox(
-                                width: t10Size*20,
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: tLightBlue,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(t40Size)
-                                      )
-                                  ),
-                                  onPressed: () {
-                                    Get.off(()=>const SignupScreen());
-                                  },
-                                  child: const Text(
-                                    tSignup,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20,
-                                        fontFamily: "Outfit",
-                                        color: tWhiteColor
-                                    ),
-                                  ),
-                                ),
-                              ),
+                              // SizedBox(
+                              //   width: t10Size*20,
+                              //   child: ElevatedButton(
+                              //     style: ElevatedButton.styleFrom(
+                              //         backgroundColor: tLightBlue,
+                              //         shape: RoundedRectangleBorder(
+                              //             borderRadius: BorderRadius.circular(t40Size)
+                              //         )
+                              //     ),
+                              //     onPressed: () {
+                              //       Get.off(()=>const SignupScreen());
+                              //     },
+                              //     child: const Text(
+                              //       tSignup,
+                              //       style: TextStyle(
+                              //           fontWeight: FontWeight.bold,
+                              //           fontSize: 20,
+                              //           fontFamily: "Outfit",
+                              //           color: tWhiteColor
+                              //       ),
+                              //     ),
+                              //   ),
+                              // ),
                             ],
                           ),
                         )

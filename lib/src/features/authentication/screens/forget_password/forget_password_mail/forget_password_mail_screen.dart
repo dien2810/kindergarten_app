@@ -9,7 +9,6 @@ import '../../../../../constants/colors.dart';
 import '../../../../../constants/sizes.dart';
 import '../../../controllers/forgot_password_email_controller.dart';
 import '../../login_screen/login_screen.dart';
-import '../../signup_screen/signup_screen.dart';
 
 class ForgetPasswordMailScreen extends StatelessWidget {
   const ForgetPasswordMailScreen({super.key});
@@ -142,32 +141,32 @@ class ForgetPasswordMailScreen extends StatelessWidget {
                                     ),
                                   ),
                                   SizedBox(height: t20Size),
-                                  Align(
-                                    alignment: Alignment.center,
-                                    child: SizedBox(
-                                      width: t10Size*20,
-                                      child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                            backgroundColor: tLightBlue,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.circular(t40Size)
-                                            )
-                                        ),
-                                        onPressed: () {
-                                          Get.off(()=>const SignupScreen());
-                                        },
-                                        child: const Text(
-                                          tSignup,
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 20,
-                                              fontFamily: "Outfit",
-                                              color: tWhiteColor
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                                  // Align(
+                                  //   alignment: Alignment.center,
+                                  //   child: SizedBox(
+                                  //     width: t10Size*20,
+                                  //     child: ElevatedButton(
+                                  //       style: ElevatedButton.styleFrom(
+                                  //           backgroundColor: tLightBlue,
+                                  //           shape: RoundedRectangleBorder(
+                                  //               borderRadius: BorderRadius.circular(t40Size)
+                                  //           )
+                                  //       ),
+                                  //       onPressed: () {
+                                  //         Get.off(()=>const SignupScreen());
+                                  //       },
+                                  //       child: const Text(
+                                  //         tSignup,
+                                  //         style: TextStyle(
+                                  //             fontWeight: FontWeight.bold,
+                                  //             fontSize: 20,
+                                  //             fontFamily: "Outfit",
+                                  //             color: tWhiteColor
+                                  //         ),
+                                  //       ),
+                                  //     ),
+                                  //   ),
+                                  // ),
                                 ],
                               ),
                             ),
