@@ -63,4 +63,7 @@ class AccountRepository extends GetxController {
   Future<void> updateAccountRecord(AccountModel account) async{
     await _db.collection("account").doc(account.id).update(account.toJson());
   }
+
+
+
 }

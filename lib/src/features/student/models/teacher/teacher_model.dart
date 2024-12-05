@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class TeacherModel {
   final String? id;
   final String avatar;
@@ -44,4 +46,18 @@ class TeacherModel {
       'teacherID': teacherID,
     };
   }
+  factory TeacherModel.fromFirestore(DocumentSnapshot doc) {
+    Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+    return TeacherModel(
+      id: doc.id,
+      avatar: data['avatar'],
+      dateOfBirth: data['dateOfBirth'],
+      firstName: data['firstName'],
+      gender: data['gender'],
+      lastName: data['lastName'],
+      phone: data['phone'],
+      teacherID: data['teacherID'],
+    );
+  }
+
 }

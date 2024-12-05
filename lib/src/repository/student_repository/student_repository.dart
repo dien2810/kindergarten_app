@@ -65,4 +65,21 @@ class StudentRepository extends GetxController{
       print("Failed to update Student: $e");
     }
   }
+
+  // Lấy tên học sinh dựa trên studentId
+  Future<String?> getStudentNameById(String studentId) async {
+    try {
+      final snapshot = await _studentCollection.doc(studentId).get();
+      if (snapshot.exists && snapshot.data() != null) {
+        final data = snapshot.data() as Map<String, dynamic>;
+        final student = StudentModel.fromMap(data);
+        return student.studentProfile.name; // Trả về tên học sinh
+      }
+      return null; // Nếu không tìm thấy học sinh
+    } catch (e) {
+      print("Failed to get student name: $e");
+      return null;
+    }
+  }
+
 }
