@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../../constants/image_strings.dart';
+import 'package:kindergarten_app/src/common_widgets/cloud_image/cloud_image_widget.dart';
 import '../../../../../constants/sizes.dart';
 import '../../../../../constants/text_strings.dart';
 import '../../../../student/models/menu/menu_item.dart';
@@ -12,28 +12,22 @@ class TeacherThucDonCardWidget extends StatelessWidget {
   final int index;
 
   const TeacherThucDonCardWidget({
-    Key? key,
+    super.key,
     required this.menuItem,
     required this.date,
     required this.index,
-  }) : super(key: key);
-
+  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         // Kiểm tra nếu menuItem không phải là null
-        if (menuItem != null) {
-          Get.to(() => TeacherChiTietMonAnScreen(
+        Get.to(() => TeacherChiTietMonAnScreen(
               menuItem: menuItem,
               date: date,
               index: index,
-          ));
-        } else {
-          // Thông báo lỗi nếu menuItem là null
-          Get.snackbar('Error', 'Món ăn không hợp lệ');
-        }
+            ));
       },
       child: Container(
         decoration: BoxDecoration(
@@ -72,16 +66,11 @@ class TeacherThucDonCardWidget extends StatelessWidget {
                     SizedBox(height: t5Size),
                     ElevatedButton(
                       onPressed: () {
-                        if (menuItem != null) {
-                          Get.to(() => TeacherChiTietMonAnScreen(
-                            menuItem: menuItem,
-                            date: date,
-                            index: index,
-
-                          ));
-                        } else {
-                          Get.snackbar('Error', 'Món ăn không hợp lệ');
-                        }
+                        Get.to(() => TeacherChiTietMonAnScreen(
+                              menuItem: menuItem,
+                              date: date,
+                              index: index,
+                            ));
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFFCAF0F8),
@@ -111,10 +100,7 @@ class TeacherThucDonCardWidget extends StatelessWidget {
                 height: t10Size * 10,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: Image(
-                    fit: BoxFit.cover,
-                    image: AssetImage(menuItem.image),
-                  ),
+                  child: CloudImage(publicId: menuItem.image),
                 ),
               ),
             ),

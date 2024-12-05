@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kindergarten_app/src/common_widgets/cloud_image/circle_cloud_image_widget.dart';
 import 'package:kindergarten_app/src/features/teacher/controllers/nhan_xet_hoc_sinh/teacher_nhan_xet_hoc_sinh_controller.dart';
-import 'package:kindergarten_app/src/features/teacher/screens/giang_day/widget/chi_tiet_hoc_sinh_bottom_sheet.dart';
 import 'package:kindergarten_app/src/features/teacher/screens/ngoai_khoa/widget/chi_tiet_thanh_vien_clb_bottom_sheet.dart';
 
 class ThanhVienWidget extends StatelessWidget {
@@ -10,10 +10,10 @@ class ThanhVienWidget extends StatelessWidget {
   final String tenHocSinh;
 
   const ThanhVienWidget({
-    Key? key,
+    super.key,
     required this.imageUrl,
     required this.tenHocSinh,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,8 @@ class ThanhVienWidget extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 16.0),
                 child: CircleAvatar(
                   radius: 60, // Kích thước hình tròn
-                  backgroundImage: AssetImage(imageUrl), // Ảnh từ asset
+                  child: CircleCloudImageWidget(publicId: imageUrl)
+                  // backgroundImage: AssetImage(imageUrl), // Ảnh từ asset
                 ),
               ),
             ),

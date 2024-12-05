@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:get/get.dart';
+import 'package:kindergarten_app/src/common_widgets/cloud_image/cloud_image_widget.dart';
 import '../../../../student/models/menu/menu_item.dart';
 import '../../../controllers/thuc_don/teacher_thuc_don_controller.dart';
 
@@ -13,11 +14,11 @@ class TeacherChinhSuaMonAnBottomSheet extends StatefulWidget {
   final int index;
 
   const TeacherChinhSuaMonAnBottomSheet({
-    Key? key,
+    super.key,
     required this.menuItem,
     required this.date,
     required this.index,
-  }) : super(key: key);
+  });
 
   @override
   State<TeacherChinhSuaMonAnBottomSheet> createState() => _ChinhSuaMonAnBottomSheetState();
@@ -175,10 +176,7 @@ class _ChinhSuaMonAnBottomSheetState extends State<TeacherChinhSuaMonAnBottomShe
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: _selectedImage == null
-                      ? Image.network(
-                    widget.menuItem.image,
-                    fit: BoxFit.cover,
-                  )
+                      ? CloudImage(publicId: widget.menuItem.image)
                       : Image.file(
                     File(_selectedImage!.path),
                     fit: BoxFit.cover,

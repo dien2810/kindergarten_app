@@ -36,7 +36,7 @@ class _TeacherChiTietCauLacBoScreenState extends State<TeacherChiTietCauLacBoScr
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Thông tin chi tiết câu lạc bộ',
                 style: TextStyle(
                   fontSize: 24,
@@ -44,38 +44,38 @@ class _TeacherChiTietCauLacBoScreenState extends State<TeacherChiTietCauLacBoScr
                   color: Colors.purple,
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Text(
                 'Tên câu lạc bộ: ${club.clubName}',
-                style: TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18),
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Text(
                 'Mô tả: ${club.aboutCourse}',
-                style: TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18),
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Text(
                 'Sức chứa: ${club.capacity} học sinh',
-                style: TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18),
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Text(
                 'Ngày khai giảng: ${club.openingDay}',
-                style: TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18),
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Text(
                 'Địa điểm: ${club.room}',
-                style: TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18),
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Text(
                 'Học phí: ${club.tuition} VND',
-                style: TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18),
               ),
-              SizedBox(height: 16),
-              Text(
+              const SizedBox(height: 16),
+              const Text(
                 'Lịch học',
                 style: TextStyle(
                   fontSize: 22,
@@ -83,7 +83,7 @@ class _TeacherChiTietCauLacBoScreenState extends State<TeacherChiTietCauLacBoScr
                   color: Colors.purple,
                 ),
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: _buildScheduleList(),
@@ -117,14 +117,14 @@ class _TeacherChiTietCauLacBoScreenState extends State<TeacherChiTietCauLacBoScr
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Row(
               children: [
                 Text(
                   'Từ: ${schedule.startTime}',
                   style: const TextStyle(fontSize: 16),
                 ),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
                 Text(
                   'Đến: ${schedule.endTime}',
                   style: const TextStyle(fontSize: 16),

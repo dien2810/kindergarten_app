@@ -76,7 +76,7 @@ class _ILSScreenState extends State<ILSScreen> {
       child: Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(
-          title: const Text('VideoSDK ILS QuickStart'),
+          title: const Text('Livestream QuickStart'),
         ),
         //Showing the Speaker or Viewer View based on the mode
         body: isJoined

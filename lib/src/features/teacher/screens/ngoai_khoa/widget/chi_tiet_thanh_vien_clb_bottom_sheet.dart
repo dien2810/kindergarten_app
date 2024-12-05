@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:kindergarten_app/src/common_widgets/cloud_image/circle_cloud_image_widget.dart';
 import 'package:kindergarten_app/src/features/teacher/controllers/nhan_xet_hoc_sinh/teacher_nhan_xet_hoc_sinh_controller.dart';
 import 'package:kindergarten_app/src/features/teacher/routes/hoc_duong_route.dart';
 
@@ -67,9 +68,10 @@ class _ChiTietThanhVienClbBottomSheetState extends State<ChiTietThanhVienClbBott
               Center(
                 child: CircleAvatar(
                   radius: 90, // Giảm kích thước avatar
-                  backgroundImage: widget.imageUrl.startsWith('http')
-                      ? NetworkImage(widget.imageUrl)
-                      : AssetImage(widget.imageUrl) as ImageProvider,
+                  child: CircleCloudImageWidget(publicId: widget.imageUrl)
+                  // backgroundImage: widget.imageUrl.startsWith('http')
+                  //     ? NetworkImage(widget.imageUrl)
+                  //     : AssetImage(widget.imageUrl) as ImageProvider,
                 ),
               ),
               const SizedBox(height: 12), // Reduced space below the avatar

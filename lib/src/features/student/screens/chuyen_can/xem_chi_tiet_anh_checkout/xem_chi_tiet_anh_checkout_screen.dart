@@ -11,7 +11,8 @@ import '../../../../../utils/helper_controller/helper_controller.dart';
 import '../../../controllers/chuyen_can/chuyen_can_controller.dart';
 
 class XemChiTietAnhCheckoutScreen extends StatelessWidget {
-  const XemChiTietAnhCheckoutScreen({super.key});
+  const XemChiTietAnhCheckoutScreen({super.key, required this.imageUrl});
+  final String imageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -129,8 +130,8 @@ class XemChiTietAnhCheckoutScreen extends StatelessWidget {
                                         ),
                                       ),
                                       SizedBox(height: t10Size),
-                                      const CloudImage(
-                                        publicId: 'tet1_bx4pgy',
+                                      CloudImage(
+                                        publicId: imageUrl,
                                       ),
                                       // Container(
                                       //   height: t100Size*3,

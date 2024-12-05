@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:kindergarten_app/src/common_widgets/app_bar_widgets/teacher_app_bar_with_title_header_2.dart';
-import 'package:kindergarten_app/src/features/teacher/controllers/thuc_don/teacher_thuc_don_controller.dart';
-import '../../../../../constants/image_strings.dart';
+import 'package:kindergarten_app/src/common_widgets/cloud_image/cloud_image_widget.dart';
 import '../../../../../constants/sizes.dart';
 import '../../../../../constants/text_strings.dart';
 import '../../../../../repository/student_repository/student_repository.dart';
@@ -87,10 +85,7 @@ class TeacherChiTietMonAnScreen extends StatelessWidget {
                                     topRight: Radius.circular(15.0),
                                     bottomRight: Radius.circular(15.0),
                                   ),
-                                  child: Image(
-                                    fit: BoxFit.cover,
-                                    image: AssetImage(menuItem.image), // Hiển thị hình ảnh món ăn
-                                  ),
+                                  child: CloudImage(publicId: menuItem.image),
                                 ),
                               ),
                             ),

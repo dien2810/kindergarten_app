@@ -69,13 +69,13 @@ class HuongDanSuDungScreen extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () => _launchURL(),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF0B2384), // Màu nền nút
+                  backgroundColor: const Color(0xFF0B2384), // Màu nền nút
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
                   child: Text(
                     "Xem hướng dẫn chi tiết",
                     style: TextStyle(color: Colors.white, fontSize: 18),
@@ -94,7 +94,7 @@ class HuongDanSuDungScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Text(
         title,
-        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
       ),
     );
   }
@@ -104,7 +104,7 @@ class HuongDanSuDungScreen extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 20),
       child: Text(
         content,
-        style: TextStyle(fontSize: 16),
+        style: const TextStyle(fontSize: 16),
       ),
     );
   }

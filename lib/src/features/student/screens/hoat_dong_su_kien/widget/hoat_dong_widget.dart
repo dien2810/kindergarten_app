@@ -65,7 +65,7 @@ class HoatDongWidget extends StatelessWidget {
                     const Row(children: [
                       Expanded(
                         child: Text(
-                          'Video giám sát hoạt động trong ngày',
+                          'Giám sát hoạt động trong ngày',
                           style: TextStyle(
                             fontSize: 18,
                             color: Color(0xFF767676),
@@ -93,7 +93,7 @@ class HoatDongWidget extends StatelessWidget {
                           child: const Row(
                             children: [
                               Text(
-                                'Xem Video',
+                                'Livestream',
                                 style: TextStyle(color: Colors.white),
                               ),
                               SizedBox(width: 8),

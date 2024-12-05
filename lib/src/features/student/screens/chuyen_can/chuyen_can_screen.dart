@@ -155,7 +155,9 @@ class ChuyenCanScreen extends StatelessWidget {
                                         valueColor: Colors.black,
                                         isButton: true,
                                         onPressed: (){
-                                          Get.to(const XemChiTietAnhCheckinScreen());
+                                          Get.to(XemChiTietAnhCheckinScreen(
+                                            imageUrl: absentDate.checkinImage
+                                          ));
                                         },
                                       ),
                                       SizedBox(height: t5Size),
@@ -167,7 +169,9 @@ class ChuyenCanScreen extends StatelessWidget {
                                         valueColor: Colors.black,
                                         isButton: true,
                                         onPressed: (){
-                                          Get.to(const XemChiTietAnhCheckoutScreen());
+                                          Get.to(XemChiTietAnhCheckoutScreen(
+                                              imageUrl: absentDate.checkoutImage
+                                          ));
                                         },
                                       ),
                                       SizedBox(height: t5Size),

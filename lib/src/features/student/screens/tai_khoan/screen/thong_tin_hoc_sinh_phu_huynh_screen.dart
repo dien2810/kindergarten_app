@@ -1,28 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:kindergarten_app/src/features/student/controllers/tai_khoan/tai_khoan_controller.dart';
 
 class ThongTinHocSinhPhuHuynhScreen extends StatefulWidget {
+  const ThongTinHocSinhPhuHuynhScreen({super.key});
+
   @override
   _ThongTinHocSinhPhuHuynhScreenState createState() => _ThongTinHocSinhPhuHuynhScreenState();
 }
 
 class _ThongTinHocSinhPhuHuynhScreenState extends State<ThongTinHocSinhPhuHuynhScreen> {
-  final TextEditingController _controllerHoTen = TextEditingController();
-  final TextEditingController _controllerNgaySinh = TextEditingController();
-  final TextEditingController _controllerEmail = TextEditingController();
-  final TextEditingController _controllerGioiTinh = TextEditingController();
-  final TextEditingController _controllerNgheNghiep = TextEditingController();
-  final TextEditingController _controllerSoDienThoai = TextEditingController();
-  final TextEditingController _controllerDiaChi = TextEditingController();
-  final TextEditingController _controllerTonGiao = TextEditingController();
-  final TextEditingController _controllerDanToc = TextEditingController();
-
-  // Thông tin học sinh không cần TextEditingController vì không chỉnh sửa
-  final String _hoTenHocsinh = "Nguyễn Văn An";
-  final String _maHocsinh = "2111001";
-  final String _lop = "Bambo 01";
-
   @override
   Widget build(BuildContext context) {
+    final taiKhoanController = Get.put(TaiKhoanController());
+    taiKhoanController.getThongTinPhuHuynhPageData();
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 100.0,
@@ -47,63 +38,64 @@ class _ThongTinHocSinhPhuHuynhScreenState extends State<ThongTinHocSinhPhuHuynhS
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Tiêu đề thông tin phụ huynh
-              Text(
+              const Text(
                 "Thông tin phụ huynh",
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 20),
-              _buildEditableField("Họ và tên", _controllerHoTen, "Nguyễn Văn Binh"),
-              SizedBox(height: 16),
-              _buildEditableField("Ngày sinh", _controllerNgaySinh, "1/1/1977"),
-              SizedBox(height: 16),
-              _buildEditableField("Email", _controllerEmail, "nguyenvanbinh@gmail.com"),
-              SizedBox(height: 16),
-              _buildEditableField("Giới tính", _controllerGioiTinh, "Nam"),
-              SizedBox(height: 16),
-              _buildEditableField("Nghề nghiệp", _controllerNgheNghiep, "Nông"),
-              SizedBox(height: 16),
-              _buildEditableField("Số điện thoại", _controllerSoDienThoai, "0123456789"),
-              SizedBox(height: 16),
-              _buildEditableField("Địa chỉ", _controllerDiaChi, "1 Vố Văn Ngân, Thủ Đức, TP.HCM"),
-              SizedBox(height: 16),
-              _buildEditableField("Tôn giáo", _controllerTonGiao, "Phật giáo"),
-              SizedBox(height: 16),
-              _buildEditableField("Dân tộc", _controllerDanToc, "Kinh"),
-              SizedBox(height: 40), // Khoảng cách trước phần thông tin học sinh
+              const SizedBox(height: 20),
+              _buildEditableField("Họ và tên", taiKhoanController.controllerHoTen, "Nguyễn Văn Binh"),
+              const SizedBox(height: 16),
+              _buildEditableField("Ngày sinh", taiKhoanController.controllerNgaySinh, "1/1/1977"),
+              const SizedBox(height: 16),
+              _buildEditableField("Email", taiKhoanController.controllerEmail, "nguyenvanbinh@gmail.com"),
+              const SizedBox(height: 16),
+              _buildEditableField("Giới tính", taiKhoanController.controllerGioiTinh, "Nam"),
+              const SizedBox(height: 16),
+              _buildEditableField("Nghề nghiệp", taiKhoanController.controllerNgheNghiep, "Nông"),
+              const SizedBox(height: 16),
+              _buildEditableField("Số điện thoại", taiKhoanController.controllerSoDienThoai, "0123456789"),
+              const SizedBox(height: 16),
+              _buildEditableField("Địa chỉ", taiKhoanController.controllerDiaChi, "1 Vố Văn Ngân, Thủ Đức, TP.HCM"),
+              const SizedBox(height: 16),
+              _buildEditableField("Tôn giáo", taiKhoanController.controllerTonGiao, "Phật giáo"),
+              const SizedBox(height: 16),
+              _buildEditableField("Dân tộc", taiKhoanController.controllerDanToc, "Kinh"),
+              const SizedBox(height: 40), // Khoảng cách trước phần thông tin học sinh
 
               // Phần thông tin học sinh
-              Text(
+              const Text(
                 "Thông tin học sinh",
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 20),
-              _buildStudentInfoField("Họ và tên", _hoTenHocsinh),
-              SizedBox(height: 16),
-              _buildStudentInfoField("Mã học sinh", _maHocsinh),
-              SizedBox(height: 16),
-              _buildStudentInfoField("Lớp", _lop),
-              SizedBox(height: 40),
+              const SizedBox(height: 20),
+              _buildStudentInfoField("Họ và tên", taiKhoanController.hoTenHocSinh),
+              const SizedBox(height: 16),
+              _buildStudentInfoField("Mã học sinh", taiKhoanController.maHocSinh),
+              const SizedBox(height: 16),
+              _buildStudentInfoField("Lớp", taiKhoanController.lop),
+              const SizedBox(height: 40),
 
               // Button Cập nhật thông tin
               Center(
                 child: ElevatedButton(
                   onPressed: () {
                     // Xử lý cập nhật thông tin ở đây
+                    taiKhoanController.updateThongTinPhuHuynh();
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF0B2384), // Màu nền
+                    backgroundColor: const Color(0xFF0B2384), // Màu nền
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
                     child: Text(
                       "Cập nhật thông tin",
                       style: TextStyle(color: Colors.white, fontSize: 18),
@@ -111,7 +103,7 @@ class _ThongTinHocSinhPhuHuynhScreenState extends State<ThongTinHocSinhPhuHuynhS
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
             ],
           ),
         ),
@@ -122,7 +114,7 @@ class _ThongTinHocSinhPhuHuynhScreenState extends State<ThongTinHocSinhPhuHuynhS
   Widget _buildEditableField(String label, TextEditingController controller, String hint) {
     return Container(
       decoration: BoxDecoration(
-        color: Color(0xFFF6E8E8),
+        color: const Color(0xFFF6E8E8),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Padding(
@@ -130,10 +122,10 @@ class _ThongTinHocSinhPhuHuynhScreenState extends State<ThongTinHocSinhPhuHuynhS
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(label, style: TextStyle(fontSize: 16)),
+            Text(label, style: const TextStyle(fontSize: 16)),
             TextField(
               controller: controller,
-              style: TextStyle(fontSize: 14),
+              style: const TextStyle(fontSize: 14),
               decoration: InputDecoration(
                 hintText: hint,
                 border: InputBorder.none,
@@ -149,7 +141,7 @@ class _ThongTinHocSinhPhuHuynhScreenState extends State<ThongTinHocSinhPhuHuynhS
     return Container(
       width: double.infinity, // Đặt chiều rộng bằng với thiết bị
       decoration: BoxDecoration(
-        color: Color(0xFFE4E4E4), // Màu nền khác cho thông tin học sinh
+        color: const Color(0xFFE4E4E4), // Màu nền khác cho thông tin học sinh
         borderRadius: BorderRadius.circular(8),
       ),
       child: Padding(
@@ -157,10 +149,10 @@ class _ThongTinHocSinhPhuHuynhScreenState extends State<ThongTinHocSinhPhuHuynhS
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(label, style: TextStyle(fontSize: 16)),
+            Text(label, style: const TextStyle(fontSize: 16)),
             Text(
               value,
-              style: TextStyle(fontSize: 14),
+              style: const TextStyle(fontSize: 14),
             ),
           ],
         ),

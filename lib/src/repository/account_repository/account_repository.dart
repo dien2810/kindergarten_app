@@ -64,6 +64,4 @@ class AccountRepository extends GetxController {
     await _db.collection("account").doc(account.id).update(account.toJson());
   }
 
-
-
 }
