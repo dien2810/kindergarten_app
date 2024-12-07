@@ -72,8 +72,8 @@ class TeacherThongBaoScreen extends StatelessWidget {
             },
             body: TabBarView(
               children: [
-                TeacherDanhSachChungWidget(controller: controller),
-                TeacherDanhSachDaTaoWidget(controller: controller),
+                TeacherDanhSachChungWidget(controller : controller),
+                TeacherDanhSachDaTaoWidget(controller: controller,),
               ],
             ),
           ),

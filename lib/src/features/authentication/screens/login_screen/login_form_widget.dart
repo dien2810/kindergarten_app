@@ -54,7 +54,7 @@ class LoginFormWidget extends StatelessWidget {
                 ),
                 SizedBox(height: t15Size),
                 TextFormField(
-                  controller: controller.email,
+                  controller: controller.username,
                   decoration: InputDecoration(
                       hintStyle:
                         const TextStyle(fontSize: 16, fontFamily: "Outfit"),
