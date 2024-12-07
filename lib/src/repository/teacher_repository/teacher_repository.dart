@@ -16,7 +16,6 @@ class TeacherRepository extends GetxController{
       return null; // Document không tồn tại hoặc không có dữ liệu
     }
   }
-
   // Thêm một document vào Firestore
   Future<void> addTeacher(TeacherModel teacher) async {
     try {
@@ -61,7 +60,4 @@ class TeacherRepository extends GetxController{
       return "Error fetching teacher ID"; // Trả về chuỗi thông báo lỗi
     }
   }
-
-
-
 }

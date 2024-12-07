@@ -6,13 +6,12 @@ import '../../../models/news/newModel.dart';
 
 class NewsDetailScreen extends StatelessWidget {
   final NewsModel news;
-
   const NewsDetailScreen({Key? key, required this.news}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
-      appBar:const GuardianAppBarWithTitleWidget(title: "CHI TIẾT TIN TỨC"),
+      appBar:const GuardianAppBarWithTitleWidget(title: "Chi tiết tin tức"),
       body: SingleChildScrollView(
       child:  Padding(
         padding: const EdgeInsets.all(16.0),
@@ -23,35 +22,34 @@ class NewsDetailScreen extends StatelessWidget {
               news.title,
               style: FlutterFlowTheme.of(context).title1,
             ),
-            const SizedBox(height: 10),
-            Text(
-              'Ngày tạo: ${news.createDate}',
-              style: FlutterFlowTheme.of(context).subtitle2,
-            ),
             const SizedBox(height: 20),
-            ...news.subtitles.map((subtitle) => Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+            ...news.subtitles.map((subtitle) {
+              String content = subtitle.content.replaceAll('\\n', '\n');
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 10.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      subtitle.subtitleName == 'none' ? '' : subtitle.subtitleName,
+                      style: FlutterFlowTheme.of(context).title3,
+                    ),
+                    const SizedBox(height: 5),
+                    RichText(
+                      text: TextSpan(
+                        children: content.split('\n').map((part) {
+                          return TextSpan(
+                            text: part + '\n',
+                            style: const TextStyle(fontSize: 16, color: Colors.black),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }).toList(),
 
-                  Text(
-
-                    subtitle.subtitleName == 'none' ? '': subtitle.subtitleName,
-                    style: FlutterFlowTheme.of(context).title3,
-                  ),
-                  const SizedBox(height: 5),
-                  Text(subtitle.content),
-                ],
-              ),
-            )).toList(),
-            const SizedBox(height: 20),
-            if (news.fileUrl != 'none')
-            const SizedBox(height: 20),
-            Text(
-              'Tác giả: ${news.authorID}',
-              style: FlutterFlowTheme.of(context).subtitle2,
-            ),
           ],
         ),
       ),
@@ -59,3 +57,8 @@ class NewsDetailScreen extends StatelessWidget {
     );
   }
 }
+
+
+
+
+

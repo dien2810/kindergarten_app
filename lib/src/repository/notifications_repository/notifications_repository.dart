@@ -65,4 +65,40 @@ class NotificationsRepository extends GetxController{
       print("Failed to update Notifications: $e");
     }
   }
+
+  Future<List<NotificationsModel>> getNotificationsByTeacherID(String teacherId) async {
+    try {
+
+      final snapshot = await _notificationsCollection
+          .where('sent_by' , isEqualTo : teacherId)
+          .get();
+
+      final notifications = snapshot.docs.map((doc) {
+        final notification = NotificationsModel.fromMap(doc.data() as Map<String,dynamic>);
+        notification.id=doc.id;
+        return notification;
+      }).toList();
+      return notifications;
+    } catch (e) {
+      print('Lỗi khi lấy thông báo: $e');
+      return [];
+    }
+  }
+  Future<List<NotificationsModel>> getNotificationsForTeacher(String teacherId) async {
+    try {
+      final snapshot = await _notificationsCollection
+          .where('recipients', arrayContains: teacherId)
+          .get();
+
+      // Chuyển đổi từng document thành NotificationsModel
+      final notifications = snapshot.docs.map((doc) {
+        return NotificationsModel.fromMap(doc.data() as Map<String,dynamic>);
+      }).toList();
+      return notifications;
+    } catch (e) {
+      print('Lỗi khi lấy thông báo: $e');
+      return [];
+    }
+  }
+
 }
