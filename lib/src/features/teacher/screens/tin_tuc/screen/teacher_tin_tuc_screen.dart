@@ -1,22 +1,50 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/constants/image_strings.dart';
 import '../../../../../common_widgets/app_bar_widgets/teacher_app_bar_with_title_header_1.dart';
 import '../../../../../constants/sizes.dart';
+import '../../../../student/models/news/newModel.dart';
+import '../../../../student/screens/homepage/pages/new_detail_screen.dart';
 import '../../../controllers/tin_tuc/teacher_tin_tuc_controller.dart';
 
-class TeacherTinTucScreen extends StatelessWidget {
+class TeacherTinTucScreen extends StatefulWidget {
   const TeacherTinTucScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final teacherTinTucController = Get.put(TeacherTinTucController());
+  State<TeacherTinTucScreen> createState() => _TeacherTinTucScreenState();
+}
 
+class _TeacherTinTucScreenState extends State<TeacherTinTucScreen> {
+  final TeacherTinTucController teacherTinTucController =
+      Get.put(TeacherTinTucController());
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_scrollListener);
+  }
+
+  void _scrollListener() {
+    if (_scrollController.position.pixels ==
+        _scrollController.position.maxScrollExtent) {
+      teacherTinTucController.loadMoreNews();
+    }
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return DefaultTabController(
       length: 4,
       child: Scaffold(
         appBar: const TeacherAppBarWithTitleHeader1(),
-
         body: Column(
           children: [
             const TabBar(
@@ -28,26 +56,32 @@ class TeacherTinTucScreen extends StatelessWidget {
               ],
             ),
             Expanded(
-              child: TabBarView(
-                children: [
-                  _buildNewsList(
-                      teacherTinTucController.getNewsList(),
-                      "Tin tức",
-                      teacherTinTucController),
-                  _buildNewsList(
-                      teacherTinTucController.getTuyenSinhList(),
-                      "Tuyển sinh",
-                      teacherTinTucController),
-                  _buildNewsList(
-                      teacherTinTucController.getGiaoDucList(),
-                      "Giáo dục",
-                      teacherTinTucController),
-                  _buildNewsList(
-                      teacherTinTucController.getGioiThieuList(),
-                      "Giới thiệu trường",
-                      teacherTinTucController),
-                ],
-              ),
+              child: Obx(() {
+                if (teacherTinTucController.loading.value) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                return TabBarView(
+                  children: [
+                    _buildNewsList(teacherTinTucController.allNews, 'Tin tức'),
+                    _buildNewsList(
+                        teacherTinTucController.allNews
+                            .where((news) => news.type == 'tuyển sinh')
+                            .toList(),
+                        'Tuyển sinh'),
+                    _buildNewsList(
+                        teacherTinTucController.allNews
+                            .where(
+                                (news) => news.type == 'chương trình giáo dục')
+                            .toList(),
+                        'Chương trình giáo dục'),
+                    _buildNewsList(
+                        teacherTinTucController.allNews
+                            .where((news) => news.type == 'giới thiệu trường')
+                            .toList(),
+                        'Giới thiệu trường'),
+                  ],
+                );
+              }),
             ),
           ],
         ),
@@ -55,15 +89,10 @@ class TeacherTinTucScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildNewsList(
-      List<Map<String, dynamic>> newsList,
-      String title,
-      TeacherTinTucController controller,
-      ) {
-    if (newsList.isEmpty) {
+  Widget _buildNewsList(List<NewsModel> filteredNews, String title) {
+    if (filteredNews.isEmpty) {
       return const Center(child: Text('Không có tin tức.'));
     }
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -81,10 +110,10 @@ class TeacherTinTucScreen extends StatelessWidget {
         ),
         Expanded(
           child: ListView.builder(
-            itemCount: newsList.length,
+            controller: _scrollController,
+            itemCount: filteredNews.length,
             itemBuilder: (context, index) {
-              final newsItem = newsList[index];
-              return _buildNewsCard(newsItem, controller);
+              return _buildNewsCard(filteredNews[index]);
             },
           ),
         ),
@@ -92,15 +121,10 @@ class TeacherTinTucScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildNewsCard(
-      Map<String, dynamic> news,
-      TeacherTinTucController controller,
-      ) {
-    String newsId = news['news_id'] ?? '';
-
+  Widget _buildNewsCard(NewsModel news) {
     return InkWell(
       onTap: () {
-        print('News ID: $newsId');
+        Get.to(NewsDetailScreen(news: news));
       },
       child: Card(
         elevation: 4,
@@ -109,13 +133,6 @@ class TeacherTinTucScreen extends StatelessWidget {
         ),
         child: Column(
           children: [
-            // Thay thế bằng ảnh mặc định
-            const Image(
-              image: AssetImage(tTinTucImageItem1), // Đường dẫn đến ảnh mặc định
-              height: 200,
-              width: double.infinity,
-              fit: BoxFit.cover,
-            ),
             Container(
               width: double.infinity,
               decoration: const BoxDecoration(
@@ -130,7 +147,7 @@ class TeacherTinTucScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    news['title'] ?? 'Chưa có tiêu đề',
+                    news.title ?? 'Chưa có tiêu đề',
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -138,7 +155,7 @@ class TeacherTinTucScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    news['createDate'] ?? 'Ngày không xác định',
+                    news.createDate ?? 'Ngày không xác định',
                     style: const TextStyle(color: Colors.grey),
                   ),
                 ],

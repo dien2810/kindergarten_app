@@ -46,9 +46,9 @@ class AccountRepository extends GetxController {
     return documents.isNotEmpty;
   }
   //Step 2: Fetch a User or All Users
-  Future<AccountModel> getAccountDetails(String email) async {
+  Future<AccountModel> getAccountDetails(String username) async {
     final snapshot =
-      await _db.collection("account").where("username", isEqualTo: email).get();
+      await _db.collection("account").where("username", isEqualTo: username).get();
     final accountData = snapshot.docs.map((e) => AccountModel.fromSnapShot(e)).single;
     return accountData;
   }

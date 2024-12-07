@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class TeacherModel {
-  final String? id;
+  late final String? id;
   final String avatar;
   final String dateOfBirth;
   final String firstName;

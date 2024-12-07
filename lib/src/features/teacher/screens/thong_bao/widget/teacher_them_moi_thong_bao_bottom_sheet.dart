@@ -86,7 +86,7 @@ class _TeacherThemMoiThongBaoBottomSheetState
                     _selectedPriority = newValue!;
                   });
                 },
-                items: <String>['Thấp', 'Trung bình', 'Cao']
+                items: <String>['high', 'normal', 'low']
                     .map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,

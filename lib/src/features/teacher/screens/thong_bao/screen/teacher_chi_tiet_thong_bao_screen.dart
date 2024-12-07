@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kindergarten_app/src/features/teacher/controllers/thong_bao/teacher_thong_bao_controller.dart';
+import 'package:kindergarten_app/src/repository/teacher_repository/teacher_repository.dart';
 import '../../../../../common_widgets/app_bar_widgets/teacher_app_bar_with_title_header_2.dart';
 import '../../../../../constants/text_strings.dart';
 
@@ -10,6 +12,8 @@ class TeacherChiTietThongBaoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TeacherThongBaoController controller = TeacherThongBaoController();
+
     return Scaffold(
       appBar: const TeacherAppBarWithTitleHeader2(title: tChiTietThongBao),
       body: Padding(
@@ -46,12 +50,44 @@ class TeacherChiTietThongBaoScreen extends StatelessWidget {
                           fontSize: 15,
                         ),
                       ),
-                      Text(
-                        notification.sentBy,
-                        style: const TextStyle(
-                          color: Colors.black87,
-                          fontSize: 15,
-                        ),
+                      FutureBuilder<String>(
+                        future: controller.getTeacherName(notification.sentBy),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const Text(
+                              'Loading...',
+                              style: TextStyle(
+                                color: Colors.black87,
+                                fontSize: 15,
+                              ),
+                            );
+                          } else if (snapshot.hasError) {
+                            return Text(
+                              'Error: ${snapshot.error}',
+                              style: const TextStyle(
+                                color: Colors.red,
+                                fontSize: 15,
+                              ),
+                            );
+                          } else if (snapshot.hasData) {
+                            return Text(
+                              snapshot.data!,
+                              style: const TextStyle(
+                                color: Colors.black87,
+                                fontSize: 15,
+                              ),
+                            );
+                          } else {
+                            return const Text(
+                              'No data available',
+                              style: TextStyle(
+                                color: Colors.black87,
+                                fontSize: 15,
+                              ),
+                            );
+                          }
+                        },
                       ),
                     ],
                   ),
@@ -64,22 +100,21 @@ class TeacherChiTietThongBaoScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Text(
-              notification.message.replaceAll("\\n", "\n"), // Thay thế ký hiệu \n bằng dòng mới
+              notification.message.replaceAll("\\n", "\n"),
               style: const TextStyle(fontSize: 16, color: Colors.black87),
-              textAlign: TextAlign.justify, // Căn đều nội dung
-              softWrap: true, // Cho phép tự động xuống dòng
+              textAlign: TextAlign.justify,
+              softWrap: true,
             ),
-            const Spacer(), // Tạo khoảng trống để đẩy nút xuống cuối
-            Center( // Căn giữa nút
+            const Spacer(),
+            Center(
               child: Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: SizedBox(
                   width: 300,
                   child: ElevatedButton(
                     onPressed: () {
-                      // Navigate back with a post-frame callback
                       WidgetsBinding.instance.addPostFrameCallback((_) {
-                        Get.back(); // Quay lại màn hình trước
+                        Get.back();
                       });
                     },
                     style: ElevatedButton.styleFrom(
