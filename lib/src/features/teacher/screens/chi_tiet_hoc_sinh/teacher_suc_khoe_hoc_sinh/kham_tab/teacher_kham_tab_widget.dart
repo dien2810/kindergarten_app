@@ -103,36 +103,36 @@ class TeacherKhamTabWidget extends StatelessWidget {
           SizedBox(height: t10Size),
           TeacherChuanDoanWidget(controller: controller),
           SizedBox(height: t15Size),
-          Align(
-            alignment: Alignment.center,
-            child: SizedBox(
-              width: t10Size*20,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: const Color(0xFF380543),
-                  borderRadius: BorderRadius.circular(t50Size),
-                ),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.transparent
-                  ),
-                  onPressed: () {
-                    controller.updateHealthInformation();
-                  },
-                  child: const Text(
-                    tCapNhat,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        fontFamily: "Outfit",
-                        color: tWhiteColor
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(height: t15Size,)
+          // Align(
+          //   alignment: Alignment.center,
+          //   child: SizedBox(
+          //     width: t10Size*20,
+          //     child: Container(
+          //       decoration: BoxDecoration(
+          //         color: const Color(0xFF380543),
+          //         borderRadius: BorderRadius.circular(t50Size),
+          //       ),
+          //       child: ElevatedButton(
+          //         style: ElevatedButton.styleFrom(
+          //             backgroundColor: Colors.transparent
+          //         ),
+          //         onPressed: () {
+          //           controller.updateHealthInformation();
+          //         },
+          //         child: const Text(
+          //           tCapNhat,
+          //           style: TextStyle(
+          //               fontWeight: FontWeight.bold,
+          //               fontSize: 20,
+          //               fontFamily: "Outfit",
+          //               color: tWhiteColor
+          //           ),
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
+          // SizedBox(height: t15Size,)
         ],
       ),
     );

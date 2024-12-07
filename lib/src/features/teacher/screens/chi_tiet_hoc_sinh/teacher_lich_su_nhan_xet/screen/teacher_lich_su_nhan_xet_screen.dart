@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:kindergarten_app/src/common_widgets/app_bar_widgets/teacher_app_bar_with_title_header_2.dart';
 import 'package:kindergarten_app/src/constants/text_strings.dart';
 import 'package:kindergarten_app/src/features/teacher/controllers/nhan_xet_hoc_sinh/teacher_nhan_xet_hoc_sinh_controller.dart';
-import 'package:kindergarten_app/src/features/teacher/controllers/thong_tin_hoc_sinh/teacher_thong_tin_hoc_sinh_controller.dart';
 import 'package:kindergarten_app/src/features/teacher/screens/chi_tiet_hoc_sinh/teacher_lich_su_nhan_xet/widget/teacher_them_moi_nhan_xet_bottom_sheet.dart';
 import '../widget/teacher_nhan_xet_card_widget.dart';
 
@@ -18,7 +17,7 @@ class TeacherLichSuNhanXetScreen extends StatelessWidget {
   final Function(String) onAddComment; // Callback để thêm nhận xét
 
   const TeacherLichSuNhanXetScreen({
-    Key? key,
+    super.key,
     required this.studentName,
     required this.imageUrl,
     required this.guardianID,
@@ -27,7 +26,7 @@ class TeacherLichSuNhanXetScreen extends StatelessWidget {
     required this.teacherID,
     required this.studentID,
     required this.onAddComment,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

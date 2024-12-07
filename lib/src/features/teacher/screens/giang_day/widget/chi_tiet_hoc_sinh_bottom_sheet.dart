@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:kindergarten_app/src/common_widgets/cloud_image/circle_cloud_image_widget.dart';
 import 'package:kindergarten_app/src/features/teacher/controllers/nhan_xet_hoc_sinh/teacher_nhan_xet_hoc_sinh_controller.dart';
 import 'package:kindergarten_app/src/features/teacher/routes/hoc_duong_route.dart';
+import 'package:kindergarten_app/src/features/teacher/screens/chi_tiet_hoc_sinh/teacher_chuyen_can/screen/teacher_chuyen_can_hoc_sinh_screen.dart';
 import 'package:kindergarten_app/src/features/teacher/screens/chi_tiet_hoc_sinh/teacher_suc_khoe_hoc_sinh/teacher_thong_tin_suc_khoe_hoc_sinh_screen.dart';
 
 import '../../../../student/models/student/student_model.dart';
@@ -216,7 +217,6 @@ class _ChiTietHocSinhBottomSheetState extends State<ChiTietHocSinhBottomSheet> {
                   ],
                 ),
               ),
-
             ],
           ),
         ),
@@ -234,6 +234,24 @@ class _ChiTietHocSinhBottomSheetState extends State<ChiTietHocSinhBottomSheet> {
         }
         else if (route == HocDuongRoutes.thongTinSucKhoe){
           Get.to(()=>TeacherThongTinSucKhoeHocSinhScreen(student: student));
+        }
+        // else if (route == HocDuongRoutes.lichSuNhanXet){
+        //   Get.to(()=>TeacherLichSuNhanXetScreen(
+        //     studentName: student.studentProfile.name,
+        //     imageUrl: student.studentDocument.image,
+        //     guardianID: student.studentProfile.studentID,
+        //     replyContent: comment.replyContent,
+        //     commentDate: comment.commentDate,
+        //     teacherID: comment.teacherID,
+        //     studentID: student.studentProfile.studentID,
+        //     onAddComment: comment.
+        //   ));
+        // }
+        else if (route == HocDuongRoutes.chuyenCan){
+          Get.to(()=>TeacherChuyenCanHocSinhScreen(
+            studentName: student.studentProfile.name,
+            imageUrl: student.studentDocument.image,
+          ));
         }
 
         // Get.toNamed(route, arguments: data); // Truyền dữ liệu bằng GetX

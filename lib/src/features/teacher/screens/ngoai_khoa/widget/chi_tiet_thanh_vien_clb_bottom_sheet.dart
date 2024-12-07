@@ -14,11 +14,11 @@ class ChiTietThanhVienClbBottomSheet extends StatefulWidget {
   final CommentData commentData;
 
   const ChiTietThanhVienClbBottomSheet({
-    Key? key,
+    super.key,
     required this.studentName,
     required this.imageUrl,
     required this.commentData,
-  }) : super(key: key);
+  });
 
   @override
   State<ChiTietThanhVienClbBottomSheet> createState() =>

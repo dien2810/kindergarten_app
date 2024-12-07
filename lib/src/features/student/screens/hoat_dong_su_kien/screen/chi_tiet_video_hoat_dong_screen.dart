@@ -8,7 +8,7 @@ import 'package:permission_handler/permission_handler.dart';
 class VideoScreen extends StatefulWidget {
   final String videoLink;
 
-  VideoScreen({required this.videoLink});
+  VideoScreen({this.videoLink='https://www.youtube.com/watch?v=X0wxLzTe5rE'});
 
   @override
   _VideoScreenState createState() => _VideoScreenState();

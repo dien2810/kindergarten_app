@@ -59,7 +59,6 @@ class TeacherDiemDanhScreen extends StatelessWidget {
                                 selectedDay: teacherDiemDanhController.selectedDay.value,
                                 changeDay: (value) {
                                   teacherDiemDanhController.selectedDay.value = value; // Cập nhật ngày đã chọn
-                                  teacherDiemDanhController.fetchAttendanceForDay(value);
                                 },
                                 backgroundColor: const Color(0xFFCAF0F8),
                                 selectedDigitBackgroundColor: const Color(0xFFBA83DE),
@@ -86,7 +85,6 @@ class TeacherDiemDanhScreen extends StatelessWidget {
                                 children: attendanceData.map<Widget>((studentData) {
                                   String studentName = studentData['name'];
                                   var attendanceDetails = studentData['attendanceDetails'];
-
                                   return TeacherDiemDanhCardWidget(
                                     studentName: studentName,
                                     attendanceDetails: attendanceDetails,

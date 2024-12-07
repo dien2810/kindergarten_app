@@ -15,7 +15,6 @@ class AbsentModel {
 
   // Tạo từ Map
   factory AbsentModel.fromMap(Map<String, dynamic> map) {
-    print(map['dates']);
     return AbsentModel(
       amountOfDayOff: map['amountOfDayOff'] ?? 0,
       semesterID: map['semesterID'] ?? '',

@@ -34,6 +34,7 @@ class TeacherThongTinSucKhoeHocSinhScreen extends StatelessWidget {
         else if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
         }
+
         return DefaultTabController(
           length: 2,
           child: Scaffold(

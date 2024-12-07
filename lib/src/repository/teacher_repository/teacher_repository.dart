@@ -6,12 +6,25 @@ import '../../features/student/models/teacher/teacher_model.dart';
 class TeacherRepository extends GetxController{
   static TeacherRepository get instance => Get.find();
   final CollectionReference _teacherCollection = FirebaseFirestore.instance.collection('teacher');
+
+  Future<TeacherModel?> getTeacherByTeacherId(String teacherId) async {
+    final snapshot = await _teacherCollection
+        .where('teacherID', isEqualTo: teacherId).limit(1)
+        .get();
+    if (snapshot.docs.isNotEmpty) {
+      final data = snapshot.docs[0].data() as Map<String,dynamic>;
+      final teacher = TeacherModel.fromMap(data)..id=snapshot.docs[0].id; // Chuyển đổi dữ liệu thành model
+      return teacher;
+    } else {
+      return null; // Document không tồn tại hoặc không có dữ liệu
+    }
+  }
   // Thêm một document mới vào Firestore
   Future<TeacherModel?> getTeacherById(String teacherId) async {
     final snapshot = await _teacherCollection.doc(teacherId).get();
     if (snapshot.exists && snapshot.data() != null) {
       final data = snapshot.data() as Map<String, dynamic>;
-      return TeacherModel.fromMap(data); // Chuyển đổi dữ liệu thành model
+      return TeacherModel.fromMap(data)..id=snapshot.id; // Chuyển đổi dữ liệu thành model
     } else {
       return null; // Document không tồn tại hoặc không có dữ liệu
     }

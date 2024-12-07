@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kindergarten_app/src/features/teacher/screens/ngoai_khoa/screen/teacher_chi_tiet_cau_lac_bo_screen.dart';
 import '../../../../../common_widgets/app_bar_widgets/teacher_app_bar_with_title_header_2.dart';
 import '../../../../../constants/text_strings.dart';
 import '../../../controllers/ngoai_khoa/enroll_club_controller.dart';
@@ -82,9 +83,9 @@ class _TeacherDanhSachThanhVienClbScreenState
                       runSpacing: 5.0,
                       alignment: WrapAlignment.center,
                       children: enrolledController.members.map((member) {
+                        print(member.id);
                         return ThanhVienWidget(
-                          imageUrl: member.studentDocument.image,
-                          tenHocSinh: member.studentProfile.name,
+                          student: member,
                         );
                       }).toList(),
                     ),
@@ -108,6 +109,9 @@ class _TeacherDanhSachThanhVienClbScreenState
                         ),
                         onPressed: () {
                           // Thêm logic chi tiết câu lạc bộ nếu cần
+                          Get.to(()=>TeacherChiTietCauLacBoScreen(
+                              clubId: widget.clubID
+                          ));
                         },
                         child: const Text(
                           'CHI TIẾT CLB',

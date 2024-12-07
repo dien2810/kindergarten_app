@@ -13,6 +13,7 @@ import 'comment_detail_screen.dart';
 class CommentsScreen extends StatelessWidget {
   final CommentsController commentsController = Get.put(CommentsController());
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

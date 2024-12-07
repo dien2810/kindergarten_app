@@ -7,9 +7,9 @@ class TeacherCauLacBoCardWidget extends StatelessWidget {
   final ClubModel club; // Nhận club model
 
   const TeacherCauLacBoCardWidget({
-    Key? key,
+    super.key,
     required this.club,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

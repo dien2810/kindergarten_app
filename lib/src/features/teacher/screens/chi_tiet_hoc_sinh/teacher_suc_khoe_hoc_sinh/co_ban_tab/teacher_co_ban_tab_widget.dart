@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kindergarten_app/src/features/teacher/screens/chi_tiet_hoc_sinh/teacher_suc_khoe_hoc_sinh/co_ban_tab/teacher_ghi_chu_widget.dart';
 import '../../../../../../common_widgets/information_input_widget/information_input_widget.dart';
-import '../../../../../../constants/colors.dart';
 import '../../../../../../constants/sizes.dart';
 import '../../../../../../constants/text_strings.dart';
 import '../../../../controllers/suc_khoe_hoc_sinh/teacher_suc_khoe_hoc_sinh_controller.dart';
@@ -68,36 +67,36 @@ class TeacherCoBanTabWidget extends StatelessWidget {
           // Thêm phần ghi chú
           TeacherGhiChuWidget(controller: controller),
           SizedBox(height: t10Size),
-          Align(
-            alignment: Alignment.center,
-            child: SizedBox(
-              width: t10Size*20,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: const Color(0xFF380543),
-                  borderRadius: BorderRadius.circular(t50Size),
-                ),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.transparent
-                  ),
-                  onPressed: () {
-                    controller.updateHealthInformation();
-                  },
-                  child: const Text(
-                    tCapNhat,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        fontFamily: "Outfit",
-                        color: tWhiteColor
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(height: t20Size ,)
+          // Align(
+          //   alignment: Alignment.center,
+          //   child: SizedBox(
+          //     width: t10Size*20,
+          //     child: Container(
+          //       decoration: BoxDecoration(
+          //         color: const Color(0xFF380543),
+          //         borderRadius: BorderRadius.circular(t50Size),
+          //       ),
+          //       child: ElevatedButton(
+          //         style: ElevatedButton.styleFrom(
+          //             backgroundColor: Colors.transparent
+          //         ),
+          //         onPressed: () {
+          //           controller.updateHealthInformation();
+          //         },
+          //         child: const Text(
+          //           tCapNhat,
+          //           style: TextStyle(
+          //               fontWeight: FontWeight.bold,
+          //               fontSize: 20,
+          //               fontFamily: "Outfit",
+          //               color: tWhiteColor
+          //           ),
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
+          // SizedBox(height: t20Size ,)
         ],
       ),
     );

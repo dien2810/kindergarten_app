@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class TeacherXinNghiCardWidget extends StatelessWidget {
   final Map<String, dynamic> dayOffData;
 
-  const TeacherXinNghiCardWidget({Key? key, required this.dayOffData}) : super(key: key);
+  const TeacherXinNghiCardWidget({super.key, required this.dayOffData});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class TeacherXinNghiCardWidget extends StatelessWidget {
           children: [
             Text(
               "Người tạo đơn : Phụ huynh em $studentId",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16), // Tăng kích thước font
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16), // Tăng kích thước font
             ),
             const SizedBox(height: 8), // Khoảng cách giữa các dòng
             Text(

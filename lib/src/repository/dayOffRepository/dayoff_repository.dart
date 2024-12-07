@@ -52,4 +52,24 @@ class DayoffRepository extends GetxController{
       print("Failed to update Dayoff: $e");
     }
   }
+
+  Future<List<DayoffModel>> fetchListDayOff(String userId) async {
+    try {
+      // Truy vấn tài liệu của người dùng từ Firestore
+      final snapshot = await _dayoffCollection.doc(userId).get();
+      if (!snapshot.exists) {
+        // Nếu không có dữ liệu, trả về danh sách rỗng
+        return [];
+      }
+      // Lấy dữ liệu và chuyển thành DayOffModel
+      final data = snapshot.data() as Map<String, dynamic>;
+      final dayOffModel = DayoffModel.fromMap(data);
+
+      return [dayOffModel];
+    } catch (e) {
+      print('Lỗi khi truy vấn danh sách ngày nghỉ: $e');
+      return [];
+    }
+  }
+
 }

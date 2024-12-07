@@ -24,13 +24,13 @@ class TeacherTinTucController extends GetxController {
       "authorID": "teacher_id_1"
     },
     "news_id_2": {
-      "title": "Vingroup Tổ Chức Chuỗi Hoạt Động Thiện Nguyện, Kêu Gọi Cộng Đồng Chung Tay Tái Thiết Cuộc Sống Sau Bão Lũ",
+      "title": "Hoa Sen Tổ Chức Chuỗi Hoạt Động Thiện Nguyện, Kêu Gọi Cộng Đồng Chung Tay Tái Thiết Cuộc Sống Sau Bão Lũ",
       "createDate": "2024-09-23T11:32",
       "subtitles": [
         {
           "subtitleName": "none",
           "imageUrl": "link_anh_baiviet_https",
-          "content": "Hà Nội - ngày 19/09/2024, Tập đoàn Vingroup, các công ty thành viên và đối tác đồng hành công bố tổ chức chuỗi hoạt động thiện nguyện “Gieo mầm Thiện tâm”."
+          "content": "Hà Nội - ngày 19/09/2024, Tập đoàn Hoa Sen, các công ty thành viên và đối tác đồng hành công bố tổ chức chuỗi hoạt động thiện nguyện “Gieo mầm Thiện tâm”."
         },
         {
           "subtitleName": "none",
@@ -59,13 +59,13 @@ class TeacherTinTucController extends GetxController {
       "authorID": "teacher_id_1"
     },
     "news_id_4": {
-      "title": "Trung Thu Tại Mầm Non Vinschool: Ngày Hội Gắn Kết Văn Hóa Truyền Thống Dân Tộc",
+      "title": "Trung Thu Tại Mầm Non Golden Star: Ngày Hội Gắn Kết Văn Hóa Truyền Thống Dân Tộc",
       "createDate": "2024-09-17T11:32",
       "subtitles": [
         {
           "subtitleName": "none",
           "imageUrl": "link_anh_baiviet_https",
-          "content": "Tại Vinschool, Tết Trung thu không chỉ là dịp để các bé vui chơi, mà còn là cơ hội để khám phá và hiểu sâu hơn về văn hóa truyền thống của dân tộc và các nước châu Á. "
+          "content": "Tại Golden Star, Tết Trung thu không chỉ là dịp để các bé vui chơi, mà còn là cơ hội để khám phá và hiểu sâu hơn về văn hóa truyền thống của dân tộc và các nước châu Á. "
         },
         {
           "subtitleName": "hello",
@@ -75,7 +75,7 @@ class TeacherTinTucController extends GetxController {
         {
           "subtitleName": "Khơi dậy tình yêu văn hóa truyền thống qua các hoạt động thủ công",
           "imageUrl": "none",
-          "content": "Các hoạt động thủ công trong dịp Trung thu tại Mầm non Vinschool giúp trẻ tiếp xúc một cách gần gũi hơn với văn hóa truyền thống."
+          "content": "Các hoạt động thủ công trong dịp Trung thu tại Mầm non Golden Star giúp trẻ tiếp xúc một cách gần gũi hơn với văn hóa truyền thống."
         },
         {
           "subtitleName": "none",
@@ -99,7 +99,7 @@ class TeacherTinTucController extends GetxController {
       "authorID": "teacher_id_1"
     },
     "news_id_5": {
-      "title": "Giới thiệu Vinschool",
+      "title": "Giới thiệu Golden Star",
       "createDate": "2024-09-17T11:32",
       "subtitles": [
         {
@@ -124,12 +124,12 @@ class TeacherTinTucController extends GetxController {
         }
       ],
       "fileUrl": "link_lien_ket_file_txt_baiviet_none",
-      "tags": ["Vinschool", "giáo dục"],
+      "tags": ["Golden Star", "giáo dục"],
       "type": "giới thiệu trường",
       "authorID": "teacher_id_2"
     },
     "news_id_6": {
-      "title": "Q&A - Góc giải đáp thắc mắc về Câu lạc bộ Ngoại khóa Vinschool",
+      "title": "Q&A - Góc giải đáp thắc mắc về Câu lạc bộ Ngoại khóa Golden Star",
       "createDate": "2024-09-17T11:50",
       "subtitles": [
         {
@@ -138,7 +138,7 @@ class TeacherTinTucController extends GetxController {
           "content": "Bên cạnh giờ học chính khóa, việc khuyến khích học sinh tích cực tham gia hoạt động ngoại khoá mở ra những cơ hội tuyệt vời để các con khai phá năng lực tiềm ẩn, mở rộng kiến thức thực tế và phát triển kỹ năng đa dạng trong nhiều lĩnh vực."
         },
         {
-          "subtitleName": "1. Vì sao tôi nên cho con tham gia các CLB ngoại khoá Vinschool?",
+          "subtitleName": "1. Vì sao tôi nên cho con tham gia các CLB ngoại khoá Golden Star?",
           "imageUrl": "none",
           "content": "Khi tham gia vào các hoạt động ngoại khoá được tổ chức bài bản và chuyên nghiệp, học sinh có cơ hội:"
         },
@@ -184,7 +184,7 @@ class TeacherTinTucController extends GetxController {
       "authorID": "teacher_id_2"
     },
     "news_id_8": {
-      "title": "Khám Phá Một Giờ Học Tiếng Anh Của Trẻ 18 - 24 Tháng Mầm Non Vinschool",
+      "title": "Khám Phá Một Giờ Học Tiếng Anh Của Trẻ 18 - 24 Tháng Mầm Non Golden Star",
       "createDate": "2024-10-29T11:39",
       "subtitles": [
         {
@@ -205,7 +205,7 @@ class TeacherTinTucController extends GetxController {
         {
           "subtitleName": "Phát triển ngôn ngữ qua ngữ cảnh cụ thể",
           "imageUrl": "none",
-          "content": "Phương pháp dạy dựa trên ngữ cảnh giúp trẻ hiểu rõ hơn về cách sử dụng ngôn ngữ trong các tình huống thực tiễn. Thay vì chỉ đơn thuần lặp lại các từ vựng, giáo viên tại Vinschool khéo léo lồng ghép các từ mới vào những hoạt động cụ thể"
+          "content": "Phương pháp dạy dựa trên ngữ cảnh giúp trẻ hiểu rõ hơn về cách sử dụng ngôn ngữ trong các tình huống thực tiễn. Thay vì chỉ đơn thuần lặp lại các từ vựng, giáo viên tại Golden Star khéo léo lồng ghép các từ mới vào những hoạt động cụ thể"
         },
         {
           "subtitleName": "none",

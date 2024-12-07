@@ -10,13 +10,6 @@ class TeacherChuyenCanHocSinhController extends GetxController {
   var countWithoutPermission = 0.obs;
   var countLate = 0.obs;
 
-  @override
-  void onInit() {
-    super.onInit();
-    // Load the data here (for example, you can fetch from a service)
-    fetchAbsentData();
-  }
-
   void fetchAbsentData() {
     // Simulate fetching JSON data
     final Map<String, dynamic> jsonData = {

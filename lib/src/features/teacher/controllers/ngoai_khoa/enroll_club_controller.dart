@@ -27,7 +27,7 @@ class EnrolledClubController extends GetxController {
               final studentQuerySnapshot = await _firestore.collection('student').doc(enrolledClub.id).get();
               if (studentQuerySnapshot.exists) {
                 if (!members.any((m) => m.id == studentQuerySnapshot.id)) {
-                  members.add(StudentModel.fromMap(studentQuerySnapshot.data() as Map<String, dynamic>));
+                  members.add(StudentModel.fromMap(studentQuerySnapshot.data() as Map<String, dynamic>)..id=studentQuerySnapshot.id);
                 }
               }
             }

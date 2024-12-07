@@ -24,12 +24,14 @@ class LoginController extends GetxController{
       //await authRepo.loginWithEmailAndPassword(emailText,password.text.trim());
       final account = await accountRepo.getAccountDetails(emailText);
       print("-------------------Role: "+account.role.toString());
-      if (role.value == Role.guardian && account.role == Role.guardian) {
+      if (role.value == Role.guardian && account.role == Role.guardian
+        && account.password == password.text) {
         accountRepo.userId = account.username;
         accountRepo.fullName = account.fullname;
 
         Get.offAll(() => const GuardianNavigationMenu());
-      } else if (role.value == Role.teacher && account.role == Role.teacher) {
+      } else if (role.value == Role.teacher && account.role == Role.teacher
+          && account.password == password.text) {
         accountRepo.userId = account.username;
         accountRepo.fullName = account.fullname;
         Get.offAll(() => const TeacherNavigationMenu());

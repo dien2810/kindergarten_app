@@ -26,8 +26,8 @@ class Helper extends GetxController{
     String dayOfWeek = daysOfWeek[dateTime.weekday % 7];
 
     // Định dạng ngày/tháng/năm
-    String formattedDate = "${dateTime.day.toString().padLeft(2, '0')}/"
-        "${dateTime.month.toString().padLeft(2, '0')}/"
+    String formattedDate = "${dateTime.day.toString().padLeft(2, '0')}-"
+        "${dateTime.month.toString().padLeft(2, '0')}-"
         "${dateTime.year}";
 
     return "$dayOfWeek - $formattedDate";
@@ -113,13 +113,13 @@ class Helper extends GetxController{
     final day = dateTime.day.toString().padLeft(2, '0'); // Đảm bảo có 2 chữ số
     final month = dateTime.month.toString().padLeft(2, '0'); // Đảm bảo có 2 chữ số
     final year = dateTime.year.toString();
-    return "$day/$month/$year";
+    return "$day-$month-$year";
   }
 
   static int calculateDaysDifference(String date1, String date2) {
     try {
       // Định dạng ngày tháng (có thể chỉnh sửa theo định dạng đầu vào)
-      final DateFormat formatter = DateFormat('dd/MM/yyyy');
+      final DateFormat formatter = DateFormat('dd-MM-yyyy');
 
       // Chuyển đổi String sang DateTime
       final DateTime parsedDate1 = formatter.parse(date1);

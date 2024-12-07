@@ -26,7 +26,6 @@ class _TeacherNgoaiKhoaScreenState extends State<TeacherNgoaiKhoaScreen> {
       clubController.selectedSemester.value = 'semester_id_1';
       _fetchClubs('semester_id_1');
     });
-
   }
 
   void _fetchClubs(String semesterID) {

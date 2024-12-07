@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/common_widgets/cloud_image/circle_cloud_image_widget.dart';
 import 'package:kindergarten_app/src/features/teacher/controllers/nhan_xet_hoc_sinh/teacher_nhan_xet_hoc_sinh_controller.dart';
-import 'package:kindergarten_app/src/features/teacher/screens/ngoai_khoa/widget/chi_tiet_thanh_vien_clb_bottom_sheet.dart';
+import 'package:kindergarten_app/src/features/teacher/screens/giang_day/widget/chi_tiet_hoc_sinh_bottom_sheet.dart';
+
+import '../../../../student/models/student/student_model.dart';
 
 class ThanhVienWidget extends StatelessWidget {
   // Khai báo tham số cho constructor
-  final String imageUrl;
-  final String tenHocSinh;
+  final StudentModel student;
 
   const ThanhVienWidget({
     super.key,
-    required this.imageUrl,
-    required this.tenHocSinh,
+    required this.student,
   });
 
   @override
@@ -29,9 +29,8 @@ class ThanhVienWidget extends StatelessWidget {
           ),
           builder: (BuildContext context) {
             // Pass both imageUrl and tenHocSinh to ChiTietHocSinhBottomSheet
-            return ChiTietThanhVienClbBottomSheet(
-              studentName: tenHocSinh,
-              imageUrl: imageUrl,
+            return ChiTietHocSinhBottomSheet(
+              student: student,
               commentData: nhanxetController.commentData, // Use data from the controller
             );
           },
@@ -61,7 +60,7 @@ class ThanhVienWidget extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 16.0),
                 child: CircleAvatar(
                   radius: 60, // Kích thước hình tròn
-                  child: CircleCloudImageWidget(publicId: imageUrl)
+                  child: CircleCloudImageWidget(publicId: student.studentDocument.image)
                   // backgroundImage: AssetImage(imageUrl), // Ảnh từ asset
                 ),
               ),
@@ -79,7 +78,9 @@ class ThanhVienWidget extends StatelessWidget {
                 ), // Bo góc cho khung tên
               ),
               child: Text(
-                tenHocSinh.length > 70 ? '${tenHocSinh.substring(0, 70)}...' : tenHocSinh,
+                student.studentProfile.name.length > 70
+                    ? '${student.studentProfile.name.substring(0, 70)}...'
+                    : student.studentProfile.name,
                 style: const TextStyle(
                   fontSize: 16.0, // Font chữ lớn hơn
                   fontWeight: FontWeight.bold, // Đậm hơn để rõ nét

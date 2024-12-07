@@ -3,15 +3,31 @@ import 'package:kindergarten_app/src/features/student/models/classes/classes_mod
 import 'package:kindergarten_app/src/features/student/models/student/student_model.dart';
 import 'package:kindergarten_app/src/repository/account_repository/account_repository.dart';
 import 'package:kindergarten_app/src/repository/classes_repository/classes_respository.dart';
+import 'package:kindergarten_app/src/repository/semester_repos/semester_teacher_repository.dart';
 import 'package:kindergarten_app/src/repository/student_repository/student_repository.dart';
+
+import '../../../student/models/semester/semester_model.dart';
 
 class TeacherGiangDayController extends GetxController{
   static TeacherGiangDayController get instance => Get.find();
+
+  RxString selectedAcademicYear = ''.obs;
+  late SemesterModel semester;
 
   final _classesRepo = Get.put(ClassesRepository());
   ClassesModel? classModel;
 
   Rx<DateTime> selectedDay = DateTime.now().obs;
+
+  Future<List<SemesterModel>> getSemesterList() async{
+    final semesterRepo = Get.put(SemesterRepository());
+    return await semesterRepo.getSemesterList();
+  }
+
+  Future<SemesterModel?> getSemesterData() async{
+    final semesterRepo = Get.put(SemesterRepository());
+    return await semesterRepo.getSemesterById();
+  }
 
   Future<ClassesModel?> getClassesData() async{
     final accountRepo = Get.put(AccountRepository());

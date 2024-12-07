@@ -6,12 +6,11 @@ import 'package:kindergarten_app/src/features/teacher/controllers/xin_nghi/teach
 import 'package:kindergarten_app/src/features/teacher/screens/xin_nghi/screen/teacher_chi_tiet_don_xin_nghi_screen.dart';
 import 'package:weekly_date_picker/weekly_date_picker.dart';
 import '../../../../../constants/sizes.dart';
-import '../../../controllers/teacher_navigation_menu_controller.dart';
-import '../../teacher_navigation_menu/teacher_bottom_navigation_bar_widget.dart';
 import '../widget/teacher_xin_nghi_card_widget.dart';
 
 class TeacherDanhSachXinNghiScreen extends StatelessWidget {
-  const TeacherDanhSachXinNghiScreen({super.key});
+  const TeacherDanhSachXinNghiScreen({super.key, required this.studentIds});
+  final List<String> studentIds;
 
   @override
   Widget build(BuildContext context) {

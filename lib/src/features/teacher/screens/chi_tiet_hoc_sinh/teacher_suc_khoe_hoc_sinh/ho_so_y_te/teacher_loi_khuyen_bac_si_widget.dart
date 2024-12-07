@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kindergarten_app/src/constants/image_strings.dart';
-import 'package:kindergarten_app/src/constants/sizes.dart';
 import 'package:kindergarten_app/src/constants/text_strings.dart';
-import 'package:kindergarten_app/src/features/teacher/screens/chi_tiet_hoc_sinh/teacher_suc_khoe_hoc_sinh/ho_so_y_te/teacher_chinh_sua_loi_khuyen_bottom_sheet.dart';
 
 import '../../../../controllers/suc_khoe_hoc_sinh/teacher_suc_khoe_hoc_sinh_controller.dart';
 
@@ -98,46 +96,46 @@ class TeacherLoiKhuyenBacSiWidget extends StatelessWidget {
 
             ],
           ),
-          SizedBox(height: t30Size,),
-          Align(
-            alignment: Alignment.center,
-            child: SizedBox(
-              width: t10Size*20,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: const Color(0xFF380543),
-                  borderRadius: BorderRadius.circular(t50Size),
-                ),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.transparent,
-                  ),
-                  onPressed: () {
-                    // Khi nút được nhấn, mở bottom sheet chỉnh sửa lời khuyên bác sĩ
-                    showModalBottomSheet(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return const TeacherChinhSuaLoiKhuyenBottomSheet(); // Gọi bottom sheet
-                      },
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.vertical(top: Radius.circular(20)), // Tùy chỉnh bo góc trên
-                      ),
-                      isScrollControlled: true, // Cho phép cuộn nội dung nếu cần
-                    );
-                  },
-                  child: const Text(
-                    "Cập nhật", // Thay bằng `tCapNhat` nếu đã định nghĩa biến này
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      fontFamily: "Outfit",
-                      color: Colors.white, // Thay tWhiteColor nếu bạn có biến này
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
+          // SizedBox(height: t30Size,),
+          // Align(
+          //   alignment: Alignment.center,
+          //   child: SizedBox(
+          //     width: t10Size*20,
+          //     child: Container(
+          //       decoration: BoxDecoration(
+          //         color: const Color(0xFF380543),
+          //         borderRadius: BorderRadius.circular(t50Size),
+          //       ),
+          //       child: ElevatedButton(
+          //         style: ElevatedButton.styleFrom(
+          //           backgroundColor: Colors.transparent,
+          //         ),
+          //         onPressed: () {
+          //           // Khi nút được nhấn, mở bottom sheet chỉnh sửa lời khuyên bác sĩ
+          //           showModalBottomSheet(
+          //             context: context,
+          //             builder: (BuildContext context) {
+          //               return const TeacherChinhSuaLoiKhuyenBottomSheet(); // Gọi bottom sheet
+          //             },
+          //             shape: const RoundedRectangleBorder(
+          //               borderRadius: BorderRadius.vertical(top: Radius.circular(20)), // Tùy chỉnh bo góc trên
+          //             ),
+          //             isScrollControlled: true, // Cho phép cuộn nội dung nếu cần
+          //           );
+          //         },
+          //         child: const Text(
+          //           "Cập nhật", // Thay bằng `tCapNhat` nếu đã định nghĩa biến này
+          //           style: TextStyle(
+          //             fontWeight: FontWeight.bold,
+          //             fontSize: 20,
+          //             fontFamily: "Outfit",
+          //             color: Colors.white, // Thay tWhiteColor nếu bạn có biến này
+          //           ),
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

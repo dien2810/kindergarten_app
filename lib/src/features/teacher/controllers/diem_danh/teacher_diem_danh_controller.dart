@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/repository/absent_repository/absent_repository.dart';
+import 'package:kindergarten_app/src/repository/student_repository/student_repository.dart';
 
 
 class AttendanceRecord {
@@ -7,12 +8,14 @@ class AttendanceRecord {
   final String semesterID;
   final int amountOfDayOff;
   final Map<String, AttendanceDetail> dates;
+  final String studentName;
 
   AttendanceRecord({
     required this.studentId,
     required this.semesterID,
     required this.amountOfDayOff,
     required this.dates,
+    required this.studentName
   });
 }
 
@@ -46,15 +49,17 @@ class TeacherDiemDanhController extends GetxController {
   void loadAbsent() {
     super.onInit();
     getAbsentData();
-    //fetchAttendanceData(); // Gọi hàm để tải dữ liệu điểm danh
   }
 
   Future<void> getAbsentData() async {
     final absentRepo = Get.put(AbsentRepository());
+    final studentRepo = Get.put(StudentRepository());
     for (var studentId in studentIds){
       final absent = await absentRepo.getAbsentByStudentId(studentId);
+      final student = await studentRepo.getStudentByStudentId(studentId);
       attendanceRecords[studentId] = AttendanceRecord(
         studentId: studentId,
+        studentName: student!.studentProfile.name,
         semesterID: absent!.semesterID, // Ép kiểu String
         amountOfDayOff: absent.amountOfDayOff, // Ép kiểu int
         dates: (absent.dates).map(
@@ -78,90 +83,6 @@ class TeacherDiemDanhController extends GetxController {
     }
   }
 
-  // Hàm để tải dữ liệu điểm danh
-  void fetchAttendanceData() {
-    // Dữ liệu mẫu từ bảng absent
-    var sampleData = {
-      "student_id_1": {
-        "semesterID": "semester_id_1",
-        "amountOfDayOff": 3,
-        "dates": {
-          "30/11/2024": {
-            "period": [
-              "routine_id_1",
-              "routine_id_2",
-              "routine_id_3",
-              "routine_id_4",
-              "routine_id_5",
-              "routine_id_6"
-            ],
-            "absentTime": "1 ngày",
-            "absentStatus": "vắng có phép",
-            "checkinImage": "",
-            "checkoutImage": "linkanhcheckout",
-            "checkinTime": "7:00",
-            "checkoutTime": "7:30",
-            "reason": "Bị ốm"
-          },
-          // Thêm các ngày khác
-        }
-      },
-      "student_id_2": {
-        "semesterID": "semester_id_1",
-        "amountOfDayOff": 1,
-        "dates": {
-          "30/11/2024": {
-            "period": ["routine_id_4"],
-            "absentTime": "1 ngày",
-            "absentStatus": "vắng không phép",
-            "checkinImage": "linkanhcheckin",
-            "checkoutImage": "",
-            "checkinTime": "7:00",
-            "checkoutTime": "17:30",
-            "reason": "Bị ốm"
-          },
-          "29/11/2024": {
-            "period": ["routine_id_4"],
-            "absentTime": "1 ngày",
-            "absentStatus": "vắng không phép",
-            "checkinImage": "linkanhcheckin",
-            "checkoutImage": "linkanhcheckout",
-            "checkinTime": "7:00",
-            "checkoutTime": "7:30",
-            "reason": "Bị ốm"
-          },
-          // Thêm các ngày khác
-        }
-      }
-    };
-
-    // Chuyển đổi dữ liệu mẫu thành AttendanceRecord
-    sampleData.forEach((studentId, data) {
-      attendanceRecords[studentId] = AttendanceRecord(
-        studentId: studentId,
-        semesterID: data['semesterID'] as String, // Ép kiểu String
-        amountOfDayOff: data['amountOfDayOff'] as int, // Ép kiểu int
-        dates: (data['dates'] as Map<String, dynamic>).map(
-              (date, details) {
-            return MapEntry(
-              date,
-              AttendanceDetail(
-                period: List<String>.from(details['period'] ?? []),
-                absentTime: details['absentTime'] as String, // Ép kiểu String
-                absentStatus: details['absentStatus'] as String, // Ép kiểu String
-                checkinImage: details['checkinImage'] as String, // Ép kiểu String
-                checkoutImage: details['checkoutImage'] as String, // Ép kiểu String
-                checkinTime: details['checkinTime'] as String, // Ép kiểu String
-                checkoutTime: details['checkoutTime'] as String, // Ép kiểu String
-                reason: details['reason'] as String, // Ép kiểu String
-              ),
-            );
-          },
-        ),
-      );
-    });
-  }
-
   // Hàm để lấy dữ liệu điểm danh cho ngày đã chọn
   List<Map<String, dynamic>> fetchAttendanceForDay(DateTime selectedDay) {
     List<Map<String, dynamic>> result = [];
@@ -171,7 +92,7 @@ class TeacherDiemDanhController extends GetxController {
         AttendanceDetail details = record.dates[formatDate(selectedDay)]!; // Lấy AttendanceDetail
         result.add({
           'studentId': studentId,
-          'name': 'Học sinh $studentId', // Thay thế bằng tên thực tế
+          'name': 'Học sinh ${record.studentName}', // Thay thế bằng tên thực tế
           'attendanceDetails': {
             'period': details.period,
             'absentTime': details.absentTime,
@@ -190,6 +111,6 @@ class TeacherDiemDanhController extends GetxController {
 
   // Hàm định dạng ngày
   String formatDate(DateTime date) {
-    return '${date.day.toString().padLeft(2, '0')}/${date.month.toString().padLeft(2, '0')}/${date.year}';
+    return '${date.day.toString().padLeft(2, '0')}-${date.month.toString().padLeft(2, '0')}-${date.year}';
   }
 }

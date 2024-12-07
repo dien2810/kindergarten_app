@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:get/get.dart';
+import 'package:kindergarten_app/src/utils/helper_controller/helper_controller.dart';
 import '../../../../student/models/menu/menu_item.dart';
 import '../../../controllers/thuc_don/teacher_thuc_don_controller.dart';
 class TeacherThemMonAnBottomSheet extends StatefulWidget {
-  const TeacherThemMonAnBottomSheet({Key? key}) : super(key: key);
+  const TeacherThemMonAnBottomSheet({super.key});
 
   @override
   State<TeacherThemMonAnBottomSheet> createState() => _ThemMonAnBottomSheetState();
@@ -26,7 +27,7 @@ class _ThemMonAnBottomSheetState extends State<TeacherThemMonAnBottomSheet> {
   @override
   void initState() {
     super.initState();
-    _ngayTaoMonController.text = DateFormat('dd-MM-yyyy').format(_selectedDate);
+    _ngayTaoMonController.text = DateFormat('dd/MM/yyyy').format(_selectedDate);
   }
 
   Future<void> _pickDate() async {
@@ -39,7 +40,7 @@ class _ThemMonAnBottomSheetState extends State<TeacherThemMonAnBottomSheet> {
     if (picked != null && picked != _selectedDate) {
       setState(() {
         _selectedDate = picked;
-        _ngayTaoMonController.text = DateFormat('dd-MM-yyyy').format(_selectedDate);
+        _ngayTaoMonController.text = DateFormat('dd/MM/yyyy').format(_selectedDate);
       });
     }
   }
@@ -64,9 +65,10 @@ class _ThemMonAnBottomSheetState extends State<TeacherThemMonAnBottomSheet> {
       return;
     }
 
-    String imageUrl = _selectedImage!.path; // URL hình ảnh sau khi upload, ở đây giả sử là path cục bộ
+    // String imageUrl = _selectedImage!.path; // URL hình ảnh sau khi upload, ở đây giả sử là path cục bộ
     List<String> ingredients = _nguyenLieuController.text.split(',').map((e) => e.trim()).toList();
     Map<String, String> note = {};
+    String imageUrl = await Helper.uploadImage(_selectedImage!);
 
     MenuItem menuItem = MenuItem(
       image: imageUrl,

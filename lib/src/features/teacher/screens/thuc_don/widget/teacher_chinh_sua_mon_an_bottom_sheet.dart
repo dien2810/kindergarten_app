@@ -135,10 +135,13 @@ class _ChinhSuaMonAnBottomSheetState extends State<TeacherChinhSuaMonAnBottomShe
               const SizedBox(height: 16),
               DropdownButtonFormField<String>(
                 value: _selectedThucDon,
-                items: _thucDonOptions.map((thucDon) => DropdownMenuItem(
-                  value: thucDon,
-                  child: Text(thucDon, style: const TextStyle(fontSize: 16)),
-                )).toList(),
+                items: _thucDonOptions.map((thucDon) {
+                  print(thucDon);
+                  return DropdownMenuItem(
+                    value: thucDon,
+                    child: Text(thucDon, style: const TextStyle(fontSize: 16)),
+                  );
+                }).toList(),
                 onChanged: (value) {
                   setState(() {
                     _selectedThucDon = value!;
@@ -187,7 +190,6 @@ class _ChinhSuaMonAnBottomSheetState extends State<TeacherChinhSuaMonAnBottomShe
               ElevatedButton(
                 onPressed: () {
                   _saveMenuItem();
-
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF9317AE), // Màu tím

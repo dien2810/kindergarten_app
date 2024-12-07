@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/common_widgets/app_bar_widgets/teacher_app_bar_with_title_header_2.dart';
+import 'package:kindergarten_app/src/common_widgets/cloud_image/circle_cloud_image_widget.dart';
 import 'package:kindergarten_app/src/constants/sizes.dart';
 import 'package:kindergarten_app/src/constants/text_strings.dart';
 import 'package:kindergarten_app/src/features/teacher/screens/chi_tiet_hoc_sinh/teacher_chuyen_can/widget/teacher_chuyen_can_card_widget.dart';
@@ -178,9 +179,10 @@ class TeacherChuyenCanHocSinhScreen extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 60,
-            backgroundImage: imageUrl.startsWith('http')
-                ? NetworkImage(imageUrl)
-                : AssetImage(imageUrl) as ImageProvider,
+            child: CircleCloudImageWidget(publicId: imageUrl)
+            // backgroundImage: imageUrl.startsWith('http')
+            //     ? NetworkImage(imageUrl)
+            //     : AssetImage(imageUrl) as ImageProvider,
           ),
           const SizedBox(height: 8),
           Text(

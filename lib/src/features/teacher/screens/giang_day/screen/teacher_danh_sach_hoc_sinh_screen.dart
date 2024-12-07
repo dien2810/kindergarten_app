@@ -93,7 +93,7 @@ class _TeacherDanhSachHocSinhScreenState
                       // Chuyển sang trang "Điểm Danh"
                       final teacherDiemDanhController = Get.put(TeacherDiemDanhController());
                       teacherDiemDanhController.studentIds = giangDayController.classModel!.students;
-                      Get.to(const TeacherDiemDanhScreen());
+                      Get.to(()=> const TeacherDiemDanhScreen());
                     },
                     child: const Text(
                       'ĐIỂM DANH',
@@ -109,7 +109,7 @@ class _TeacherDanhSachHocSinhScreenState
                     onPressed: () {
                       final diemDanhController = Get.put(TeacherDiemDanhController());
                       diemDanhController.studentIds = giangDayController.classModel!.students;
-                      Get.to(const TeacherDanhSachXinNghiScreen());
+                      Get.to(TeacherDanhSachXinNghiScreen(studentIds: giangDayController.classModel!.students));
                     },
                     child: const Text(
                       'XIN NGHỈ',
