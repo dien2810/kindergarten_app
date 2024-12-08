@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
-
 import '../screen/teacher_xem_chi_tiet_anh_screen.dart';
 
 class TeacherDiemDanhCardWidget extends StatefulWidget {
   final String studentName;
   final Map<String, dynamic> attendanceDetails;
+  final Function(Map<String, dynamic>) onUpdate; // Callback để truyền dữ liệu cập nhật
 
   const TeacherDiemDanhCardWidget({
     super.key,
     required this.studentName,
     required this.attendanceDetails,
+    required this.onUpdate,
   });
 
   @override
@@ -24,22 +25,23 @@ class _TeacherDiemDanhCardWidgetState extends State<TeacherDiemDanhCardWidget> {
   late String checkinTime;
   late String checkoutTime;
 
-  File? checkinImage;
-  File? checkoutImage;
+  String? checkinImage;
+  String? checkoutImage;
 
   final ImagePicker _picker = ImagePicker();
 
+  final List<String> statuses = ['vắng không phép', 'vắng có phép', 'đúng giờ', 'đến muộn'];
   @override
   void initState() {
     super.initState();
-    selectedStatus = widget.attendanceDetails['absentStatus'] ?? 'N/A';
+    selectedStatus = widget.attendanceDetails['absentStatus'] ?? statuses[0];
     checkinTime = widget.attendanceDetails['checkinTime'] ?? 'N/A';
     checkoutTime = widget.attendanceDetails['checkoutTime'] ?? 'N/A';
     checkinImage = widget.attendanceDetails['checkinImage'] != null && widget.attendanceDetails['checkinImage'] != ""
-        ? File(widget.attendanceDetails['checkinImage'])
+        ? (widget.attendanceDetails['checkinImage'])
         : null;
     checkoutImage = widget.attendanceDetails['checkoutImage'] != null && widget.attendanceDetails['checkoutImage'] != ""
-        ? File(widget.attendanceDetails['checkoutImage'])
+        ? (widget.attendanceDetails['checkoutImage'])
         : null;
   }
 
@@ -100,11 +102,12 @@ class _TeacherDiemDanhCardWidgetState extends State<TeacherDiemDanhCardWidget> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Thời gian đã được cập nhật!')),
       );
+      _updateAttendanceDetails(); // Cập nhật dữ liệu sau khi thay đổi thời gian
     }
   }
 
   Future<void> _pickImage(bool isCheckin) async {
-    final pickedImage = await showDialog<File?>(
+    final pickedImage = await showDialog<String?>(
       context: context,
       builder: (context) {
         return SimpleDialog(
@@ -113,7 +116,7 @@ class _TeacherDiemDanhCardWidgetState extends State<TeacherDiemDanhCardWidget> {
             SimpleDialogOption(
               onPressed: () async {
                 final image = await _picker.getImage(source: ImageSource.camera);
-                Navigator.pop(context, image != null ? File(image.path) : null);
+                Navigator.pop(context, image != null ? (image.path) : null);
               },
               child: const Text('Chụp ảnh từ Camera'),
             ),
@@ -139,16 +142,29 @@ class _TeacherDiemDanhCardWidgetState extends State<TeacherDiemDanhCardWidget> {
       setState(() {
         if (isCheckin) {
           checkinImage = pickedImage;
-          widget.attendanceDetails['checkinImage'] = pickedImage.path; // Cập nhật giá trị trong attendanceDetails
+          widget.attendanceDetails['checkinImage'] = pickedImage; // Cập nhật giá trị trong attendanceDetails
         } else {
           checkoutImage = pickedImage;
-          widget.attendanceDetails['checkoutImage'] = pickedImage.path; // Cập nhật giá trị trong attendanceDetails
+          widget.attendanceDetails['checkoutImage'] = pickedImage; // Cập nhật giá trị trong attendanceDetails
         }
       });
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(isCheckin ? 'Ảnh Check-in đã được thêm!' : 'Ảnh Check-out đã được thêm!')),
       );
+      _updateAttendanceDetails(); // Cập nhật dữ liệu sau khi thêm ảnh
     }
+  }
+
+  void _updateAttendanceDetails() {
+    // Cập nhật dữ liệu vào attendanceDetails
+    widget.attendanceDetails['absentStatus'] = selectedStatus;
+    widget.attendanceDetails['checkinTime'] = checkinTime;
+    widget.attendanceDetails['checkoutTime'] = checkoutTime;
+    widget.attendanceDetails['checkinImage'] = checkinImage;
+    widget.attendanceDetails['checkoutImage'] = checkoutImage;
+
+    // Gọi callback để truyền dữ liệu cập nhật về widget cha
+    widget.onUpdate(widget.attendanceDetails);
   }
 
   @override
@@ -169,7 +185,7 @@ class _TeacherDiemDanhCardWidgetState extends State<TeacherDiemDanhCardWidget> {
               style: const TextStyle(
                 fontSize: 20, // Tăng kích thước font chữ
                 fontWeight: FontWeight.bold,
-                color : Colors.purple,
+                color: Colors.purple,
               ),
             ),
             const SizedBox(height: 8),
@@ -180,19 +196,17 @@ class _TeacherDiemDanhCardWidgetState extends State<TeacherDiemDanhCardWidget> {
                 const Text("Trạng thái:", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
                 DropdownButton<String>(
                   value: selectedStatus,
-                  dropdownColor: _getStatusColor(selectedStatus).withOpacity(0.1), // Màu nền dropdown
-                  style: TextStyle(color: _getStatusColor(selectedStatus)), // Màu chữ
-                  items: <String>['vắng không phép', 'vắng có phép', 'đúng giờ', 'đến muộn']
-                      .map<DropdownMenuItem<String>>((String value) {
+                  items: statuses.map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
-                      child: Text(value, style: const TextStyle(fontSize: 16)), // Giảm kích thước font chữ
+                      child: Text(value),
                     );
                   }).toList(),
                   onChanged: (String? newValue) {
                     setState(() {
                       selectedStatus = newValue!;
                     });
+                    _updateAttendanceDetails(); // Cập nhật dữ liệu khi thay đổi trạng thái
                   },
                 ),
               ],
@@ -203,28 +217,27 @@ class _TeacherDiemDanhCardWidgetState extends State<TeacherDiemDanhCardWidget> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    // Chuyển đến trang xem ảnh check-in
-                    // Chuyển đến trang xem ảnh check-in
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => TeacherXemChiTietAnhScreen(
-                          image: checkinImage,
-                          title: "Chi tiết Ảnh Check-in",
+                    if (checkinImage != null) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => TeacherXemChiTietAnhScreen(
+                            image: checkinImage!,
+                            title: "Chi tiết Ảnh Check-in",
+                          ),
                         ),
-                      ),
-                    );
+                      );
+                    }
                   },
                   child: const Text(
                     "Ảnh Check-in",
                     style: TextStyle(color: Colors.green, fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ),
-                if (checkinImage == null || checkinImage!.path.isEmpty) // Hiển thị nút thêm ảnh chỉ khi không có ảnh
+                if (checkinImage == null || checkinImage!.isEmpty) // Hiển thị nút thêm ảnh chỉ khi không có ảnh
                   ElevatedButton(
                     onPressed: () {
                       _pickImage(true); // Thêm ảnh check-in
-                      // tiếp theo là lấy cái ảnh này bỏ vào lưu trên data online (xử lý be)
                     },
                     child: const Text("Thêm ảnh checkin"),
                   ),
@@ -237,27 +250,27 @@ class _TeacherDiemDanhCardWidgetState extends State<TeacherDiemDanhCardWidget> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    // Chuyển đến trang xem ảnh check-out
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => TeacherXemChiTietAnhScreen(
-                          image: checkoutImage,
-                          title: "Chi tiết Ảnh Check-out",
+                    if (checkoutImage != null) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => TeacherXemChiTietAnhScreen(
+                            image: checkoutImage!,
+                            title: "Chi tiết Ảnh Check-out",
+                          ),
                         ),
-                      ),
-                    );
+                      );
+                    }
                   },
                   child: const Text(
                     "Ảnh Check-out",
-                    style: TextStyle(color: Colors.red, fontSize: 16, fontWeight:FontWeight.bold  ),
+                    style: TextStyle(color: Colors.red, fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ),
-                if (checkoutImage == null || checkoutImage!.path.isEmpty) // Hiển thị nút thêm ảnh chỉ khi không có ảnh
+                if (checkoutImage == null || checkoutImage!.isEmpty) // Hiển thị nút thêm ảnh chỉ khi không có ảnh
                   ElevatedButton(
                     onPressed: () {
                       _pickImage(false); // Thêm ảnh check-out
-                      // tiếp theo là lấy cái ảnh này bỏ vào lưu trên data online (xử lý be)
                     },
                     child: const Text("Thêm ảnh checkout"),
                   ),

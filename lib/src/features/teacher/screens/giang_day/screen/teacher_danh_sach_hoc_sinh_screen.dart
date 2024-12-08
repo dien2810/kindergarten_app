@@ -93,7 +93,7 @@ class _TeacherDanhSachHocSinhScreenState
                       // Chuyển sang trang "Điểm Danh"
                       final teacherDiemDanhController = Get.put(TeacherDiemDanhController());
                       teacherDiemDanhController.studentIds = giangDayController.classModel!.students;
-                      Get.to(()=> const TeacherDiemDanhScreen());
+                      Get.to(()=>  TeacherDiemDanhScreen());
                     },
                     child: const Text(
                       'ĐIỂM DANH',

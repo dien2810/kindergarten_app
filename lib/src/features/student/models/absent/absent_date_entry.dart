@@ -46,4 +46,8 @@ class AbsentDateEntry {
       'reason': reason,
     };
   }
+  @override
+  String toString() {
+    return 'AbsentDateEntry(period: $period, absentTime: $absentTime, absentStatus: $absentStatus, checkinImage: $checkinImage, checkoutImage: $checkoutImage, checkinTime: $checkinTime, checkoutTime: $checkoutTime, reason: $reason)';
+  }
 }

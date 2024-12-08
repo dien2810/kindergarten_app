@@ -85,9 +85,17 @@ class TeacherDiemDanhScreen extends StatelessWidget {
                                 children: attendanceData.map<Widget>((studentData) {
                                   String studentName = studentData['name'];
                                   var attendanceDetails = studentData['attendanceDetails'];
+
+                                  // Chuyển đổi attendanceDetails thành AttendanceDetail
+                                  AttendanceDetail updatedAttendanceDetail = AttendanceDetail.fromMap(attendanceDetails);
+
                                   return TeacherDiemDanhCardWidget(
                                     studentName: studentName,
-                                    attendanceDetails: attendanceDetails,
+                                    attendanceDetails: updatedAttendanceDetail.toMap(), // Chuyển đổi lại thành Map nếu cần
+                                    onUpdate: (updatedDetails) {
+                                      // Cập nhật thông tin từ card vào controller
+                                      teacherDiemDanhController.attendanceRecords[studentData['studentId']]?.dates[teacherDiemDanhController.formatDate(teacherDiemDanhController.selectedDay.value)] = AttendanceDetail.fromMap(updatedDetails);
+                                    },
                                   );
                                 }).toList(),
                               );
@@ -118,7 +126,8 @@ class TeacherDiemDanhScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(vertical: 16.0), // Kích thước nút
                         ),
                         onPressed: () {
-                          // Logic lưu
+                          // Gọi hàm cập nhật trong controller
+                          teacherDiemDanhController.updateAttendance();
                         },
                         child: const Text(
                           "Lưu",

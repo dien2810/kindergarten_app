@@ -15,7 +15,7 @@ class AttendanceRecord {
     required this.semesterID,
     required this.amountOfDayOff,
     required this.dates,
-    required this.studentName
+    required this.studentName,
   });
 }
 
@@ -39,8 +39,40 @@ class AttendanceDetail {
     required this.checkoutTime,
     required this.reason,
   });
-}
 
+  factory AttendanceDetail.fromMap(Map<String, dynamic> map) {
+    // Danh sách trạng thái hợp lệ
+    final List<String> statuses = ['vắng không phép', 'vắng có phép', 'đúng giờ', 'đến muộn'];
+
+    // Kiểm tra và gán giá trị hợp lệ cho absentStatus
+    String absentStatus = map['absentStatus'] ?? '';
+    if (!statuses.contains(absentStatus)) {
+      absentStatus = statuses[0]; // Gán giá trị mặc định nếu không hợp lệ
+    }
+
+    return AttendanceDetail(
+      period: List<String>.from(map['period'] ?? []), // Giữ lại period từ dữ liệu
+      absentTime: map['absentTime'] ?? '', // Lấy absentTime từ dữ liệu
+      absentStatus: absentStatus, // Sử dụng giá trị đã kiểm tra
+      checkinTime: map['checkinTime'] ?? '',
+      checkoutTime: map['checkoutTime'] ?? '',
+      checkinImage: map['checkinImage'] ?? '',
+      checkoutImage: map['checkoutImage'] ?? '',
+      reason: map['reason'] ?? '', // Giữ lại reason từ dữ liệu
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'absentStatus': absentStatus,
+      'checkinTime': checkinTime,
+      'checkoutTime': checkoutTime,
+      'checkinImage': checkinImage,
+      'checkoutImage': checkoutImage,
+      // Không bao gồm period và reason trong Map khi cập nhật
+    };
+  }
+}
 class TeacherDiemDanhController extends GetxController {
   var selectedDay = DateTime.now().obs; // Ngày được chọn
   var attendanceRecords = <String, AttendanceRecord>{}.obs; // Dữ liệu điểm danh
@@ -112,5 +144,44 @@ class TeacherDiemDanhController extends GetxController {
   // Hàm định dạng ngày
   String formatDate(DateTime date) {
     return '${date.day.toString().padLeft(2, '0')}-${date.month.toString().padLeft(2, '0')}-${date.year}';
+  }
+
+
+  Future<void> updateAttendance() async {
+    final absentRepo = Get.put(AbsentRepository());
+    final selectedDate = formatDate(selectedDay.value);
+
+    // Lặp qua tất cả các bản ghi điểm danh
+    for (var studentId in attendanceRecords.keys) {
+      final record = attendanceRecords[studentId];
+      if (record != null && record.dates.containsKey(selectedDate)) {
+        // Lấy thông tin chi tiết về trạng thái vắng
+        final details = record.dates[selectedDate];
+
+        // Tạo bản ghi mới để lưu vào Firebase
+        final updatedAbsentData = {
+          'semesterID': record.semesterID,
+          'amountOfDayOff': record.amountOfDayOff,
+          'dates': {
+            selectedDate: {
+              'period': details!.period,
+              'absentTime': details.absentTime,
+              'absentStatus': details.absentStatus,
+              'checkinImage': details.checkinImage,
+              'checkoutImage': details.checkoutImage,
+              'checkinTime': details.checkinTime,
+              'checkoutTime': details.checkoutTime,
+              'reason': details.reason,
+            }
+          }
+        };
+
+        // Cập nhật dữ liệu vào Firebase
+        await absentRepo.updateAbsentByStudentId(studentId, updatedAbsentData);
+      }
+    }
+
+    // Thông báo cập nhật thành công
+    Get.snackbar('Thông báo', 'Đã cập nhật trạng thái xin nghỉ thành công.');
   }
 }
