@@ -58,4 +58,13 @@ class AbsentRepository extends GetxController{
       print("Failed to update Absent: $e");
     }
   }
+
+  Future<void> updateAbsentByStudentId(String studentId, Map<String, dynamic> updatedData) async {
+    try {
+      await _absentCollection.doc(studentId).update(updatedData);
+      print("Absent updated successfully for student ID: $studentId");
+    } catch (e) {
+      print("Failed to update absent for student ID: $studentId - Error: $e");
+    }
+  }
 }

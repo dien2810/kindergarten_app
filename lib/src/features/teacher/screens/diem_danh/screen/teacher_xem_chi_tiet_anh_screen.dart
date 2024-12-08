@@ -4,10 +4,11 @@ import 'package:kindergarten_app/src/features/teacher/screens/diem_danh/screen/t
 import 'dart:io';
 
 import '../../../../../common_widgets/app_bar_widgets/teacher_app_bar_with_color_and_title.dart';
+import '../../../../../common_widgets/cloud_image/cloud_image_widget.dart';
 import '../../../controllers/teacher_navigation_menu_controller.dart';
 
 class TeacherXemChiTietAnhScreen extends StatelessWidget {
-  final File? image; // Ảnh được truyền vào
+  final String  image; // Ảnh được truyền vào
   final String title; // Tiêu đề để hiển thị
 
   const TeacherXemChiTietAnhScreen({
@@ -27,8 +28,6 @@ class TeacherXemChiTietAnhScreen extends StatelessWidget {
               child: _buildImageView(),
             ),
           ),
-          // Nút Quay lại
-          // Nút Quay lại
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0), // Padding thêm cho nút
             child: ElevatedButton(
@@ -40,7 +39,7 @@ class TeacherXemChiTietAnhScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 60,), // Kích thước nút
               ),
               onPressed: () {
-               Get.back();
+                Get.back();
               },
               child: const Text(
                 "Quay lại trang trước",
@@ -52,29 +51,23 @@ class TeacherXemChiTietAnhScreen extends StatelessWidget {
       ),
     );
   }
+
   Widget _buildImageView() {
-    if (image == null || (image?.path.isEmpty ?? true)) {
-      // Trường hợp ảnh chưa được thêm
+    if (image!.isEmpty ) {
       return const Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(Icons.info, color: Colors.blue, size: 50), // Biểu tượng thông tin
           SizedBox(height: 16),
-          Text("Ảnh chưa được thêm.", style: TextStyle(fontSize: 18)),
+
+          Text("Ảnh chưa được thêm hoặc không tồn tại.", style: TextStyle(fontSize: 18)),
         ],
       );
-    } else if (image!.existsSync()) {
-      // Trường hợp ảnh tồn tại
-      return Image.file(image!); // Hiển thị ảnh
     } else {
-      // Trường hợp ảnh không tồn tại
-      return const Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(Icons.error, color: Colors.red, size: 50), // Biểu tượng lỗi
-          SizedBox(height: 16),
-          Text("Ảnh không hoạt động hoặc không tồn tại.", style: TextStyle(fontSize: 18)),
-        ],
+      // Return the CloudImage widget with the Cloudinary URL
+      print('link ảnh ${image}');
+      return CloudImage(
+        publicId: image,
       );
     }
   }

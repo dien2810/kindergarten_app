@@ -7,7 +7,6 @@ import '../../../../../repository/account_repository/account_repository.dart';
 import '../../../controllers/comments/comments_controller.dart';
 import '../../../models/comment/comment_model.dart';
 
-
 class CommentDetailScreen extends StatelessWidget {
   final CommentModel comment;
   final CommentsController commentsController = Get.find();

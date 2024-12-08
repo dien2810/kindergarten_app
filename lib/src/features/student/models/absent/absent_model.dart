@@ -2,7 +2,7 @@ import 'absent_date_entry.dart';
 
 class AbsentModel {
   late String? id;
-  final int amountOfDayOff;
+  late final int amountOfDayOff;
   final String semesterID;
   final Map<String, AbsentDateEntry> dates;
 
@@ -30,5 +30,9 @@ class AbsentModel {
       'semesterID': semesterID,
       'dates': dates.map((key, value) => MapEntry(key, value.toMap())),
     };
+  }
+  @override
+  String toString() {
+    return 'AbsentModel(id: $id, semesterID: $semesterID, amountOfDayOff: $amountOfDayOff, dates: ${dates.map((key, value) => MapEntry(key, value.toString()))})';
   }
 }
