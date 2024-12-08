@@ -1,7 +1,7 @@
 import 'absent_date_entry.dart';
 
 class AbsentModel {
-  final String? id;
+  late String? id;
   final int amountOfDayOff;
   final String semesterID;
   final Map<String, AbsentDateEntry> dates;
@@ -19,7 +19,7 @@ class AbsentModel {
       amountOfDayOff: map['amountOfDayOff'] ?? 0,
       semesterID: map['semesterID'] ?? '',
       dates: (map['dates'] as Map<String, dynamic>? ?? {})
-          .map((key, value) => MapEntry(key, AbsentDateEntry.fromMap(value))),
+          .map((key, value) => MapEntry(key, AbsentDateEntry.fromMap(value)..day=key)),
     );
   }
 

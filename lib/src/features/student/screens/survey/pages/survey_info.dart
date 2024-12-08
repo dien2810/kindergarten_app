@@ -268,7 +268,7 @@ class _SurveyInfoWidgetState extends State<SurveyInfoWidget> {
                               },
                               text: 'Quay lại',
                               options: FFButtonOptions(
-                                width: t100Size*1.2,
+                                width: t100Size,
                                 height: t50Size,
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     16, 0, 16, 0),
@@ -300,7 +300,7 @@ class _SurveyInfoWidgetState extends State<SurveyInfoWidget> {
                               },
                               text: 'Gửi',
                               options: FFButtonOptions(
-                                width: t100Size*1.2,
+                                width: t100Size,
                                 height: t50Size,
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     16, 0, 16, 0),

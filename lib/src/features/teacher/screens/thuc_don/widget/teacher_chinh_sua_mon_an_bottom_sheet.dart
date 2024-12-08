@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/common_widgets/cloud_image/cloud_image_widget.dart';
+import '../../../../../utils/helper_controller/helper_controller.dart';
 import '../../../../student/models/menu/menu_item.dart';
 import '../../../controllers/thuc_don/teacher_thuc_don_controller.dart';
 
@@ -70,7 +71,7 @@ class _ChinhSuaMonAnBottomSheetState extends State<TeacherChinhSuaMonAnBottomShe
   }
 
   Future<void> _saveMenuItem() async {
-    if (_tenMonAnController.text.isEmpty || _nguyenLieuController.text.isEmpty || _selectedImage == null) {
+    if (_tenMonAnController.text.isEmpty || _nguyenLieuController.text.isEmpty) {
       Get.snackbar(
         'Thông báo',
         'Vui lòng nhập đầy đủ thông tin',
@@ -79,8 +80,11 @@ class _ChinhSuaMonAnBottomSheetState extends State<TeacherChinhSuaMonAnBottomShe
       );
       return;
     }
-
-    String imageUrl = _selectedImage?.path ?? widget.menuItem.image; // Sử dụng URL hình ảnh mới nếu có, nếu không thì sử dụng URL cũ
+    String imageUrl = widget.menuItem.image;
+    if (_selectedImage != null) {
+      imageUrl = await Helper.uploadImage(_selectedImage);
+      // Sử dụng URL hình ảnh mới nếu có, nếu không thì sử dụng URL cũ
+    }
     List<String> ingredients = _nguyenLieuController.text.split(',').map((e) => e.trim()).toList();
     Map<String, String> note = widget.menuItem.note; // Sử dụng ghi chú cũ
 

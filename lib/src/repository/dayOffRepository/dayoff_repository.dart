@@ -23,6 +23,16 @@ class DayoffRepository extends GetxController{
     }
   }
 
+  Future<DayoffModel?> getDayOffByStudentId(String studentId) async {
+    final snapshot = await _dayoffCollection.doc(studentId).get();
+    if (snapshot.exists && snapshot.data() != null) {
+      final data = snapshot.data() as Map<String, dynamic>;
+      return DayoffModel.fromMap(data)..id=snapshot.id; // Chuyển đổi dữ liệu thành model
+    } else {
+      return null; // Document không tồn tại hoặc không có dữ liệu
+    }
+  }
+
   // Thêm một document vào Firestore
   Future<void> addDayoff(DayoffModel dayoff) async {
     try {

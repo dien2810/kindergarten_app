@@ -40,7 +40,6 @@ class TaiKhoanController extends GetxController{
     _accountModel = await _accountRepo.getAccountDetails(_accountRepo.userId);
     return _accountModel;
   }
-
   Future<void> getThongTinPhuHuynhPageData() async{
     await getAccountDetails();
     final guardianRepo = Get.put(GuardianRepository());

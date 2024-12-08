@@ -15,7 +15,7 @@ class TeacherDanhSachXinNghiScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final teacherXinNghiController = Get.put(TeacherXinNghiController());
-
+    teacherXinNghiController.studentIds = studentIds;
     return DefaultTabController(
       length: 1,
       child: Scaffold(
@@ -71,44 +71,45 @@ class TeacherDanhSachXinNghiScreen extends StatelessWidget {
                             )),
                             SizedBox(height: t15Size),
                             Obx(() {
-                              var events = teacherXinNghiController.fetchEventsForDay(teacherXinNghiController.selectedDay.value);
-                              // Kiểm tra xem có đơn xin nghỉ nào không
-                              if (events.isEmpty) {
-                                return const Center(
-                                  child: Text(
-                                    "Không có đơn xin nghỉ",
-                                    style: TextStyle(fontSize: 18, color: Colors.grey),
-                                  ),
-                                );
-                              }
-                              return Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: events.map<Widget>((event) {
-                                  var activityNames = teacherXinNghiController.getActivityNamesFromPeriod(event['details']['period']);
-
-                                  return GestureDetector(
-                                    onTap: () {
-                                      Get.to(() => TeacherChiTietDonXinNghiScreen(
-                                        studentId: event['studentId'],
-                                        date: event['date'],
-                                        details: event['details'],
-                                      ));
-                                    },
-                                    child: TeacherXinNghiCardWidget(
-                                      dayOffData: {
-                                        event['studentId']: {
-                                          'dates': {
-                                            event['date']: {
-                                              'content': event['details']['content'],
-                                              'period': activityNames.isNotEmpty ? activityNames : ['Cả ngày'],
-                                              'status': event['details']['status'],
-                                            },
-                                          },
+                              return FutureBuilder(
+                                future: teacherXinNghiController.fetchEventsForDay(
+                                  teacherXinNghiController.selectedDay.value
+                                ),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState == ConnectionState.waiting){
+                                    return const Center(child: CircularProgressIndicator());
+                                  }
+                                  else if (snapshot.hasError) {
+                                    return Center(child: Text('Error: ${snapshot.error}'));
+                                  }
+                                  else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                                    return const Center(child: Text('Không có dữ liệu.'));
+                                  }
+                                  final dayoffEntryList = snapshot.data;
+                                  return ListView.builder(
+                                    shrinkWrap: true,
+                                    physics: const NeverScrollableScrollPhysics(),
+                                    itemCount: dayoffEntryList?.length,
+                                    itemBuilder: (context, index){
+                                      return GestureDetector(
+                                        onTap: () {
+                                          Get.to(() => TeacherChiTietDonXinNghiScreen(
+                                            dayoffEntry: dayoffEntryList[index],
+                                            studentIds: studentIds,
+                                            index: index
+                                          ));
                                         },
-                                      },
-                                    ),
+                                        child: TeacherXinNghiCardWidget(
+                                          dayoffEntry: dayoffEntryList![index],
+                                          studentIds: studentIds,
+                                          index: index
+                                        )
+                                      );
+
+                                    }
+
                                   );
-                                }).toList(),
+                                }
                               );
                             }),
                           ],

@@ -31,7 +31,7 @@ class ThemMoiDanThuocController extends GetxController{
     hoVaTenPhuHuynhDanThuoc.text = accountRepo.fullName;
     lop.text = className!;
     DateTime now = DateTime.now();
-    String formattedDate = "${now.day.toString().padLeft(2, '0')}/${now.month.toString().padLeft(2, '0')}/${now.year}";
+    String formattedDate = "${now.day.toString().padLeft(2, '0')}-${now.month.toString().padLeft(2, '0')}-${now.year}";
     createDate = formattedDate;
   }
   // Hàm thêm widget mới vào danh sách
@@ -39,15 +39,15 @@ class ThemMoiDanThuocController extends GetxController{
   Future<void> addMedicine(MedicineModel medicine) async{
     await medicineRepo.addMedicine(medicine);
     Helper.successSnackBar(title: 'Đã thêm thành công', message: tDaThemThanhCong);
-    // Get.offAll(const DanThuocScreen());
+    Get.back();
   }
   int compareDates(String date1, String date2) {
     // Tách ngày, tháng, năm từ chuỗi ngày và chuyển chúng thành DateTime
     DateTime parsedDate1 = DateTime.parse(
-      date1.split('/').reversed.join(),
+      date1.split('-').reversed.join(),
     );
     DateTime parsedDate2 = DateTime.parse(
-      date2.split('/').reversed.join(),
+      date2.split('-').reversed.join(),
     );
     // So sánh hai DateTime
     if (parsedDate1.isBefore(parsedDate2)) {

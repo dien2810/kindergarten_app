@@ -81,9 +81,10 @@ class HocDuongRoutes {
     },),
    GetPage(name: '/chuyenCan',  page: () {
      final arguments = Get.arguments;
-     final studentName = arguments['studentName'] ?? 'Chưa có tên';
-     final imageUrl =arguments['imageUrl'] ?? 'chưa có ảnh';
-     return TeacherChuyenCanHocSinhScreen(studentName: studentName, imageUrl: imageUrl,);
+     final student = arguments['student'] ?? 'Chưa có tên';
+     return TeacherChuyenCanHocSinhScreen(
+       student: student,
+     );
    },
    ),
 

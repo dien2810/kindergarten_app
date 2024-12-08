@@ -191,12 +191,12 @@ const String tThemGhiChuMoi = 'Thêm ghi chú mới';
 const String tNoiDungGhiChu = 'Nội dung ghi chú';
 //ThoiHocHoanPhiScreen
 const String tThoiHocVaHoanPhi = 'Thôi học và hoàn phí';
-const String tYeuCauThoiHoc = 'Yêu cầu thôi học';
-const String tHoanPhiCLB = 'Hoàn phí câu lạc bộ';
+const String tYeuCauThoiHoc = 'yêu cầu thôi học';
+const String tHoanPhiCLB = 'hoàn phí CLB';
 const String tDaTiepNhan = 'Đã tiếp nhận';
-const String tHoanPhiSach = 'Hoàn phí sách';
-const String tHoanPhiBHYT = 'Hoàn phí BHYT';
-const String tHoanPhiDongPhuc = 'Hoàn phí đồng phục';
+const String tHoanPhiSach = 'hoàn phí sách';
+const String tHoanPhiBHYT = 'hoàn phí BHYT';
+const String tHoanPhiDongPhuc = 'hoàn phí đồng phục';
 const String tDaHoanPhi = 'Đã hoàn phí';
 const String tDaHuy = 'Đã hủy';
 const String tChoDuyet = 'Chờ duyệt';

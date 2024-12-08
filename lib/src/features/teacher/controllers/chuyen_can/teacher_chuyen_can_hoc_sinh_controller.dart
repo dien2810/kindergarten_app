@@ -1,122 +1,48 @@
 import 'package:get/get.dart';
-import 'package:intl/intl.dart'; // Import this for date formatting
+import 'package:intl/intl.dart';
+import 'package:kindergarten_app/src/repository/absent_repository/absent_repository.dart';
+import 'package:kindergarten_app/src/repository/student_repository/student_repository.dart';
+
+import '../../../student/models/absent/absent_model.dart';
+import '../../../student/models/student/student_model.dart'; // Import this for date formatting
 
 class TeacherChuyenCanHocSinhController extends GetxController {
   // Store the absent data
-  var absentData = <String, Map<String, dynamic>>{}.obs;
+  late AbsentModel absentData;
 
   // Counts for different statuses
-  var countWithPermission = 0.obs;
-  var countWithoutPermission = 0.obs;
-  var countLate = 0.obs;
+  var countWithPermission = 0;
+  var countWithoutPermission = 0;
+  var countLate = 0;
 
-  void fetchAbsentData() {
-    // Simulate fetching JSON data
-    final Map<String, dynamic> jsonData = {
-      "absent": {
-        "student_id_1": {
-          "semesterID": "semester_id_1",
-          "amountOfDayOff": 2,
-          "dates": {
-            "23/09/2024": {
-              "period": [
-                "routine_id_1",
-                "routine_id_2",
-                "routine_id_3",
-                "routine_id_4",
-                "routine_id_5",
-                "routine_id_6"
-              ],
-              "absentTime": "1 ngày",
-              "absentStatus": "vắng có phép",
-              "checkinImage": "linkanhcheckin",
-              "checkoutImage": "linkanhcheckout",
-              "checkinTime": "7:00",
-              "checkoutTime": "7:30",
-              "reason": "Bị ốm"
-            },
-            "24/09/2024": {
-              "period": "none",
-              "absentTime": "Không có",
-              "absentStatus": "đúng giờ",
-              "checkinImage": "linkanhcheckin",
-              "checkoutImage": "linkanhcheckout",
-              "checkinTime": "7:00",
-              "checkoutTime": "17:00",
-              "reason": "Không có"
-            },
-            "25/09/2024": {
-              "period": "none",
-              "absentTime": "Không có",
-              "absentStatus": "vắng không phép",
-              "checkinImage": "linkanhcheckin",
-              "checkoutImage": "linkanhcheckout",
-              "checkinTime": "7:00",
-              "checkoutTime": "17:00",
-              "reason": "Không có"
-            },
-            "26/09/2024": {
-              "period": "none",
-              "absentTime": "Không có",
-              "absentStatus": "đến muộn",
-              "checkinImage": "linkanhcheckin",
-              "checkoutImage": "linkanhcheckout",
-              "checkinTime": "7:00",
-              "checkoutTime": "17:00",
-              "reason": "Không có"
-            },
-            "27/09/2024": {
-              "period": "none",
-              "absentTime": "Không có",
-              "absentStatus": "đến muộn",
-              "checkinImage": "linkanhcheckin",
-              "checkoutImage": "linkanhcheckout",
-              "checkinTime": "7:00",
-              "checkoutTime": "17:00",
-              "reason": "Không có"
-            },
-            "28/09/2024": {
-              "period": "none",
-              "absentTime": "Không có",
-              "absentStatus": "đến muộn",
-              "checkinImage": "linkanhcheckin",
-              "checkoutImage": "linkanhcheckout",
-              "checkinTime": "7:00",
-              "checkoutTime": "17:00",
-              "reason": "Không có"
-            },
-          },
-        },
-      },
-    };
+  Future<AbsentModel> fetchAbsentData(StudentModel student) async{
+    final absentRepo = Get.put(AbsentRepository());
+    absentData = (await absentRepo.getAbsentByStudentId(student.id!))!;
+    return absentData;
 
-    // Update the absent data
-    absentData.value = jsonData["absent"];
-    countAbsences(); // Call to count the absences
+    // // Update the absent data
+    // absentData.value = jsonData["absent"];
+    // countAbsences(); // Call to count the absences
   }
 
   // Function to count absences
   void countAbsences() {
-    countWithPermission.value = 0;
-    countWithoutPermission.value = 0;
-    countLate.value = 0;
-
+    countWithPermission = 0;
+    countWithoutPermission = 0;
+    countLate = 0;
     // Iterate through the data
-    absentData.forEach((studentId, studentInfo) {
-      var dates = studentInfo['dates'] as Map<String, dynamic>;
-      dates.forEach((date, details) {
-        switch (details['absentStatus']) {
-          case 'vắng có phép':
-            countWithPermission.value++;
-            break;
-          case 'vắng không phép':
-            countWithoutPermission.value++;
-            break;
-          case 'đến muộn':
-            countLate.value++;
-            break;
-        }
-      });
+    absentData.dates.forEach((day, absentDateEntry) {
+      switch (absentDateEntry.absentStatus) {
+        case 'vắng có phép':
+          countWithPermission++;
+          break;
+        case 'vắng không phép':
+          countWithoutPermission++;
+          break;
+        case 'đến muộn':
+          countLate++;
+          break;
+      }
     });
   }
 
@@ -127,8 +53,8 @@ class TeacherChuyenCanHocSinhController extends GetxController {
 
     // Sort by date, converting the string date to DateTime for comparison
     sortedDates.sort((a, b) {
-      DateTime dateA = DateFormat('dd/MM/yyyy').parse(a.key);
-      DateTime dateB = DateFormat('dd/MM/yyyy').parse(b.key);
+      DateTime dateA = DateFormat('dd-MM-yyyy').parse(a.key);
+      DateTime dateB = DateFormat('dd-MM-yyyy').parse(b.key);
       return dateB.compareTo(dateA); // Sort descending
     });
 

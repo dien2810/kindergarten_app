@@ -1,8 +1,8 @@
 class DayoffEntry {
-  final String? day;
+  late String? day;
   final String content;
   final List<String> period;
-  final String status;
+  late String status;
 
   DayoffEntry({
     this.day,

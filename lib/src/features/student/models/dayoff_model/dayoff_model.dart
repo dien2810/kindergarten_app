@@ -1,7 +1,7 @@
 import 'dayoff_entry_model.dart';
 
 class DayoffModel{
-  final String? id;
+  late String? id;
   final Map<String, DayoffEntry> dates;
 
   DayoffModel({
@@ -13,7 +13,9 @@ class DayoffModel{
   factory DayoffModel.fromMap(Map<String, dynamic> map) {
     final datesMap = map['dates'] as Map<String, dynamic>? ?? {};
     final convertedDates = datesMap.map(
-          (key, value) => MapEntry(key, DayoffEntry.fromMap(value)),
+          (key, value) {
+            return MapEntry(key, DayoffEntry.fromMap(value)..day=key);
+          }
     );
     return DayoffModel(id: map['id'], dates: convertedDates);
   }

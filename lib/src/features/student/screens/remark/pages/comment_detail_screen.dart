@@ -58,7 +58,7 @@ class CommentDetailScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Giáo viên: $teacherName',  // Hiển thị tên giáo viên
+                        'Giáo viên chủ nhiệm lớp: Pool 01',  // Hiển thị tên giáo viên
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,

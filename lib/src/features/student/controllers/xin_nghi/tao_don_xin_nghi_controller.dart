@@ -33,7 +33,7 @@ class TaoDonXinNghiController extends GetxController{
   }
 
   void addDayOff() async{
-    final day = "${selectedDay.value.day}/${selectedDay.value.month}/${selectedDay.value.year}";
+    final day = "${selectedDay.value.day}-${selectedDay.value.month}-${selectedDay.value.year}";
     final map = {
       "id": _accountRepo.userId,
       "dates": {
@@ -49,7 +49,7 @@ class TaoDonXinNghiController extends GetxController{
   }
 
   void changeDay() async{
-    final day = "${selectedDay.value.day}/${selectedDay.value.month}/${selectedDay.value.year}";
+    final day = "${selectedDay.value.day}-${selectedDay.value.month}-${selectedDay.value.year}";
     final xinNghi = await _dayOffRepo.getDayOffById();
     final xinNghiMap = xinNghi?.toMap();
     lyDoNghi.text = tLyDoNghi;

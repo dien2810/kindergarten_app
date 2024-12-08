@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:kindergarten_app/src/features/student/models/absent/absent_date_entry.dart';
 
 class TeacherChuyenCanCardWidget extends StatelessWidget {
   final String studentName;
-  final String date;
-  final Map<String, dynamic> details;
+  final AbsentDateEntry absentDate;
 
   const TeacherChuyenCanCardWidget({
-    Key? key,
+    super.key,
     required this.studentName,
-    required this.date,
-    required this.details,
-  }) : super(key: key);
+    required this.absentDate,
+  });
 
   Color _getStatusColor(String status) {
     switch (status) {
@@ -27,8 +26,7 @@ class TeacherChuyenCanCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final statusColor = _getStatusColor(details['absentStatus']);
-
+    final statusColor = _getStatusColor(absentDate.absentStatus);
     return Container(
       margin: const EdgeInsets.all(8.0),
       child: Card(
@@ -66,7 +64,7 @@ class TeacherChuyenCanCardWidget extends StatelessWidget {
                         const Icon(Icons.calendar_today, size: 20),
                         const SizedBox(width: 4),
                         Text(
-                          date,
+                          absentDate.day!,
                           style: const TextStyle(
                             fontSize: 16,
                           ),
@@ -75,14 +73,14 @@ class TeacherChuyenCanCardWidget extends StatelessWidget {
                       ],
                     ),
                     Text(
-                      details['absentStatus'],
+                      absentDate.absentStatus,
                       style: const TextStyle(
                         fontSize: 16,
                       ),
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      "Lý do: ${details['reason']}",
+                      "Lý do: ${absentDate.reason}",
                       style: const TextStyle(fontSize: 16),
                     ),
                   ],

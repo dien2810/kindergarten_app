@@ -249,8 +249,7 @@ class _ChiTietHocSinhBottomSheetState extends State<ChiTietHocSinhBottomSheet> {
         // }
         else if (route == HocDuongRoutes.chuyenCan){
           Get.to(()=>TeacherChuyenCanHocSinhScreen(
-            studentName: student.studentProfile.name,
-            imageUrl: student.studentDocument.image,
+            student: student
           ));
         }
 

@@ -91,7 +91,7 @@ class _ThongTinTaiKhoanScreenState extends State<ThongTinTaiKhoanScreen> {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  _buildInfoField("Email", "nguyenvanbinh@gmail.com"),
+                  _buildInfoField("Email", taiKhoanController.guardian.email),
                   const SizedBox(height: 16),
                   _buildInfoField("Số điện thoại", account.phoneNo),
                   const SizedBox(height: 260), // Khoảng cách trước nút

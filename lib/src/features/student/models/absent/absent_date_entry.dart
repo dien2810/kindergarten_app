@@ -1,4 +1,5 @@
 class AbsentDateEntry {
+  late String? day;
   final String absentStatus;
   final String absentTime;
   final String checkinImage;
@@ -9,6 +10,7 @@ class AbsentDateEntry {
   final String reason;
 
   AbsentDateEntry({
+    this.day,
     required this.absentStatus,
     required this.absentTime,
     required this.checkinImage,
