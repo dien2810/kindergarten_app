@@ -113,13 +113,13 @@ class ThucDonScreen extends StatelessWidget {
                                       itemCount: menuItemList?.length,
                                       itemBuilder: (context,index){
                                         var meal = tBuaSang;
-                                        if (menuItemList?[index].meal == 'lunch'){
+                                        if (menuItemList?[index].meal == 'Bữa trưa'){
                                           meal = 'Bữa trưa';
                                         }
-                                        else if (menuItemList?[index].meal == 'afternoonSnack'){
+                                        else if (menuItemList?[index].meal == 'Bữa xế'){
                                           meal = 'Bữa xế';
                                         }
-                                        else if (menuItemList?[index].meal == 'dinner'){
+                                        else if (menuItemList?[index].meal == 'Bữa tối'){
                                           meal = 'Bữa tối';
                                         }
                                         return Column(

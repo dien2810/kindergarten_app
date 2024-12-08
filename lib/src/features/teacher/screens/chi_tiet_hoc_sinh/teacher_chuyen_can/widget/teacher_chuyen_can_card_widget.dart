@@ -20,7 +20,7 @@ class TeacherChuyenCanCardWidget extends StatelessWidget {
       case 'vắng không phép':
         return const Color(0xFFF14F4F);
       default:
-        return const Color(0xFF99D98C);; // Default color if status is unknown
+        return const Color(0xFF99D98C); // Default color if status is unknown
     }
   }
 

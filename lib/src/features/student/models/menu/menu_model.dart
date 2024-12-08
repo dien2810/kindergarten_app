@@ -1,7 +1,7 @@
 import 'menu_item.dart';
 
 class MenuModel {
-  final String? id;
+  late String? id;
   final Map<String, List<MenuItem>> dates;
 
   MenuModel({this.id, required this.dates});

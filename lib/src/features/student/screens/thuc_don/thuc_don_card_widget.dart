@@ -46,11 +46,11 @@ class ThucDonCardWidget extends StatelessWidget {
                               fontSize: 14
                           ),
                         ),
-                        const Text(
-                          tLuaChon,
+                        Text(
+                          'Nguyên liệu: ${menuItem.ingredients.toString()}',
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Colors.white,
                               fontSize: 14
                           ),

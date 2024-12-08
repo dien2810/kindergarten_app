@@ -21,7 +21,7 @@ class MenuRepository extends GetxController {
     final snapshot = await _menuCollection.doc("menu_id_hechuan").get();
     if (snapshot.exists && snapshot.data() != null) {
       final data = snapshot.data() as Map<String, dynamic>;
-      return MenuModel.fromMap(data); // Chuyển đổi dữ liệu thành model
+      return MenuModel.fromMap(data)..id="menu_id_hechuan"; // Chuyển đổi dữ liệu thành model
     } else {
       return null; // Document không tồn tại hoặc không có dữ liệu
     }

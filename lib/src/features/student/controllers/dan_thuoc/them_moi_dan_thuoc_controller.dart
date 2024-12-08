@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/constants/text_strings.dart';
 import 'package:kindergarten_app/src/features/student/models/medicine/medicine_model.dart';
-import 'package:kindergarten_app/src/features/student/screens/dan_thuoc/dan_thuoc_screen.dart';
 import 'package:kindergarten_app/src/repository/account_repository/account_repository.dart';
 import 'package:kindergarten_app/src/repository/classes_repository/classes_respository.dart';
 import 'package:kindergarten_app/src/repository/medicine_repository/medicine_repository.dart';

@@ -53,7 +53,7 @@ class NgoaiKhoaScreen extends StatelessWidget {
               ),
               SizedBox(height: t15Size),
               SizedBox(
-                height: t100Size*3.2,
+                height: t100Size*3,
                 child: const TabBarView(
                   children: [
                     DanhSachClbWidget(), // Hiển thị widget cho "Danh sách CLB"

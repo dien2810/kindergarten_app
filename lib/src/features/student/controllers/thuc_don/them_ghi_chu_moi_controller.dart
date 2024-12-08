@@ -35,6 +35,7 @@ class ThemGhiChuMoiController extends GetxController{
         menuModel?.dates[day] = menuItems;
         // print(menuModel?.toMap().toString());
         // Cập nhật lại dữ liệu vào Firestore
+        print(menuModel?.id);
         await _thucDonRepo.updateMenu(menuModel!);
         print('Thêm ghi chú thành công!');
         Helper.successSnackBar(title: tDaThemThanhCong, message: 'Thêm ghi chú thành công');
