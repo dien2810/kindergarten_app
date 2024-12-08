@@ -31,7 +31,6 @@ class ThanhVienWidget extends StatelessWidget {
             // Pass both imageUrl and tenHocSinh to ChiTietHocSinhBottomSheet
             return ChiTietHocSinhBottomSheet(
               student: student,
-              commentData: nhanxetController.commentData, // Use data from the controller
             );
           },
         );

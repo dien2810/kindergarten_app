@@ -40,7 +40,7 @@ class TeacherClbNhanXetCardWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Phụ huynh HS: $parentName",
+              "Phụ huynh HS: $parentName ",
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,

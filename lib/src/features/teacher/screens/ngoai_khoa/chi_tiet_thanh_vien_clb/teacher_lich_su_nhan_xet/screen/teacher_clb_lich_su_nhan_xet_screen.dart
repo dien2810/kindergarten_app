@@ -1,21 +1,24 @@
+import 'package:cloudinary_url_gen/cloudinary.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/common_widgets/app_bar_widgets/teacher_app_bar_with_title_header_2.dart';
 import 'package:kindergarten_app/src/constants/text_strings.dart';
 import 'package:kindergarten_app/src/features/teacher/controllers/nhan_xet_hoc_sinh/teacher_nhan_xet_hoc_sinh_controller.dart';
 import 'package:kindergarten_app/src/features/teacher/controllers/thong_tin_hoc_sinh/teacher_thong_tin_hoc_sinh_controller.dart';
+import '../../../../../../../common_widgets/cloud_image/cloud_image_widget.dart';
+import '../../../../../../../repository/guardian_repository/guardian_repository.dart';
 import '../widget/teacher_clb_nhan_xet_card_widget.dart';
 import '../widget/teacher_clb_them_moi_nhan_xet_bottom_sheet.dart';
 
 class TeacherClbLichSuNhanXetScreen extends StatelessWidget {
   final String studentName;
   final String imageUrl;
-  final String guardianID; // ID phụ huynh
-  final String replyContent; // Nội dung trả lời
-  final String commentDate; // Ngày nhận xét
-  final String teacherID; // ID giáo viên
-  final String studentID; // ID học sinh
-  final Function(String) onAddComment; // Callback để thêm nhận xét
+  final String guardianID;
+  final String replyContent;
+  final String commentDate;
+  final String teacherID;
+  final String studentID;
+  final Function(String) onAddComment;
 
   const TeacherClbLichSuNhanXetScreen({
     Key? key,
@@ -32,11 +35,11 @@ class TeacherClbLichSuNhanXetScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TeacherThongTinNhanxetController controller =
-    Get.put(TeacherThongTinNhanxetController());
-
+        Get.put(TeacherThongTinNhanxetController());
+    Future<String> parentName = controller.getTeacherName(guardianID);
     // Lấy ngày hiện tại
-    final String currentDate = DateTime.now().toLocal().toString().split(
-        ' ')[0];
+    final String currentDate =
+        DateTime.now().toLocal().toString().split(' ')[0];
 
     return Scaffold(
       appBar: const TeacherAppBarWithTitleHeader2(title: tLichSuNhanXet),
@@ -55,152 +58,69 @@ class TeacherClbLichSuNhanXetScreen extends StatelessWidget {
                     child: ListView.builder(
                       itemCount: controller.comments.length,
                       itemBuilder: (context, index) {
-                        var studentComments =
-                        controller
-                            .comments[index]["student_id_1"]["commentInfo"]; // Lấy danh sách nhận xét của học sinh
+                        var comment = controller.comments[index];
 
                         return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: studentComments.map<Widget>((comment) {
-                            return TeacherClbNhanXetCardWidget(
-                              parentName: comment["guardianID"],
-                              date: comment["commentDate"],
-                              comment: comment["comment"],
-                              teacherID: comment["teacherID"],
-                              guardianID: comment["guardianID"],
-                              replyContent: comment["replyContent"],
-                              commentDate: comment["commentDate"],
-                              replyDate: comment["replyDate"],
-                            );
-                          }).toList(),
+                          children: [
+                            for (var info in comment.commentInfo)
+                              TeacherClbNhanXetCardWidget(
+                                teacherID: info.teacherID,
+                                comment: info.comment,
+                                replyContent: info.replyContent,
+                                commentDate: info.commentDate,
+                                replyDate: info.replyDate,
+                                guardianID: guardianID,
+                                parentName: (parentName as String?) ?? '', // Placeholder, sẽ cập nhật sau
+                                date: '',
+                              ),
+                          ],
                         );
                       },
                     ),
                   );
                 }),
               ),
-
-              Padding(
-                padding: const EdgeInsets.all(16.0), // Padding xung quanh nút
-                child: SizedBox(
-                  width: 300, // Đặt chiều rộng của nút lớn hơn
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Get.back(); // Quay lại màn hình trước
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF380543), // Màu nền nút
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30), // Bo góc 30
-                      ),
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 9.0),
-                      // Padding bên trong nút
-                      child: Text(
-                        "Quay lại trang trước",
-                        style: TextStyle(
-                          color: Colors.white, // Màu chữ trắng
-                          fontSize: 22, // Kích thước chữ 22
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
             ],
+          ),
+          // Gọi hàm để lấy tên phụ huynh
+          FutureBuilder<String?>(
+            future: getFullNameByGuardianId(guardianID),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                return Text("Error: ${snapshot.error}");
+              } else {
+                return Text(
+                    "Tên phụ huynh: ${snapshot.data ?? 'Không tìm thấy'}");
+              }
+            },
           ),
         ],
       ),
     );
   }
 
-  // Hàm xây dựng phần avatar và tên học sinh
   Widget _buildStudentProfile(BuildContext context, String imageUrl,
       String studentName, String currentDate) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        children: [
-          Stack(
-            alignment: Alignment.center, // Căn giữa các widget trong Stack
-            children: [
-              // Avatar hình tròn
-              CircleAvatar(
-                radius: 70, // Kích thước avatar
-                backgroundImage: imageUrl.startsWith('http')
-                    ? NetworkImage(imageUrl)
-                    : AssetImage(imageUrl) as ImageProvider,
-              ),
-              // Nút thêm mới
-              Positioned(
-                bottom: 0, // Đặt nút ở đáy của avatar
-                right: 0,
-                // Đặt nút ở bên phải của avatar
-                child: GestureDetector(
-                  onTap: () {
-                    // Hiển thị BottomSheet
-                    showModalBottomSheet(
-                      context: context,
-                      isScrollControlled: true,
-                      builder: (BuildContext context) {
-                        return TeacherClbThemMoiNhanXetBottomSheet(
-                          teacherID: "teacher_id_1",
-                          // ID giáo viên
-                          parentName: studentName, // :))) lấy tên học sinh cho phụ huynh
-                          // Tên phụ huynh
-                          currentDate: currentDate,
-                          guardianID: guardianID,
-                          replyContent: replyContent,
-                          commentDate: commentDate,
-                          onAddComment: (String comment) {
-                            // Logic để thêm nhận xét
-                            print(
-                                "Nhận xét được thêm: $comment"); // Thay đổi với logic thực tế
-                          },
-                        );
-                      },
-                    );
-                  },
-                  child: Container(
-                    width: 40, // Kích thước nút
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFADE25D), // Màu nền nút
-                      shape: BoxShape.circle, // Hình tròn
-                      border: Border.all(
-                          color: Colors.white, width: 2), // Viền trắng
-                    ),
-                    child: const Icon(
-                      Icons.add,
-                      size: 28,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            ],
+    return Row(
+      children: [
+        CircleAvatar(
+          child: CloudImage(
+            publicId: imageUrl,
           ),
-          const SizedBox(height: 8), // Khoảng cách giữa avatar và tên
-          // Tên học sinh
-          Text(
-            studentName,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Color(0xFF333333), // Màu chữ
-            ),
-          ),
-          const Text(
-            "LỊCH SỬ NHẬN XÉT",
-            style: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-              color: Color(0xFF7B7B7B), // Màu chữ
-            ),
-          ),
-        ],
-      ),
+        ),
+        const SizedBox(width: 16),
+        Text(
+          studentName,
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+      ],
     );
+  }
+
+  Future<String?> getFullNameByGuardianId(String guardianId) async {
+    final guardianRepo = GuardianRepository(); // Đảm bảo bạn đã tạo lớp này
+    return await guardianRepo.getFullNameByGuardianId(guardianId);
   }
 }

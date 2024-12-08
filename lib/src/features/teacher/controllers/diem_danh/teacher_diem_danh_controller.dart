@@ -92,21 +92,21 @@ class TeacherDiemDanhController extends GetxController {
       attendanceRecords[studentId] = AttendanceRecord(
         studentId: studentId,
         studentName: student!.studentProfile.name,
-        semesterID: absent!.semesterID, // Ép kiểu String
-        amountOfDayOff: absent.amountOfDayOff, // Ép kiểu int
+        semesterID: absent!.semesterID,
+        amountOfDayOff: absent.amountOfDayOff,
         dates: (absent.dates).map(
               (date, details) {
             return MapEntry(
               date,
               AttendanceDetail(
                 period: List<String>.from(details.period ?? [""]),
-                absentTime: details.absentTime, // Ép kiểu String
-                absentStatus: details.absentStatus, // Ép kiểu String
-                checkinImage: details.checkinImage, // Ép kiểu String
-                checkoutImage: details.checkoutImage, // Ép kiểu String
-                checkinTime: details.checkinTime, // Ép kiểu String
-                checkoutTime: details.checkoutTime, // Ép kiểu String
-                reason: details.reason, // Ép kiểu String
+                absentTime: details.absentTime,
+                absentStatus: details.absentStatus,
+                checkinImage: details.checkinImage,
+                checkoutImage: details.checkoutImage,
+                checkinTime: details.checkinTime,
+                checkoutTime: details.checkoutTime,
+                reason: details.reason,
               ),
             );
           },
@@ -115,16 +115,14 @@ class TeacherDiemDanhController extends GetxController {
     }
   }
 
-  // Hàm để lấy dữ liệu điểm danh cho ngày đã chọn
   List<Map<String, dynamic>> fetchAttendanceForDay(DateTime selectedDay) {
     List<Map<String, dynamic>> result = [];
     attendanceRecords.forEach((studentId, record) {
-      // Kiểm tra xem học sinh có dữ liệu điểm danh cho ngày đó không
       if (record.dates.containsKey(formatDate(selectedDay))) {
-        AttendanceDetail details = record.dates[formatDate(selectedDay)]!; // Lấy AttendanceDetail
+        AttendanceDetail details = record.dates[formatDate(selectedDay)]!;
         result.add({
           'studentId': studentId,
-          'name': 'Học sinh ${record.studentName}', // Thay thế bằng tên thực tế
+          'name': 'Học sinh ${record.studentName}',
           'attendanceDetails': {
             'period': details.period,
             'absentTime': details.absentTime,
@@ -141,7 +139,6 @@ class TeacherDiemDanhController extends GetxController {
     return result;
   }
 
-  // Hàm định dạng ngày
   String formatDate(DateTime date) {
     return '${date.day.toString().padLeft(2, '0')}-${date.month.toString().padLeft(2, '0')}-${date.year}';
   }
@@ -151,37 +148,28 @@ class TeacherDiemDanhController extends GetxController {
     final absentRepo = Get.put(AbsentRepository());
     final selectedDate = formatDate(selectedDay.value);
 
-    // Lặp qua tất cả các bản ghi điểm danh
     for (var studentId in attendanceRecords.keys) {
       final record = attendanceRecords[studentId];
       if (record != null && record.dates.containsKey(selectedDate)) {
-        // Lấy thông tin chi tiết về trạng thái vắng
         final details = record.dates[selectedDate];
-
-        // Tạo bản ghi mới để lưu vào Firebase
         final updatedAbsentData = {
           'semesterID': record.semesterID,
           'amountOfDayOff': record.amountOfDayOff,
-          'dates': {
-            selectedDate: {
-              'period': details!.period,
-              'absentTime': details.absentTime,
-              'absentStatus': details.absentStatus,
-              'checkinImage': details.checkinImage,
-              'checkoutImage': details.checkoutImage,
-              'checkinTime': details.checkinTime,
-              'checkoutTime': details.checkoutTime,
-              'reason': details.reason,
-            }
+          'dates.$selectedDate': {
+            'period': details!.period,
+            'absentTime': details.absentTime,
+            'absentStatus': details.absentStatus,
+            'checkinImage': details.checkinImage,
+            'checkoutImage': details.checkoutImage,
+            'checkinTime': details.checkinTime,
+            'checkoutTime': details.checkoutTime,
+            'reason': details.reason,
           }
         };
 
-        // Cập nhật dữ liệu vào Firebase
         await absentRepo.updateAbsentByStudentId(studentId, updatedAbsentData);
       }
     }
-
-    // Thông báo cập nhật thành công
     Get.snackbar('Thông báo', 'Đã cập nhật trạng thái xin nghỉ thành công.');
   }
 }

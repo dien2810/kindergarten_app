@@ -36,7 +36,6 @@ class HocSinhWidget extends StatelessWidget {
             teacherThongTinHocSinhController.studentModel = student;
             return ChiTietHocSinhBottomSheet(
               student: student,
-              commentData: nhanxetController.commentData, // Use data from the controller
             );
           },
         );

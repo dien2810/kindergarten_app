@@ -58,7 +58,8 @@ class TeacherDiemDanhScreen extends StatelessWidget {
                               child: WeeklyDatePicker(
                                 selectedDay: teacherDiemDanhController.selectedDay.value,
                                 changeDay: (value) {
-                                  teacherDiemDanhController.selectedDay.value = value; // Cập nhật ngày đã chọn
+                                  teacherDiemDanhController.selectedDay.value = value;
+
                                 },
                                 backgroundColor: const Color(0xFFCAF0F8),
                                 selectedDigitBackgroundColor: const Color(0xFFBA83DE),

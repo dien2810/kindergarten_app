@@ -9,15 +9,21 @@ import 'package:kindergarten_app/src/features/teacher/routes/hoc_duong_route.dar
 import '../../chi_tiet_hoc_sinh/teacher_lich_su_nhan_xet/widget/teacher_them_moi_nhan_xet_bottom_sheet.dart';
 
 class ChiTietThanhVienClbBottomSheet extends StatefulWidget {
-  final String studentName; // Student's name
-  final String imageUrl; // Student's image URL
-  final CommentData commentData;
-
+  final String studentName;
+  final String imageUrl;
+  final String guardianID;
+  final String studentID;
+  final String teacherID; // Thêm teacherID
+  final Function(String, String, String) onAddComment;
+  // Cập nhật kiểu hàm
   const ChiTietThanhVienClbBottomSheet({
     super.key,
     required this.studentName,
     required this.imageUrl,
-    required this.commentData,
+    required this.guardianID,
+    required this.studentID,
+    required this.teacherID, // Thêm tham số này
+    required this.onAddComment,
   });
 
   @override
@@ -27,6 +33,7 @@ class ChiTietThanhVienClbBottomSheet extends StatefulWidget {
 
 class _ChiTietThanhVienClbBottomSheetState extends State<ChiTietThanhVienClbBottomSheet> {
   late final TeacherThongTinNhanxetController nhanxetController;
+
   @override
   void initState(){
     super.initState();
@@ -152,15 +159,10 @@ class _ChiTietThanhVienClbBottomSheetState extends State<ChiTietThanhVienClbBott
                             isScrollControlled: true,
                             builder: (BuildContext context) {
                               return TeacherThemMoiNhanXetBottomSheet(
-                                teacherID: widget.commentData.teacherID,
+                                teacherID: widget.teacherID,
                                 parentName: widget.studentName,
-                                currentDate: widget.commentData.currentDate,
-                                guardianID: widget.commentData.guardianID,
-                                replyContent: widget.commentData.replyContent,
-                                commentDate: widget.commentData.commentDate,
-                                onAddComment: (String comment) {
-                                  print("Nhận xét được thêm: $comment"); // Thay đổi với logic thực tế
-                                },
+                                guardianID: widget.guardianID!,
+                                onAddComment: widget.onAddComment,
                               );
                             },
                           );

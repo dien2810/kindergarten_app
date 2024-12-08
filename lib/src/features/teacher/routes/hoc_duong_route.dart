@@ -68,15 +68,13 @@ class HocDuongRoutes {
         studentName: studentName,
         imageUrl: imageUrl,
         guardianID: guardianID,
-        replyContent: replyContent,
-        commentDate: commentDate,
-        teacherID: teacherID, // Truyền ID giáo viên
+        // replyContent: replyContent,
+        // commentDate: commentDate,
+         teacherID: teacherID, // Truyền ID giáo viên
         studentID: studentID, // Truyền ID học sinh
-        onAddComment: (String comment) {
-          // Logic để thêm nhận xét
-          print("Nhận xét được thêm: $comment");
-          // Bạn có thể gọi hàm để cập nhật nhận xét ở đây
-        },
+        onAddComment: (String guardianID, String teacherID, String comment) {
+        // Xử lý nhận xét
+      },
       );
     },),
    GetPage(name: '/chuyenCan',  page: () {
