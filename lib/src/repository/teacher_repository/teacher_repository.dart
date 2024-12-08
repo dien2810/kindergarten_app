@@ -73,4 +73,24 @@ class TeacherRepository extends GetxController{
       return "Error fetching teacher ID"; // Trả về chuỗi thông báo lỗi
     }
   }
+  Future<String> getFullNameByTeacherID(String inputTeacherID) async {
+    try {
+      final snapshot = await _firestore.collection('teacher')
+          .where('teacherID', isEqualTo: inputTeacherID)
+          .limit(1)
+          .get();
+
+      if (snapshot.docs.isNotEmpty) {
+        final teacherData = snapshot.docs.first.data() as Map<String, dynamic>;
+        String firstName = teacherData['firstName'] ?? '';
+        String lastName = teacherData['lastName'] ?? '';
+        return '$firstName $lastName'.trim();
+      } else {
+        throw Exception("No teacher found with teacherID: $inputTeacherID");
+      }
+    } catch (e) {
+      print("Error fetching teacher full name: $e");
+      return "Error fetching teacher full name"; // Trả về chuỗi thông báo lỗi
+    }
+  }
 }

@@ -1,22 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class TeacherThemMoiNhanXetBottomSheet extends StatelessWidget {
-  final String teacherID; // ID giáo viên
-  final String parentName; // Tên phụ huynh
-  final String currentDate; // Ngày hiện tại
-  final String guardianID; // ID phụ huynh
-  final String replyContent; // Nội dung trả lời
-  final String commentDate; // Ngày nhận xét
-  final Function(String) onAddComment; // Callback để thêm nhận xét
+  final String teacherID;
+  final String parentName;
+  final String guardianID;
+  final Function(String, String, String) onAddComment;
 
   const TeacherThemMoiNhanXetBottomSheet({
     Key? key,
     required this.teacherID,
     required this.parentName,
-    required this.currentDate,
     required this.guardianID,
-    required this.replyContent,
-    required this.commentDate,
     required this.onAddComment,
   }) : super(key: key);
 
@@ -27,55 +22,63 @@ class TeacherThemMoiNhanXetBottomSheet extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16.0),
       height: MediaQuery.of(context).viewInsets.bottom > 0
-          ? MediaQuery.of(context).size.height * 0.8 // Adjust height when keyboard is up
-          : 370, // Default height
+          ? MediaQuery.of(context).size.height * 0.8
+          : 370,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           // Header
-          // Header
           const Text(
             "Thêm mới nhận xét",
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold , color: Color(0xFF380543)),
-            textAlign: TextAlign.center, // Center the header here
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xFF380543)),
+            textAlign: TextAlign.center,
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
+
           // Hiển thị thông tin
           _buildInfoText("Giáo viên:", teacherID),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           _buildInfoText("Phụ huynh học sinh:", parentName),
-          SizedBox(height: 8),
-          _buildInfoText("Ngày tạo nhận xét:", currentDate),
-          SizedBox(height: 16),
+          const SizedBox(height: 8),
+          _buildInfoText("Ngày tạo nhận xét:", DateFormat('dd-MM-yyyy').format(DateTime.now())),
+          const SizedBox(height: 16),
+
           // TextField cho nhận xét
           TextField(
             controller: commentController,
             maxLines: 4,
             decoration: InputDecoration(
               filled: true,
-              fillColor: Color(0xFFE9EFF7), // Màu nền
+              fillColor: const Color(0xFFE9EFF7),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide.none,
               ),
               hintText: "Nhập nội dung nhận xét...",
-              hintStyle: TextStyle(fontSize: 14, fontStyle: FontStyle.italic), // Hint text style
+              hintStyle: const TextStyle(fontSize: 14, fontStyle: FontStyle.italic),
             ),
-            style: TextStyle(fontSize: 16), // TextField input text size
+            style: const TextStyle(fontSize: 16),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
+
           // Nút Thêm mới và Hủy
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildActionButton("Thêm mới", Color(0xFF99D98C), () {
+              _buildActionButton("Thêm mới", const Color(0xFF99D98C), () {
                 if (commentController.text.isNotEmpty) {
-                  onAddComment(commentController.text); // Gọi callback
-                  Navigator.pop(context); // Đóng bottom sheet
+                  // Gọi hàm callback để thêm nhận xét
+                  onAddComment(guardianID, teacherID, commentController.text);
+                  Navigator.pop(context);
+                } else {
+                  // Hiển thị thông báo nếu nhận xét rỗng
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("Vui lòng nhập nội dung nhận xét.")),
+                  );
                 }
               }),
-              _buildActionButton("Hủy", Color(0xFFF4778D), () {
-                Navigator.pop(context); // Đóng bottom sheet
+              _buildActionButton("Hủy", const Color(0xFFF4778D), () {
+                Navigator.pop(context);
               }),
             ],
           ),
@@ -84,7 +87,6 @@ class TeacherThemMoiNhanXetBottomSheet extends StatelessWidget {
     );
   }
 
-  // Helper method to create info text
   Widget _buildInfoText(String label, String value) {
     return Align(
       alignment: Alignment.centerLeft,
@@ -93,11 +95,11 @@ class TeacherThemMoiNhanXetBottomSheet extends StatelessWidget {
           children: [
             TextSpan(
               text: label,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Color(0xFF380543)), // Bold for label
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Color(0xFF380543)),
             ),
             TextSpan(
               text: " $value",
-              style: TextStyle(fontSize: 16, color: Color(0xFF7B7B7B)), // Regular for value
+              style: const TextStyle(fontSize: 16, color: Color(0xFF7B7B7B)),
             ),
           ],
         ),
@@ -111,14 +113,14 @@ class TeacherThemMoiNhanXetBottomSheet extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         backgroundColor: color,
-        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 60), // Button padding
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 60),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30), // Rounded corners
+          borderRadius: BorderRadius.circular(30),
         ),
       ),
       child: Text(
         text,
-        style: TextStyle(fontSize: 18, color: Colors.white), // Button text size
+        style: const TextStyle(fontSize: 18, color: Colors.white),
       ),
     );
   }

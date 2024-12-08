@@ -69,4 +69,23 @@ class GuardianRepository extends GetxController{
       print("Failed to update Guardian: $e");
     }
   }
+
+  Future<String> getFullNameByGuardianId(String studentId) async {
+    try {
+      QuerySnapshot snapshot = await FirebaseFirestore.instance
+          .collection('guardian')
+          .where('studentID', isEqualTo: studentId)
+          .get();
+      if (snapshot.docs.isNotEmpty) {
+        var guardianData = snapshot.docs.first.data() as Map<String, dynamic>;
+        return guardianData['guardianFullname'] ?? '';
+      } else {
+        print("Guardian not found for studentID: $studentId");
+        return '';
+      }
+    } catch (e) {
+      print("Error fetching fullname: $e");
+      return '';
+    }
+  }
 }

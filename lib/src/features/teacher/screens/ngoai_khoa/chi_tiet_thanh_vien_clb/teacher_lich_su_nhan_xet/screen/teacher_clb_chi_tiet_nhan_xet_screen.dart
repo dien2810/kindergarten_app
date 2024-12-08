@@ -6,14 +6,14 @@ import 'package:kindergarten_app/src/constants/text_strings.dart';
 import '../../../../../controllers/nhan_xet_hoc_sinh/teacher_nhan_xet_hoc_sinh_controller.dart';
 
 class TeacherClbChiTietNhanXetScreen extends StatelessWidget {
-  final String parentName; // Tên phụ huynh
-  final String date; // Ngày nhận xét
-  final String comment; // Nội dung nhận xét
-  final String teacherID; // ID giáo viên
-  final String guardianID; // ID phụ huynh
-  final String replyContent; // Nội dung trả lời
-  final String commentDate; // Ngày nhận xét
-  final String replyDate; // Ngày trả lời
+  final String parentName;
+  final String date;
+  final String comment;
+  final String teacherID;
+  final String guardianID;
+  final String replyContent;
+  final String commentDate;
+  final String replyDate;
 
   const TeacherClbChiTietNhanXetScreen({
     super.key,
