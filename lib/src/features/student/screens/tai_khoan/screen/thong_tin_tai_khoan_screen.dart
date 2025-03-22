@@ -10,12 +10,11 @@ class ThongTinTaiKhoanScreen extends StatefulWidget {
 }
 
 class _ThongTinTaiKhoanScreenState extends State<ThongTinTaiKhoanScreen> {
-  bool _obscurePassword = true; // Biến để kiểm soát hiển thị mật khẩu
+  bool _obscurePassword = true;
+  final taiKhoanController = Get.put(TaiKhoanController());
 
   @override
   Widget build(BuildContext context) {
-    final taiKhoanController = Get.put(TaiKhoanController());
-
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 100.0,

@@ -78,6 +78,7 @@ class TeacherThongTinHocSinhWidget extends StatelessWidget {
                         style: TextStyle(fontSize: 16, color: Color(0xFF505050)),
                       ),
                       TextField(
+                        readOnly: true,
                         controller: teacherThongTinHocSinhController.maHocSinh,
                         style: const TextStyle(fontSize: 16, color: Color(0xFF505050)),
                         decoration: const InputDecoration(
@@ -109,7 +110,7 @@ class TeacherThongTinHocSinhWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start, // Căn lề trái cho các widget trong cột
                     children: [
                       const Text(
-                        tMaHocSinh, // Hiển thị label
+                        tNgaySinh, // Hiển thị label
                         style: TextStyle(fontSize: 16, color: Color(0xFF505050)),
                       ),
                       TextField(
@@ -183,6 +184,7 @@ class TeacherThongTinHocSinhWidget extends StatelessWidget {
                         style: TextStyle(fontSize: 16, color: Color(0xFF505050)),
                       ),
                       TextField(
+                        readOnly: true,
                         controller: teacherThongTinHocSinhController.truong,
                         style: const TextStyle(fontSize: 16, color: Color(0xFF505050)),
                         decoration: const InputDecoration(
@@ -218,6 +220,7 @@ class TeacherThongTinHocSinhWidget extends StatelessWidget {
                         style: TextStyle(fontSize: 16, color: Color(0xFF505050)),
                       ),
                       TextField(
+                        readOnly: true,
                         controller: teacherThongTinHocSinhController.he,
                         style: const TextStyle(fontSize: 16, color: Color(0xFF505050)),
                         decoration: const InputDecoration(
@@ -249,45 +252,11 @@ class TeacherThongTinHocSinhWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start, // Căn lề trái cho các widget trong cột
                     children: [
                       const Text(
-                        tMaHocSinh, // Hiển thị label
-                        style: TextStyle(fontSize: 16, color: Color(0xFF505050)),
-                      ),
-                      TextField(
-                        controller: teacherThongTinHocSinhController.maHocSinh,
-                        style: const TextStyle(fontSize: 16, color: Color(0xFF505050)),
-                        decoration: const InputDecoration(
-                          border: InputBorder.none, // Loại bỏ viền
-                          isDense: true, // Giảm padding mặc định
-                          hintText: "Nhập $tMaHocSinh", // Gợi ý nhập
-                          hintStyle: TextStyle(color: Colors.grey), // Màu của hint text
-                        ),
-                        maxLines: null, // Cho phép nhiều dòng
-                        minLines: 1, // Ít nhất 1 dòng
-                        onChanged: (value) {
-                          // Xử lý khi nội dung thay đổi
-                          teacherThongTinHocSinhController.maHocSinh.text = value;
-                          teacherThongTinHocSinhController.studentModel.studentProfile.studentID = value;
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  width: double.infinity, // Chiều rộng toàn màn hình
-                  padding: const EdgeInsets.all(16.0),
-                  margin: const EdgeInsets.only(bottom: 8.0),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFD9D9D9), // Màu nền
-                    borderRadius: BorderRadius.circular(8.0), // Góc bo tròn
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start, // Căn lề trái cho các widget trong cột
-                    children: [
-                      const Text(
                         tKhoi, // Hiển thị label
                         style: TextStyle(fontSize: 16, color: Color(0xFF505050)),
                       ),
                       TextField(
+                        readOnly: true,
                         controller: teacherThongTinHocSinhController.khoi,
                         style: const TextStyle(fontSize: 16, color: Color(0xFF505050)),
                         decoration: const InputDecoration(

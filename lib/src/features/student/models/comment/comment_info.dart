@@ -1,12 +1,12 @@
-class CommentModel {
+class CommentInfo {
   final String teacherID;
   final String comment;
   final String? guardianID;  // Optional field
-  final String replyContent;
+  late String replyContent;
   final String commentDate;
-  final String replyDate;
+  late String replyDate;
 
-  CommentModel({
+  CommentInfo({
     required this.teacherID,
     required this.comment,
     this.guardianID,
@@ -15,8 +15,8 @@ class CommentModel {
     required this.replyDate,
   });
 
-  factory CommentModel.fromJson(Map<String, dynamic> json) {
-    return CommentModel(
+  factory CommentInfo.fromJson(Map<String, dynamic> json) {
+    return CommentInfo(
       teacherID: json['teacherID'],
       comment: json['comment'],
       guardianID: json['guardianID'],

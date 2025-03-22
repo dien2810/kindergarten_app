@@ -27,7 +27,7 @@ class _ThemMonAnBottomSheetState extends State<TeacherThemMonAnBottomSheet> {
   @override
   void initState() {
     super.initState();
-    _ngayTaoMonController.text = DateFormat('dd/MM/yyyy').format(_selectedDate);
+    _ngayTaoMonController.text = DateFormat('dd-MM-yyyy').format(_selectedDate);
   }
 
   Future<void> _pickDate() async {
@@ -40,7 +40,7 @@ class _ThemMonAnBottomSheetState extends State<TeacherThemMonAnBottomSheet> {
     if (picked != null && picked != _selectedDate) {
       setState(() {
         _selectedDate = picked;
-        _ngayTaoMonController.text = DateFormat('dd/MM/yyyy').format(_selectedDate);
+        _ngayTaoMonController.text = DateFormat('dd-MM-yyyy').format(_selectedDate);
       });
     }
   }

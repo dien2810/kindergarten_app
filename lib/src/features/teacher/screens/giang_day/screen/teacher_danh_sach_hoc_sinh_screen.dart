@@ -35,34 +35,33 @@ class _TeacherDanhSachHocSinhScreenState
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Khung tìm kiếm
-              Container(
-                margin: const EdgeInsets.only(bottom: 16.0),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFF4E9F7),
-                  borderRadius: BorderRadius.circular(18.0),
-                ),
-                child: TextField(
-                  controller: searchController,
-                  decoration: const InputDecoration(
-                    contentPadding:
-                    EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
-                    suffixIcon: Icon(
-                      Icons.search,
-                      color: Colors.black,
-                    ),
-                    hintText: 'Tìm kiếm học sinh...',
-                    hintStyle: TextStyle(
-                      fontSize: 14.0,
-                      color: Color(0xFF7B7B7B),
-                    ),
-                    border: InputBorder.none,
-                  ),
-                  onChanged: (value) {
-                    // Thực hiện logic tìm kiếm
-                  },
-                ),
-              ),
+              // Container(
+              //   margin: const EdgeInsets.only(bottom: 16.0),
+              //   decoration: BoxDecoration(
+              //     color: const Color(0xFFF4E9F7),
+              //     borderRadius: BorderRadius.circular(18.0),
+              //   ),
+              //   child: TextField(
+              //     controller: searchController,
+              //     decoration: const InputDecoration(
+              //       contentPadding:
+              //       EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+              //       suffixIcon: Icon(
+              //         Icons.search,
+              //         color: Colors.black,
+              //       ),
+              //       hintText: 'Tìm kiếm học sinh...',
+              //       hintStyle: TextStyle(
+              //         fontSize: 14.0,
+              //         color: Color(0xFF7B7B7B),
+              //       ),
+              //       border: InputBorder.none,
+              //     ),
+              //     onChanged: (value) {
+              //       // Thực hiện logic tìm kiếm
+              //     },
+              //   ),
+              // ),
               // Dãy button
               Wrap(
                 spacing: 1.0, // Khoảng cách giữa các button

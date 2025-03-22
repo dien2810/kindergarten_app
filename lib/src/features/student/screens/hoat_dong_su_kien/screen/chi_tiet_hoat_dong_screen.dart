@@ -3,10 +3,10 @@ import 'package:get/get.dart';
 import 'package:kindergarten_app/src/constants/sizes.dart';
 import 'package:kindergarten_app/src/features/student/models/activities/activities_event.dart';
 import 'package:kindergarten_app/src/features/student/models/type_of_activity/type_of_activity_model.dart';
+import 'package:kindergarten_app/src/features/student/screens/hoat_dong_su_kien/screen/chi_tiet_video_hoat_dong_screen.dart';
 
 import '../../../../../constants/text_strings.dart';
 import 'chi_tiet_hinh_anh_hoat_dong_screen.dart';
-import 'chi_tiet_video_hoat_dong_screen.dart';
 
 class ChiTietHoatDongScreen extends StatelessWidget {
   final ActivityEvent activityEvent;
@@ -108,7 +108,10 @@ class ChiTietHoatDongScreen extends StatelessWidget {
                         width: 150, // Set the fixed width for the button
                         child: ElevatedButton(
                           onPressed: () {
-                            Get.to(() => VideoScreen(videoLink: activityEvent.videoLive));
+                            Get.to(()=>VideoScreen(
+                              videoLink: activityEvent.videoLive,
+                            ));
+                            // Get.to(() => VideoScreen(videoLink: activityEvent.videoLive));
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFFD74971), // Background color

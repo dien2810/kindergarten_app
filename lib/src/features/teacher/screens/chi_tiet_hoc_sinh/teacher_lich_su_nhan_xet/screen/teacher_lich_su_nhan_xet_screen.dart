@@ -4,7 +4,6 @@ import 'package:kindergarten_app/src/common_widgets/app_bar_widgets/teacher_app_
 import 'package:kindergarten_app/src/constants/text_strings.dart';
 import 'package:kindergarten_app/src/features/teacher/controllers/nhan_xet_hoc_sinh/teacher_nhan_xet_hoc_sinh_controller.dart';
 import 'package:kindergarten_app/src/features/teacher/screens/chi_tiet_hoc_sinh/teacher_lich_su_nhan_xet/widget/teacher_them_moi_nhan_xet_bottom_sheet.dart';
-import '../../../../../../../flutter_flow/flutter_flow_util.dart';
 import '../../../../../../common_widgets/cloud_image/circle_cloud_image_widget.dart';
 import '../widget/teacher_nhan_xet_card_widget.dart';
 
@@ -43,18 +42,19 @@ class TeacherLichSuNhanXetScreen extends StatelessWidget {
               // Avatar và tên học sinh
               _buildStudentProfile(context, imageUrl, studentName, currentDate),
               const SizedBox(height: 16),
-
               Expanded(
                 child: Obx(() {
+                  print('Re-renderrrrrrrrrrrrrrrrrrrrrrrr');
+                  if (controller.isLoading.value == true){
+                    controller.isLoading.value = false;
+                  }
                   // Lấy danh sách nhận xét của học sinh
                   var studentComments = controller.comments;
-
                   return Scrollbar(
                     child: ListView.builder(
                       itemCount: studentComments.length,
                       itemBuilder: (context, index) {
                         final commentModel = studentComments[index];
-
                         // Lặp qua tất cả các CommentInfo trong CommentModel
                         return Column(
                           children: commentModel.commentInfo.map((comment) {

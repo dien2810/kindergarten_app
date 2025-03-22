@@ -8,7 +8,6 @@ import 'package:kindergarten_app/src/features/student/screens/health/thong_tin_s
 import 'package:kindergarten_app/src/features/student/screens/hoat_dong_su_kien/screen/hoat_dong_su_kien_screen.dart';
 import 'package:kindergarten_app/src/features/student/screens/ngoai_khoa/screen/ngoai_khoa_screen.dart';
 import 'package:kindergarten_app/src/features/student/screens/remark/pages/comment_screen.dart';
-import 'package:kindergarten_app/src/features/student/screens/remark/pages/remark.dart';
 import 'package:kindergarten_app/src/features/student/screens/survey/pages/survey.dart';
 import 'package:kindergarten_app/src/features/student/screens/thoi_hoc_hoan_phi/thoi_hoc_hoan_phi_screen.dart';
 import 'package:kindergarten_app/src/features/student/screens/thuc_don/thuc_don_screen.dart';

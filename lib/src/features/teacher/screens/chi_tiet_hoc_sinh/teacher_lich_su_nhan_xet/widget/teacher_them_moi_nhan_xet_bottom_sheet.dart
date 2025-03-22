@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
+import 'package:kindergarten_app/src/features/teacher/controllers/nhan_xet_hoc_sinh/teacher_nhan_xet_hoc_sinh_controller.dart';
 
 class TeacherThemMoiNhanXetBottomSheet extends StatelessWidget {
   final String teacherID;
@@ -69,6 +72,9 @@ class TeacherThemMoiNhanXetBottomSheet extends StatelessWidget {
                 if (commentController.text.isNotEmpty) {
                   // Gọi hàm callback để thêm nhận xét
                   onAddComment(guardianID, teacherID, commentController.text);
+                  final lichSuNhanXetController = Get.put(TeacherThongTinNhanxetController());
+                  lichSuNhanXetController.isLoading.value = true;
+                  print('abcccccccccc');
                   Navigator.pop(context);
                 } else {
                   // Hiển thị thông báo nếu nhận xét rỗng

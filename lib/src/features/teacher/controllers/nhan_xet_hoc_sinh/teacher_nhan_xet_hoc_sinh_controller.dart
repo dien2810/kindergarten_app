@@ -1,69 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:kindergarten_app/src/repository/account_repository/account_repository.dart';
 
 import '../../../../repository/teacher_repository/teacher_repository.dart';
+import '../../../student/models/comment/comment_info.dart';
+import '../../../student/models/comment/comments_model.dart';
 import '../../../student/models/teacher/teacher_model.dart';
 
-class CommentInfo {
-  final String teacherID;
-  final String comment;
-  final String replyContent;
-  final String? guardianID; // Thêm thuộc tính guardianID
-  final String commentDate; // Giữ commentDate là String
-  final String replyDate; // Giữ replyDate là String
-
-  CommentInfo({
-    required this.teacherID,
-    required this.comment,
-    required this.replyContent,
-    this.guardianID, // Thuộc tính này có thể null
-    required this.commentDate,
-    required this.replyDate,
-  });
-
-  factory CommentInfo.fromMap(Map<String, dynamic> map) {
-    return CommentInfo(
-      teacherID: map['teacherID'],
-      comment: map['comment'],
-      replyContent: map['replyContent'],
-      guardianID: map['guardianID'],
-      commentDate: map['commentDate'],
-      replyDate: map['replyDate'],
-    );
-  }
-}
-
-class CommentModel {
-  final String studentID;
-  final List<CommentInfo> commentInfo; // Danh sách các nhận xét
-
-  CommentModel({
-    required this.studentID,
-    required this.commentInfo,
-  });
-
-  factory CommentModel.fromMap(Map<String, dynamic> map) {
-    var commentList = (map['commentInfo'] as List)
-        .map((comment) => CommentInfo.fromMap(comment))
-        .toList();
-
-    return CommentModel(
-      studentID: map['studentID'],
-      commentInfo: commentList,
-    );
-  }
-}
-
 class TeacherThongTinNhanxetController extends GetxController {
-  var comments = <CommentModel>[].obs; // Danh sách các CommentModel
+  var comments = <CommentsModel>[].obs; // Danh sách các CommentModel
   final _teacherRepo = Get.put(TeacherRepository());
+  //LichSuNhanXet
+  Rx<bool> isLoading = false.obs;
   // Phương thức để tải nhận xét của giáo viên cho học sinh
   void loadComments(Map<String, dynamic> commentsData, String studentId, String teacherId) {
     if (commentsData.containsKey(studentId)) {
       var studentCommentsData = commentsData[studentId];
-      var commentModel = CommentModel.fromMap({
+      var commentModel = CommentsModel.fromMap({
         'studentID': studentId,
         'commentInfo': studentCommentsData['commentInfo'],
       });
@@ -73,7 +26,7 @@ class TeacherThongTinNhanxetController extends GetxController {
         return comment.teacherID == teacherId;
       }).toList();
 
-      comments.assignAll([CommentModel(studentID: studentId, commentInfo: filteredComments)]); // Cập nhật danh sách nhận xét
+      comments.assignAll([CommentsModel(studentID: studentId, commentInfo: filteredComments)]); // Cập nhật danh sách nhận xét
     } else {
       comments.clear(); // Nếu không có nhận xét cho học sinh
     }
@@ -98,14 +51,14 @@ class TeacherThongTinNhanxetController extends GetxController {
 
           // Lọc nhận xét theo teacherID
           commentInfoList = commentsData.map((data) {
-            var commentInfo = CommentInfo.fromMap(data);
+            var commentInfo = CommentInfo.fromJson(data);
             // Chỉ thêm nhận xét nếu teacherID khớp
             return commentInfo.teacherID == teacherId ? commentInfo : null;
           }).where((comment) => comment != null).cast<CommentInfo>().toList();
         }
 
         // Tạo CommentModel từ danh sách CommentInfo
-        var commentModel = CommentModel(
+        var commentModel = CommentsModel(
           studentID: studentId,
           commentInfo: commentInfoList,
         );
@@ -123,10 +76,9 @@ class TeacherThongTinNhanxetController extends GetxController {
 
   Future<String> getTeacherName(String sentBy) async {
     TeacherModel? teacher= await _teacherRepo.getTeacherById(sentBy);
-    String teacherName = await  teacher!.firstName +  ' ' + teacher.lastName;
+    String teacherName = '${teacher!.firstName} ${teacher.lastName}';
     return teacherName;
   }
-
 
   Future<void> addComment(String guardianID, String teacherID, String comment) async {
     String commentDate = DateFormat('dd-MM-yyyy').format(DateTime.now());
@@ -161,7 +113,4 @@ class TeacherThongTinNhanxetController extends GetxController {
       print("Error adding comment: $e");
     }
   }
-
-
-
 }

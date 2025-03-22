@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/features/student/controllers/hoat_dong_su_kien/hoat_dong_su_kien_controller.dart';
 import 'package:kindergarten_app/src/features/student/screens/hoat_dong_su_kien/livestream_video_sdk/join_screen.dart';
-import 'package:kindergarten_app/src/features/student/screens/hoat_dong_su_kien/screen/chi_tiet_hoat_dong_screen.dart';
 import 'package:weekly_date_picker/weekly_date_picker.dart';
 import '../../../../../constants/sizes.dart';
+import '../screen/chi_tiet_hoat_dong_screen.dart';
 
 class TeacherHoatDongWidget extends StatelessWidget {
   const TeacherHoatDongWidget({super.key});
@@ -16,19 +16,6 @@ class TeacherHoatDongWidget extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          // ClipRRect(
-          //   borderRadius: BorderRadius.circular(25.0),
-          //   child: Padding(
-          //     padding: EdgeInsets.symmetric(horizontal: t10Size),
-          //     child: Container(
-          //       decoration: const BoxDecoration(
-          //           color: Colors.white,
-          //           shape: BoxShape.rectangle,
-          //           borderRadius: BorderRadius.all(Radius.circular(25.0))),
-          //     ),
-          //   ),
-          // ),
-          // SizedBox(height: t15Size),
           Expanded(
             child: SingleChildScrollView(
               child: Container(
@@ -214,7 +201,7 @@ class TeacherHoatDongWidget extends StatelessWidget {
                                                                     .getTypeOfActivity(
                                                                         event);
                                                             // Navigate to event details page
-                                                            Get.to(() => ChiTietHoatDongScreen(
+                                                            Get.to(() => TeacherChiTietHoatDongScreen(
                                                                 activityEvent:
                                                                     event,
                                                                 typeOfActivity:

@@ -1,14 +1,14 @@
+import 'package:cloudinary_flutter/video/cld_video_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kindergarten_app/src/constants/sizes.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:video_player/video_player.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class VideoScreen extends StatefulWidget {
   final String videoLink;
 
-  VideoScreen({this.videoLink='https://www.youtube.com/watch?v=X0wxLzTe5rE'});
+  VideoScreen({super.key, this.videoLink='https://www.youtube.com/watch?v=X0wxLzTe5rE'});
 
   @override
   _VideoScreenState createState() => _VideoScreenState();
@@ -31,6 +31,8 @@ class _VideoScreenState extends State<VideoScreen> {
 
   Future<void> _initializeVideo() async {
     try {
+      print('URLLLLLLLLLLLLLLL');
+      print(widget.videoLink);
       if (widget.videoLink.contains('youtube.com') ||
           widget.videoLink.contains('youtu.be')) {
         isYoutube = true;
@@ -38,7 +40,7 @@ class _VideoScreenState extends State<VideoScreen> {
         if (videoId != null) {
           _youtubeController = YoutubePlayerController(
             initialVideoId: videoId,
-            flags: YoutubePlayerFlags(autoPlay: false, mute: false),
+            flags: const YoutubePlayerFlags(autoPlay: false, mute: false),
           )..addListener(() {
               setState(() {});
             });
@@ -49,10 +51,15 @@ class _VideoScreenState extends State<VideoScreen> {
           print('Invalid YouTube URL');
         }
       } else {
-        _videoPlayerController = VideoPlayerController.network(widget.videoLink)
+        _videoPlayerController = CldVideoController(publicId: widget.videoLink)
           ..initialize().then((_) {
+            // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
             setState(() {});
           });
+        // _videoPlayerController = VideoPlayerController.networkUrl(Uri.parse(widget.videoLink))
+        //   ..initialize().then((_) {
+        //     setState(() {});
+        //   });
       }
     } catch (e) {
       setState(() {
@@ -83,7 +90,7 @@ class _VideoScreenState extends State<VideoScreen> {
             padding: const EdgeInsets.only(
                 top: 50.0), // Điều chỉnh vị trí nút quay lại
             child: IconButton(
-              icon: Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back),
               onPressed: () {
                 Navigator.pop(context); // Quay lại trang trước
               },
@@ -106,7 +113,7 @@ class _VideoScreenState extends State<VideoScreen> {
           child: SingleChildScrollView(
             child: Center(
               child: _isError
-                  ? Text(
+                  ? const Text(
                       'Video không thể phát được. Vui lòng kiểm tra lại đường dẫn video.')
                   : isYoutube
                       ? Column(
@@ -121,7 +128,7 @@ class _VideoScreenState extends State<VideoScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 IconButton(
-                                  icon: Icon(Icons.fast_rewind),
+                                  icon: const Icon(Icons.fast_rewind),
                                   onPressed: () {
                                     _youtubeController.seekTo(Duration(
                                         seconds: _youtubeController
@@ -144,7 +151,7 @@ class _VideoScreenState extends State<VideoScreen> {
                                   },
                                 ),
                                 IconButton(
-                                  icon: Icon(Icons.fast_forward),
+                                  icon: const Icon(Icons.fast_forward),
                                   onPressed: () {
                                     _youtubeController.seekTo(Duration(
                                         seconds: _youtubeController
@@ -154,7 +161,7 @@ class _VideoScreenState extends State<VideoScreen> {
                                 ),
                                 // Nút chiếu toàn màn hình
                                 IconButton(
-                                  icon: Icon(Icons.fullscreen),
+                                  icon: const Icon(Icons.fullscreen),
                                   onPressed: () {
                                     SystemChrome.setPreferredOrientations([
                                       DeviceOrientation.landscapeRight,
@@ -164,7 +171,7 @@ class _VideoScreenState extends State<VideoScreen> {
                                 ),
                                 // Nút thu nhỏ
                                 IconButton(
-                                  icon: Icon(Icons.fullscreen_exit),
+                                  icon: const Icon(Icons.fullscreen_exit),
                                   onPressed: () {
                                     SystemChrome.setPreferredOrientations([
                                       DeviceOrientation.portraitUp,
@@ -189,7 +196,7 @@ class _VideoScreenState extends State<VideoScreen> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     IconButton(
-                                      icon: Icon(Icons.fast_rewind),
+                                      icon: const Icon(Icons.fast_rewind),
                                       onPressed: () {
                                         setState(() {
                                           _videoPlayerController.seekTo(
@@ -221,7 +228,7 @@ class _VideoScreenState extends State<VideoScreen> {
                                       },
                                     ),
                                     IconButton(
-                                      icon: Icon(Icons.fast_forward),
+                                      icon: const Icon(Icons.fast_forward),
                                       onPressed: () {
                                         setState(() {
                                           _videoPlayerController.seekTo(
@@ -238,7 +245,7 @@ class _VideoScreenState extends State<VideoScreen> {
 
                                     // Nút chiếu toàn màn hình
                                     IconButton(
-                                      icon: Icon(Icons.fullscreen),
+                                      icon: const Icon(Icons.fullscreen),
                                       onPressed: () {
                                         SystemChrome.setPreferredOrientations([
                                           DeviceOrientation.landscapeRight,
@@ -248,7 +255,7 @@ class _VideoScreenState extends State<VideoScreen> {
                                     ),
                                     // Nút thu nhỏ
                                     IconButton(
-                                      icon: Icon(Icons.fullscreen_exit),
+                                      icon: const Icon(Icons.fullscreen_exit),
                                       onPressed: () {
                                         SystemChrome.setPreferredOrientations([
                                           DeviceOrientation.portraitUp,
@@ -260,7 +267,7 @@ class _VideoScreenState extends State<VideoScreen> {
                                 ),
                               ],
                             )
-                          : CircularProgressIndicator(),
+                          : const CircularProgressIndicator(),
             ),
           ),
         ));

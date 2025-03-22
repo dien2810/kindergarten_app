@@ -154,7 +154,7 @@ class _TeacherThongTinTaiKhoanScreenState extends State<TeacherThongTinTaiKhoanS
 }
 void _showChangePasswordBottomSheet(BuildContext context) {
   double keyboardHeight = MediaQuery.of(context).viewInsets.bottom; // Lấy chiều cao bàn phím
-  final taiKhoanController = Get.put(TaiKhoanController());
+  final taiKhoanController = Get.put(TeacherTaiKhoanController());
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,

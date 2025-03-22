@@ -53,6 +53,9 @@ class LoginController extends GetxController{
   void signOut(){
     accountRepo.userId = '';
     accountRepo.fullName = '';
+    username.text = '';
+    password.text = '';
+    role.value = Role.guardian;
     Get.offAll(()=>const LoginScreen());
   }
 

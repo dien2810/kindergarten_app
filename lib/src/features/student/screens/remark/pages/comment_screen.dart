@@ -6,68 +6,66 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../../../../flutter_flow/flutter_flow_theme.dart';
 import '../../../../../common_widgets/app_bar_widgets/guardian_app_bar_with_title.dart';
 import '../../../controllers/comments/comments_controller.dart';
-import '../../../models/comment/commentInfo_model.dart';
-import '../../../models/comment/comment_model.dart';
+import '../../../models/comment/comment_info.dart';
 import 'comment_detail_screen.dart';
 
 class CommentsScreen extends StatelessWidget {
   final CommentsController commentsController = Get.put(CommentsController());
 
+  CommentsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const GuardianAppBarWithTitleWidget(title: tNhanXet),
-      body: Obx(() {
-        // Tạo danh sách nhận xét từ controller
-        Map<String, CommentInfo> allComments = commentsController.comments;
-
-        if (allComments.isEmpty) {
-          return Center(
-            child: Text('Không có nhận xét nào.'),
+    return FutureBuilder(
+      future: commentsController.fetchComments(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting){
+          return const Center(child: CircularProgressIndicator());
+        }
+        else if (snapshot.hasError) {
+          return Center(child: Text('Error: ${snapshot.error}'));
+        }
+        if (commentsController.comments.isEmpty){
+          return const Scaffold(
+            appBar: GuardianAppBarWithTitleWidget(title: tNhanXet),
+            body: Center(
+                child: Text('Không có nhận xét nào.')
+            ),
           );
         }
-
-        // Chuyển đổi dữ liệu nhận xét thành danh sách các widget
-        return ListView.builder(
-          itemCount: allComments.length,
-          itemBuilder: (context, index) {
-            String key = allComments.keys.elementAt(index);
-            CommentInfo commentInfo = allComments[key]!;
-
-            return Column(
-              children: commentInfo.commentInfo.map((comment) {
-                return FutureBuilder<String>(
-                  future: commentsController.getTeacherNameById(comment.teacherID),
+        return Scaffold(
+          appBar: const GuardianAppBarWithTitleWidget(title: tNhanXet),
+          body: ListView.builder(
+              itemCount: commentsController.comments.length,
+              itemBuilder: (context, index) {
+                CommentInfo commentInfo = commentsController.comments[index];
+                return  FutureBuilder(
+                  future: commentsController.getTeacherNameById(commentInfo.teacherID),
                   builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return CircularProgressIndicator();
-                    }
                     String teacherName = snapshot.data ?? 'Không rõ';
-                    return _buildCommentCard(comment, teacherName, context);
-                  },
+                    return _buildCommentCard(index, commentInfo, teacherName, context);
+                  }
                 );
-              }).toList(),
-            );
-          },
+              },
+          )
         );
-      }),
+      }
     );
   }
 
-  Widget _buildCommentCard(CommentModel comment, String teacherName, BuildContext context) {
+  Widget _buildCommentCard(int index, CommentInfo commentInfo, String teacherName, BuildContext context) {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(12, 12, 12, 0),
       child: InkWell(
         onTap: () {
-          Get.to(() => CommentDetailScreen(comment: comment));
+          Get.to(() => CommentDetailScreen(commentInfo: commentInfo, index: index));
         },
         child: Row(
           children: [
             Container(
               width: 5,
               height: 120,  // Tăng chiều cao của thẻ nhận xét
-              color: Color(0xFF2058E9), // Thanh dọc màu xanh
+              color: const Color(0xFF2058E9), // Thanh dọc màu xanh
             ),
             Expanded(
               child: Card(
@@ -92,7 +90,7 @@ class CommentsScreen extends StatelessWidget {
                           fontWeight: FontWeight.w800,
                         ),
                       ),
-                      SizedBox(height: 30),
+                      const SizedBox(height: 30),
                       Row(
                         children: [
                           const Icon(
@@ -100,9 +98,9 @@ class CommentsScreen extends StatelessWidget {
                             color: Color(0xFF0B2384),
                             size: 16,
                           ),
-                          SizedBox(width: 5),
+                          const SizedBox(width: 5),
                           Text(
-                            comment.commentDate,  // Hiển thị ngày nhận xét
+                            commentInfo.commentDate,  // Hiển thị ngày nhận xét
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
@@ -113,7 +111,7 @@ class CommentsScreen extends StatelessWidget {
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          SizedBox(height: 30),
+                          const SizedBox(height: 30),
                         ],
                       ),
                     ],

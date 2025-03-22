@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kindergarten_app/src/constants/text_strings.dart';
-import 'package:kindergarten_app/src/features/student/screens/hoat_dong_su_kien/screen/chi_tiet_hinh_anh_hoat_dong_screen.dart';
+import 'package:kindergarten_app/src/features/student/screens/student_information/screen/anh_ho_so_giay_to_screen.dart';
 import 'package:kindergarten_app/src/repository/classes_repository/classes_respository.dart';
 import 'package:kindergarten_app/src/repository/student_repository/student_repository.dart';
 
@@ -118,11 +118,12 @@ class ThongTinHocSinhController extends GetxController{
         final image = await pickImage('photo4x6');
         if (image != null){
           anhHocSinh.text = await Helper.uploadImage(image);
+          studentModel.studentDocument.image = anhHocSinh.text;
         }
       }
       else{
         images = [anhHocSinh.text];
-        Get.to(HinhAnhScreen(images: images));
+        Get.to(AnhHoSoGiayToScreen(images: images, type: 'photo4x6'));
       }
     } else{
       if (type == 'birthCertificate') {
@@ -130,11 +131,12 @@ class ThongTinHocSinhController extends GetxController{
           final image = await pickImage('birthCertificate');
           if (image != null){
             anhGiayKhaiSinh.text = await Helper.uploadImage(image);
+            studentModel.studentDocument.birthCertificate = anhGiayKhaiSinh.text;
           }
         }
         else{
           images = [anhGiayKhaiSinh.text];
-          Get.to(HinhAnhScreen(images: images));
+          Get.to(AnhHoSoGiayToScreen(images: images, type: 'birthCertificate'));
         }
       }
       else{
@@ -143,11 +145,12 @@ class ThongTinHocSinhController extends GetxController{
             final image = await pickImage('householdRegistration');
             if (image != null){
               anhSoHoKhau.text = await Helper.uploadImage(image);
+              studentModel.studentDocument.householdRegistration = anhSoHoKhau.text;
             }
           }
           else{
             images = [anhSoHoKhau.text];
-            Get.to(HinhAnhScreen(images: images));
+            Get.to(AnhHoSoGiayToScreen(images: images, type: 'householdRegistration'));
           }
         }
       }

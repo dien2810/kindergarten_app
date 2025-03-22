@@ -62,15 +62,24 @@ class TeacherThongTinHocSinhController extends GetxController {
     email.text = guardianModel.email;
     diaChi.text = guardianModel.address;
     anhHocSinh.text = studentModel.studentDocument.image;
-    if (anhHocSinh.text != 'Chưa nộp'){
+    if (anhHocSinh.text == 'Chưa nộp'){
+      hasPhoto4x6.value = false;
+    }
+    else {
       hasPhoto4x6.value = true;
     }
     anhGiayKhaiSinh.text = studentModel.studentDocument.birthCertificate;
-    if (anhGiayKhaiSinh.text != 'Chưa nộp'){
+    if (anhGiayKhaiSinh.text == 'Chưa nộp'){
+      hasBirthCertificate.value = false;
+    }
+    else{
       hasBirthCertificate.value = true;
     }
     anhSoHoKhau.text = studentModel.studentDocument.householdRegistration;
-    if (anhSoHoKhau.text != 'Chưa nộp'){
+    if (anhSoHoKhau.text == 'Chưa nộp'){
+      hasHouseholdRegistration.value = false;
+    }
+    else{
       hasHouseholdRegistration.value = true;
     }
   }
@@ -95,6 +104,7 @@ class TeacherThongTinHocSinhController extends GetxController {
         final image = await pickImage('photo4x6');
         if (image != null){
           anhHocSinh.text = await Helper.uploadImage(image);
+          studentModel.studentDocument.image = anhHocSinh.text;
         }
       }
       else{
@@ -107,6 +117,7 @@ class TeacherThongTinHocSinhController extends GetxController {
           final image = await pickImage('birthCertificate');
           if (image != null){
             anhGiayKhaiSinh.text = await Helper.uploadImage(image);
+            studentModel.studentDocument.birthCertificate = anhGiayKhaiSinh.text;
           }
         }
         else{
@@ -120,6 +131,7 @@ class TeacherThongTinHocSinhController extends GetxController {
             final image = await pickImage('householdRegistration');
             if (image != null){
               anhSoHoKhau.text = await Helper.uploadImage(image);
+              studentModel.studentDocument.householdRegistration = anhSoHoKhau.text;
             }
           }
           else{
