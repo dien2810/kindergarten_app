@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../../../../constants/text_strings.dart';
 import '../../../../../controllers/suc_khoe_hoc_sinh/teacher_suc_khoe_hoc_sinh_controller.dart';
+import '../../../../chi_tiet_hoc_sinh/teacher_suc_khoe_hoc_sinh/ho_so_y_te/teacher_them_moi_lieu_tiem_bottom_sheet.dart';
+import '../../../../chi_tiet_hoc_sinh/teacher_suc_khoe_hoc_sinh/ho_so_y_te/teacher_them_moi_loai_vaccine_bottom_sheet.dart';
 
 class TeacherClbDanhSachLichSuTiemChungWidget extends StatelessWidget {
   const TeacherClbDanhSachLichSuTiemChungWidget(
@@ -26,34 +28,58 @@ class TeacherClbDanhSachLichSuTiemChungWidget extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           // Button thêm mới loại vaccine
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF9ADA7E), // Màu nền button
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8), // Bo góc button
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12), // Padding cho button
+            ),
+            onPressed: () {
+              // Gọi BottomSheet khi nhấn nút
+              showModalBottomSheet(
+                context: context,
+                isScrollControlled: true, // Cho phép BottomSheet cuộn khi có nhiều nội dung
+                builder: (BuildContext context) {
+                  return TeacherThemMoiLoaiVaccineBottomSheet(context: context, controller: controller);
+                },
+              );
+            },
+            child: const Text(
+              tThemMoiLoaiVaccine,
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
+            ),
+          ),
           const SizedBox(height: 16),
           Obx(() {
             if (controller.isDetailView.value &&
-                controller.selectedVaccine.value.isNotEmpty) {
-              final vaccineHistoryId = controller.selectedVaccine.value;
-              final selectedVaccineHistory =
-                  controller.vaccineHistory[vaccineHistoryId] ?? {};
-              final vaccineId = selectedVaccineHistory["vaccineID"];
-              final vaccineInfo = controller.vaccineData[vaccineId] ?? {};
-
+                controller.vaccineListByStudent.isNotEmpty) {
+              final vaccineName = controller.vaccineListByStudent[controller.vaccineHistoryIndex]["vaccineName"];
+              final vaccineDescription = controller.vaccineListByStudent[controller.vaccineHistoryIndex]["description"];
+              final vaccineHistoryDetailOfStudent = controller.vaccineListByStudent[controller.vaccineHistoryIndex]["details"];
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '$tChiTietVe ${vaccineInfo['vaccineName']} \n ${vaccineInfo['description']}',
+                    '$tChiTietVe $vaccineName \n $vaccineDescription',
                     style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF7209B7)
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF7209B7)
                     ),
                   ),
                   const SizedBox(height: 16),
                   ListView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: selectedVaccineHistory['doses']?.length ?? 0,
+                    itemCount: vaccineHistoryDetailOfStudent['doses']?.length ?? 0,
                     itemBuilder: (context, index) {
-                      final doseInfo = selectedVaccineHistory['doses'][index];
+                      final doseInfo = vaccineHistoryDetailOfStudent['doses'][index];
                       return Card(
                         color: index.isEven
                             ? Colors.white
@@ -115,8 +141,9 @@ class TeacherClbDanhSachLichSuTiemChungWidget extends StatelessWidget {
                     },
                   ),
                   const SizedBox(height: 16),
+                  // Thêm hai nút trong cùng một dòng
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
                         child: ElevatedButton(
@@ -130,12 +157,33 @@ class TeacherClbDanhSachLichSuTiemChungWidget extends StatelessWidget {
                           ),
                           onPressed: () {
                             controller.isDetailView.value = false;
-                            controller.selectedVaccine.value = '';
                           },
-                          child: const Text(tQuayLaiDanhSach, style: TextStyle(fontSize: 19),),
+                          child: const Text(tQuayLaiDanhSach),
                         ),
                       ),
-                      const SizedBox(width: 19), // Khoảng cách giữa hai nút
+                      const SizedBox(width: 16), // Khoảng cách giữa hai nút
+                      Expanded(
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: Colors.white,
+                            backgroundColor: const Color(0xFF9ADA7E),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                          ),
+                          onPressed: () {
+                            showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              builder: (BuildContext context) {
+                                return TeacherThemMoiLieuTiemBottomSheet(controller: controller,);
+                              },
+                            );
+                          },
+                          child: const Text(tThemMoiLieuVaccine),
+                        ),
+                      ),
                     ],
                   ),
                 ],
@@ -144,8 +192,7 @@ class TeacherClbDanhSachLichSuTiemChungWidget extends StatelessWidget {
               return SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: DataTable(
-                  headingRowColor:
-                  WidgetStateProperty.all(const Color(0xFFE9CEF8)),
+                  headingRowColor: WidgetStateProperty.all(const Color(0xFFE9CEF8)),
                   columns: const [
                     DataColumn(
                       label: Text(
@@ -170,10 +217,9 @@ class TeacherClbDanhSachLichSuTiemChungWidget extends StatelessWidget {
                     ),
                   ],
                   rows: List<DataRow>.generate(
-                    controller.selectedVaccineHistory.length,
+                    controller.vaccineListByStudent.length,
                         (index) {
-                      final vaccineHistory =
-                      controller.selectedVaccineHistory[index];
+                      final vaccineHistoryByStudent = controller.vaccineListByStudent[index];
                       final rowColor =
                       index.isEven ? Colors.white : const Color(0xFFF2E9F7);
                       return DataRow(
@@ -187,7 +233,7 @@ class TeacherClbDanhSachLichSuTiemChungWidget extends StatelessWidget {
                           ),
                           DataCell(
                             Text(
-                              vaccineHistory['LoaiVaccine'] ?? '',
+                              vaccineHistoryByStudent['vaccineName'] ?? '',
                               style: const TextStyle(fontSize: 18),
                             ),
                           ),
@@ -195,8 +241,9 @@ class TeacherClbDanhSachLichSuTiemChungWidget extends StatelessWidget {
                             TextButton(
                               onPressed: () {
                                 controller.isDetailView.value = true;
-                                controller.selectedVaccine.value =
-                                vaccineHistory['vaccineHistoryId'];
+                                controller.vaccineHistoryId =
+                                  vaccineHistoryByStudent['vaccineHistoryId'];
+                                controller.vaccineHistoryIndex = index;
                               },
                               child: const Text(
                                 tXemChiTietButton,

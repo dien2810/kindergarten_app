@@ -124,7 +124,7 @@ class _TeacherGiangDayScreenState extends State<TeacherGiangDayScreen> {
                                               lopName: classes.className,
                                               soLuong: classes.students.length,
                                               thoiGianBatDau: '01-12-2024',
-                                              thoiGianKetThuc: '31/12/2024'
+                                              thoiGianKetThuc: '31-12-2024'
                                             ),
                                             SizedBox(height: t5Size),
                                             //TeacherThucDonCardWidget(),
@@ -132,7 +132,6 @@ class _TeacherGiangDayScreenState extends State<TeacherGiangDayScreen> {
                                           ],
                                         );
                                       },
-
                                     )
                                   ),
                                 ],

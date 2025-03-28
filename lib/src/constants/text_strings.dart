@@ -242,6 +242,27 @@ const String tPhanUngSauTiem = 'Phản ứng sau tiêm:';
 const String tLieuTiepTheo = 'Liều tiếp theo:';
 const String tTienTrinhTiem = 'Tiến trình tiêm:';
 const String tQuayLaiDanhSach = 'Quay lại danh sách';
+const String tThemMoiLoaiVaccine = "Thêm loại vaccine";
+const String tThemMoiLichSuTiemChung = "Thêm lịch sử tiêm chủng";
+const String tTenLoaiVaccine = "Tên loại vaccine";
+const String tNhapTenLoaiVaccine = "Nhập tên loại vaccine";
+const String tMoTaLoaiVaccine = "Mô tả loại vaccine";
+const String tNhapMoTaLoaiVaccine = "Nhập mô tả loại vaccine";
+const String tThemVaccineThanhCong = "Thêm vaccine thành công";
+const String tDaThemVaccine = "Đã thêm vaccine";
+const String tthanhCong = "thành công";
+const String tThemMoiLieuVaccine = "Thêm mới liều vaccine";
+const String tThemMoiLieuTiemChungVaccine = "THÊM MỚI LIỀU TIÊM CHỦNG VACCINE";
+const String tLieuLuongTiem = "Liều lượng tiêm";
+const String tTacDungPhuNeuCo = "Tác dụng phụ (nếu có)";
+const String tLieuTiemTiepTheoNeuCo = "Liều tiêm tiếp theo (nếu có)";
+const String tChonNgayTiemTiepTheo = "Chọn ngày tiêm tiếp theo";
+const String tTienTrinhTiemChung = "Tiến trình tiêm chủng";
+const String tNhap = "Nhập";
+const String tThemLieuVaccineThanhCong = "Thêm liều vaccine thành công";
+const String tLoaiVaccine = "Loại vaccine";
+const String tVuiLongChonLoaiVaccine = "Vui lòng chọn loại vaccine";
+const String tDaThemLichSuTiemChung = "Đã thêm lịch sử tiêm chủng";
 
 // Thông tin học sinh screen : thong_tin_hoc_sinh_screen.dart
 const String tThongTinHocSinh = "Thông tin học sinh";

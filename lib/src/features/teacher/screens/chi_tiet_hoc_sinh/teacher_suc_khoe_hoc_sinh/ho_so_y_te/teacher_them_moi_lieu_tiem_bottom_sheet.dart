@@ -1,55 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:intl/intl.dart';
 import 'package:kindergarten_app/src/constants/sizes.dart';
+import 'package:kindergarten_app/src/features/teacher/controllers/suc_khoe_hoc_sinh/teacher_suc_khoe_hoc_sinh_controller.dart';
 
-class TeacherThemMoiLieuTiemBottomSheet extends StatefulWidget {
-  const TeacherThemMoiLieuTiemBottomSheet({super.key});
+import '../../../../../../constants/text_strings.dart';
+import '../../../../../../utils/helper_controller/helper_controller.dart';
 
-  @override
-  _TeacherThemMoiLieuTiemBottomSheetState createState() =>
-      _TeacherThemMoiLieuTiemBottomSheetState();
-}
+class TeacherThemMoiLieuTiemBottomSheet extends StatelessWidget {
+  final TeacherSucKhoeHocSinhController controller;
 
-class _TeacherThemMoiLieuTiemBottomSheetState
-    extends State<TeacherThemMoiLieuTiemBottomSheet> {
-  final TextEditingController _lieuLuongTiemController =
-      TextEditingController();
-  final TextEditingController _viTriTiemController = TextEditingController();
-  final TextEditingController _nhaCungCapController = TextEditingController();
-  final TextEditingController _tacDungPhuController = TextEditingController();
-  final TextEditingController _lieuTiemTiepTheoController =
-      TextEditingController();
-  final TextEditingController _tienTrinhTiemChungController =
-      TextEditingController();
-  DateTime? _ngayTiem;
+  const TeacherThemMoiLieuTiemBottomSheet({super.key, required this.controller});
 
-  @override
-  void dispose() {
-    _lieuLuongTiemController.dispose();
-    _viTriTiemController.dispose();
-    _nhaCungCapController.dispose();
-    _tacDungPhuController.dispose();
-    _lieuTiemTiepTheoController.dispose();
-    _tienTrinhTiemChungController.dispose();
-    super.dispose();
-  }
-
-  Future<void> _selectDate(BuildContext context) async {
+  Future<void> selectInjectionDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: _ngayTiem ?? DateTime.now(),
+      initialDate: controller.ngayTiem.value,
       firstDate: DateTime(2000),
       lastDate: DateTime(2101),
     );
-    if (picked != null && picked != _ngayTiem) {
-      setState(() {
-        _ngayTiem = picked;
-      });
+    if (picked != null && picked != controller.ngayTiem.value) {
+      controller.ngayTiem.value = picked;
+    }
+  }
+
+  Future<void> selectNextInjectionDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: controller.lieuTiemTiepTheo.value,
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+    );
+    if (picked != null && picked != controller.lieuTiemTiepTheo.value) {
+      controller.lieuTiemTiepTheo.value = picked;
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController lieuLuongTiemController = TextEditingController();
+    final TextEditingController viTriTiemController = TextEditingController();
+    final TextEditingController nhaCungCapController = TextEditingController();
+    final TextEditingController tacDungPhuController = TextEditingController();
+    final TextEditingController tienTrinhTiemChungController = TextEditingController();
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: const BoxDecoration(
@@ -67,7 +60,7 @@ class _TeacherThemMoiLieuTiemBottomSheetState
             ),
             Center(
               child: Text(
-                "THÊM MỚI LIỀU TIÊM CHỦNG VACCINE",
+                tThemMoiLieuTiemChungVaccine,
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -78,7 +71,7 @@ class _TeacherThemMoiLieuTiemBottomSheetState
             const SizedBox(height: 16),
         // Ngày tiêm
             const Text(
-              "Ngày tiêm",
+              tNgayTiem,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
@@ -87,10 +80,9 @@ class _TeacherThemMoiLieuTiemBottomSheetState
             ),
             const SizedBox(height: 8),
             GestureDetector(
-              onTap: () => _selectDate(context),
+              onTap: () => selectInjectionDate(context),
               child: Container(
-                width: double
-                    .infinity, // Đặt chiều rộng là 100% để khung rộng đầy đủ
+                width: double.infinity, // Đặt chiều rộng là 100% để khung rộng đầy đủ
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: const Color(0xFFF2E9F7),
@@ -100,12 +92,10 @@ class _TeacherThemMoiLieuTiemBottomSheetState
                   mainAxisAlignment:
                       MainAxisAlignment.spaceBetween, // Căn giữa các phần tử
                   children: [
-                    Text(
-                      _ngayTiem == null
-                          ? DateFormat('dd/MM/yyyy').format(DateTime.now())
-                          : DateFormat('dd/MM/yyyy').format(_ngayTiem!),
+                    Obx(()=>Text(
+                      DateFormat('dd-MM-yyyy').format(controller.ngayTiem.value),
                       style: const TextStyle(fontSize: 16),
-                    ),
+                    )),
                     const Icon(
                       Icons.calendar_today, // Biểu tượng lịch
                       color: Colors.grey, // Màu của biểu tượng
@@ -116,26 +106,22 @@ class _TeacherThemMoiLieuTiemBottomSheetState
             ),
             const SizedBox(height: 16),
             // Liều lượng tiêm
-            _buildTextField("Liều lượng tiêm", _lieuLuongTiemController),
+            _buildTextField(tLieuLuongTiem, lieuLuongTiemController),
             const SizedBox(height: 16),
-
             // Vị trí tiêm
-            _buildTextField("Vị trí tiêm", _viTriTiemController),
+            _buildTextField(tViTriTiem, viTriTiemController),
             const SizedBox(height: 16),
-
             // Nhà cung cấp
-            _buildTextField("Nhà cung cấp", _nhaCungCapController,
+            _buildTextField(tNhaCungCap, nhaCungCapController,
                 isExpanded: false),
             const SizedBox(height: 16),
-
             // Tác dụng phụ
-            _buildTextField("Tác dụng phụ (nếu có)", _tacDungPhuController,
+            _buildTextField(tTacDungPhuNeuCo, tacDungPhuController,
                 isExpanded: false),
             const SizedBox(height: 16),
-
             // Liều tiêm tiếp theo
             const Text(
-              "Liều tiêm tiếp theo (nếu có)",
+              tLieuTiemTiepTheoNeuCo,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
@@ -152,7 +138,7 @@ class _TeacherThemMoiLieuTiemBottomSheetState
                 borderRadius: BorderRadius.circular(12),
               ),
               child: GestureDetector(
-                onTap: () => _selectDate(context),
+                onTap: () => selectNextInjectionDate(context),
                 child: Container(
                   width: double
                       .infinity, // Đặt chiều rộng là 100% để khung rộng đầy đủ
@@ -164,13 +150,11 @@ class _TeacherThemMoiLieuTiemBottomSheetState
                     mainAxisAlignment:
                         MainAxisAlignment.spaceBetween, // Căn giữa các phần tử
                     children: [
-                      Text(
-                        _ngayTiem == null
-                            ? "Chọn ngày tiêm tiếp theo"
-                            : DateFormat('dd/MM/yyyy').format(_ngayTiem!),
+                      Obx(()=>Text(
+                        DateFormat('dd-MM-yyyy').format(controller.lieuTiemTiepTheo.value),
                         style: const TextStyle(
                             fontSize: 17, color: Color(0xFF7B7B7B)),
-                      ),
+                      )),
                       const Icon(
                         Icons.calendar_today, // Biểu tượng lịch
                         color: Colors.grey, // Màu của biểu tượng
@@ -183,19 +167,32 @@ class _TeacherThemMoiLieuTiemBottomSheetState
             const SizedBox(height: 16),
             // Tiến trình tiêm chủng
             _buildTextField(
-                "Tiến trình tiêm chủng", _tienTrinhTiemChungController),
+                tTienTrinhTiemChung, tienTrinhTiemChungController),
             const SizedBox(height: 24),
-
             // Nút Lưu và Hủy
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     // Xử lý lưu dữ liệu
-                    print("Dữ liệu đã được lưu!");
-                    Navigator.pop(context);
+                    final BuildContext currentContext = context;
+                    await controller.addNewDoseForStudent(
+                      controller.ngayTiem.value,
+                      lieuLuongTiemController.text,
+                      viTriTiemController.text,
+                      nhaCungCapController.text,
+                      tacDungPhuController.text,
+                      controller.lieuTiemTiepTheo.value,
+                      tienTrinhTiemChungController.text
+                    );
+                    Helper.successSnackBar(
+                      title: tDaThemThanhCong,
+                      message: tThemLieuVaccineThanhCong
+                    );
+                    if (currentContext.mounted) {
+                      Navigator.of(currentContext).pop();
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF99D98C),
@@ -205,8 +202,7 @@ class _TeacherThemMoiLieuTiemBottomSheetState
                     padding:
                         const EdgeInsets.symmetric(horizontal: 60, vertical: 8),
                   ),
-                  child:
-                  const Text("Thêm mới", style: TextStyle(fontSize: 20, color: Colors.white)),
+                  child: const Text(tThemMoi, style: TextStyle(fontSize: 20, color: Colors.white)),
                 ),
                 ElevatedButton(
                   onPressed: () {
@@ -218,11 +214,9 @@ class _TeacherThemMoiLieuTiemBottomSheetState
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 60, vertical: 8),
+                    padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 8),
                   ),
-                  child:
-                  const Text("Hủy", style: TextStyle(fontSize: 20, color: Colors.white)),
+                  child: const Text(tHuy, style: TextStyle(fontSize: 20, color: Colors.white)),
                 ),
               ],
             ),
@@ -255,7 +249,7 @@ class _TeacherThemMoiLieuTiemBottomSheetState
           child: TextField(
             controller: controller,
             decoration: InputDecoration(
-              hintText: "Nhập $label",
+              hintText: "$tNhap $label",
               hintStyle: const TextStyle(
                 color: Color(0xFF7B7B7B),
                 fontStyle: FontStyle.italic,

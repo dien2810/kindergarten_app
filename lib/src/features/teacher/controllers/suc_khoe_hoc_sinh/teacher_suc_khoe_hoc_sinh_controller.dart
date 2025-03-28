@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kindergarten_app/src/features/student/models/vaccine/vaccine_information_model.dart';
+import 'package:kindergarten_app/src/repository/vaccine_information_repository/vaccine_information_repository.dart';
 
+import '../../../../../flutter_flow/flutter_flow_util.dart';
 import '../../../../constants/text_strings.dart';
-import '../../../../repository/account_repository/account_repository.dart';
 import '../../../../repository/healthHistory_repository/healthHistory_repository.dart';
 import '../../../../repository/health_information_repository/health_information_repository.dart';
 import '../../../../repository/medical_record_repository/medical_record_repository.dart';
+import '../../../../repository/vaccine_history_reposiroty/vaccine_history_repository.dart';
+import '../../../../repository/vaccine_repository/vaccine_repository.dart';
 import '../../../../utils/helper_controller/helper_controller.dart';
 import '../../../student/models/health_history/health_history_model.dart';
 import '../../../student/models/health_information/health_information_model.dart';
 import '../../../student/models/medical_record/medical_record_model.dart';
 import '../../../student/models/student/student_model.dart';
+import '../../../student/models/vaccine/dose.dart';
+import '../../../student/models/vaccine/vaccine_history_model.dart';
+import '../../../student/models/vaccine/vaccine_model.dart';
 
 enum GiaDinhCoBenh{khong,co}
 enum TruyenNhiem{khong,co}
@@ -21,10 +28,13 @@ enum HenSuyen{khong,co}
 class TeacherSucKhoeHocSinhController extends GetxController{
   static TeacherSucKhoeHocSinhController get instance => Get.find();
 
-  final _accountRepo = Get.put(AccountRepository());
   final _healthHistoryRepo = Get.put(HealthHistoryRepository());
   final _healthInformationRepo = Get.put(HealthInformationRepository());
   final _medicalRecordRepo = Get.put(MedicalRecordRepository());
+  final _vaccineRepo = Get.put(VaccineRepository());
+  final _vaccineInfoRepo = Get.put(VaccineInformationRepository());
+  final _vaccineHistoryRepo = Get.put(VaccineHistoryRepository());
+
   late final String _healthHistoryId;
   late final String _healthInformationId;
   late final String _medicalRecordId;
@@ -59,12 +69,16 @@ class TeacherSucKhoeHocSinhController extends GetxController{
   final loiKhuyenCuaBacSi = TextEditingController();
 
   // danh sach lich su tiem chung
-  var vaccineData = {}.obs;
-  var vaccinationInformation = {}.obs;
-  var vaccineHistory = {}.obs;
-  var selectedVaccineHistory = [].obs;
-  var selectedVaccine = ''.obs;
+  var vaccineHistoryId = '';
+  var vaccineListByStudent = <Map<String, dynamic>>[].obs;
   var isDetailView = false.obs;
+  List<VaccineModel> allVaccines = [];
+  List<VaccineHistoryModel> allVaccineHistories = [];
+  late int vaccineHistoryIndex;
+  Rx<DateTime> ngayTiem = DateTime.now().obs;
+  Rx<DateTime> lieuTiemTiepTheo = DateTime.now().obs;
+  var selectedVaccine = Rxn<VaccineModel>(); // Rxn cho phép null
+  late VaccineInformationModel vaccineInfo;
 
   Future<void> loadData() async {
     super.onInit();
@@ -77,8 +91,7 @@ class TeacherSucKhoeHocSinhController extends GetxController{
     loadHealthHistoryData(healthHistory);
     loadHealthInformationData(healthInformation);
     loadMedicalRecordData(medicalRecord);
-    loadSampleData();
-    buildVaccineHistory();
+    await buildVaccineHistory();
   }
 
   void loadMedicalRecordData(MedicalRecordModel medicalRecord){
@@ -129,112 +142,48 @@ class TeacherSucKhoeHocSinhController extends GetxController{
     benhKhac.text = healthHistory.note;
   }
 
-  void loadSampleData() {
-    // Sample vaccine data
-    vaccineData.value = {
-      "vaccine_id_1": {
-        "vaccineName": "rabies",
-        "description": "vaccine phòng bệnh dại "
-      },
-      "vaccine_id_2": {
-        "vaccineName": "pertussis",
-        "description": "vaccine phòng bệnh ho gà "
-      },
-      "vaccine_id_3": {
-        "vaccineName": "BCG",
-        "description": "vaccine phòng bệnh lao "
-      }
-    };
+  Future<void> buildVaccineHistory() async {
+    try {
+      vaccineListByStudent.clear();
+      // Bước 1: Lấy thông tin vaccine information theo studentID
+      vaccineInfo =
+        await _vaccineInfoRepo.getVaccineInformationByStudentID(student.studentProfile.studentID);
 
-    // Sample vaccination information data
-    vaccinationInformation.value = {
-      "vaccinationInformation_id_10": {
-        "studentID": "student_id_10",
-        "vaccineHistory": [
-          "vaccineHistory_id_1_1",
-          "vaccineHistory_id_1_2",
-        ]
-      }
-    };
+      // Bước 2: Lấy tất cả vaccine history và vaccine data
+      allVaccineHistories = await _vaccineHistoryRepo.getAllVaccineHistory();
+      allVaccines = await _vaccineRepo.getAllVaccines();
 
-    // Sample vaccine history data
-    vaccineHistory.value = {
-      "vaccineHistory_id_1_1": {
-        "vaccineID": "vaccine_id_1",
-        "doses": [
-          {
-            "dateAdministered": "21/06/2022",
-            "dose": "0.5 ml",
-            "site": "Cơ delta (bắp tay) trái",
-            "provider": "Phòng khám đa khoa Linh Trung 1 thuộc Bệnh viện Quận Thủ Đức",
-            "sideEffects": "Đau nhức tại chỗ tiêm, sốt nhẹ, mệt mỏi.",
-            "nextDoseDue": "Không có",
-            "vaccinationProgress": "1/"
+      // Chuyển vaccine data thành Map để tra cứu nhanh theo vaccineID
+      Map<String, VaccineModel> vaccineDataMap = {
+        for (var vaccine in allVaccines) vaccine.id!: vaccine
+      };
+
+      // Bước 3: Xây dựng mảng vaccineListByStudent
+      for (var historyId in vaccineInfo.vaccineHistory) {
+        // Tìm vaccine history tương ứng với historyId
+        var matchingHistory = allVaccineHistories.firstWhere(
+              (history) => history.id == historyId,
+          orElse: () => VaccineHistoryModel(
+              vaccineID: '', doses: []), // Trường hợp không tìm thấy
+        );
+
+        if (matchingHistory.vaccineID.isNotEmpty) {
+          // Lấy thông tin vaccine từ vaccineID
+          var vaccine = vaccineDataMap[matchingHistory.vaccineID];
+          if (vaccine != null) {
+            vaccineListByStudent.add({
+              "STT": (vaccineListByStudent.length + 1).toString(),
+              "vaccineName": vaccine.vaccineName,
+              "vaccineHistoryId": historyId,
+              "details": matchingHistory.toJson(), // Chuyển history thành JSON
+              "description": vaccine.description
+            });
           }
-        ]
-      },
-      "vaccineHistory_id_1_2": {
-        "vaccineID": "vaccine_id_2",
-        "doses": [
-          {
-            "dateAdministered": "16/03/2020",
-            "dose": "0.5 ml",
-            "site": "đùi trái",
-            "provider": "Phòng khám đa khoa Trung tâm Y tế Quận Thủ Đức",
-            "sideEffects": "Không có",
-            "nextDoseDue": "16/04/2020",
-            "vaccinationProgress": "1/4"
-          },
-          {
-            "dateAdministered": "16/04/2020",
-            "dose": "0.5 ml",
-            "site": "đùi trái",
-            "provider": "Phòng khám đa khoa Trung tâm Y tế Quận Thủ Đức",
-            "sideEffects": "Sốt, sưng đỏ tại chỗ tiêm, khóc nhiều, biếng ăn, buồn nôn.",
-            "nextDoseDue": "16/05/2020",
-            "vaccinationProgress": "2/4"
-          },
-          {
-            "dateAdministered": "16/05/2020",
-            "dose": "0.5 ml",
-            "site": "đùi trái",
-            "provider": "Phòng khám đa khoa Trung tâm Y tế Quận Thủ Đức",
-            "sideEffects": "Sốt, sưng đỏ tại chỗ tiêm, khóc nhiều, biếng ăn, buồn nôn.",
-            "nextDoseDue": "16/07/2021",
-            "vaccinationProgress": "3/4"
-          },
-          {
-            "dateAdministered": "16/07/2021",
-            "dose": "0.5 ml",
-            "site": "đùi trái",
-            "provider": "Phòng khám đa khoa Trung tâm Y tế Quận Thủ Đức",
-            "sideEffects": "Không có",
-            "nextDoseDue": "Không có",
-            "vaccinationProgress": "4/4"
-          }
-        ]
-      }
-    };
-  }
-
-  void buildVaccineHistory() {
-    var result = [];
-    vaccinationInformation.forEach((key, value) {
-      value["vaccineHistory"].forEach((historyId) {
-        if (vaccineHistory.containsKey(historyId)) {
-          var history = vaccineHistory[historyId];
-          var vaccineId = history["vaccineID"];
-          var vaccineName = vaccineData[vaccineId]["vaccineName"];
-          result.add({
-            "STT": (result.length + 1).toString(),
-            "LoaiVaccine": vaccineName,
-            "vaccineHistoryId": historyId,
-            "details": history
-          });
         }
-      });
-    });
-    selectedVaccineHistory.value = result;
+      }
+    } catch (e) {
+      throw Exception('Error building vaccine history: $e');
+    }
   }
 
   void updateHealthHistory() async{
@@ -281,7 +230,6 @@ class TeacherSucKhoeHocSinhController extends GetxController{
           message: e.toString()
       );
     }
-
   }
 
   void updateHealthInformation() async{
@@ -419,6 +367,43 @@ class TeacherSucKhoeHocSinhController extends GetxController{
           title: 'Error',
           message: e.toString()
       );
+    }
+  }
+
+  Future<void> addNewVaccine(String vaccineName, String description)async {
+    await _vaccineRepo.addVaccine(VaccineModel(vaccineName: vaccineName, description: description));
+    await buildVaccineHistory();
+  }
+
+  Future<void> addNewDoseForStudent(DateTime ngayTiem, String lieuLuongTiem,
+      String vitriTiem, String nhaCungCap, String tacDungPhu,
+      DateTime lieuTiemTiepTheo, String tienTrinhTiemChung)async {
+    try {
+      final historyId = vaccineListByStudent[vaccineHistoryIndex]['vaccineHistoryId'];
+      await _vaccineHistoryRepo.addDoseToVaccineHistory(
+        historyId,
+        Dose(
+          dateAdministered: DateFormat('dd-MM-yyyy').format(ngayTiem),
+          dose: lieuLuongTiem,
+          nextDoseDue: DateFormat('dd-MM-yyyy').format(lieuTiemTiepTheo),
+          provider: nhaCungCap,
+          sideEffects: tacDungPhu,
+          site: vitriTiem,
+          vaccinationProgress: tienTrinhTiemChung,
+        ),
+      );
+      await buildVaccineHistory();
+    } catch (e) {
+      throw Exception('Error adding new dose: $e');
+    }
+  }
+  
+  Future<void> addNewVaccineHistory() async {
+    if (selectedVaccine.value?.id != null){
+      String newVaccineHistoryId = await _vaccineHistoryRepo.addVaccineHistory(VaccineHistoryModel(doses: [], vaccineID: selectedVaccine.value?.id as String));
+      vaccineInfo.vaccineHistory.add(newVaccineHistoryId);
+      await _vaccineInfoRepo.updateVaccineInformation(vaccineInfo);
+      await buildVaccineHistory();
     }
   }
 }

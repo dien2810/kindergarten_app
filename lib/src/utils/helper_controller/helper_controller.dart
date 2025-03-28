@@ -32,6 +32,7 @@ class Helper extends GetxController{
 
     return "$dayOfWeek - $formattedDate";
   }
+
   static successSnackBar({required title, message}){
     Get.snackbar(
       title,
