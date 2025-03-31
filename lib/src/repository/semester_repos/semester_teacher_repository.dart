@@ -14,7 +14,7 @@ class SemesterRepository extends GetxController{
 
       // Chuyển đổi từng document thành SemesterModel
       return querySnapshot.docs
-          .map((doc) => SemesterModel.fromMap(doc.data() as Map<String, dynamic>))
+          .map((doc) => SemesterModel.fromMap(doc.data() as Map<String, dynamic>)..id = doc.id)
           .toList();
     } catch (e) {
       print('Lỗi khi lấy danh sách học kỳ: $e');
@@ -22,8 +22,8 @@ class SemesterRepository extends GetxController{
     }
   }
 
-  Future<SemesterModel?> getSemesterById() async {
-    final snapshot = await _semesterCollection.doc('daily_id_1').get();
+  Future<SemesterModel?> getSemesterById(String id) async {
+    final snapshot = await _semesterCollection.doc(id).get();
     if (snapshot.exists && snapshot.data() != null) {
       final data = snapshot.data() as Map<String, dynamic>;
       return SemesterModel.fromMap(data)..id=snapshot.id; // Chuyển đổi dữ liệu thành model

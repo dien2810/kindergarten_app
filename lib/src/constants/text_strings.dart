@@ -314,6 +314,9 @@ const String tSuKien = "Sự kiện ";
 const String tGiangDay  = "Giảng dạy";
 // danh_sach_hoc_sinh_screen
 const String tDanhSachHocSinh = 'Danh sách học sinh';
+const String tHOATDONG = 'HOẠT ĐỘNG';
+const String tDIEMDANH = 'ĐIỂM DANH';
+const String tXINNGHI = 'XIN NGHỈ';
 // teacher_thong_tin_ca_nhan_screen
 const String tThongTinCaNhan = 'Thông tin cá nhân';
 // teacher_ho_so_giay_to_widget
@@ -329,6 +332,23 @@ const String tThongBao = 'Thông báo';
 const String tThongBaoChung = 'Thông báo chung';
 const String tThongBaoDaTao = 'Thông báo đã tạo';
 const String tChiTietThongBao = 'Chi tiết thông báo';
+const String tDanhSachThongBao = 'Danh sách thông báo';
+const String tKhongCoThongBaoNao = 'Không có thông báo nào.';
+const String tDanhSachThongBaoDaTao = 'Danh sách thông báo đã tạo';
+const String tIDThongBaoKhongHopLe = 'ID thông báo không hợp lệ';
+const String tXacNhanXoa = 'Xác nhận xóa';
+const String tBanCoChacMuonXoaThongBao = 'Bạn có chắc muốn xóa thông báo này không?';
+const String tXoa = 'Xóa';
+const String tTHEMMOITHONGBAO = "THÊM MỚI THÔNG BÁO";
+const String tTieuDe = "Tiêu đề ";
+const String tNoiDungSp = "Nội dung ";
+const String tLoaiThongBao = "Loại thông báo";
+const String tNguoiNhan = "Người nhận";
+const String tTatCa = 'Tất cả';
+const String tGiaoVien = 'Giáo viên';
+const String tPhuHuynh = 'Phụ huynh';
+const String tDoUuTien = 'Độ ưu tiên';
+const String tThemThongBaoThanhCong = 'Thêm thông báo thành công!';
 // teacher_danh_sach_xin_nghi_screen
 
 // teacher_diem_danh_screen

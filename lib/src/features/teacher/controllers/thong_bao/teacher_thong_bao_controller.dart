@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../../flutter_flow/flutter_flow_util.dart';
 import '../../../../repository/account_repository/account_repository.dart';
 import '../../../../repository/notifications_repository/notifications_repository.dart';
 import '../../../../repository/teacher_repository/teacher_repository.dart';
@@ -15,29 +15,26 @@ class TeacherThongBaoController extends GetxController {
   final _accountRepo = Get.put(AccountRepository());
 
   final _teacherRepo = Get.put(TeacherRepository());
-  var isLoading = false.obs;
-
-
-  @override
-  void onInit() {
-    super.onInit();
-    isLoading.value = true;
-  }
+  var notificationsFuture = Rxn<Future<List<NotificationsModel>>>(); // Future reactive
 
   late NotificationsModel notification;
   late TeacherModel teacher;
 
   Future<List<NotificationsModel>> getNotificationsList() async{
-    String  teacherID = await _teacherRepo.getTeacherIDByTeacherID(_accountRepo.userId);
+    String teacherID = _accountRepo.userId;
     return await _notificationRepo.getNotificationsForTeacher(teacherID);
   }
+
+  void loadNotifications() {
+    notificationsFuture.value = getNotificationsCreatedByTeacher();
+  }
   Future<List<NotificationsModel>> getNotificationsCreatedByTeacher() async {
-    String  teacherID = await _teacherRepo.getTeacherIDByTeacherID(_accountRepo.userId);
+    String teacherID = _accountRepo.userId;
     return await _notificationRepo.getNotificationsByTeacherID(teacherID);
   }
   Future<String> getTeacherName(String sentBy) async {
-    TeacherModel? teacher= await _teacherRepo.getTeacherById(sentBy);
-    String teacherName =   teacher!.firstName +  ' ' + teacher.lastName;
+    TeacherModel? teacher= await _teacherRepo.getTeacherByTeacherID(sentBy);
+    String teacherName = '${teacher!.firstName} ${teacher.lastName}';
     return teacherName;
   }
   Future<void> deleteNotification(String notificationID) async {
@@ -47,21 +44,30 @@ class TeacherThongBaoController extends GetxController {
       throw Exception('Delete Failed: $e');
     }
   }
-  fetchNotificationsCreatedByTeacher() {}
 
   Future<void> addNotification(NotificationsModel notification) async {
     try {
-      isLoading.value = true;
       await _notificationRepo.addNotifications(notification);
-      await fetchNotificationsCreatedByTeacher();
-      print("Notification added successfully");
+      loadNotifications();
     } catch (e) {
       print("Error adding notification: $e");
-    } finally {
-      isLoading.value = false;
     }
   }
 
+  Future<void> reloadNotifications() async {
+    loadNotifications();
+  }
 
-
+  Future<void> addNewNotificationByTeacher(String title, String typeOfNotification, String content, String priority, String recipient)async {
+    await _notificationRepo.addNotifications(NotificationsModel(
+        allReceivedStatus: 'true',
+        dateSent: DateFormat('dd-MM-yyyy').format(DateTime.now()),
+        message: content,
+        priority: priority,
+        recipients: [],
+        sentBy: _accountRepo.userId,
+        title: title,
+        typeOfNotification: typeOfNotification
+    ));
+  }
 }

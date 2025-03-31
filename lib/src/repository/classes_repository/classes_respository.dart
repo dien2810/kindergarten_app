@@ -70,4 +70,25 @@ class ClassesRepository extends GetxController{
       print("Failed to update Classes: $e");
     }
   }
+
+  Future<List<ClassesModel>> getClassesBySemesterAndTeacherId(
+      String semesterId, String teacherId) async {
+    try {
+      QuerySnapshot snapshot = await _classesCollection
+          .where('semesterID', isEqualTo: semesterId)
+          .where('teacherID', isEqualTo: teacherId)
+          .get();
+
+      // Chuyển đổi dữ liệu từ snapshot thành List<ClassModel>
+      List<ClassesModel> classes = snapshot.docs
+          .map((doc) => ClassesModel.fromMap(doc.data() as Map<String, dynamic>)..id=doc.id)
+          .toList();
+
+      print("Classes retrieved successfully: ${classes.length} classes found");
+      return classes;
+    } catch (e) {
+      print("Failed to retrieve classes: $e");
+      throw Exception('Error fetching classes: $e');
+    }
+  }
 }

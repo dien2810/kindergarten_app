@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:kindergarten_app/src/utils/helper_controller/helper_controller.dart';
+
+import '../../../../../constants/text_strings.dart';
+import '../../../controllers/thong_bao/teacher_thong_bao_controller.dart';
 
 class TeacherThemMoiThongBaoBottomSheet extends StatefulWidget {
+  const TeacherThemMoiThongBaoBottomSheet({super.key});
+
   @override
   _TeacherThemMoiThongBaoBottomSheetState createState() =>
       _TeacherThemMoiThongBaoBottomSheetState();
@@ -9,9 +16,11 @@ class TeacherThemMoiThongBaoBottomSheet extends StatefulWidget {
 class _TeacherThemMoiThongBaoBottomSheetState
     extends State<TeacherThemMoiThongBaoBottomSheet> {
   final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _typeController = TextEditingController();
   final TextEditingController _contentController = TextEditingController();
   String _selectedRecipient = 'Tất cả';
-  String _selectedPriority = 'Trung bình';
+  String _selectedPriority = 'normal';
+  final notificationsController = Get.put(TeacherThongBaoController());
 
   @override
   void dispose() {
@@ -23,8 +32,6 @@ class _TeacherThemMoiThongBaoBottomSheetState
   @override
   Widget build(BuildContext context) {
     // Lấy chiều cao của màn hình và chiều cao của bàn phím
-    final screenHeight = MediaQuery.of(context).size.height;
-    final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -43,7 +50,7 @@ class _TeacherThemMoiThongBaoBottomSheetState
             const SizedBox(height: 20),
             Center(
               child: Text(
-                "THÊM MỚI THÔNG BÁO",
+                tTHEMMOITHONGBAO,
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -54,16 +61,20 @@ class _TeacherThemMoiThongBaoBottomSheetState
             const SizedBox(height: 16),
 
             // Tiêu đề thông báo
-            _buildTextField("Tiêu đề ", _titleController),
+            _buildTextField(tTieuDe, _titleController),
+            const SizedBox(height: 16),
+
+            // Loại thông báo
+            _buildTextField(tLoaiThongBao, _typeController),
             const SizedBox(height: 16),
 
             // Nội dung thông báo
-            _buildTextField("Nội dung ", _contentController, isExpanded: true),
+            _buildTextField(tNoiDungSp, _contentController, isExpanded: true),
             const SizedBox(height: 16),
 
             // Loại thông báo
             const Text(
-              "Loại thông báo",
+              tDoUuTien,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
@@ -87,7 +98,7 @@ class _TeacherThemMoiThongBaoBottomSheetState
                   });
                 },
                 items: <String>['high', 'normal', 'low']
-                    .map<DropdownMenuItem<String>>((String value) {
+                    .map((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: Text(
@@ -110,7 +121,7 @@ class _TeacherThemMoiThongBaoBottomSheetState
 
             // Người nhận
             const Text(
-              "Người nhận",
+              tNguoiNhan,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
@@ -133,7 +144,7 @@ class _TeacherThemMoiThongBaoBottomSheetState
                     _selectedRecipient = newValue!;
                   });
                 },
-                items: <String>['Tất cả', 'Giáo viên', 'Phụ huynh']
+                items: <String>[tTatCa, tGiaoVien, tPhuHuynh]
                     .map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
@@ -154,16 +165,27 @@ class _TeacherThemMoiThongBaoBottomSheetState
               ),
             ),
             const SizedBox(height: 24),
-
             // Nút Lưu và Hủy
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ElevatedButton(
-                  onPressed: () {
-                    // Xử lý lưu dữ liệu
-                    print("Thông báo đã được thêm!");
-                    Navigator.pop(context);
+                  onPressed: () async{
+                    await notificationsController.addNewNotificationByTeacher(
+                      _titleController.text,
+                        _typeController.text,
+                      _contentController.text,
+                      _selectedPriority,
+                      _selectedRecipient
+                    );
+                    await notificationsController.reloadNotifications();
+                    Helper.successSnackBar(
+                      title: tDaThemThanhCong,
+                      message: tThemThongBaoThanhCong
+                    );
+                    if (context.mounted){
+                      Navigator.pop(context);
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF99D98C),
@@ -172,7 +194,7 @@ class _TeacherThemMoiThongBaoBottomSheetState
                     ),
                     padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 8),
                   ),
-                  child: const Text("Thêm mới", style: TextStyle(fontSize: 20, color: Colors.white)),
+                  child: const Text(tThemMoi, style: TextStyle(fontSize: 20, color: Colors.white)),
                 ),
                 ElevatedButton(
                   onPressed: () {
@@ -186,7 +208,7 @@ class _TeacherThemMoiThongBaoBottomSheetState
                     ),
                     padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 8),
                   ),
-                  child: const Text("Hủy", style: TextStyle(fontSize: 20, color: Colors.white)),
+                  child: const Text(tHuy, style: TextStyle(fontSize: 20, color: Colors.white)),
                 ),
               ],
             ),

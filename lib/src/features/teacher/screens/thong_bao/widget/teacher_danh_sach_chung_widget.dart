@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/features/teacher/controllers/thong_bao/teacher_thong_bao_controller.dart';
+import '../../../../../constants/text_strings.dart';
 import '../../../../student/models/notifications/notifications_model.dart';
 import '../screen/teacher_chi_tiet_thong_bao_screen.dart';
 
 class TeacherDanhSachChungWidget extends StatelessWidget {
-  const TeacherDanhSachChungWidget({Key? key, required this.controller})
-      : super(key: key);
+  const TeacherDanhSachChungWidget({super.key, required this.controller});
   final TeacherThongBaoController controller;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Danh sách thông báo'),
+        title: const Text(tDanhSachThongBao),
       ),
       body: FutureBuilder<List<NotificationsModel>>(
         future: controller.getNotificationsList(),
@@ -22,7 +22,7 @@ class TeacherDanhSachChungWidget extends StatelessWidget {
           } else if (snapshot.hasError) {
             return Center(child: Text('Lỗi: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('Không có thông báo nào.'));
+            return const Center(child: Text(tKhongCoThongBaoNao));
           }
 
           final notifications = snapshot.data!;

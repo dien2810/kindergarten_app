@@ -1,5 +1,5 @@
 class SemesterModel {
-  late final String? id;
+  String? id;
   final String semesterName;
   final String startDate;
   final String endDate;

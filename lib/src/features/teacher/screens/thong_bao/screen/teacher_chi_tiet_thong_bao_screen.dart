@@ -126,7 +126,7 @@ class TeacherChiTietThongBaoScreen extends StatelessWidget {
                     child: const Padding(
                       padding: EdgeInsets.symmetric(vertical: 9.0),
                       child: Text(
-                        "Quay lại trang trước",
+                        tQuayLaiTrangTruoc,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 22,

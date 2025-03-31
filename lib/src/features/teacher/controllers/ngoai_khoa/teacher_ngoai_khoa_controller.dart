@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:kindergarten_app/src/features/student/models/teacher/teacher_model.dart';
 import 'package:kindergarten_app/src/repository/club_repository/club_teacher_repository.dart';
 import 'package:kindergarten_app/src/repository/account_repository/account_repository.dart';
 import 'package:kindergarten_app/src/repository/teacher_repository/teacher_repository.dart';
@@ -39,8 +38,8 @@ class TeacherNgoaiKhoaController extends GetxController {
       isLoading.value = true;
       final accountRepo = Get.put(AccountRepository());
       String username = accountRepo.userId;
-      final teacherRepo = Get.put(TeacherRepository());
-      String teacherID = await teacherRepo.getTeacherIDByTeacherID(username); // Đợi kết quả của Future
+      Get.put(TeacherRepository());
+      String teacherID = username;
 
       if (teacherID.isEmpty) {
         print("Error: Teacher ID is empty");
@@ -101,13 +100,5 @@ class TeacherNgoaiKhoaController extends GetxController {
       'Sunday': 'Chủ Nhật'
     };
     return days[day] ?? day;
-  }
-
-  Future<Future<String?>> getTeacherID() async {
-    final accountRepo = Get.put(AccountRepository());
-    String username  = accountRepo.userId;
-    final teacherRepo = Get.put(TeacherRepository());
-    Future<String?> teacherID =  teacherRepo.getTeacherIDByTeacherID(username);
-    return  teacherID ;
   }
 }

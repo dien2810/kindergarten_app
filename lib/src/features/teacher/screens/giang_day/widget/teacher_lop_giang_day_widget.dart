@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:kindergarten_app/src/constants/sizes.dart';
+import 'package:kindergarten_app/src/features/student/models/classes/classes_model.dart';
+import 'package:kindergarten_app/src/features/teacher/controllers/giang_day/teacher_giang_day_controller.dart';
 
 import '../screen/teacher_danh_sach_hoc_sinh_screen.dart';
 
 class TeacherLopGiangDayWidget extends StatelessWidget {
+  final ClassesModel classItem;
   final String lopName;
   final int soLuong;
   final String thoiGianBatDau;
@@ -11,6 +15,7 @@ class TeacherLopGiangDayWidget extends StatelessWidget {
 
   const TeacherLopGiangDayWidget({
     super.key,
+    required this.classItem,
     required this.lopName,
     required this.soLuong,
     required this.thoiGianBatDau,
@@ -19,8 +24,10 @@ class TeacherLopGiangDayWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final giangDayController = Get.put(TeacherGiangDayController());
     return GestureDetector(
       onTap: () {
+        giangDayController.classModel = classItem;
         // Chuyển sang trang danh sách học sinh
         Navigator.push(
           context,

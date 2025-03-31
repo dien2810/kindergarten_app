@@ -78,7 +78,7 @@ class _TeacherDanhSachHocSinhScreenState
                       Get.to(const TeacherHoatDongSuKienScreen());
                     },
                     child: const Text(
-                      'HOẠT ĐỘNG',
+                      tHOATDONG,
                       style: TextStyle(fontSize: 14.0, color: Colors.white),
                     ),
                   ),
@@ -92,10 +92,10 @@ class _TeacherDanhSachHocSinhScreenState
                       // Chuyển sang trang "Điểm Danh"
                       final teacherDiemDanhController = Get.put(TeacherDiemDanhController());
                       teacherDiemDanhController.studentIds = giangDayController.classModel!.students;
-                      Get.to(()=>  TeacherDiemDanhScreen());
+                      Get.to(()=>  const TeacherDiemDanhScreen());
                     },
                     child: const Text(
-                      'ĐIỂM DANH',
+                      tDIEMDANH,
                       style: TextStyle(fontSize: 14.0, color: Colors.white),
                     ),
                   ),
@@ -111,7 +111,7 @@ class _TeacherDanhSachHocSinhScreenState
                       Get.to(TeacherDanhSachXinNghiScreen(studentIds: giangDayController.classModel!.students));
                     },
                     child: const Text(
-                      'XIN NGHỈ',
+                      tXINNGHI,
                       style: TextStyle(fontSize: 14.0, color: Colors.white),
                     ),
                   ),

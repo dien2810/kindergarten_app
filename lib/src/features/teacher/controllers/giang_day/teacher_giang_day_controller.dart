@@ -24,15 +24,10 @@ class TeacherGiangDayController extends GetxController{
     return await semesterRepo.getSemesterList();
   }
 
-  Future<SemesterModel?> getSemesterData() async{
-    final semesterRepo = Get.put(SemesterRepository());
-    return await semesterRepo.getSemesterById();
-  }
-
-  Future<ClassesModel?> getClassesData() async{
+  Future<List<ClassesModel>?> getClassesData() async{
     final accountRepo = Get.put(AccountRepository());
-    classModel = await _classesRepo.getClassesByTeacherId(accountRepo.userId);
-    return classModel;
+    List<ClassesModel> classList = await _classesRepo.getClassesBySemesterAndTeacherId(semester.id!, accountRepo.userId);
+    return classList;
   }
 
   Future<StudentModel?> getStudentByStudentId(String studentId) async{

@@ -107,8 +107,9 @@ class _TeacherThemMoiCauLacBoScreenState extends State<TeacherThemMoiCauLacBoScr
 
     final accountRepo = Get.put(AccountRepository());
     String username = accountRepo.userId;
-    final teacherRepo = Get.put(TeacherRepository());
-    String teacherID = await teacherRepo.getTeacherIDByTeacherID(username);
+    Get.put(TeacherRepository());
+    // String teacherID = await teacherRepo.getTeacherIDByTeacherID(username);
+    final teacherID = username;
     // Lưu câu lạc bộ mới vào Firestore
     final newClub = ClubModel(
       aboutCourse: _aboutCourseController.text,

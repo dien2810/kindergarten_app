@@ -68,11 +68,9 @@ class NotificationsRepository extends GetxController{
 
   Future<List<NotificationsModel>> getNotificationsByTeacherID(String teacherId) async {
     try {
-
       final snapshot = await _notificationsCollection
           .where('sent_by' , isEqualTo : teacherId)
           .get();
-
       final notifications = snapshot.docs.map((doc) {
         final notification = NotificationsModel.fromMap(doc.data() as Map<String,dynamic>);
         notification.id=doc.id;

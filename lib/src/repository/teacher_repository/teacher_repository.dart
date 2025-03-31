@@ -19,7 +19,7 @@ class TeacherRepository extends GetxController{
       return null; // Document không tồn tại hoặc không có dữ liệu
     }
   }
-  // Thêm một document mới vào Firestore
+
   Future<TeacherModel?> getTeacherById(String teacherId) async {
     final snapshot = await _teacherCollection.doc(teacherId).get();
     if (snapshot.exists && snapshot.data() != null) {
@@ -29,7 +29,17 @@ class TeacherRepository extends GetxController{
       return null; // Document không tồn tại hoặc không có dữ liệu
     }
   }
-  // Thêm một document vào Firestore
+
+  Future<TeacherModel?> getTeacherByTeacherID(String teacherId) async {
+    final snapshot = await _teacherCollection.where('teacherID', isEqualTo: teacherId).limit(1).get();
+    if (snapshot.docs.isNotEmpty) {
+      final teacherData = snapshot.docs.first.data() as Map<String, dynamic>;
+      return TeacherModel.fromMap(teacherData)..id=snapshot.docs.first.id;
+    } else {
+      return null;
+    }
+  }
+
   Future<void> addTeacher(TeacherModel teacher) async {
     try {
       await _teacherCollection.doc(teacher.id).set(teacher.toMap());
@@ -58,21 +68,7 @@ class TeacherRepository extends GetxController{
   }
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  Future<String> getTeacherIDByTeacherID(String inputTeacherID) async {
-    try {
-      final snapshot = await _firestore.collection('teacher').where('teacherID', isEqualTo: inputTeacherID).limit(1).get();
 
-      if (snapshot.docs.isNotEmpty) {
-        final teacher = TeacherModel.fromFirestore(snapshot.docs.first);
-        return teacher.id!;
-      } else {
-        throw Exception("No teacher found with teacherID: $inputTeacherID");
-      }
-    } catch (e) {
-      print("Error fetching teacher ID: $e");
-      return "Error fetching teacher ID"; // Trả về chuỗi thông báo lỗi
-    }
-  }
   Future<String> getFullNameByTeacherID(String inputTeacherID) async {
     try {
       final snapshot = await _firestore.collection('teacher')
@@ -81,7 +77,7 @@ class TeacherRepository extends GetxController{
           .get();
 
       if (snapshot.docs.isNotEmpty) {
-        final teacherData = snapshot.docs.first.data() as Map<String, dynamic>;
+        final teacherData = snapshot.docs.first.data();
         String firstName = teacherData['firstName'] ?? '';
         String lastName = teacherData['lastName'] ?? '';
         return '$firstName $lastName'.trim();
