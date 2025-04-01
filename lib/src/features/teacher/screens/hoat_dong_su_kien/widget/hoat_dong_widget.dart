@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kindergarten_app/src/features/student/controllers/hoat_dong_su_kien/hoat_dong_su_kien_controller.dart';
 import 'package:kindergarten_app/src/features/student/screens/hoat_dong_su_kien/livestream_video_sdk/join_screen.dart';
 import 'package:weekly_date_picker/weekly_date_picker.dart';
 import '../../../../../constants/sizes.dart';
+import '../../../../../constants/text_strings.dart';
+import '../../../controllers/hoat_dong_su_kien/teacher_hoat_dong_su_kien_controller.dart';
 import '../screen/chi_tiet_hoat_dong_screen.dart';
 
 class TeacherHoatDongWidget extends StatelessWidget {
@@ -11,7 +12,7 @@ class TeacherHoatDongWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final hoatDongController = Get.put(HoatDongSuKienController());
+    final hoatDongController = Get.put(TeacherHoatDongSuKienController());
 
     return Scaffold(
       body: Column(
@@ -36,8 +37,7 @@ class TeacherHoatDongWidget extends StatelessWidget {
                             selectedDay: hoatDongController.selectedDay.value,
                             // DateTime
                             changeDay: (value) {
-                              hoatDongController.fetchEventsForDay(
-                                  value); // Fetch events for selected day
+                              hoatDongController.fetchEventsForDay(value); // Fetch events for selected day
                             },
                             backgroundColor: const Color(0xFFCAF0F8),
                             selectedDigitBackgroundColor:
@@ -52,7 +52,7 @@ class TeacherHoatDongWidget extends StatelessWidget {
                     const Row(children: [
                       Expanded(
                         child: Text(
-                          'Giám sát hoạt động trong ngày',
+                          tGiamSatHoatDongTrongNgay,
                           style: TextStyle(
                             fontSize: 18,
                             color: Color(0xFF767676),
@@ -65,9 +65,7 @@ class TeacherHoatDongWidget extends StatelessWidget {
                       children: [
                         ElevatedButton(
                           onPressed: () {
-                            //Navigate to video screen
-                            String videoLink =
-                                'URL_CUA_VIDEO'; // Thay thế bằng giá trị thực tế
+                            //Navigate to livestream screen
                             // Get.to(() => VideoGiamSatScreen());
                             Get.to(()=>JoinScreen());
                           },
@@ -80,7 +78,7 @@ class TeacherHoatDongWidget extends StatelessWidget {
                           child: const Row(
                             children: [
                               Text(
-                                'Livestream',
+                                tLiveStream,
                                 style: TextStyle(color: Colors.white),
                               ),
                               SizedBox(width: 8),
@@ -95,7 +93,7 @@ class TeacherHoatDongWidget extends StatelessWidget {
                     ),
                     SizedBox(height: t5Size),
                     const Text(
-                      'Lịch sử hoạt động',
+                      tLichSuHoatDong,
                       style: TextStyle(
                         color: Color(0xFF767676),
                         fontSize: 18,
@@ -123,7 +121,7 @@ class TeacherHoatDongWidget extends StatelessWidget {
                                   snapshot.data!.isEmpty) {
                                 return const Align(
                                   alignment: Alignment.topCenter,
-                                  child: Text('Không có dữ liệu.'));
+                                  child: Text(tKhongCoDuLieu));
                               } else {
                                 final listEvent = snapshot.data!;
                                 return ListView.builder(
@@ -135,8 +133,7 @@ class TeacherHoatDongWidget extends StatelessWidget {
                                     itemBuilder: (context, index) {
                                       final event = listEvent[index];
                                       return Container(
-                                        margin:
-                                            const EdgeInsets.only(bottom: 15),
+                                        margin: const EdgeInsets.only(bottom: 15),
                                         child: Row(
                                           children: [
                                             // Vertical line
@@ -145,8 +142,7 @@ class TeacherHoatDongWidget extends StatelessWidget {
                                               // Width of the vertical line
                                               height: 150,
                                               // Height of the line (now extends through the entire list)
-                                              color: const Color(
-                                                  0xFFB2B2B2), // Line color
+                                              color: const Color(0xFFB2B2B2), // Line color
                                             ),
                                             const SizedBox(width: 10),
                                             Column(
@@ -184,55 +180,40 @@ class TeacherHoatDongWidget extends StatelessWidget {
                                                       children: [
                                                         Text(event.activityName,
                                                             style: const TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                fontSize: 16)),
-                                                        const SizedBox(
-                                                            height: 5),
+                                                                fontWeight: FontWeight.bold,
+                                                                fontSize: 16)
+                                                        ),
+                                                        const SizedBox(height: 5),
                                                         Text(event.location),
-                                                        const SizedBox(
-                                                            height: 10),
+                                                        const SizedBox(height: 10),
                                                         // Xem chi tiết button with border and background color
                                                         ElevatedButton(
                                                           onPressed: () async {
-                                                            final typeOfActivity =
-                                                                await hoatDongController
-                                                                    .getTypeOfActivity(
-                                                                        event);
+                                                            final typeOfActivity = await hoatDongController.getTypeOfActivity(event);
+                                                            hoatDongController.typeOfActivity = typeOfActivity!;
+                                                            hoatDongController.eventIndex = index;
                                                             // Navigate to event details page
                                                             Get.to(() => TeacherChiTietHoatDongScreen(
-                                                                activityEvent:
-                                                                    event,
-                                                                typeOfActivity:
-                                                                    typeOfActivity));
+                                                                typeOfActivity: typeOfActivity
+                                                            ));
                                                           },
-                                                          style: ElevatedButton
-                                                              .styleFrom(
+                                                          style: ElevatedButton.styleFrom(
                                                             backgroundColor:
-                                                                const Color(
-                                                                    0xFFD74971),
-                                                            // Background color
+                                                                const Color(0xFFD74971),
                                                             side:
                                                                 const BorderSide(
-                                                                    color: Color(
-                                                                        0xFFD74971),
-                                                                    // Border color
-                                                                    width: 1),
+                                                                    color: Color(0xFFD74971),
+                                                                    width: 1
+                                                                ),
                                                             // Border width
-                                                            shape:
-                                                                RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          30), // Rounded corners
+                                                            shape: RoundedRectangleBorder(
+                                                              borderRadius: BorderRadius.circular(30), // Rounded corners
                                                             ),
                                                           ),
                                                           child: const Text(
-                                                              'Xem chi tiết',
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .white)),
+                                                              tXemChiTietButton,
+                                                              style: TextStyle(color: Colors.white)
+                                                          ),
                                                         ),
                                                       ],
                                                     ),

@@ -1,13 +1,20 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kindergarten_app/src/constants/text_strings.dart';
 import 'package:kindergarten_app/src/features/student/screens/student_information/screen/anh_ho_so_giay_to_screen.dart';
 import 'package:kindergarten_app/src/repository/classes_repository/classes_respository.dart';
 import 'package:kindergarten_app/src/repository/student_repository/student_repository.dart';
+import 'package:path_provider/path_provider.dart';
 
+import '../../../../constants/cloud_params.dart';
 import '../../../../utils/helper_controller/helper_controller.dart';
 import '../../models/student/student_model.dart';
+import 'package:http/http.dart' as http;
+
 class ThongTinHocSinhController extends GetxController{
   static ThongTinHocSinhController get instance => Get.find();
   final _studentRepo = Get.put(StudentRepository());
@@ -36,6 +43,8 @@ class ThongTinHocSinhController extends GetxController{
   var hasHouseholdRegistration = false.obs;
 
   late StudentModel studentModel;
+
+  final RxList<String> images = <String>[].obs; // Danh sách ảnh reactive
 
   @override
   Future<void> onInit() async {
@@ -104,10 +113,10 @@ class ThongTinHocSinhController extends GetxController{
           print('Da upload image${image.path}');
         }
       }
-      Helper.successSnackBar(title: 'Cập nhật thành công', message: 'Cập nhật thông tin học sinh thành công');
+      Helper.successSnackBar(title: tCapNhatThanhCong, message: tCapNhatThongTinHocSinhThanhCong);
     } catch(e){
       print(e);
-      Helper.errorSnackBar(title: 'Cập nhật thất bại', message: 'Cập nhật thông tin cá nhân thất bại');
+      Helper.errorSnackBar(title: tCapNhatThatBai, message: tCapNhatThongTinCaNhanThatBai);
     }
   }
 
@@ -176,5 +185,35 @@ class ThongTinHocSinhController extends GetxController{
       }
     }
     return image;
+  }
+
+  String buildCloudinaryUrl(String publicId) {
+    return 'https://res.cloudinary.com/$tCloudName/image/upload/$publicId.$defaultFormat';
+  }
+
+  // Hàm tải ảnh từ Cloudinary
+  Future<void> downloadImage(String publicId) async {
+    try {
+      final imageUrl = buildCloudinaryUrl(publicId); // Tạo URL từ public ID
+      final response = await http.get(Uri.parse(imageUrl));
+      if (response.statusCode == 200) {
+        final directory = await getTemporaryDirectory();
+        final filePath = '${directory.path}/image_${DateTime.now().millisecondsSinceEpoch}.$defaultFormat';
+        final file = File(filePath);
+        await file.writeAsBytes(response.bodyBytes);
+
+        // Lưu vào thư viện ảnh
+        final result = await GallerySaver.saveImage(filePath);
+        if (result == true) {
+          Helper.successSnackBar(title: tHinhAnh, message: tDaTaiAnhThanhCong);
+        } else {
+          throw Exception(tLuuAnhThatBai);
+        }
+      } else {
+        throw Exception('$tTaiAnhThatBai ${response.statusCode}');
+      }
+    } catch (e) {
+      Helper.errorSnackBar(title: tHinhAnh, message: '$tLoiKhiTaiAnh $e');
+    }
   }
 }

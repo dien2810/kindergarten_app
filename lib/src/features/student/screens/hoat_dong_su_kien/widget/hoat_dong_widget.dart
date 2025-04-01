@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kindergarten_app/src/constants/text_strings.dart';
 import 'package:kindergarten_app/src/features/student/controllers/hoat_dong_su_kien/hoat_dong_su_kien_controller.dart';
 import 'package:kindergarten_app/src/features/student/screens/hoat_dong_su_kien/livestream_video_sdk/join_screen.dart';
 import 'package:kindergarten_app/src/features/student/screens/hoat_dong_su_kien/screen/chi_tiet_hoat_dong_screen.dart';
@@ -65,7 +66,7 @@ class HoatDongWidget extends StatelessWidget {
                     const Row(children: [
                       Expanded(
                         child: Text(
-                          'Giám sát hoạt động trong ngày',
+                          tTheoDoiTre,
                           style: TextStyle(
                             fontSize: 18,
                             color: Color(0xFF767676),
@@ -79,9 +80,6 @@ class HoatDongWidget extends StatelessWidget {
                         ElevatedButton(
                           onPressed: () {
                             //Navigate to video screen
-                            String videoLink =
-                                'URL_CUA_VIDEO'; // Thay thế bằng giá trị thực tế
-                            // Get.to(() => VideoGiamSatScreen());
                             Get.to(()=>JoinScreen());
                           },
                           style: ElevatedButton.styleFrom(
@@ -93,7 +91,7 @@ class HoatDongWidget extends StatelessWidget {
                           child: const Row(
                             children: [
                               Text(
-                                'Livestream',
+                                tLiveStream,
                                 style: TextStyle(color: Colors.white),
                               ),
                               SizedBox(width: 8),
@@ -108,7 +106,7 @@ class HoatDongWidget extends StatelessWidget {
                     ),
                     SizedBox(height: t5Size),
                     const Text(
-                      'Lịch sử hoạt động',
+                      tLichSuHoatDong,
                       style: TextStyle(
                         color: Color(0xFF767676),
                         fontSize: 18,
@@ -136,7 +134,7 @@ class HoatDongWidget extends StatelessWidget {
                                   snapshot.data!.isEmpty) {
                                 return const Align(
                                   alignment: Alignment.topCenter,
-                                  child: Text('Không có dữ liệu.'));
+                                  child: Text(tKhongCoDuLieu));
                               } else {
                                 final listEvent = snapshot.data!;
                                 return ListView.builder(
@@ -209,16 +207,14 @@ class HoatDongWidget extends StatelessWidget {
                                                         // Xem chi tiết button with border and background color
                                                         ElevatedButton(
                                                           onPressed: () async {
-                                                            final typeOfActivity =
-                                                                await hoatDongController
-                                                                    .getTypeOfActivity(
-                                                                        event);
+                                                            final typeOfActivity = await hoatDongController.getTypeOfActivity(event);
+                                                            hoatDongController.typeOfActivity = typeOfActivity!;
+                                                            hoatDongController.eventIndex = index;
+                                                            print(hoatDongController.eventIndex);
                                                             // Navigate to event details page
                                                             Get.to(() => ChiTietHoatDongScreen(
-                                                                activityEvent:
-                                                                    event,
-                                                                typeOfActivity:
-                                                                    typeOfActivity));
+                                                                typeOfActivity: typeOfActivity)
+                                                            );
                                                           },
                                                           style: ElevatedButton
                                                               .styleFrom(
@@ -242,7 +238,7 @@ class HoatDongWidget extends StatelessWidget {
                                                             ),
                                                           ),
                                                           child: const Text(
-                                                              'Xem chi tiết',
+                                                              tXemChiTietButton,
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .white)),

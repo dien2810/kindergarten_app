@@ -7,7 +7,7 @@ class ActivityEvent {
   final String startTime;
   final Map<String,dynamic> studentsNote;
   final String typeOfActivity;
-  final String videoLive;
+  String videoLive;
 
   ActivityEvent({
     required this.activityName,

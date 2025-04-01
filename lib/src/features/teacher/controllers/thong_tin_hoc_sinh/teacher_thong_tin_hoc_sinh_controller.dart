@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:kindergarten_app/src/constants/text_strings.dart';
 import 'package:kindergarten_app/src/features/student/models/guardian/guardian_model.dart';
 import 'package:kindergarten_app/src/repository/guardian_repository/guardian_repository.dart';
 import 'package:kindergarten_app/src/repository/student_repository/student_repository.dart';
@@ -109,7 +110,7 @@ class TeacherThongTinHocSinhController extends GetxController {
       }
       else{
         images = [anhHocSinh.text];
-        Get.to(HinhAnhScreen(images: images));
+        Get.to(HinhAnhScreen(images: images, screenType: tThongTinHocSinh,));
       }
     } else{
       if (type == 'birthCertificate') {
@@ -122,7 +123,7 @@ class TeacherThongTinHocSinhController extends GetxController {
         }
         else{
           images = [anhGiayKhaiSinh.text];
-          Get.to(HinhAnhScreen(images: images));
+          Get.to(HinhAnhScreen(images: images, screenType: tThongTinHocSinh,));
         }
       }
       else{
@@ -136,7 +137,7 @@ class TeacherThongTinHocSinhController extends GetxController {
           }
           else{
             images = [anhSoHoKhau.text];
-            Get.to(HinhAnhScreen(images: images));
+            Get.to(HinhAnhScreen(images: images, screenType: tThongTinHocSinh,));
           }
         }
       }

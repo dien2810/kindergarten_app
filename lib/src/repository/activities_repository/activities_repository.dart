@@ -7,13 +7,26 @@ class ActivitiesRepository extends GetxController{
   static ActivitiesRepository get instance => Get.find();
   final CollectionReference _activitiesCollection = FirebaseFirestore.instance.collection('activities');
   // Thêm một document mới vào Firestore
-  Future<ActivitiesModel?> getActivitiesById() async {
-    final snapshot = await _activitiesCollection.doc('activities_class_id_1').get();
+  Future<ActivitiesModel?> getActivitiesById(String id) async {
+    final snapshot = await _activitiesCollection.doc(id).get();
     if (snapshot.exists && snapshot.data() != null) {
       final data = snapshot.data() as Map<String, dynamic>;
       return ActivitiesModel.fromMap(data); // Chuyển đổi dữ liệu thành model
     } else {
       return null; // Document không tồn tại hoặc không có dữ liệu
+    }
+  }
+
+  Future<ActivitiesModel?> getActivitiesByClassId(String classID) async {
+    try {
+      final snapshot = await _activitiesCollection.where('classID', isEqualTo: classID).get();
+
+      final doc = snapshot.docs.first;
+      print("Activity retrieved successfully");
+      return ActivitiesModel.fromMap(doc.data() as Map<String, dynamic>)..id = doc.id;
+    } catch (e) {
+      print("Failed to retrieve activity: $e");
+      throw Exception('Error fetching activity: $e');
     }
   }
 

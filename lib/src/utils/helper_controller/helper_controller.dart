@@ -1,13 +1,17 @@
+import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kindergarten_app/src/constants/cloud_params.dart';
 import 'package:kindergarten_app/src/constants/sizes.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
+import 'package:path_provider/path_provider.dart';
 
 import '../../../flutter_flow/flutter_flow_util.dart';
+import '../../constants/text_strings.dart';
 import '../../features/student/models/club/day_of_week.dart';
 
 class Helper extends GetxController{
@@ -103,7 +107,8 @@ class Helper extends GetxController{
       final responseData = await response.stream.toBytes();
       final responseString = String.fromCharCodes(responseData);
       final jsonMap = jsonDecode(responseString);
-      return jsonMap['url'];
+      print(jsonMap);
+      return jsonMap['public_id'];
     }
     else{
       return '';
@@ -160,5 +165,38 @@ class Helper extends GetxController{
       return '$vietnameseDay: ${day.startTime} - ${day.endTime}';
     }).join('\n'); // Ghép các chuỗi lại bằng dấu xuống dòng
   }
+
+  // Hàm tải video từ Cloudinary
+  static Future<void> downloadVideo(String publicId) async {
+    try {
+      // Tạo URL video từ publicId
+      final videoUrl = 'https://res.cloudinary.com/$tCloudName/video/upload/$publicId.mp4';
+      print("Downloading video from: $videoUrl");
+
+      final response = await http.get(Uri.parse(videoUrl));
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        final directory = await getTemporaryDirectory();
+        final filePath = '${directory.path}/video_${DateTime.now().millisecondsSinceEpoch}.mp4';
+        final file = File(filePath);
+        await file.writeAsBytes(response.bodyBytes);
+
+        // Lưu vào thư viện ảnh/video
+        final result = await GallerySaver.saveVideo(filePath);
+        if (result == true) {
+          print("Download thành công");
+          Helper.successSnackBar(title: tVideoHoatDong, message: tDaTaiVideoThanhCong);
+        } else {
+          throw Exception(tLuuVideoThatBai);
+        }
+      } else {
+        throw Exception('$tTaiVideoThatBai ${response.statusCode}');
+      }
+    } catch (e) {
+      Helper.errorSnackBar(title: tVideoHoatDong, message: '$tLoiKhiTaiVideo: $e');
+    }
+  }
+
+
 
 }

@@ -267,6 +267,10 @@ const String tDaThemLichSuTiemChung = "Đã thêm lịch sử tiêm chủng";
 // Thông tin học sinh screen : thong_tin_hoc_sinh_screen.dart
 const String tThongTinHocSinh = "Thông tin học sinh";
 const String tHoSoGiayTo = "Hồ sơ giấy tờ";
+const String tCapNhatThanhCong = 'Cập nhật thành công';
+const String tCapNhatThongTinHocSinhThanhCong = 'Cập nhật thông tin học sinh thành công';
+const String tCapNhatThatBai = 'Cập nhật thất bại';
+const String tCapNhatThongTinCaNhanThatBai = 'Cập nhật thông tin cá nhân thất bại';
 
 // Thông tin học sinh widget : teacher_clb_thong_tin_hoc_sinh_widget.dart
 const String tHoTen = "Họ tên : ";
@@ -300,14 +304,47 @@ const String tChiTietCauLacBoCuaToi = "Chi tiết CLB của tôi";
 // chi tiết câu lạc bộ : chi_tiet_clb_card_screen.dart
 const String tChiTietCauLacBo = "Chi tiết câu lạc bộ";
 
-
-
 // hoạt động - sự kiện : hoat_dong_su_kien_screen.dart
-
 const String tHoatDongSuKien = "Hoạt động - Sự kiện ";
 const String tHoatDong = "Hoạt động";
 const String tSuKien = "Sự kiện ";
-
+const String tGiamSatHoatDongTrongNgay = 'Giám sát hoạt động trong ngày';
+const String tLiveStream = 'Livestream';
+const String tLichSuHoatDong = 'Lịch sử hoạt động';
+const String tKhongCoDuLieu = 'Không có dữ liệu.';
+const String tChiTietHoatDong = 'Chi Tiết Hoạt Động';
+const String tTHONGTINSOLUOC = 'THÔNG TIN SƠ LƯỢC';
+const String tTenHoatDong = 'Tên hoạt động: ';
+const String tThoiLuong = 'Thời lượng: ';
+const String tLoaiHoatDong = 'Loại hoạt động: ';
+const String tDiaDiem = 'Địa điểm: ';
+const String tTHUVIEN = 'THƯ VIỆN';
+const String tHinhAnhHoatDong = 'Hình ảnh hoạt động';
+const String tSoLuong = 'Số lượng: ';
+const String tHinhAnh = 'Hình Ảnh';
+const String tActivity = 'Activity';
+const String tDaUploadAnhThanhCong = 'Đã upload ảnh thành công!';
+const String tLoiKhiUploadAnh = 'Lỗi khi upload ảnh:';
+const String tDaTaiAnhThanhCong = 'Đã tải ảnh thành công!';
+const String tLuuAnhThatBai = 'Lưu ảnh thất bại';
+const String tTaiAnhThatBai = 'Tải ảnh thất bại:';
+const String tLoiKhiTaiAnh = 'Lỗi khi tải ảnh:';
+const String tBanCoChacMuonXoaAnhKhong = 'Bạn có chắc muốn xóa ảnh này không?';
+const String tDaXoaAnhThanhCong = 'Đã xóa ảnh thành công!';
+const String tLoiKhiXoaAnh = 'Lỗi khi xóa ảnh:';
+const String tVideoHoatDong = 'Video hoạt động';
+const String tXemVideo = 'Xem video';
+const String tGHICHUHOCSINH = 'GHI CHÚ HỌC SINH';
+const String tTheoDoiTre = 'Theo dõi trẻ';
+const String tVideoKhongThePhatDuoc = 'Video không thể phát được. Vui lòng kiểm tra lại đường dẫn video.';
+const String tDaTaiVideoThanhCong = 'Đã tải video thành công!';
+const String tLuuVideoThatBai = 'Lưu video thất bại';
+const String tTaiVideoThatBai = 'Tải video thất bại';
+const String tLoiKhiTaiVideo = 'Lỗi khi tải video:';
+const String tUploadThanhCong = 'Upload thành công';
+const String tDaUploadVideoThanhCong = 'Đã upload video thành công!';
+const String tUploadThatBai = 'Upload thất bại';
+const String tLoiKhiUploadVideo = 'Lỗi khi upload video';
 
 // giao vien const string
 // giao dien teacher_giang_day_screen

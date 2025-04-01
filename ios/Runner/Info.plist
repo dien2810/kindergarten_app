@@ -51,5 +51,7 @@
         <string>$(PRODUCT_NAME) Camera Usage!</string>
         <key>NSMicrophoneUsageDescription</key>
         <string>$(PRODUCT_NAME) Microphone Usage!</string>
+        <key>NSPhotoLibraryUsageDescription</key>
+        <string>Ứng dụng cần quyền truy cập thư viện ảnh để tải và lưu ảnh</string>
 	</dict>
 </plist>

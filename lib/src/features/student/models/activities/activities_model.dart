@@ -1,7 +1,7 @@
 import 'activities_dates.dart';
 
 class ActivitiesModel {
-  final String? id;
+  String? id;
   final String classID;
   final String semester;
   final Map<String, ActivityDate> dates;

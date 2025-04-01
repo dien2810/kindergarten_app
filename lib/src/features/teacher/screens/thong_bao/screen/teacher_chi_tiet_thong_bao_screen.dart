@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/features/teacher/controllers/thong_bao/teacher_thong_bao_controller.dart';
-import 'package:kindergarten_app/src/repository/teacher_repository/teacher_repository.dart';
 import '../../../../../common_widgets/app_bar_widgets/teacher_app_bar_with_title_header_2.dart';
 import '../../../../../constants/text_strings.dart';
 
