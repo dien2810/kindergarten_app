@@ -67,35 +67,32 @@ class DanThuocScreen extends StatelessWidget {
             Expanded(
               child: TabBarView(
                 children: [
-                  SingleChildScrollView(
-                    child: Container(
-                      height: t100Size*5,
-                      padding: EdgeInsets.all(t15Size),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: const BorderRadius.all(Radius.circular(25.0)),
-                        border: Border.all(width:2,color:const Color(0xFFC4C4C4)),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            tLichSuDanThuoc,
-                            style: TextStyle(
+                  Container(
+                    height: t100Size*5,
+                    padding: EdgeInsets.all(t15Size),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: const BorderRadius.all(Radius.circular(25.0)),
+                      border: Border.all(width:2,color:const Color(0xFFC4C4C4)),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          tLichSuDanThuoc,
+                          style: TextStyle(
                               fontWeight: FontWeight.w800,
                               fontSize: 24,
                               color: Color(0xFF03045E)
-                            ),
                           ),
-                          SizedBox(height: t10Size),
-                          const Expanded(
-                            child: DanThuocListViewWidget(),
-                          )
-                        ],
-                      ),
+                        ),
+                        SizedBox(height: t10Size),
+                        const Expanded(
+                          child: DanThuocListViewWidget(),
+                        )
+                      ],
                     ),
-
-                  )
+                  ),
                 ],
               ),
             )

@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:kindergarten_app/src/common_widgets/cloud_image/cloud_image_widget.dart';
+import 'package:kindergarten_app/src/features/teacher/controllers/diem_danh/teacher_diem_danh_controller.dart';
+import 'package:kindergarten_app/src/utils/helper_controller/helper_controller.dart';
 import 'dart:io';
 
+import '../../../../../constants/text_strings.dart';
 import '../screen/teacher_xem_chi_tiet_anh_screen.dart';
 
 class TeacherDiemDanhCardWidget extends StatefulWidget {
@@ -27,6 +33,7 @@ class _TeacherDiemDanhCardWidgetState extends State<TeacherDiemDanhCardWidget> {
 
   String? checkinImage;
   String? checkoutImage;
+  late String _selectedDate;
 
   final ImagePicker _picker = ImagePicker();
 
@@ -43,6 +50,8 @@ class _TeacherDiemDanhCardWidgetState extends State<TeacherDiemDanhCardWidget> {
     checkoutImage = widget.attendanceDetails['checkoutImage'] != null && widget.attendanceDetails['checkoutImage'] != ""
         ? (widget.attendanceDetails['checkoutImage'])
         : null;
+    final diemDanhController = Get.put(TeacherDiemDanhController());
+    _selectedDate = Helper.formatDateToString(diemDanhController.selectedDay.value);
   }
 
   Color _getStatusColor(String status) {
@@ -100,32 +109,32 @@ class _TeacherDiemDanhCardWidgetState extends State<TeacherDiemDanhCardWidget> {
         }
       });
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Thời gian đã được cập nhật!')),
+        const SnackBar(content: Text(tThoiGianDaCapNhat)),
       );
       _updateAttendanceDetails(); // Cập nhật dữ liệu sau khi thay đổi thời gian
     }
   }
 
   Future<void> _pickImage(bool isCheckin) async {
-    final pickedImage = await showDialog<String?>(
+    final pickedImage = await showDialog<XFile?>(
       context: context,
       builder: (context) {
         return SimpleDialog(
-          title: const Text('Chọn phương thức'),
+          title: const Text(tChonPhuongThuc),
           children: <Widget>[
             SimpleDialogOption(
               onPressed: () async {
-                final image = await _picker.getImage(source: ImageSource.camera);
-                Navigator.pop(context, image != null ? (image.path) : null);
+                final image = await _picker.pickImage(source: ImageSource.camera);
+                Navigator.pop(context, image);
               },
-              child: const Text('Chụp ảnh từ Camera'),
+              child: const Text(tChupAnhTuCamera),
             ),
             SimpleDialogOption(
               onPressed: () async {
-                final image = await _picker.getImage(source: ImageSource.gallery);
-                Navigator.pop(context, image != null ? File(image.path) : null);
+                final image = await _picker.pickImage(source: ImageSource.gallery);
+                Navigator.pop(context, image);
               },
-              child: const Text('Chọn ảnh từ Thư viện'),
+              child: const Text(tChonAnhTuThuVien),
             ),
             SimpleDialogOption(
               onPressed: () {
@@ -139,13 +148,13 @@ class _TeacherDiemDanhCardWidgetState extends State<TeacherDiemDanhCardWidget> {
     );
 
     if (pickedImage != null) {
-      setState(() {
+      setState(() async {
         if (isCheckin) {
-          checkinImage = pickedImage;
-          widget.attendanceDetails['checkinImage'] = pickedImage; // Cập nhật giá trị trong attendanceDetails
+          checkinImage = await Helper.uploadImage(pickedImage);
+          widget.attendanceDetails['checkinImage'] = checkinImage; // Cập nhật giá trị trong attendanceDetails
         } else {
-          checkoutImage = pickedImage;
-          widget.attendanceDetails['checkoutImage'] = pickedImage; // Cập nhật giá trị trong attendanceDetails
+          checkoutImage = await Helper.uploadImage(pickedImage);
+          widget.attendanceDetails['checkoutImage'] = checkoutImage; // Cập nhật giá trị trong attendanceDetails
         }
       });
       ScaffoldMessenger.of(context).showSnackBar(
@@ -153,6 +162,38 @@ class _TeacherDiemDanhCardWidgetState extends State<TeacherDiemDanhCardWidget> {
       );
       _updateAttendanceDetails(); // Cập nhật dữ liệu sau khi thêm ảnh
     }
+  }
+
+  void _viewImage(BuildContext context, String? image) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          backgroundColor: Colors.transparent, // Nền trong suốt
+          child: Stack(
+            alignment: Alignment.topRight,
+            children: [
+              // Hiển thị ảnh
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: CloudImage(publicId: image!)
+              ),
+              // Nút đóng
+              Positioned(
+                top: 8,
+                right: 8,
+                child: IconButton(
+                  icon: const Icon(Icons.close, color: Colors.white, size: 30),
+                  onPressed: () {
+                    Navigator.of(context).pop(); // Đóng dialog
+                  },
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   void _updateAttendanceDetails() {
@@ -164,7 +205,18 @@ class _TeacherDiemDanhCardWidgetState extends State<TeacherDiemDanhCardWidget> {
     widget.attendanceDetails['checkoutImage'] = checkoutImage;
 
     // Gọi callback để truyền dữ liệu cập nhật về widget cha
-    widget.onUpdate(widget.attendanceDetails);
+    Map<String, dynamic> absentDateEntryMap = {
+      'day': _selectedDate,
+      'absentStatus': selectedStatus,
+      'absentTime': '',
+      'checkinImage': checkinImage,
+      'checkinTime': checkinTime,
+      'checkoutImage': checkoutImage,
+      'checkoutTime': checkoutTime,
+      'period': [],
+      'reason': ''
+    };
+    widget.onUpdate(absentDateEntryMap);
   }
 
   @override
@@ -223,24 +275,27 @@ class _TeacherDiemDanhCardWidgetState extends State<TeacherDiemDanhCardWidget> {
                         MaterialPageRoute(
                           builder: (context) => TeacherXemChiTietAnhScreen(
                             image: checkinImage!,
-                            title: "Chi tiết Ảnh Check-in",
+                            title: tChiTietAnhCheckin,
                           ),
                         ),
                       );
                     }
                   },
                   child: const Text(
-                    "Ảnh Check-in",
+                    tAnhCheckin,
                     style: TextStyle(color: Colors.green, fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ),
-                if (checkinImage == null || checkinImage!.isEmpty) // Hiển thị nút thêm ảnh chỉ khi không có ảnh
-                  ElevatedButton(
-                    onPressed: () {
-                      _pickImage(true); // Thêm ảnh check-in
-                    },
-                    child: const Text("Thêm ảnh checkin"),
-                  ),
+                ElevatedButton(
+                  onPressed: () {
+                    if (checkinImage == null || checkinImage == '') {
+                      _pickImage(true); // Thêm ảnh checkin
+                    } else {
+                      _viewImage(context, checkinImage);
+                    }
+                  },
+                  child: Text(checkinImage != null?tXemAnh:tThemAnhCheckin),
+                ),
               ],
             ),
             const SizedBox(height: 8),
@@ -250,30 +305,33 @@ class _TeacherDiemDanhCardWidgetState extends State<TeacherDiemDanhCardWidget> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    if (checkoutImage != null) {
+                    if (checkoutImage != null && checkoutImage != '') {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => TeacherXemChiTietAnhScreen(
                             image: checkoutImage!,
-                            title: "Chi tiết Ảnh Check-out",
+                            title: tChiTietAnhCheckout,
                           ),
                         ),
                       );
                     }
                   },
                   child: const Text(
-                    "Ảnh Check-out",
+                    tAnhCheckout,
                     style: TextStyle(color: Colors.red, fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ),
-                if (checkoutImage == null || checkoutImage!.isEmpty) // Hiển thị nút thêm ảnh chỉ khi không có ảnh
-                  ElevatedButton(
-                    onPressed: () {
-                      _pickImage(false); // Thêm ảnh check-out
-                    },
-                    child: const Text("Thêm ảnh checkout"),
-                  ),
+                ElevatedButton(
+                  onPressed: () {
+                    if (checkoutImage == null || checkoutImage == '') {
+                      _pickImage(true); // Thêm ảnh checkin
+                    } else {
+                      _viewImage(context, checkinImage);
+                    }
+                  },
+                  child: Text(checkinImage != null?tXemAnh:tThemAnhCheckin),
+                ),
               ],
             ),
             const SizedBox(height: 16),
@@ -287,7 +345,7 @@ class _TeacherDiemDanhCardWidgetState extends State<TeacherDiemDanhCardWidget> {
                     children: [
                       const Icon(Icons.access_time, color: Colors.purple), // Thêm icon
                       const SizedBox(width: 6),
-                      Text("Check-in: $checkinTime"),
+                      Text(tCheckin + checkinTime),
                     ],
                   ),
                 ),
@@ -297,7 +355,7 @@ class _TeacherDiemDanhCardWidgetState extends State<TeacherDiemDanhCardWidget> {
                     children: [
                       const Icon(Icons.access_time, color: Colors.purple), // Thêm icon
                       const SizedBox(width: 6),
-                      Text("Check-out: $checkoutTime"),
+                      Text(tCheckout + checkoutTime),
                     ],
                   ),
                 ),

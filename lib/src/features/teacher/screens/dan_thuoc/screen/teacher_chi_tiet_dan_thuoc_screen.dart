@@ -104,7 +104,7 @@ class TeacherChiTietDanThuocScreen extends StatelessWidget {
                           ),
                           SizedBox(height: t10Size),
                           _buildInformationBox(
-                            title: tNgayNhanThuoc,
+                            title: tNgayDanThuoc,
                             value: medicine.createDate,
                             deviceWidth: deviceWidth,
                           ),

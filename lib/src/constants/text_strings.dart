@@ -158,7 +158,7 @@ const String tDangThucHien = 'Đang thực hiện';
 const String tChiTietDonThuoc = 'Chi tiết đơn thuốc';
 const String tDonThuoc = 'Đơn thuốc: ';
 const String tGhiChuDanThuoc = 'Ghi chú: ';
-const String tNgayNhanThuoc = 'Ngày nhận thuốc: ';
+const String tNgayDanThuoc = 'Ngày dặn thuốc: ';
 const String tHoVaTenPhuHuynhDanThuoc = 'Họ và tên phụ huynh dặn thuốc: ';
 const String tNguoiNhanDonThuoc = 'Người nhận đơn thuốc (GVCN lớp): ';
 const String tCanUongNhieuNuoc = 'Cần uống nhiều nước ';
@@ -390,6 +390,25 @@ const String tThemThongBaoThanhCong = 'Thêm thông báo thành công!';
 
 // teacher_diem_danh_screen
 const String tDiemDanh = 'ĐIỂM DANH';
+const tDaCapNhatTrangThaiDiemDanh = 'Đã cập nhật trạng thái điểm danh thành công';
+const String tCheckin = 'Check-in:';
+const String tCheckout = 'Check-out:';
+const String tThoiGianDaCapNhat = 'Thời gian đã được cập nhật!';
+const String tChiTietAnhCheckin = "Chi tiết Ảnh Check-in";
+const String tThemAnhCheckin = "Thêm ảnh checkin";
+const String tChiTietAnhCheckout = "Chi tiết Ảnh Check-out";
+const String tThemAnhCheckout = "Thêm ảnh checkout";
+const String tChonPhuongThuc = 'Chọn phương thức';
+const String tChupAnhTuCamera = 'Chụp ảnh từ Camera';
+const String tChonAnhTuThuVien = 'Chọn ảnh từ Thư viện';
+const String tDiemDanhTuDong = 'Điểm danh\n   tự động';
+const String tQuayLai = 'Quay lại';
 // teacher_ngoai_khoa_screen
 const String tThanhVienCLB = 'Thành viên CLB';
-
+// teacher_chat_screen
+const String tChat = 'Chat';
+const String tTypeAMessage = 'Type A Message';
+//teacher_diem_danh_tu_dong_screen
+const tChungThucKhuonMat = 'Chứng thực khuôn mặt';
+const tNhanDienKhuonMat = 'Nhận diện khuôn mặt';
+const tDangKyKhuonMat = 'Đăng ký khuôn mặt';

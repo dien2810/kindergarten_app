@@ -93,13 +93,13 @@ class TaiKhoanScreen extends StatelessWidget {
             // Chuyển hướng đến màn hình thông tin tài khoản
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ThongTinTaiKhoanScreen()),
+              MaterialPageRoute(builder: (context) => const ThongTinTaiKhoanScreen()),
             );
           } else if (text == "Thông tin Học sinh/Phụ huynh/Giám hộ") {
             // Chuyển hướng đến màn hình thông tin học sinh/phụ huynh
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ThongTinHocSinhPhuHuynhScreen()),
+              MaterialPageRoute(builder: (context) => const ThongTinHocSinhPhuHuynhScreen()),
             );
           }else if (text == "Hướng dẫn sử dụng") {
             // Chuyển hướng đến màn hình thông tin học sinh/phụ huynh

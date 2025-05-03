@@ -89,10 +89,7 @@ class _TeacherDanhSachHocSinhScreenState
                       padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
                     ),
                     onPressed: () {
-                      // Chuyển sang trang "Điểm Danh"
-                      final teacherDiemDanhController = Get.put(TeacherDiemDanhController());
-                      teacherDiemDanhController.studentIds = giangDayController.classModel!.students;
-                      Get.to(()=>  const TeacherDiemDanhScreen());
+                      Get.to(()=> const TeacherDiemDanhScreen());
                     },
                     child: const Text(
                       tDIEMDANH,

@@ -65,7 +65,7 @@ class ThemMoiDanThuocBottomSheet{
                       SizedBox(height: t10Size),
                       InformationInputWithIconWidget(
                         color: const Color(0xFFE9EFF7),
-                        title: tNgayNhanThuoc,
+                        title: tNgayDanThuoc,
                         hintText: themMoiDanThuocConTroller.createDate,
                         readOnly: true,
                       ),

@@ -1,23 +1,12 @@
 import 'package:get/get.dart';
+import 'package:kindergarten_app/src/constants/text_strings.dart';
+import 'package:kindergarten_app/src/features/student/models/absent/absent_date_entry.dart';
+import 'package:kindergarten_app/src/features/student/models/absent/absent_model.dart';
+import 'package:kindergarten_app/src/features/teacher/controllers/giang_day/teacher_giang_day_controller.dart';
 import 'package:kindergarten_app/src/repository/absent_repository/absent_repository.dart';
 import 'package:kindergarten_app/src/repository/student_repository/student_repository.dart';
 
-
-class AttendanceRecord {
-  final String studentId;
-  final String semesterID;
-  final int amountOfDayOff;
-  final Map<String, AttendanceDetail> dates;
-  final String studentName;
-
-  AttendanceRecord({
-    required this.studentId,
-    required this.semesterID,
-    required this.amountOfDayOff,
-    required this.dates,
-    required this.studentName,
-  });
-}
+import '../../../../utils/helper_controller/helper_controller.dart';
 
 class AttendanceDetail {
   final List<String> period;
@@ -75,88 +64,91 @@ class AttendanceDetail {
 }
 class TeacherDiemDanhController extends GetxController {
   var selectedDay = DateTime.now().obs; // Ngày được chọn
-  var attendanceRecords = <String, AttendanceRecord>{}.obs; // Dữ liệu điểm danh
-  late List<dynamic> studentIds;
+  var attendanceRecords = <String, dynamic>{}; // Dữ liệu điểm danh
+  late List<String> studentIds;
+  Map<String, AbsentModel> absentList = {};
+  final _giangDayController = Get.put(TeacherGiangDayController());
+  final _absentRepo = Get.put(AbsentRepository());
+  final _studentRepo = Get.put(StudentRepository());
 
   void loadAbsent() {
     super.onInit();
     getAbsentData();
   }
-
+  
   Future<void> getAbsentData() async {
-    final absentRepo = Get.put(AbsentRepository());
-    final studentRepo = Get.put(StudentRepository());
-    for (var studentId in studentIds){
-      final absent = await absentRepo.getAbsentByStudentId(studentId);
-      final student = await studentRepo.getStudentByStudentId(studentId);
-      attendanceRecords[studentId] = AttendanceRecord(
-        studentId: studentId,
-        studentName: student!.studentProfile.name,
-        semesterID: absent!.semesterID,
-        amountOfDayOff: absent.amountOfDayOff,
-        dates: (absent.dates).map(
-              (date, details) {
-            return MapEntry(
-              date,
-              AttendanceDetail(
-                period: List<String>.from(details.period ?? [""]),
-                absentTime: details.absentTime,
-                absentStatus: details.absentStatus,
-                checkinImage: details.checkinImage,
-                checkoutImage: details.checkoutImage,
-                checkinTime: details.checkinTime,
-                checkoutTime: details.checkoutTime,
-                reason: details.reason,
-              ),
-            );
-          },
-        ),
-      );
+
+    studentIds = _giangDayController.classModel!.students;
+
+    for (var studentId in studentIds) {
+      var absent = await _absentRepo.getAbsentByStudentId(studentId);
+      if (absent != null){
+        absentList[studentId] = absent;
+      }
     }
   }
 
-  List<Map<String, dynamic>> fetchAttendanceForDay(DateTime selectedDay) {
+  Future<List<Map<String, dynamic>>> fetchAttendance(DateTime date) async {
     List<Map<String, dynamic>> result = [];
+    final dateString = Helper.formatDateToString(date);
+    for(var studentId in studentIds){
+      final student = await _studentRepo.getStudentByStudentId(studentId);
+      attendanceRecords[studentId] = {
+        'studentId': studentId,
+        'studentName': student!.studentProfile.name,
+        'semesterID': absentList[studentId]?.semesterID??'',
+        'amountOfDayOff': absentList[studentId]?.amountOfDayOff??0,
+        'absentData': absentList[studentId]?.dates[dateString]??AbsentDateEntry(
+          day: dateString,
+          absentStatus: tVangKhongPhep,
+          absentTime: '',
+          checkinImage: '',
+          checkinTime: 'N/A',
+          checkoutImage: '',
+          checkoutTime: 'N/A',
+          period: [],
+          reason: ''
+        ),
+      };
+    }
+    int count = 0;
     attendanceRecords.forEach((studentId, record) {
-      if (record.dates.containsKey(formatDate(selectedDay))) {
-        AttendanceDetail details = record.dates[formatDate(selectedDay)]!;
-        result.add({
-          'studentId': studentId,
-          'name': 'Học sinh ${record.studentName}',
-          'attendanceDetails': {
-            'period': details.period,
-            'absentTime': details.absentTime,
-            'absentStatus': details.absentStatus,
-            'checkinImage': details.checkinImage,
-            'checkoutImage': details.checkoutImage,
-            'checkinTime': details.checkinTime,
-            'checkoutTime': details.checkoutTime,
-            'reason': details.reason,
-          },
-        });
-      }
+      print(studentId);
+      // print(record);
+      count++;
+      print(record['absentData']);
+      AbsentDateEntry details = record['absentData']!;
+      result.add({
+        'studentId': studentId,
+        'name': 'Học sinh ${record['studentName']}',
+        'attendanceDetails': {
+          'period': details.period,
+          'absentTime': details.absentTime,
+          'absentStatus': details.absentStatus,
+          'checkinImage': details.checkinImage,
+          'checkoutImage': details.checkoutImage,
+          'checkinTime': details.checkinTime,
+          'checkoutTime': details.checkoutTime,
+          'reason': details.reason,
+        },
+      });
     });
+    print(result);
     return result;
   }
 
-  String formatDate(DateTime date) {
-    return '${date.day.toString().padLeft(2, '0')}-${date.month.toString().padLeft(2, '0')}-${date.year}';
-  }
-
-
   Future<void> updateAttendance() async {
     final absentRepo = Get.put(AbsentRepository());
-    final selectedDate = formatDate(selectedDay.value);
+    final selectedDate = Helper.formatDateToString(selectedDay.value);
 
     for (var studentId in attendanceRecords.keys) {
       final record = attendanceRecords[studentId];
-      if (record != null && record.dates.containsKey(selectedDate)) {
-        final details = record.dates[selectedDate];
+      if (record != null) {
+        AbsentDateEntry details = record['absentData']!;
         final updatedAbsentData = {
-          'semesterID': record.semesterID,
-          'amountOfDayOff': record.amountOfDayOff,
+          'amountOfDayOff': record['amountOfDayOff'],
           'dates.$selectedDate': {
-            'period': details!.period,
+            'period': details.period,
             'absentTime': details.absentTime,
             'absentStatus': details.absentStatus,
             'checkinImage': details.checkinImage,
@@ -170,6 +162,6 @@ class TeacherDiemDanhController extends GetxController {
         await absentRepo.updateAbsentByStudentId(studentId, updatedAbsentData);
       }
     }
-    Get.snackbar('Thông báo', 'Đã cập nhật trạng thái xin nghỉ thành công.');
+    Helper.successSnackBar(title: tThongBao, message: tDaCapNhatTrangThaiDiemDanh);
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/features/teacher/screens/tai_khoan/screen/thong_tin_giao_vien_screen.dart';
 import '../../../../../common_widgets/app_bar_widgets/teacher_app_bar_with_title_header_1.dart';
+import '../../../../../common_widgets/cloud_image/circle_cloud_image_widget.dart';
 import '../../../../../constants/image_strings.dart';
 import '../../../../../constants/sizes.dart';
 import '../../../../authentication/controllers/login_controller.dart';
@@ -66,13 +67,23 @@ class TeacherTaiKhoanScreen extends StatelessWidget {
           // Avatar nằm trên Card
           Positioned(
             top: t20Size,
-            left: MediaQuery.of(context).size.width / 2 - 55,
-            child: CircleAvatar(
-              radius: 60,
-              backgroundImage: urlAvatar.isNotEmpty
-                  ? NetworkImage(urlAvatar)
-                  : const AssetImage(tTaiKhoanAvatarThayThe) as ImageProvider,
+            left: MediaQuery.of(context).size.width / 3,
+            child: const CircleAvatar(
+              radius: 80, // Kích thước hình tròn
+              child: ClipOval(
+                child: CircleCloudImageWidget(
+                  publicId: 'https://res.cloudinary.com/dv0ehr5z7/image/upload/v1746253986/htv9zhyitvzkyfp8woi1.jpg',
+                  fit: true
+                ),
+              ),
+              // backgroundImage: AssetImage(imageUrl), // Ảnh từ asset
             ),
+            // child: CircleAvatar(
+            //   radius: 60,
+            //   backgroundImage: urlAvatar.isNotEmpty
+            //       ? NetworkImage(urlAvatar)
+            //       : const AssetImage(tTaiKhoanAvatarThayThe) as ImageProvider,
+            // ),
           ),
         ],
       ),

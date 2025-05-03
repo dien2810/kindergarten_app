@@ -129,9 +129,11 @@ class CommentDetailScreen extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                commentInfo.replyContent,  // Hiển thị phản hồi
-                                style: const TextStyle(fontSize: 16),
+                              Expanded(
+                                child: Text(
+                                  commentInfo.replyContent,  // Hiển thị phản hồi
+                                  style: const TextStyle(fontSize: 16),
+                                ),
                               ),
                               IconButton(
                                 icon: const Icon(Icons.delete, color: Colors.red),

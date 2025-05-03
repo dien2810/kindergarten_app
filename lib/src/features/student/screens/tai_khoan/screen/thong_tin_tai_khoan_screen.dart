@@ -14,6 +14,12 @@ class _ThongTinTaiKhoanScreenState extends State<ThongTinTaiKhoanScreen> {
   final taiKhoanController = Get.put(TaiKhoanController());
 
   @override
+  void initState() {
+    super.initState();
+    taiKhoanController.getThongTinPhuHuynhPageData();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -104,6 +110,7 @@ class _ThongTinTaiKhoanScreenState extends State<ThongTinTaiKhoanScreen> {
       ),
     );
   }
+
   Widget _buildInfoField(String label, String hint) {
     return Container(
       decoration: BoxDecoration(

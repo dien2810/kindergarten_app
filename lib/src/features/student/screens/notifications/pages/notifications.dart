@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/constants/sizes.dart';
+import 'package:kindergarten_app/src/constants/text_strings.dart';
 import 'package:kindergarten_app/src/features/student/controllers/thong_bao/notifications_controller.dart';
 import 'package:kindergarten_app/src/features/student/screens/notifications/pages/notification_info.dart';
 import 'package:kindergarten_app/src/repository/teacher_repository/teacher_repository.dart';
@@ -289,7 +290,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                 return Center(child: Text('Error: ${snapshot.error}'));
                               }
                               else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                                return const Center(child: Text('Không có dữ liệu.'));
+                                return const Center(child: Text(tKhongCoDuLieu));
                               }
                               else{
                                 final notifications = snapshot.data!;
@@ -306,7 +307,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                       return GestureDetector(
                                         onTap: () async {
                                           final teacherRepo = Get.put(TeacherRepository());
-                                          notificationController.teacher = (await teacherRepo.getTeacherById(
+                                          notificationController.teacher = (await teacherRepo.getTeacherByTeacherId(
                                             notification.sentBy
                                           ))!;
                                           Get.to(const NotificationInfoWidget());
