@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kindergarten_app/src/constants/text_strings.dart';
 import 'package:kindergarten_app/src/features/student/models/guardian/guardian_model.dart';
+import 'package:kindergarten_app/src/repository/classes_repository/classes_respository.dart';
 import 'package:kindergarten_app/src/repository/guardian_repository/guardian_repository.dart';
 import 'package:kindergarten_app/src/repository/student_repository/student_repository.dart';
 
@@ -44,6 +45,7 @@ class TeacherThongTinHocSinhController extends GetxController {
   Future<void> loadStudentInfo() async {
     final studentRepo = Get.put(StudentRepository());
     final guardianRepo = Get.put(GuardianRepository());
+    final classesRepo = Get.put(ClassesRepository());
     studentModel = (await studentRepo.getStudentByStudentId(studentModel.studentProfile.studentID))!;
     guardianModel = (await guardianRepo.getGuardianByStudentId(studentModel.studentProfile.studentID))!;
     hoTen.text = studentModel.studentProfile.name;
@@ -53,7 +55,8 @@ class TeacherThongTinHocSinhController extends GetxController {
     truong.text = studentModel.studentProfile.school;
     he.text = studentModel.studentProfile.educationSystem;
     khoi.text = studentModel.studentProfile.gradeLevel.toString();
-    lop.text = studentModel.studentProfile.studentClass;
+    final classesModel = await classesRepo.getClassesById(studentModel.studentProfile.studentClass);
+    lop.text = classesModel!.className;
 
     hoCha.text = studentModel.studentProfile.fatherFullname;
     hoMe.text = studentModel.studentProfile.motherFullname;

@@ -70,6 +70,7 @@ class TeacherDiemDanhController extends GetxController {
   final _giangDayController = Get.put(TeacherGiangDayController());
   final _absentRepo = Get.put(AbsentRepository());
   final _studentRepo = Get.put(StudentRepository());
+  List<Map<String, dynamic>> result = [];
 
   void loadAbsent() {
     super.onInit();
@@ -77,7 +78,7 @@ class TeacherDiemDanhController extends GetxController {
   }
   
   Future<void> getAbsentData() async {
-
+    result = [];
     studentIds = _giangDayController.classModel!.students;
 
     for (var studentId in studentIds) {
@@ -89,7 +90,6 @@ class TeacherDiemDanhController extends GetxController {
   }
 
   Future<List<Map<String, dynamic>>> fetchAttendance(DateTime date) async {
-    List<Map<String, dynamic>> result = [];
     final dateString = Helper.formatDateToString(date);
     for(var studentId in studentIds){
       final student = await _studentRepo.getStudentByStudentId(studentId);
@@ -120,7 +120,7 @@ class TeacherDiemDanhController extends GetxController {
       AbsentDateEntry details = record['absentData']!;
       result.add({
         'studentId': studentId,
-        'name': 'Học sinh ${record['studentName']}',
+        'name': 'Bé: ${record['studentName']}',
         'attendanceDetails': {
           'period': details.period,
           'absentTime': details.absentTime,

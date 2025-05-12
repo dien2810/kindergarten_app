@@ -122,6 +122,11 @@ class Helper extends GetxController{
     return "$day-$month-$year";
   }
 
+  static String formatTime(DateTime dateTime) {
+    final DateFormat formatter = DateFormat('HH:mm');
+    return formatter.format(dateTime);
+  }
+
   static int calculateDaysDifference(String date1, String date2) {
     try {
       // Định dạng ngày tháng (có thể chỉnh sửa theo định dạng đầu vào)

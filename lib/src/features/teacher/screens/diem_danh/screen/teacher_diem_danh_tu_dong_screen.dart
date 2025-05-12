@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kindergarten_app/src/features/teacher/controllers/diem_danh/teacher_diem_danh_controller.dart';
+import 'package:kindergarten_app/src/features/teacher/screens/diem_danh/screen/teacher_dang_ki_khuon_mat_screen.dart';
+import 'package:kindergarten_app/src/features/teacher/screens/diem_danh/screen/teacher_nhan_dien_khuon_mat_screen.dart';
 
 import '../../../../../constants/text_strings.dart';
 import '../../../controllers/diem_danh/teacher_diem_danh_tu_dong_controller.dart';
@@ -11,36 +13,14 @@ class TeacherDiemDanhTuDongScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final diemDanhTuDongController = Get.put(TeacherDiemDanhTuDongController());
+    final teacherDiemDanhController = Get.put(TeacherDiemDanhController());
+    print("RESULT:");
+    print(teacherDiemDanhController.result);
     return Scaffold(
       appBar: AppBar(
         leading: Container(),
         elevation: 0,
         backgroundColor: Colors.transparent,
-        actions: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(right: 20, top: 20),
-            child: PopupMenuButton<String>(
-              child: const Icon(
-                Icons.more_vert,
-                color: Colors.black,
-              ),
-              onSelected: (value) {
-                switch (value) {
-                  case 'Clear DB':
-                    break;
-                }
-              },
-              itemBuilder: (BuildContext context) {
-                return {'Clear DB'}.map((String choice) {
-                  return PopupMenuItem<String>(
-                    value: choice,
-                    child: Text(choice),
-                  );
-                }).toList();
-              },
-            ),
-          ),
-        ],
       ),
       body: Obx((){
         final loading = diemDanhTuDongController.loading.value;
@@ -55,7 +35,8 @@ class TeacherDiemDanhTuDongScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Container(
+                  const Image(image: AssetImage('assets/images/face_detection_images/logo.png')),
+                  SizedBox(
                     width: MediaQuery.of(context).size.width*0.8,
                     child: const Column(
                       children: [
@@ -68,7 +49,7 @@ class TeacherDiemDanhTuDongScreen extends StatelessWidget {
                         ),
                         SizedBox(height: 20),
                         Text(
-                          "Ứng dụng nhận diện khuôn mặt",
+                          tDiemDanhBangNhanDienKhuonMat,
                           style: TextStyle(
                             fontSize: 16,
                           ),
@@ -77,16 +58,18 @@ class TeacherDiemDanhTuDongScreen extends StatelessWidget {
                       ],
                     ),
                   ),
+                  const SizedBox(height: 30,),
                   Column(
                     children: [
                       InkWell(
                         onTap:(){
                           // Den trang xac thuc bang khuon mat
+                          Get.to(()=>const TeacherNhanDienKhuonMatScreen(isCheckin: true));
                         },
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius:BorderRadius.circular(10),
-                            color: Colors.white,
+                            color: Colors.lightGreenAccent,
                             boxShadow: <BoxShadow>[
                               BoxShadow(
                                 color: Colors.blue.withOpacity(0.1),
@@ -105,7 +88,46 @@ class TeacherDiemDanhTuDongScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                tNhanDienKhuonMat,
+                                tCheckin,
+                                style: TextStyle(color: Color(0xFF0F0BDB)),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Icon(Icons.login, color: Color(0xFF0F0BDB))
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      InkWell(
+                        onTap:(){
+                          // Den trang xac thuc bang khuon mat
+                          Get.to(()=>const TeacherNhanDienKhuonMatScreen(isCheckin: false));
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius:BorderRadius.circular(10),
+                              color: Colors.white,
+                              boxShadow: <BoxShadow>[
+                                BoxShadow(
+                                    color: Colors.blue.withOpacity(0.1),
+                                    blurRadius: 1,
+                                    offset: const Offset(0, 2)
+                                )
+                              ]
+                          ),
+                          alignment: Alignment.center,
+                          padding: const EdgeInsets.symmetric(
+                              vertical:14,
+                              horizontal: 16
+                          ),
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                tCheckout,
                                 style: TextStyle(color: Color(0xFF0F0BDB)),
                               ),
                               SizedBox(
@@ -120,6 +142,7 @@ class TeacherDiemDanhTuDongScreen extends StatelessWidget {
                       InkWell(
                         onTap: (){
                           // Den trang dang ky khuon mat
+                          Get.to(()=> const TeacherDangKiKhuonMatScreen());
                         },
                         child: Container(
                           decoration: BoxDecoration(

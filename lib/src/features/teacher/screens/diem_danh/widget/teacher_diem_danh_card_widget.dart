@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kindergarten_app/src/common_widgets/cloud_image/cloud_image_widget.dart';
 import 'package:kindergarten_app/src/features/teacher/controllers/diem_danh/teacher_diem_danh_controller.dart';
 import 'package:kindergarten_app/src/utils/helper_controller/helper_controller.dart';
-import 'dart:io';
 
 import '../../../../../constants/text_strings.dart';
 import '../screen/teacher_xem_chi_tiet_anh_screen.dart';
@@ -245,21 +243,26 @@ class _TeacherDiemDanhCardWidgetState extends State<TeacherDiemDanhCardWidget> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text("Trạng thái:", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
-                DropdownButton<String>(
-                  value: selectedStatus,
-                  items: statuses.map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      selectedStatus = newValue!;
-                    });
-                    _updateAttendanceDetails(); // Cập nhật dữ liệu khi thay đổi trạng thái
-                  },
+                const Expanded(
+                  flex: 1,
+                  child: Text("Trạng thái:", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17))),
+                Expanded(
+                  flex: 2,
+                  child: DropdownButton<String>(
+                    value: selectedStatus,
+                    items: statuses.map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
+                      );
+                    }).toList(),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        selectedStatus = newValue!;
+                      });
+                      _updateAttendanceDetails(); // Cập nhật dữ liệu khi thay đổi trạng thái
+                    },
+                  ),
                 ),
               ],
             ),

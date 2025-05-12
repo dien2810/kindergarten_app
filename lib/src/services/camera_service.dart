@@ -55,7 +55,7 @@ class CameraService extends GetxService {
 
   Future<XFile?> takePicture() async {
     assert(_cameraController != null, 'Camera controller not initialized');
-    await _cameraController?.stopImageStream();
+    // await _cameraController?.stopImageStream();
     XFile? file = await _cameraController?.takePicture();
     _imagePath = file?.path;
     return file;

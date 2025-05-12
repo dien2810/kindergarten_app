@@ -8,6 +8,7 @@ class FacePainter extends CustomPainter {
   Face? face;
   @override
   void paint(Canvas canvas, Size size) {
+    print(face);
     if (face == null) return;
 
     Paint paint;

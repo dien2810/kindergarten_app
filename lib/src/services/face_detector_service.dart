@@ -6,7 +6,7 @@ import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:kindergarten_app/src/services/camera_service.dart';
 
-class FaceDetectorService {
+class FaceDetectorService extends GetxService {
   final CameraService _cameraService = Get.put(CameraService());
 
   late FaceDetector _faceDetector;
@@ -65,6 +65,8 @@ class FaceDetectorService {
     // for mlkit 13
 
     _faces = await _faceDetector.processImage(firebaseVisionImage);
+    print("FACES LIST");
+    print(_faces);
   }
 
   Future<List<Face>> detect(CameraImage image, InputImageRotation rotation) {

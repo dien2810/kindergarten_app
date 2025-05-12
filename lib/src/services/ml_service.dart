@@ -2,50 +2,104 @@ import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
 import 'package:camera/camera.dart';
+import 'package:get/get.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image/image.dart' as imglib;
+import 'package:kindergarten_app/src/features/student/models/student_face/student_face.dart';
+import 'package:kindergarten_app/src/repository/student_face_repository/student_face_repository.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 
 import 'image_converter.dart';
 
 class MLService {
   Interpreter? _interpreter;
-  double threshold = 0.5;
+  double threshold = 0.7;
 
   List _predictedData = [];
   List get predictedData => _predictedData;
 
   Future initialize() async {
-    late Delegate delegate;
     try {
+      Delegate? delegate;
       if (Platform.isAndroid) {
-        delegate = GpuDelegateV2(
-          options: GpuDelegateOptionsV2(
-            isPrecisionLossAllowed: false,
-            inferencePreference: TfLiteGpuInferenceUsage.fastSingleAnswer,
-            inferencePriority1: TfLiteGpuInferencePriority.minLatency,
-            inferencePriority2: TfLiteGpuInferencePriority.auto,
-            inferencePriority3: TfLiteGpuInferencePriority.auto,
-          ),
-        );
+        try {
+          delegate = GpuDelegateV2(
+            options: GpuDelegateOptionsV2(
+              isPrecisionLossAllowed: false,
+              inferencePreference: TfLiteGpuInferenceUsage.fastSingleAnswer,
+              inferencePriority1: TfLiteGpuInferencePriority.minLatency,
+              inferencePriority2: TfLiteGpuInferencePriority.auto,
+              inferencePriority3: TfLiteGpuInferencePriority.auto,
+            ),
+          );
+        } catch (e) {
+          print('GPU Delegate V2 failed, trying GpuDelegate: $e');
+          try {
+            delegate = GpuDelegate(
+              options: GpuDelegateOptions(
+                allowPrecisionLoss: false,
+                waitType: TFLGpuDelegateWaitType.active,
+              ),
+            );
+          } catch (e) {
+            print('GpuDelegate failed, falling back to CPU: $e');
+          }
+        }
       } else if (Platform.isIOS) {
         delegate = GpuDelegate(
           options: GpuDelegateOptions(
-              allowPrecisionLoss: true,
-              waitType: TFLGpuDelegateWaitType.active),
+            allowPrecisionLoss: true,
+            waitType: TFLGpuDelegateWaitType.active,
+          ),
         );
       }
-      var interpreterOptions = InterpreterOptions()..addDelegate(delegate);
-
+      var interpreterOptions = InterpreterOptions();
+      if (delegate != null) {
+        interpreterOptions.addDelegate(delegate);
+      }
+      print("INITIAL INTERPRETTERRRRRRRR");
       _interpreter = await Interpreter.fromAsset('mobilefacenet.tflite',
           options: interpreterOptions);
+      print(_interpreter);
     } catch (e) {
-      print('Failed to load model.');
-      print(e);
+      print('Failed to load model: $e');
     }
   }
 
+  // Future initialize() async {
+  //   late Delegate delegate;
+  //   try {
+  //     if (Platform.isAndroid) {
+  //       print("INITIAL INTERPRETTERRRRRRRR");
+  //       delegate = GpuDelegateV2(
+  //         options: GpuDelegateOptionsV2(
+  //           isPrecisionLossAllowed: false,
+  //           inferencePreference: TfLiteGpuInferenceUsage.fastSingleAnswer,
+  //           inferencePriority1: TfLiteGpuInferencePriority.minLatency,
+  //           inferencePriority2: TfLiteGpuInferencePriority.auto,
+  //           inferencePriority3: TfLiteGpuInferencePriority.auto,
+  //         ),
+  //       );
+  //     } else if (Platform.isIOS) {
+  //       delegate = GpuDelegate(
+  //         options: GpuDelegateOptions(
+  //             allowPrecisionLoss: true,
+  //             waitType: TFLGpuDelegateWaitType.active),
+  //       );
+  //     }
+  //     var interpreterOptions = InterpreterOptions()..addDelegate(delegate);
+  //     _interpreter = await Interpreter.fromAsset('mobilefacenet.tflite',
+  //         options: interpreterOptions);
+  //     print("SUCCESS INITIALIZE INTERPRETER");
+  //     print(_interpreter);
+  //   } catch (e) {
+  //     print('Failed to load model.');
+  //     print(e);
+  //   }
+  // }
+
   void setCurrentPrediction(CameraImage cameraImage, Face? face) {
+    print("SET CURRENT PREDICTION");
     if (_interpreter == null) throw Exception('Interpreter is null');
     if (face == null) throw Exception('Face is null');
     List input = _preProcess(cameraImage, face);
@@ -57,12 +111,18 @@ class MLService {
     output = output.reshape([192]);
 
     _predictedData = List.from(output);
+    print("ABCCC");
+    print(_predictedData);
+  }
+
+  Future<StudentFace?> predict() async {
+    return _searchResult(_predictedData);
   }
 
   List _preProcess(CameraImage image, Face faceDetected) {
     imglib.Image croppedImage = _cropFace(image, faceDetected);
     imglib.Image img = imglib.copyResizeCropSquare(croppedImage, size: 112);
-
+    print("IMAGETOBYTELIST");
     Float32List imageAsList = imageToByteListFloat32(img);
     return imageAsList;
   }
@@ -113,11 +173,14 @@ class MLService {
 
     for (var i = 0; i < 112; i++) {
       for (var j = 0; j < 112; j++) {
-        int pixel = image.getPixel(j, i) as int;
+        var pixel = image.getPixel(j, i);
         // Extract RGBA components from pixel value
-        int r = (pixel >> 24) & 0xFF;
-        int g = (pixel >> 16) & 0xFF;
-        int b = (pixel >> 8) & 0xFF;
+        // int r = (pixel >> 24) & 0xFF;
+        // int g = (pixel >> 16) & 0xFF;
+        // int b = (pixel >> 8) & 0xFF;
+        int r = pixel.r.toInt();
+        int g = pixel.g.toInt();
+        int b = pixel.b.toInt();
 
         // Normalize and store pixel values
         buffer[pixelIndex++] = (r - 128) / 128.0;
@@ -126,6 +189,27 @@ class MLService {
       }
     }
     return convertedBytes.buffer.asFloat32List();
+  }
+
+  Future<StudentFace?> _searchResult(List predictedData) async {
+    final studentFaceRepo = Get.put(StudentFaceRepository());
+    List<StudentFace> studentFaces = await studentFaceRepo.getStudentFaceList();
+    double minDist = 999;
+    double currDist = 0.0;
+    StudentFace? predictedResult;
+
+    print('users.length=> ${studentFaces.length}');
+
+    for (StudentFace u in studentFaces) {
+      currDist = _euclideanDistance(u.modelData, predictedData);
+      print("CURRDIST");
+      print(currDist);
+      if (currDist <= threshold && currDist < minDist) {
+        minDist = currDist;
+        predictedResult = u;
+      }
+    }
+    return predictedResult;
   }
 
   double _euclideanDistance(List? e1, List? e2) {
@@ -141,6 +225,4 @@ class MLService {
   void setPredictedData(value) {
     _predictedData = value;
   }
-
-  dispose() {}
 }

@@ -7,6 +7,7 @@ class CameraHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return Container(
       width: MediaQuery.of(context).size.width,
       height: 150,
@@ -39,8 +40,8 @@ class CameraHeader extends StatelessWidget {
                 color: Colors.white, fontWeight: FontWeight.w600, fontSize: 20),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(
-            width: 90,
+          SizedBox(
+            width: width * 0.1,
           )
         ],
       ),

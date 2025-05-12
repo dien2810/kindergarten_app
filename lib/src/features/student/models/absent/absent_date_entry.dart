@@ -1,13 +1,13 @@
 class AbsentDateEntry {
   late String? day;
-  final String absentStatus;
-  final String absentTime;
-  final String checkinImage;
-  final String checkinTime;
-  final String checkoutImage;
-  final String checkoutTime;
-  final List<dynamic> period; // String hoặc List<String>
-  final String reason;
+  String absentStatus;
+  String absentTime;
+  String checkinImage;
+  String checkinTime;
+  String checkoutImage;
+  String checkoutTime;
+  List<dynamic> period; // String hoặc List<String>
+  String reason;
 
   AbsentDateEntry({
     this.day,
